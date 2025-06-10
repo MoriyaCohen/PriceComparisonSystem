@@ -1,33 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PriceComparison.Infrastructure.Models;
 
-namespace PriceComparison.Infrastructure.Models;
-
-public partial class Product
+public class Product
 {
     public int Id { get; set; }
-
-    public string ProductId { get; set; } = null!;
-
-    public string ProductName { get; set; } = null!;
-
+    public string ProductId { get; set; } = string.Empty;
+    public string ProductName { get; set; } = string.Empty;
     public string? Barcode { get; set; }
 
     public int? CategoryId { get; set; }
-
     public string? ManufacturerName { get; set; }
-
     public string? UnitOfMeasure { get; set; }
-
-    public bool? IsWeighted { get; set; }
-
+    public bool IsWeighted { get; set; } = false;
     public decimal? QtyInPackage { get; set; }
+    public bool IsActive { get; set; } = true;
+    public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-    public bool? IsActive { get; set; }
-
-    public DateTime? CreatedDate { get; set; }
-
-    public virtual Category? Category { get; set; }
-
-    public virtual ICollection<StorePrice> StorePrices { get; set; } = new List<StorePrice>();
+    // Navigation properties
+    public Category? Category { get; set; }
+    public ICollection<StorePrice> StorePrices { get; set; } = new List<StorePrice>();
 }

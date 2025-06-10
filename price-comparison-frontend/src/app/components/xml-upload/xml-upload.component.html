@@ -1,0 +1,146 @@
+<!-- xml-upload.component.html -->
+<div class="upload-container">
+    <h2>העלאת קובץ מחירים XML</h2>
+    
+    <!-- File Upload Area -->
+    <div class="upload-area" 
+         [class.dragover]="currentState.isDragOver"
+         (dragover)="onDragOver($event)"
+         (dragleave)="onDragLeave($event)"
+         (drop)="onDrop($event)">
+      
+      <div class="upload-content">
+        <div class="upload-icon">📁</div>
+        <p>גרור קובץ XML לכאן או</p>
+        <input type="file" 
+               #fileInput 
+               accept=".xml"
+               (change)="onFileSelected($event)"
+               hidden>
+        <button class="upload-btn" (click)="fileInput.click()">
+          בחר קובץ
+        </button>
+      </div>
+    </div>
+  
+    <!-- Loading State -->
+    @if (currentState.isLoading) {
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>מעבד את הקובץ...</p>
+      </div>
+    }
+  
+    <!-- Error State -->
+    @if (currentState.error) {
+      <div class="error-message">
+        <h3>❌ שגיאה</h3>
+        <p>{{ currentState.error }}</p>
+        <button (click)="resetUpload()" class="retry-btn">נסה שוב</button>
+      </div>
+    }
+  
+    <!-- Success - Show Data -->
+    @if (hasData && !currentState.error) {
+      <div class="data-preview">
+        
+        <!-- Store Info -->
+        <div class="store-info">
+          <h3>פרטי החנות</h3>
+          <div class="info-grid">
+            <div><strong>קוד רשת:</strong> {{ parsedData()!.storeInfo.chainId }}</div>
+            <div><strong>תת-רשת:</strong> {{ parsedData()!.storeInfo.subChainId }}</div>
+            <div><strong>קוד סניף:</strong> {{ parsedData()!.storeInfo.storeId }}</div>
+            <div><strong>מספר ביקורת:</strong> {{ parsedData()!.storeInfo.bikoretNo }}</div>
+          </div>
+        </div>
+  
+        <!-- Summary Statistics -->
+        @if (summary) {
+          <div class="summary">
+            <h3>סיכום נתונים</h3>
+            <div class="summary-stats">
+              <div class="stat">
+                <span class="stat-number">{{ summary.totalItems }}</span>
+                <span class="stat-label">מוצרים</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">{{ summary.averagePrice | number:'1.2-2' }}₪</span>
+                <span class="stat-label">מחיר ממוצע</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">{{ summary.weightedItemsCount }}</span>
+                <span class="stat-label">מוצרים במשקל</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">{{ summary.minPrice | number:'1.2-2' }}₪</span>
+                <span class="stat-label">מחיר מינימלי</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">{{ summary.maxPrice | number:'1.2-2' }}₪</span>
+                <span class="stat-label">מחיר מקסימלי</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">{{ summary.totalValue | number:'1.2-2' }}₪</span>
+                <span class="stat-label">ערך כולל</span>
+              </div>
+            </div>
+          </div>
+        }
+  
+        <!-- Items Table -->
+        <div class="items-table-container">
+          <h3>מוצרים ({{ parsedData()!.totalItems }})</h3>
+          
+          <div class="table-wrapper">
+            <table class="items-table">
+              <thead>
+                <tr>
+                  <th>קוד</th>
+                  <th>שם המוצר</th>
+                  <th>יצרן</th>
+                  <th>יחידת מידה</th>
+                  <th>כמות</th>
+                  <th>מחיר</th>
+                  <th>במשקל</th>
+                  <th>סטטוס</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (item of parsedData()!.items; track item.itemCode) {
+                  <tr>
+                    <td>{{ item.itemCode }}</td>
+                    <td class="item-name">{{ item.itemName }}</td>
+                    <td>{{ item.manufacturerName }}</td>
+                    <td>{{ item.unitOfMeasure }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td class="price">{{ item.itemPrice | number:'1.2-2' }}₪</td>
+                    <td>
+                      <span class="badge" [class.weighted]="item.isWeighted">
+                        {{ item.isWeighted ? 'כן' : 'לא' }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="status" [class.active]="item.itemStatus === 1">
+                        {{ item.itemStatus === 1 ? 'פעיל' : 'לא פעיל' }}
+                      </span>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+  
+        <!-- Action Buttons -->
+        <div class="actions">
+          <button class="save-btn" (click)="saveData()" [disabled]="currentState.isSaving">
+            {{ currentState.isSaving ? 'שומר...' : 'שמור במסד הנתונים' }}
+          </button>
+          <button class="cancel-btn" (click)="resetUpload()">
+            בטל והתחל מחדש
+          </button>
+        </div>
+      </div>
+    }
+  </div>

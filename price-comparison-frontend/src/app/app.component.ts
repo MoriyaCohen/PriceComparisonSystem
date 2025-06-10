@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
+import { XmlUploadComponent } from './components/xml-upload/xml-upload.component';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
@@ -10,3 +10,4 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'price-comparison-frontend';
 }
+

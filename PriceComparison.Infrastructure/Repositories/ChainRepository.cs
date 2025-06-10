@@ -31,5 +31,19 @@ namespace PriceComparison.Infrastructure.Repositories
             return await _context.Chains
                 .FirstOrDefaultAsync(c => c.ChainId == chainId && c.IsActive == true);
         }
+
+        public async Task<Chain> AddAsync(Chain chain)
+        {
+            _context.Chains.Add(chain);
+            await _context.SaveChangesAsync();
+            return chain;
+        }
+
+        public async Task<Chain> UpdateAsync(Chain chain)
+        {
+            _context.Chains.Update(chain);
+            await _context.SaveChangesAsync();
+            return chain;
+        }
     }
 }

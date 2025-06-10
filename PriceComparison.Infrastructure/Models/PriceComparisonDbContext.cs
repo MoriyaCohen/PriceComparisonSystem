@@ -25,8 +25,9 @@ public partial class PriceComparisonDbContext : DbContext
 
     public virtual DbSet<StorePrice> StorePrices { get; set; }
 
+    public virtual DbSet<User> Users { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=DESKTOP-1VUANBN;Database=PriceComparisonDB;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -123,7 +124,34 @@ public partial class PriceComparisonDbContext : DbContext
                 .HasForeignKey(d => d.StoreId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__StorePric__Store__5070F446");
+
+
         });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07");
+
+            // אינדקסים
+            entity.HasIndex(e => e.Phone, "IX_Users_Phone")
+                  .HasFilter("([Phone] IS NOT NULL)");
+            entity.HasIndex(e => e.Email, "IX_Users_Email")
+                  .HasFilter("([Email] IS NOT NULL)");
+            entity.HasIndex(e => e.IsActive, "IX_Users_IsActive");
+
+            // הגדרות עמודות
+            entity.Property(e => e.Phone).HasMaxLength(20);
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.FullName).HasMaxLength(100).IsRequired();
+            entity.Property(e => e.PasswordHash).HasMaxLength(255).IsRequired();
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+
+            // Constraint - לפחות טלפון או אימייל
+            entity.HasCheckConstraint("CK_Users_PhoneOrEmail",
+                "([Phone] IS NOT NULL AND [Phone] != '') OR ([Email] IS NOT NULL AND [Email] != '')");
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }

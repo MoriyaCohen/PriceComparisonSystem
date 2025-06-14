@@ -51,5 +51,26 @@ namespace PriceComparison.Infrastructure.Repositories
                 .OrderBy(p => p.ProductName)
                 .ToListAsync();
         }
+
+        public async Task<Product?> GetByProductIdAsync(string productId)
+        {
+            return await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.ProductId == productId && p.IsActive == true);
+        }
+
+        public async Task<Product> AddAsync(Product product)
+        {
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+            return product;
+        }
+
+        public async Task<Product> UpdateAsync(Product product)
+        {
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
+            return product;
+        }
     }
 }

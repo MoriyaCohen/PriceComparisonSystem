@@ -15,8 +15,8 @@ import {
   providedIn: 'root'
 })
 export class AuthService {
-  // פורט 5161 כפי שנקבע בצ'אט
-  private readonly API_URL = 'http://localhost:5161/api/auth';
+  // פורט 5162 כפי שנקבע בצ'אט
+  private readonly API_URL = 'http://localhost:5162/api/auth';
   private readonly USER_KEY = 'user_info';
 
   authState = signal<AuthState>({
@@ -198,7 +198,7 @@ export class AuthService {
     if (error.error && error.error.message) {
       errorMessage = error.error.message;
     } else if (error.status === 0) {
-      errorMessage = 'לא ניתן להתחבר לשרת. בדוק שהשרת רץ על פורט 5161';
+      errorMessage = 'לא ניתן להתחבר לשרת. בדוק שהשרת רץ על פורט 5162';
     } else if (error.status === 400) {
       errorMessage = 'פרטי התחברות שגויים';
     } else if (error.status === 404) {

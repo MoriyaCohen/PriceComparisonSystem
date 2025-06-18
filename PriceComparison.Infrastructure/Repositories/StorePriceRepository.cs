@@ -52,5 +52,34 @@ namespace PriceComparison.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return storePrice;
         }
+        public async Task<IEnumerable<StorePrice>> GetLatestPricesAsync()
+        {
+            return await _context.StorePrices
+                .Include(sp => sp.Store)
+                .Include(sp => sp.Product)
+                .Where(sp => sp.LastUpdated >= DateTime.Now.AddDays(-7))
+                .OrderByDescending(sp => sp.LastUpdated)
+                .ToListAsync();
+        }
+
+        public async Task<StorePrice?> GetLowestPriceForProductAsync(int productId)
+        {
+            return await _context.StorePrices
+                .Include(sp => sp.Store)
+                .Where(sp => sp.ProductId == productId)
+                .OrderBy(sp => sp.CurrentPrice)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<StorePrice>> GetPriceComparisonAsync(string barcode)
+        {
+            return await _context.StorePrices
+                .Include(sp => sp.Store)
+                .ThenInclude(s => s.Chain)
+                .Include(sp => sp.Product)
+                .Where(sp => sp.Product.Barcode == barcode)
+                .OrderBy(sp => sp.CurrentPrice)
+                .ToListAsync();
+        }
     }
 }

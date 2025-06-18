@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PriceComparison.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+056325552203fe38e42bb405729c4fd954153cae")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("PriceComparison.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PriceComparison.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

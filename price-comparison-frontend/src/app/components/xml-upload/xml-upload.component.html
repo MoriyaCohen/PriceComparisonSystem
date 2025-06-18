@@ -1,7 +1,9 @@
 <!-- xml-upload.component.html -->
 <div class="upload-container">
     <h2>העלאת קובץ מחירים XML</h2>
-    
+      <button class="cancel-btn" (click)="barcode()">
+      ברקוד
+          </button>
     <!-- File Upload Area -->
     <div class="upload-area" 
          [class.dragover]="currentState.isDragOver"

@@ -10,4 +10,5 @@ namespace PriceComparison.Infrastructure.Repositories
         Task<Store> AddAsync(Store store);
         Task<Store> UpdateAsync(Store store);
     }
+
 }

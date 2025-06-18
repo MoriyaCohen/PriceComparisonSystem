@@ -1,0 +1,207 @@
+<!-- src/app/components/barcode-search.component.html -->
+
+<div class="barcode-search-container">
+  <!-- כותרת הדף -->
+  <div class="page-header">
+    <h1 class="page-title">חיפוש מוצר לפי ברקוד</h1>
+    <p class="page-subtitle">הזן מספר ברקוד לקבלת השוואת מחירים בין רשתות השיווק</p>
+  </div>
+
+  <!-- טופס קליטת ברקוד -->
+  <div class="search-form-container">
+    <form [formGroup]="barcodeForm" (ngSubmit)="onSubmit()" class="barcode-form">
+      
+      <!-- שדה קליטת ברקוד -->
+      <div class="form-group">
+        <label for="barcode" class="form-label">
+          מספר ברקוד
+          <span class="required-asterisk">*</span>
+        </label>
+        
+        <div class="input-container">
+          <!-- שדה הקלט -->
+          <input
+            type="text"
+            id="barcode"
+            formControlName="barcode"
+            class="form-input"
+            [class.input-error]="shouldShowFieldError('barcode')"
+            [class.input-valid]="validationStatus === BarcodeValidationStatus.VALID"
+            [class.input-validating]="validationStatus === BarcodeValidationStatus.VALIDATING"
+            placeholder="הזן מספר ברקוד (8-13 ספרות)"
+            autocomplete="off"
+            [disabled]="isLoading"
+            maxlength="13"
+            inputmode="numeric"
+            pattern="[0-9]*"
+          />
+          
+          <!-- אייקון סטטוס -->
+          <div class="input-status-icon">
+            <!-- אייקון תקין -->
+            <svg 
+              *ngIf="validationStatus === BarcodeValidationStatus.VALID && !isLoading"
+              class="icon icon-success" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            
+            <!-- אייקון שגיאה -->
+            <svg 
+              *ngIf="validationStatus === BarcodeValidationStatus.INVALID"
+              class="icon icon-error" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            
+            <!-- אייקון טעינה -->
+            <div 
+              *ngIf="isLoading"
+              class="loading-spinner"
+            ></div>
+          </div>
+        </div>
+
+        <!-- הודעות שגיאה של השדה -->
+        <div 
+          *ngIf="shouldShowFieldError('barcode')" 
+          class="field-error-message"
+        >
+          {{ getFieldErrorMessage('barcode') }}
+        </div>
+
+        <!-- הנחיות למשתמש -->
+        <div class="field-help-text">
+          ברקוד תקין מכיל 8, 12 או 13 ספרות. ניתן למצוא אותו על גבי אריזת המוצר.
+        </div>
+      </div>
+
+      <!-- כפתורי פעולה -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="isLoading || barcodeForm.invalid"
+          [class.btn-loading]="isLoading"
+        >
+          <span *ngIf="!isLoading">חפש מוצר</span>
+          <span *ngIf="isLoading">מחפש...</span>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="resetForm()"
+          [disabled]="isLoading"
+        >
+          איפוס
+        </button>
+      </div>
+
+      <!-- הודעת שגיאה כללית -->
+      <div 
+        *ngIf="currentErrorMessage" 
+        class="error-message"
+      >
+        <svg class="icon icon-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        {{ currentErrorMessage }}
+      </div>
+    </form>
+  </div>
+
+  <!-- תוצאות החיפוש -->
+  <div class="search-results-container" *ngIf="searchResults$ | async as results">
+    
+    <!-- מצב טעינה -->
+    <div *ngIf="(searchStatus$ | async) === SearchStatus.SEARCHING" class="loading-state">
+      <div class="loading-spinner large"></div>
+      <p class="loading-text">מחפש מוצר ומשווה מחירים...</p>
+    </div>
+
+    <!-- מוצר לא נמצא -->
+    <div *ngIf="(searchStatus$ | async) === SearchStatus.NOT_FOUND" class="not-found-state">
+      <svg class="icon icon-not-found" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.467-.846-6.127-2.239"></path>
+      </svg>
+      <h3>מוצר לא נמצא</h3>
+      <p>המוצר עם הברקוד שהוזן לא נמצא במערכת שלנו.</p>
+      <p class="help-text">נסה לבדוק שהברקוד הוזן נכון או חפש מוצר אחר.</p>
+    </div>
+
+    <!-- שגיאה בחיפוש -->
+    <div *ngIf="(searchStatus$ | async) === SearchStatus.ERROR && results.errorMessage" class="error-state">
+      <svg class="icon icon-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <h3>שגיאה בחיפוש</h3>
+      <p>{{ results.errorMessage }}</p>
+    </div>
+
+    <!-- תוצאות מוצלחות -->
+    <div *ngIf="(searchStatus$ | async) === SearchStatus.SUCCESS && results.success" class="success-results">
+      
+      <!-- פרטי המוצר -->
+      <div class="product-info" *ngIf="results.productInfo">
+        <h2 class="product-name">{{ results.productInfo.productName }}</h2>
+        <div class="product-details">
+          <span class="product-barcode">ברקוד: {{ results.productInfo.barcode }}</span>
+          <span *ngIf="results.productInfo.manufacturerName" class="product-manufacturer">
+            יצרן: {{ results.productInfo.manufacturerName }}
+          </span>
+        </div>
+      </div>
+
+      <!-- סטטיסטיקות מחירים -->
+      <div class="price-statistics" *ngIf="results.statistics">
+        <h3 class="statistics-title">סיכום מחירים</h3>
+        <div class="statistics-grid">
+          <div class="stat-item stat-min">
+            <span class="stat-label">זול ביותר</span>
+            <span class="stat-value">₪{{ results.statistics.minPrice | number:'1.2-2' }}</span>
+          </div>
+          <div class="stat-item stat-avg">
+            <span class="stat-label">ממוצע</span>
+            <span class="stat-value">₪{{ results.statistics.averagePrice | number:'1.2-2' }}</span>
+          </div>
+          <div class="stat-item stat-max">
+            <span class="stat-label">יקר ביותר</span>
+            <span class="stat-value">₪{{ results.statistics.maxPrice | number:'1.2-2' }}</span>
+          </div>
+        </div>
+        <div class="statistics-summary">
+          <p>נמצא ב-{{ results.statistics.storeCount }} סניפים מ-{{ results.statistics.chainCount }} רשתות</p>
+          <p *ngIf="results.statistics.maxPrice > results.statistics.minPrice" class="savings-info">
+            חיסכון אפשרי של ₪{{ (results.statistics.maxPrice - results.statistics.minPrice) | number:'1.2-2' }}
+          </p>
+        </div>
+      </div>
+
+      <!-- רשימת מחירים מפורטת -->
+      <!-- <div class="detailed-prices">
+        <app-price-results 
+          [priceDetails]="results.priceDetails"
+          [minPrice]="results.statistics?.minPrice"
+        ></app-price-results>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- עצות לשימוש -->
+  <div class="usage-tips" *ngIf="(searchStatus$ | async) === SearchStatus.IDLE">
+    <h3>עצות לשימוש:</h3>
+    <ul>
+      <li>הזן את מספר הברקוד המלא המופיע על המוצר</li>
+      <li>ברקוד תקין מכיל 8-13 ספרות</li>
+      <li>ודא שהברקוד ברור וללא נזק</li>
+      <li>אם המוצר לא נמצא, ייתכן שהוא לא נמכר ברשתות שבמערכת</li>
+    </ul>
+  </div>
+</div>

@@ -13,3 +13,18 @@ C:\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\n
 C:\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\refint\PriceComparison.Application.dll
 C:\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.pdb
 C:\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\ref\PriceComparison.Application.dll
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Application.deps.json
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Application.dll
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Application.pdb
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Infrastructure.dll
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Infrastructure.pdb
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.csproj.AssemblyReference.cache
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.AssemblyInfoInputs.cache
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.AssemblyInfo.cs
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.csproj.CoreCompileInputs.cache
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\PriceCom.D780C0ED.Up2Date
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.dll
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\refint\PriceComparison.Application.dll
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.pdb
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Application\obj\Debug\net8.0\ref\PriceComparison.Application.dll

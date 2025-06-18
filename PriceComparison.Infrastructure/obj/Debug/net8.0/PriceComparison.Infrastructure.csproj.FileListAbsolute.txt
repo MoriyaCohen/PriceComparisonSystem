@@ -12,3 +12,17 @@ C:\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debu
 C:\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.pdb
 C:\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.genruntimeconfig.cache
 C:\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\ref\PriceComparison.Infrastructure.dll
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\bin\Debug\net8.0\PriceComparison.Infrastructure.deps.json
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\bin\Debug\net8.0\PriceComparison.Infrastructure.runtimeconfig.json
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\bin\Debug\net8.0\PriceComparison.Infrastructure.dll
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\bin\Debug\net8.0\PriceComparison.Infrastructure.pdb
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.AssemblyInfo.cs
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.dll
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\refint\PriceComparison.Infrastructure.dll
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.pdb
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.genruntimeconfig.cache
+C:\Users\sbhtk\Desktop\השוואת מחירים\PriceComparisonSystem-first-prototype\PriceComparison.Infrastructure\obj\Debug\net8.0\ref\PriceComparison.Infrastructure.dll

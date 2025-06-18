@@ -28,7 +28,7 @@ public partial class PriceComparisonDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-1VUANBN;Database=PriceComparisonDB;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False;");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-O81NVTE;Database=PriceComparisonDB;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

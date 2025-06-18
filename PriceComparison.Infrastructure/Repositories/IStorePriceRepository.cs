@@ -9,5 +9,8 @@ namespace PriceComparison.Infrastructure.Repositories
         Task<IEnumerable<StorePrice>> GetPricesByProductIdAsync(int productId);
         Task<StorePrice> AddAsync(StorePrice storePrice);
         Task<StorePrice> UpdateAsync(StorePrice storePrice);
+        Task<IEnumerable<StorePrice>> GetLatestPricesAsync();
+        Task<StorePrice?> GetLowestPriceForProductAsync(int productId);
+        Task<IEnumerable<StorePrice>> GetPriceComparisonAsync(string barcode);
     }
 }

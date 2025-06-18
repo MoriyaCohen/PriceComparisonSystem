@@ -72,5 +72,36 @@ namespace PriceComparison.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return product;
         }
+        public async Task<IEnumerable<Product>> GetProductsWithPricesAsync()
+        {
+            return await _context.Products
+                .Include(p => p.StorePrices)
+                .ThenInclude(sp => sp.Store)
+                .Where(p => p.IsActive)
+                .ToListAsync();
+        }
+
+        public async Task<Product?> GetProductWithCategoryAsync(int id)
+        {
+            return await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.StorePrices)
+                .FirstOrDefaultAsync(p => p.Id == id && p.IsActive);
+        }
+
+        public async Task<bool> ExistsAsync(string barcode)
+        {
+            return await _context.Products
+                .AnyAsync(p => p.Barcode == barcode && p.IsActive);
+        }
     }
+    //public async Task<bool> SoftDeleteAsync(int id)
+    //{
+    //    var product = await _context.Products.FindAsync(id);
+    //    if (product == null) return false;
+
+    //    product.IsActive = false;
+    //    await _context.SaveChangesAsync();
+    //    return true;
+    //}
 }

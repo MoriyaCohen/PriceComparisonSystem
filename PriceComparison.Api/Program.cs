@@ -38,6 +38,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 // XML Processing Services
 builder.Services.AddScoped<IXmlProcessingService, XmlProcessingService>();
 
+builder.Services.AddScoped<IBarcodeValidationService, BarcodeValidationService>();
+builder.Services.AddScoped<IPriceComparisonService, PriceComparisonService>();
 // Business Repositories  
 builder.Services.AddScoped<IChainRepository, ChainRepository>();
 builder.Services.AddScoped<IStoreRepository, StoreRepository>();

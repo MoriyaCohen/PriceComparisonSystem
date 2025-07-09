@@ -17,7 +17,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PriceComparison.Application\PriceComparison.Application.csproj" />
+    <ProjectReference Include="..\PriceComparison.Download\PriceComparison.Download.csproj" />
     <ProjectReference Include="..\PriceComparison.Infrastructure\PriceComparison.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BackgroundServices\" />
   </ItemGroup>
 
 </Project>

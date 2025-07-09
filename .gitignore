@@ -1,12 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<NotepadPlus>
-    <Session activeView="0">
-        <mainView activeIndex="5">
-            <File firstVisibleLine="0" xOffset="0" scrollWidth="464" startPos="44" endPos="44" selMode="0" offset="0" wrapCount="1" lang="&#x05DE;&#x05E2;&#x05D8;&#x05E4;&#x05EA;" encoding="-1" userReadOnly="no" filename="C:\Users\user1\Downloads\run.sh" backupFilePath="" originalFileLastModifTimestamp="-1256373030" originalFileLastModifTimestampHigh="31154955" tabColourId="-1" RTL="yes" tabPinned="no" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="512" mapWrapIndentMode="-1" mapIsWrap="no" />
-            <File firstVisibleLine="0" xOffset="0" scrollWidth="1568" startPos="1154" endPos="1154" selMode="0" offset="0" wrapCount="1" lang="&#x05E4;&#x05D9;&#x05D9;&#x05D8;&#x05D5;&#x05DF;" encoding="-1" userReadOnly="no" filename="C:\Users\user1\Downloads\Download tip for clean\fingerprint_effect.py" backupFilePath="" originalFileLastModifTimestamp="2101591415" originalFileLastModifTimestampHigh="31154961" tabColourId="-1" RTL="yes" tabPinned="no" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="512" mapWrapIndentMode="-1" mapIsWrap="no" />
-            <File firstVisibleLine="175" xOffset="0" scrollWidth="2916" startPos="6911" endPos="6912" selMode="0" offset="0" wrapCount="1" lang="&#x05E9;&#x05E4;&#x05EA; &#x05EA;&#x05D2;&#x05D9;&#x05D5;&#x05EA;(HTML)" encoding="-1" userReadOnly="no" filename="C:\Users\user1\Downloads\Disgn.html" backupFilePath="" originalFileLastModifTimestamp="1301532488" originalFileLastModifTimestampHigh="31189291" tabColourId="-1" RTL="yes" tabPinned="no" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="512" mapWrapIndentMode="-1" mapIsWrap="no" />
-            <File firstVisibleLine="5" xOffset="0" scrollWidth="528" startPos="582" endPos="582" selMode="0" offset="0" wrapCount="1" lang="&#x05D8;&#x05E7;&#x05E1;&#x05D8; &#x05E0;&#x05D5;&#x05E8;&#x05DE;&#x05DC;&#x05D9;" encoding="-1" userReadOnly="no" filename="C:\Projects\PriceComparison Project\PriceComparisonSystem\.gitignore" backupFilePath="" originalFileLastModifTimestamp="1301696563" originalFileLastModifTimestampHigh="31189291" tabColourId="-1" RTL="yes" tabPinned="no" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="512" mapWrapIndentMode="-1" mapIsWrap="no" />
-        </mainView>
-        <subView activeIndex="0" />
-    </Session>
-</NotepadPlus>
+# Build artifacts
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log
+
+# System
+*.tmp
+*.bak
+*.cache
+
+# Node.js
+node_modules/
+dist/
+
+# Others
+.env
+*.DS_Store
+Thumbs.db

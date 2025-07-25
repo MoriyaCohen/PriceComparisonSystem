@@ -41,3 +41,18 @@ C:\Projects\PriceComparison Project\PriceComparisonSystem\PriceComparison.Infras
 C:\Projects\PriceComparison Project\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.pdb
 C:\Projects\PriceComparison Project\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.genruntimeconfig.cache
 C:\Projects\PriceComparison Project\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\ref\PriceComparison.Infrastructure.dll
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\bin\Debug\net8.0\PriceComparison.Infrastructure.deps.json
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\bin\Debug\net8.0\PriceComparison.Infrastructure.runtimeconfig.json
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\bin\Debug\net8.0\PriceComparison.Infrastructure.dll
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\bin\Debug\net8.0\PriceComparison.Infrastructure.pdb
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.csproj.AssemblyReference.cache
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.AssemblyInfoInputs.cache
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.AssemblyInfo.cs
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.sourcelink.json
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.dll
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\refint\PriceComparison.Infrastructure.dll
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.pdb
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\PriceComparison.Infrastructure.genruntimeconfig.cache
+C:\Projects\PriceComparisonSystem\PriceComparison.Infrastructure\obj\Debug\net8.0\ref\PriceComparison.Infrastructure.dll

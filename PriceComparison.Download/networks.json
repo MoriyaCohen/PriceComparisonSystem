@@ -1,0 +1,291 @@
+//{
+//  "BinaProjectsNetworks": [
+//    {
+//      "Id": "kingstore",
+//      "Name": "אלמשהדאוי קינג סטור בע\"מ",
+//      "BaseUrl": "https://kingstore.binaprojects.com",
+//      "MainPageUrl": "https://kingstore.binaprojects.com/Main.aspx",
+//      "ApiEndpoint": "https://kingstore.binaprojects.com/MainIO_Hok.aspx",
+//      "ChainId": "7290027600007",
+//      "IsActive": true,
+//      "FileTypes": {
+//        "StoresFull": {
+//          "SearchTerms": [ "storesfull", "מחסנים מלא" ],
+//          "Description": "קובץ יחיד המכיל את כל סניפי הרשת"
+//        },
+//        "Price": {
+//          "SearchTerms": [ "price", "מחירים" ],
+//          "Description": "מחירי המוצרים הרגילים"
+//        },
+//        "PriceFull": {
+//          "SearchTerms": [ "pricefull", "מחירים מלא" ],
+//          "Description": "מחירי המוצרים המלאים"
+//        },
+//        "Promo": {
+//          "SearchTerms": [ "promo", "מבצעים" ],
+//          "Description": "מבצעים רגילים"
+//        },
+//        "PromoFull": {
+//          "SearchTerms": [ "promofull", "מבצעים מלא" ],
+//          "Description": "מבצעים מלאים"
+//        }
+//      },
+//      "UpdateVersions": "כל גרסאות העדכון לאותו יום",
+//      "DownloadFormat": "קבצי ZIP המכילים קובץ XML יחיד",
+//      "FilterOptions": [ "מחסן", "סוג", "תאריך" ]
+//    },
+//    {
+//      "Id": "maayan2000",
+//      "Name": "ג.מ מעיין אלפיים (07) בע\"מ",
+//      "BaseUrl": "https://maayan2000.binaprojects.com",
+//      "MainPageUrl": "https://maayan2000.binaprojects.com/Main.aspx",
+//      "ApiEndpoint": "https://maayan2000.binaprojects.com/MainIO_Hok.aspx",
+//      "ChainId": "7290058140886",
+//      "IsActive": true,
+//      "FileTypes": {
+//        "StoresFull": {
+//          "SearchTerms": [ "storesfull", "מחסנים מלא" ],
+//          "Description": "קובץ יחיד המכיל את כל סניפי הרשת"
+//        },
+//        "Price": {
+//          "SearchTerms": [ "price", "מחירים" ],
+//          "Description": "מחירי המוצרים הרגילים"
+//        },
+//        "PriceFull": {
+//          "SearchTerms": [ "pricefull", "מחירים מלא" ],
+//          "Description": "מחירי המוצרים המלאים"
+//        },
+//        "Promo": {
+//          "SearchTerms": [ "promo", "מבצעים" ],
+//          "Description": "מבצעים רגילים"
+//        },
+//        "PromoFull": {
+//          "SearchTerms": [ "promofull", "מבצעים מלא" ],
+//          "Description": "מבצעים מלאים"
+//        }
+//      },
+//      "UpdateVersions": "כל גרסאות העדכון לאותו יום",
+//      "DownloadFormat": "קבצי ZIP המכילים קובץ XML יחיד",
+//      "FilterOptions": [ "מחסן", "סוג", "תאריך" ]
+//    },
+//    {
+//      "Id": "goodpharm",
+//      "Name": "גוד פארם בע\"מ",
+//      "BaseUrl": "https://goodpharm.binaprojects.com",
+//      "MainPageUrl": "https://goodpharm.binaprojects.com/Main.aspx",
+//      "ApiEndpoint": "https://goodpharm.binaprojects.com/MainIO_Hok.aspx",
+//      "ChainId": "7290172900007",
+//      "IsActive": true,
+//      "FileTypes": {
+//        "StoresFull": {
+//          "SearchTerms": [ "storesfull", "מחסנים מלא" ],
+//          "Description": "קובץ יחיד המכיל את כל סניפי הרשת"
+//        },
+//        "Price": {
+//          "SearchTerms": [ "price", "מחירים" ],
+//          "Description": "מחירי המוצרים הרגילים"
+//        },
+//        "PriceFull": {
+//          "SearchTerms": [ "pricefull", "מחירים מלא" ],
+//          "Description": "מחירי המוצרים המלאים"
+//        },
+//        "Promo": {
+//          "SearchTerms": [ "promo", "מבצעים" ],
+//          "Description": "מבצעים רגילים"
+//        },
+//        "PromoFull": {
+//          "SearchTerms": [ "promofull", "מבצעים מלא" ],
+//          "Description": "מבצעים מלאים"
+//        }
+//      },
+//      "UpdateVersions": "כל גרסאות העדכון לאותו יום",
+//      "DownloadFormat": "קבצי ZIP המכילים קובץ XML יחיד",
+//      "FilterOptions": [ "מחסן", "סוג", "תאריך" ]
+//    },
+//    {
+//      "Id": "zolvebegadol",
+//      "Name": "זול ובגדול בע\"מ",
+//      "BaseUrl": "https://zolvebegadol.binaprojects.com",
+//      "MainPageUrl": "https://zolvebegadol.binaprojects.com/Main.aspx",
+//      "ApiEndpoint": "https://zolvebegadol.binaprojects.com/MainIO_Hok.aspx",
+//      "ChainId": "7290875100007",
+//      "IsActive": true,
+//      "FileTypes": {
+//        "Stores": {
+//          "SearchTerms": [ "מחסנים" ],
+//          "Description": "רשימת מחסנים"
+//        },
+//        "Price": {
+//          "SearchTerms": [ "מחירים" ],
+//          "Description": "מחירי המוצרים הרגילים"
+//        },
+//        "PriceFull": {
+//          "SearchTerms": [ "מחירים מלא" ],
+//          "Description": "מחירי המוצרים המלאים"
+//        },
+//        "Promo": {
+//          "SearchTerms": [ "מבצעים" ],
+//          "Description": "מבצעים רגילים"
+//        },
+//        "PromoFull": {
+//          "SearchTerms": [ "מבצעים מלא" ],
+//          "Description": "מבצעים מלאים"
+//        }
+//      },
+//      "UpdateVersions": "לכל סניף בנפרד",
+//      "DownloadFormat": "קבצי ZIP המכילים קובץ XML יחיד",
+//      "FilterOptions": [ "מחסן", "סוג", "תאריך" ],
+//      "SpecialNote": "לא כולל StoresFull - רק קבצים לכל סניף"
+//    },
+//    {
+//      "Id": "supersapir",
+//      "Name": "סופר ספיר בע\"מ",
+//      "BaseUrl": "https://supersapir.binaprojects.com",
+//      "MainPageUrl": "https://supersapir.binaprojects.com/Main.aspx",
+//      "ApiEndpoint": "https://supersapir.binaprojects.com/MainIO_Hok.aspx",
+//      "ChainId": "7290725900007",
+//      "IsActive": true,
+//      "FileTypes": {
+//        "StoresFull": {
+//          "SearchTerms": [ "storesfull", "מחסנים מלא" ],
+//          "Description": "קובץ המכיל את סניפי הרשת"
+//        },
+//        "Stores": {
+//          "SearchTerms": [ "מחסנים" ],
+//          "Description": "רשימת מחסנים"
+//        },
+//        "Price": {
+//          "SearchTerms": [ "מחירים" ],
+//          "Description": "מחירי המוצרים הרגילים"
+//        },
+//        "PriceFull": {
+//          "SearchTerms": [ "מחירים מלא" ],
+//          "Description": "מחירי המוצרים המלאים"
+//        },
+//        "Promo": {
+//          "SearchTerms": [ "מבצעים" ],
+//          "Description": "מבצעים רגילים"
+//        },
+//        "PromoFull": {
+//          "SearchTerms": [ "מבצעים מלא" ],
+//          "Description": "מבצעים מלאים"
+//        }
+//      },
+//      "UpdateVersions": "כל גרסאות העדכון לאותו יום",
+//      "DownloadFormat": "קבצי ZIP המכילים קובץ XML יחיד",
+//      "FilterOptions": [ "רשת", "מחסן", "סוג", "תאריך" ],
+//      "SpecialNote": "כולל סינון נוסף לפי רשת"
+//    },
+//    {
+//      "Id": "ktshivuk",
+//      "Name": "קיי.טי. יבוא ושיווק בע\"מ (קייטי)",
+//      "BaseUrl": "https://ktshivuk.binaprojects.com",
+//      "MainPageUrl": "https://ktshivuk.binaprojects.com/Main.aspx",
+//      "ApiEndpoint": "https://ktshivuk.binaprojects.com/MainIO_Hok.aspx",
+//      "ChainId": "7290696200007",
+//      "IsActive": true,
+//      "FileTypes": {
+//        "StoresFull": {
+//          "SearchTerms": [ "storesfull", "מחסנים מלא" ],
+//          "Description": "קובץ המכיל את סניפי הרשת"
+//        },
+//        "Price": {
+//          "SearchTerms": [ "price", "מחירים" ],
+//          "Description": "מחירי המוצרים הרגילים"
+//        },
+//        "PriceFull": {
+//          "SearchTerms": [ "pricefull", "מחירים מלא" ],
+//          "Description": "מחירי המוצרים המלאים"
+//        },
+//        "Promo": {
+//          "SearchTerms": [ "promo", "מבצעים" ],
+//          "Description": "מבצעים רגילים"
+//        },
+//        "PromoFull": {
+//          "SearchTerms": [ "promofull", "מבצעים מלא" ],
+//          "Description": "מבצעים מלאים"
+//        }
+//      },
+//      "UpdateVersions": "כל גרסאות העדכון לאותו יום",
+//      "DownloadFormat": "קבצי ZIP המכילים קובץ XML יחיד",
+//      "FilterOptions": [ "מחסן", "סוג", "תאריך" ]
+//    },
+//    {
+//      "Id": "shukhayir",
+//      "Name": "שוק העיר (ט.ע.מ.ס) בע\"מ",
+//      "BaseUrl": "https://shuk-hayir.binaprojects.com",
+//      "MainPageUrl": "https://shuk-hayir.binaprojects.com/Main.aspx",
+//      "ApiEndpoint": "https://shuk-hayir.binaprojects.com/MainIO_Hok.aspx",
+//      "ChainId": "7290103152007",
+//      "IsActive": true,
+//      "FileTypes": {
+//        "StoresFull": {
+//          "SearchTerms": [ "storesfull", "מחסנים מלא" ],
+//          "Description": "קובץ המכיל את סניפי הרשת"
+//        },
+//        "Price": {
+//          "SearchTerms": [ "price", "מחירים" ],
+//          "Description": "מחירי המוצרים הרגילים"
+//        },
+//        "PriceFull": {
+//          "SearchTerms": [ "pricefull", "מחירים מלא" ],
+//          "Description": "מחירי המוצרים המלאים"
+//        },
+//        "Promo": {
+//          "SearchTerms": [ "promo", "מבצעים" ],
+//          "Description": "מבצעים רגילים"
+//        },
+//        "PromoFull": {
+//          "SearchTerms": [ "promofull", "מבצעים מלא" ],
+//          "Description": "מבצעים מלאים"
+//        }
+//      },
+//      "UpdateVersions": "2 גרסאות עדכון לאותו יום",
+//      "DownloadFormat": "קבצי ZIP המכילים קובץ XML יחיד",
+//      "FilterOptions": [ "מחסן", "סוג", "תאריך" ]
+//    },
+//    {
+//      "Id": "shefabirkathashem",
+//      "Name": "שפע ברכת השם בע\"מ",
+//      "BaseUrl": "https://shefabirkathashem.binaprojects.com",
+//      "MainPageUrl": "https://shefabirkathashem.binaprojects.com/Main.aspx",
+//      "ApiEndpoint": "https://shefabirkathashem.binaprojects.com/MainIO_Hok.aspx",
+//      "ChainId": "7290492000005",
+//      "IsActive": true,
+//      "FileTypes": {
+//        "StoresFull": {
+//          "SearchTerms": [ "storesfull", "מחסנים מלא" ],
+//          "Description": "קובץ המכיל את סניפי הרשת"
+//        },
+//        "Price": {
+//          "SearchTerms": [ "price", "מחירים" ],
+//          "Description": "מחירי המוצרים הרגילים"
+//        },
+//        "PriceFull": {
+//          "SearchTerms": [ "pricefull", "מחירים מלא" ],
+//          "Description": "מחירי המוצרים המלאים"
+//        },
+//        "Promo": {
+//          "SearchTerms": [ "promo", "מבצעים" ],
+//          "Description": "מבצעים רגילים"
+//        },
+//        "PromoFull": {
+//          "SearchTerms": [ "promofull", "מבצעים מלא" ],
+//          "Description": "מבצעים מלאים"
+//        }
+//      },
+//      "UpdateVersions": "2 גרסאות עדכון לאותו יום",
+//      "DownloadFormat": "קבצי ZIP המכילים קובץ XML יחיד",
+//      "FilterOptions": [ "מחסן", "סוג", "תאריך" ]
+//    }
+//  ],
+//  "GlobalSettings": {
+//    "DefaultTimeout": 30000,
+//    "RetryAttempts": 3,
+//    "DownloadFolder": "DownloadedFiles",
+//    "SupportedFormats": [ "ZIP", "XML" ],
+//    "DefaultUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+//    "DefaultAcceptLanguage": "he-IL,he;q=0.8",
+//    "MaxConcurrentDownloads": 3
+//  }
+//}

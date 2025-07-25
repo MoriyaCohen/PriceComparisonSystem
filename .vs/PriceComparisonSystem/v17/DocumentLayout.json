@@ -1,307 +1,157 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\",
+  "WorkspaceRootPath": "C:\\Projects\\PriceComparisonSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.download.new\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|solutionrelative:pricecomparison.download.new\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.download.new\\binaproject\\si.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|solutionrelative:pricecomparison.download.new\\binaproject\\si.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\abstractions\\istorageprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\abstractions\\istorageprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.download.new\\shufersal\\shufersaldownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|solutionrelative:pricecomparison.download.new\\shufersal\\shufersaldownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\pricecomparison.download.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\pricecomparison.download.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.download.new\\chains.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|solutionrelative:pricecomparison.download.new\\chains.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\abstractions\\iscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\abstractions\\iscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.download.new\\wolt\\woltdownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|solutionrelative:pricecomparison.download.new\\wolt\\woltdownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\abstractions\\ichaindownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\abstractions\\ichaindownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.download.new\\mishnatyosef\\mishnatyosefdownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|solutionrelative:pricecomparison.download.new\\mishnatyosef\\mishnatyosefdownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\jobs\\dailydownloadjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\jobs\\dailydownloadjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\scrapers\\chainconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\scrapers\\chainconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\configuration\\binaprojectscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\configuration\\binaprojectscraper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\configuration\\htmlutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\configuration\\htmlutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\configuration\\scraperbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\configuration\\scraperbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\storage\\downloadcoordinator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\storage\\downloadcoordinator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.download\\storage\\filemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F33C302-62CD-4010-9465-996676DD7CA9}|PriceComparison.Download\\PriceComparison.Download.csproj|solutionrelative:pricecomparison.download\\storage\\filemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.api\\pricecomparison.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\pricecomparison.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CFC41D3F-6443-4F63-88C5-1E959E9BDD9E}|PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj|c:\\projects\\pricecomparison project\\pricecomparisonsystem\\pricecomparison.infrastructure\\models\\pricecomparisondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CFC41D3F-6443-4F63-88C5-1E959E9BDD9E}|PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj|solutionrelative:pricecomparison.infrastructure\\models\\pricecomparisondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.download.new\\superpharm\\superpharmdownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B579BFFB-16B5-924D-6AB6-1CA67051DB63}|PriceComparison.Download.New\\PriceComparison.Download.New.csproj|solutionrelative:pricecomparison.download.new\\superpharm\\superpharmdownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 0,
+      "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "DockedHeight": 379,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SI.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\BinaProject\\SI.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Download.New\\BinaProject\\SI.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\BinaProject\\SI.cs",
+              "RelativeToolTip": "PriceComparison.Download.New\\BinaProject\\SI.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T19:40:32.813Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "chains.json",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\chains.json",
+              "RelativeDocumentMoniker": "PriceComparison.Download.New\\chains.json",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\chains.json",
+              "RelativeToolTip": "PriceComparison.Download.New\\chains.json",
+              "ViewState": "AgIAAEkAAAAAAAAAAADwv20AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-19T22:27:44.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Program.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Program.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Program.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Program.cs",
-              "ViewState": "AQIAAPcCAAAAAAAAAAAvwL0CAAAIAAAA",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\Program.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Download.New\\Program.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\Program.cs",
+              "RelativeToolTip": "PriceComparison.Download.New\\Program.cs",
+              "ViewState": "AgIAABMCAAAAAAAAAAAowCECAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T19:58:37.193Z",
+              "WhenOpened": "2025-07-18T09:08:17.411Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "IStorageProvider.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Abstractions\\IStorageProvider.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Abstractions\\IStorageProvider.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Abstractions\\IStorageProvider.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Abstractions\\IStorageProvider.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAcAAAABAAAA",
+              "Title": "ShuferSalDownloader.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\Shufersal\\ShuferSalDownloader.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Download.New\\Shufersal\\ShuferSalDownloader.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\Shufersal\\ShuferSalDownloader.cs",
+              "RelativeToolTip": "PriceComparison.Download.New\\Shufersal\\ShuferSalDownloader.cs",
+              "ViewState": "AgIAAHIDAAAAAAAAAAAswJQDAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T16:47:33.318Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\appsettings.json",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\appsettings.json",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\appsettings.json",
-              "RelativeToolTip": "PriceComparison.Download\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-08T17:51:54.269Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PriceComparison.Download.csproj",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\PriceComparison.Download.csproj",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj",
-              "RelativeToolTip": "PriceComparison.Download\\PriceComparison.Download.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvxwAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-29T19:37:58.866Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DailyDownloadJob.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Jobs\\DailyDownloadJob.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Jobs\\DailyDownloadJob.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Jobs\\DailyDownloadJob.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Jobs\\DailyDownloadJob.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T17:51:15.773Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IChainDownloader.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Abstractions\\IChainDownloader.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Abstractions\\IChainDownloader.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Abstractions\\IChainDownloader.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Abstractions\\IChainDownloader.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-05T20:38:21.701Z",
+              "WhenOpened": "2025-07-23T20:16:09.381Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "IScraper.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Abstractions\\IScraper.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Abstractions\\IScraper.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Abstractions\\IScraper.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Abstractions\\IScraper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAFAAAA",
+              "Title": "WoltDownloader.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\Wolt\\WoltDownloader.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Download.New\\Wolt\\WoltDownloader.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\Wolt\\WoltDownloader.cs",
+              "RelativeToolTip": "PriceComparison.Download.New\\Wolt\\WoltDownloader.cs",
+              "ViewState": "AgIAANcCAAAAAAAAAAAIwPsCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T17:42:55.623Z",
+              "WhenOpened": "2025-07-24T17:36:38.386Z",
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ChainConfig.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Scrapers\\ChainConfig.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Scrapers\\ChainConfig.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Scrapers\\ChainConfig.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Scrapers\\ChainConfig.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "DocumentIndex": 5,
+              "Title": "MishnatYosefDownloader.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\MishnatYosef\\MishnatYosefDownloader.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Download.New\\MishnatYosef\\MishnatYosefDownloader.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\MishnatYosef\\MishnatYosefDownloader.cs",
+              "RelativeToolTip": "PriceComparison.Download.New\\MishnatYosef\\MishnatYosefDownloader.cs",
+              "ViewState": "AgIAAEkCAAAAAAAAAAAowFgCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T15:13:08.248Z",
+              "WhenOpened": "2025-07-22T19:13:24.014Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "BinaprojectScraper.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Configuration\\BinaprojectScraper.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Configuration\\BinaprojectScraper.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Configuration\\BinaprojectScraper.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Configuration\\BinaprojectScraper.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAnwFUAAAAyAAAA",
+              "DocumentIndex": 6,
+              "Title": "SuperPharmDownloader.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\SuperPharm\\SuperPharmDownloader.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Download.New\\SuperPharm\\SuperPharmDownloader.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\SuperPharm\\SuperPharmDownloader.cs",
+              "RelativeToolTip": "PriceComparison.Download.New\\SuperPharm\\SuperPharmDownloader.cs",
+              "ViewState": "AgIAAPUDAAAAAAAAAAAowPsDAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T17:49:11.705Z",
+              "WhenOpened": "2025-07-23T16:58:37.832Z",
               "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 21,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "HtmlUtils.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Configuration\\HtmlUtils.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Configuration\\HtmlUtils.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Configuration\\HtmlUtils.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Configuration\\HtmlUtils.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T17:49:25.975Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ScraperBase.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Configuration\\ScraperBase.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Configuration\\ScraperBase.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Configuration\\ScraperBase.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Configuration\\ScraperBase.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T17:49:41.317Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "DownloadCoordinator.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Storage\\DownloadCoordinator.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Storage\\DownloadCoordinator.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Storage\\DownloadCoordinator.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Storage\\DownloadCoordinator.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAnwCQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T15:17:12.689Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "FileManager.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Storage\\FileManager.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Download\\Storage\\FileManager.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\Storage\\FileManager.cs",
-              "RelativeToolTip": "PriceComparison.Download\\Storage\\FileManager.cs",
-              "ViewState": "AQIAAB4BAAAA0uS+CjMqwCUBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-05T20:39:53.404Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Api\\appsettings.json",
-              "RelativeDocumentMoniker": "PriceComparison.Api\\appsettings.json",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Api\\appsettings.json",
-              "RelativeToolTip": "PriceComparison.Api\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-24T11:02:05.885Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "PriceComparison.Api.csproj",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
-              "RelativeDocumentMoniker": "PriceComparison.Api\\PriceComparison.Api.csproj",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
-              "RelativeToolTip": "PriceComparison.Api\\PriceComparison.Api.csproj",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAIwBUAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-29T19:31:59.751Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Api\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "PriceComparison.Api\\appsettings.Development.json",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Api\\appsettings.Development.json",
-              "RelativeToolTip": "PriceComparison.Api\\appsettings.Development.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-29T19:19:48.698Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "PriceComparisonDbContext.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
-              "ToolTip": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
-              "RelativeToolTip": "PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAwwBsAAAAyAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T16:52:21.939Z"
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         }

@@ -1,0 +1,110 @@
+{
+  "Description": "הגדרות רשתות להורדה - MVP מתוקן + וולט + משנת יוסף",
+  "LastUpdated": "2025-07-22 14:30:00",
+  "Chains": [
+    {
+      "Id": "shufersal",
+      "Name": "שופרסל בע\"מ (כולל רשת BE)",
+      "BaseUrl": "https://prices.shufersal.co.il/",
+      "Prefix": "Shufersal",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "mishnatyosef",
+      "Name": "משנת יוסף (קיי.טי.)",
+      "BaseUrl": "https://chp-kt.pages.dev/",
+      "Prefix": "MishnatYosef",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "superpharm",
+      "Name": "סופר פארם (ישראל) בע\"מ",
+      "BaseUrl": "https://prices.super-pharm.co.il/",
+      "Prefix": "SuperPharm",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "wolt",
+      "Name": "וולט אופריישנס סרוויסס ישראל",
+      "BaseUrl": "https://wm-gateway.wolt.com/isr-prices/public/v1",
+      "Prefix": "Wolt",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "kingstore",
+      "Name": "קינג סטור",
+      "BaseUrl": "https://kingstore.binaprojects.com",
+      "Prefix": "KingStore",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "maayan",
+      "Name": "מעיין אלפיים",
+      "BaseUrl": "https://maayan2000.binaprojects.com",
+      "Prefix": "Maayan",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "goodpharm",
+      "Name": "גוד פארם",
+      "BaseUrl": "https://goodpharm.binaprojects.com",
+      "Prefix": "GoodPharm",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "supersapir",
+      "Name": "סופר ספיר",
+      "BaseUrl": "https://supersapir.binaprojects.com",
+      "Prefix": "SuperSapir",
+      "HasNetworkColumn": true,
+      "Enabled": false
+    },
+    {
+      "Id": "ktshivuk",
+      "Name": "קיי.טי. יבוא ושיווק (בינה פרוגקט)",
+      "BaseUrl": "https://ktshivuk.binaprojects.com",
+      "Prefix": "KTShivuk",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "shefabirkathashem",
+      "Name": "שפע ברכת השם",
+      "BaseUrl": "https://shefabirkathashem.binaprojects.com",
+      "Prefix": "ShefaBirkatHashem",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "shukhayir",
+      "Name": "שוק העיר (ט.ע.מ.ס)",
+      "BaseUrl": "https://shuk-hayir.binaprojects.com",
+      "Prefix": "ShukHayir",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "zolvebegadol",
+      "Name": "זול ובגדול",
+      "BaseUrl": "https://zolvebegadol.binaprojects.com",
+      "Prefix": "ZolVeBegadol",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    },
+    {
+      "Id": "superbareket",
+      "Name": "עוף והודו ברקת - חנות המפעל",
+      "BaseUrl": "https://superbareket.binaprojects.com",
+      "Prefix": "SuperBareket",
+      "HasNetworkColumn": false,
+      "Enabled": false
+    }
+  ]
+}

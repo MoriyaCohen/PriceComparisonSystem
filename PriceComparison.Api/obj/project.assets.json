@@ -989,6 +989,30 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "Microsoft.Extensions.Http/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Diagnostics": "8.0.0",
+          "Microsoft.Extensions.Logging": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Options": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
       "Microsoft.Extensions.Logging/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -3223,6 +3247,7 @@
           "Microsoft.Extensions.Configuration.Json": "8.0.0",
           "Microsoft.Extensions.DependencyInjection": "8.0.0",
           "Microsoft.Extensions.Hosting": "8.0.0",
+          "Microsoft.Extensions.Http": "8.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
           "Microsoft.Extensions.Options": "8.0.0",
           "System.IO.Compression.ZipFile": "4.3.0"
@@ -4959,6 +4984,36 @@
         "lib/netstandard2.1/Microsoft.Extensions.Hosting.Abstractions.xml",
         "microsoft.extensions.hosting.abstractions.8.0.0.nupkg.sha512",
         "microsoft.extensions.hosting.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.Http/8.0.0": {
+      "sha512": "cWz4caHwvx0emoYe7NkHPxII/KkTI8R/LC9qdqJqnKv2poTJ4e2qqPGQqvRoQ5kaSA4FU5IV3qFAuLuOhoqULQ==",
+      "type": "package",
+      "path": "microsoft.extensions.http/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.Http.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Http.targets",
+        "lib/net462/Microsoft.Extensions.Http.dll",
+        "lib/net462/Microsoft.Extensions.Http.xml",
+        "lib/net6.0/Microsoft.Extensions.Http.dll",
+        "lib/net6.0/Microsoft.Extensions.Http.xml",
+        "lib/net7.0/Microsoft.Extensions.Http.dll",
+        "lib/net7.0/Microsoft.Extensions.Http.xml",
+        "lib/net8.0/Microsoft.Extensions.Http.dll",
+        "lib/net8.0/Microsoft.Extensions.Http.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.xml",
+        "microsoft.extensions.http.8.0.0.nupkg.sha512",
+        "microsoft.extensions.http.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -9415,6 +9470,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.EntityFrameworkCore.Design >= 8.0.0",
+      "Microsoft.Extensions.Http >= 8.0.0",
       "PriceComparison.Application >= 1.0.0",
       "PriceComparison.Download >= 1.0.0",
       "PriceComparison.Infrastructure >= 1.0.0",
@@ -9423,23 +9479,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user1\\.nuget\\packages\\": {},
+    "C:\\Users\\sbhtk\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
+      "projectUniqueName": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
       "projectName": "PriceComparison.Api",
-      "projectPath": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
-      "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Api\\obj\\",
+      "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
+      "packagesPath": "C:\\Users\\sbhtk\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sbhtk\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -9448,21 +9504,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj": {
-              "projectPath": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj"
+            "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj": {
+              "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj"
             },
-            "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj": {
-              "projectPath": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj"
+            "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj": {
+              "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj"
             },
-            "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj": {
-              "projectPath": "C:\\Projects\\PriceComparison Project\\PriceComparisonSystem\\PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj"
+            "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj": {
+              "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj"
             }
           }
         }
@@ -9476,7 +9531,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -9485,6 +9541,10 @@
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Extensions.Http": {
             "target": "Package",
             "version": "[8.0.0, )"
           },
@@ -9516,7 +9576,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

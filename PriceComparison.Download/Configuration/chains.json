@@ -1,0 +1,94 @@
+{
+  "chains": [
+    {
+      "name": "אלמשהדאוי קינג סטור בע\"מ",
+      "prefix": "kingstore",
+      "baseUrl": "https://kingstore.binaprojects.com",
+      "type": "BinaProjects",
+      "isActive": true,
+      "notes": "רשת מקורית שעליה התבסס הפיתוח",
+      "credentials": null
+    },
+    {
+      "name": "ג.מ מעיין אלפיים (07) בע\"מ",
+      "prefix": "maayan2000",
+      "baseUrl": "https://maayan2000.binaprojects.com",
+      "type": "BinaProjects",
+      "isActive": true,
+      "notes": null,
+      "credentials": null
+    },
+    {
+      "name": "גוד פארם בע\"מ",
+      "prefix": "goodpharm",
+      "baseUrl": "https://goodpharm.binaprojects.com",
+      "type": "BinaProjects",
+      "isActive": true,
+      "notes": null,
+      "credentials": null
+    },
+    {
+      "name": "שפע ברכת השם בע\"מ",
+      "prefix": "shefabirkathashem",
+      "baseUrl": "https://shefabirkathashem.binaprojects.com",
+      "type": "BinaProjects",
+      "isActive": true,
+      "notes": null,
+      "credentials": null
+    },
+    {
+      "name": "סופר ספיר בע\"מ",
+      "prefix": "supersapir",
+      "baseUrl": "https://supersapir.binaprojects.com",
+      "type": "BinaProjects",
+      "isActive": true,
+      "notes": "כולל עמודת רשת נוספת בטבלה",
+      "credentials": null
+    },
+    {
+      "name": "שוק העיר (ט.ע.מ.ס) בע\"מ",
+      "prefix": "shuk-hayir",
+      "baseUrl": "https://shuk-hayir.binaprojects.com",
+      "type": "BinaProjects",
+      "isActive": true,
+      "notes": null,
+      "credentials": null
+    },
+    {
+      "name": "זול ובגדול בע\"מ",
+      "prefix": "zolvebegadol",
+      "baseUrl": "https://zolvebegadol.binaprojects.com",
+      "type": "BinaProjects",
+      "isActive": true,
+      "notes": null,
+      "credentials": null
+    },
+    {
+      "name": "קיי.טי. יבוא ושיווק בע\"מ (משנת יוסף)",
+      "prefix": "ktshivuk",
+      "baseUrl": "https://ktshivuk.binaprojects.com",
+      "type": "BinaProjects",
+      "isActive": true,
+      "notes": "יש גם קישור חלופי: https://chp-kt.pages.dev",
+      "credentials": null
+    }
+  ],
+  "general": {
+    "maxConcurrentDownloads": 3,
+    "timeoutMinutes": 10,
+    "delayBetweenRequests": 100,
+    "retryAttempts": 3,
+    "keepZipFiles": false,
+    "verboseLogging": true,
+    "defaultDownloadPath": "DownloadedFiles",
+    "cleanupOldFiles": true,
+    "keepFilesForDays": 7,
+    "scheduledHour": 3,
+    "scheduledMinute": 0
+  },
+  "azure": {
+    "connectionString": "",
+    "containerName": "price-comparison-data",
+    "pathPrefix": ""
+  }
+}

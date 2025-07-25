@@ -44,3 +44,19 @@ C:\Projects\PriceComparison Project\PriceComparisonSystem\PriceComparison.Applic
 C:\Projects\PriceComparison Project\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\refint\PriceComparison.Application.dll
 C:\Projects\PriceComparison Project\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.pdb
 C:\Projects\PriceComparison Project\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\ref\PriceComparison.Application.dll
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Application.deps.json
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Application.dll
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Application.pdb
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Infrastructure.dll
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\bin\Debug\net8.0\PriceComparison.Infrastructure.pdb
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.csproj.AssemblyReference.cache
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.AssemblyInfoInputs.cache
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.AssemblyInfo.cs
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.csproj.CoreCompileInputs.cache
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.sourcelink.json
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceCom.D780C0ED.Up2Date
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.dll
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\refint\PriceComparison.Application.dll
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\PriceComparison.Application.pdb
+C:\Projects\PriceComparisonSystem\PriceComparison.Application\obj\Debug\net8.0\ref\PriceComparison.Application.dll

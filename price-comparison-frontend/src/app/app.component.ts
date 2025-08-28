@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { XmlUploadComponent } from './components/xml-upload/xml-upload.component';
+
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  template: `
+    <div class="app-container">
+      <router-outlet></router-outlet>
+    </div>
+  `,
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'price-comparison-frontend';
+  title = 'מערכת השוואת מחירים';
 }
-

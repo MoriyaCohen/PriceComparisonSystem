@@ -131,7 +131,38 @@
     }
 
     /// <summary>
-    /// סטטיסטיקות מחירים
+    /// תגובת השוואת מחירים - מתואמת עם הפרונטאנד
+    /// </summary>
+    public class PriceComparisonResponseDto
+    {
+        /// <summary>
+        /// האם החיפוש הצליח
+        /// </summary>
+        public bool Success { get; set; }
+
+        /// <summary>
+        /// הודעת שגיאה במקרה של כישלון
+        /// </summary>
+        public string? ErrorMessage { get; set; }
+
+        /// <summary>
+        /// פרטי המוצר שנמצא
+        /// </summary>
+        public ProductInfoDto? ProductInfo { get; set; }
+
+        /// <summary>
+        /// רשימת מחירים מפורטת
+        /// </summary>
+        public List<ProductPriceInfoDto> PriceDetails { get; set; } = new();
+
+        /// <summary>
+        /// סטטיסטיקות המחירים - נדרש לפרונטאנד
+        /// </summary>
+        public PriceStatisticsDto? Statistics { get; set; }
+    }
+
+    /// <summary>
+    /// סטטיסטיקות מחירים - כולל את כל השדות הנדרשים
     /// </summary>
     public class PriceStatisticsDto
     {
@@ -151,44 +182,18 @@
         public decimal AveragePrice { get; set; }
 
         /// <summary>
-        /// כמות סניפים שנמצאו
+        /// מספר רשתות שנמצאו
+        /// </summary>
+        public int ChainCount { get; set; }
+
+        /// <summary>
+        /// מספר סניפים שנמצאו
         /// </summary>
         public int StoreCount { get; set; }
 
         /// <summary>
-        /// כמות רשתות שנמצאו
+        /// סך הכל תוצאות - נדרש ל-LocalXmlSearchService
         /// </summary>
-        public int ChainCount { get; set; }
-    }
-
-    /// <summary>
-    /// תגובת השוואת מחירים
-    /// </summary>
-    public class PriceComparisonResponseDto
-    {
-        /// <summary>
-        /// האם החיפוש היה מוצלח
-        /// </summary>
-        public bool Success { get; set; }
-
-        /// <summary>
-        /// הודעת שגיאה במקרה של כישלון
-        /// </summary>
-        public string? ErrorMessage { get; set; }
-
-        /// <summary>
-        /// פרטי המוצר שנמצא
-        /// </summary>
-        public ProductInfoDto? ProductInfo { get; set; }
-
-        /// <summary>
-        /// סטטיסטיקות המחירים
-        /// </summary>
-        public PriceStatisticsDto? Statistics { get; set; }
-
-        /// <summary>
-        /// רשימת כל המחירים שנמצאו, ממוינת לפי מחיר
-        /// </summary>
-        public List<ProductPriceInfoDto> PriceDetails { get; set; } = new();
+        public int TotalResults { get; set; }
     }
 }

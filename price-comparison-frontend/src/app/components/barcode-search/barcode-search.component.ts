@@ -1,163 +1,109 @@
-// src/app/components/barcode-search.component.ts
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Subject, takeUntil, debounceTime, distinctUntilChanged, Observable } from 'rxjs';
-import { BarcodeValidationService } from '../../services/barcode-validation.service';
-import { PriceComparisonService } from '../../services/price-comparison.service';
-import { barcodeValidator } from '../../validators/barcode-validator.directive';
-import { BarcodeValidationStatus } from '../../interfaces/barcode-validation.interface';
-import { SearchStatus } from '../../interfaces/price-comparison.interface';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { PriceComparisonService } from '../../services/price-comparison.service';
+import { BarcodeValidationService } from '../../services/barcode-validation.service';
+import { 
+  PriceComparisonResponse, 
+  SearchStatus, 
+  LocalDataStatus 
+} from '../../interfaces/price-comparison.interface';
+import { BarcodeValidationStatus } from '../../interfaces/barcode-validation.interface';
 
-
-/**
- * קומפוננטה ראשית לחיפוש ברקוד והשוואת מחירים
- * כוללת טופס לקליטת ברקוד, בדיקת תקינות והצגת תוצאות
- */
 @Component({
   selector: 'app-barcode-search',
   standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './barcode-search.component.html',
-  imports: [ReactiveFormsModule, CommonModule],
   styleUrls: ['./barcode-search.component.scss']
 })
 export class BarcodeSearchComponent implements OnInit, OnDestroy {
-  /** טופס לקליטת הברקוד */
   barcodeForm: FormGroup;
-
-  /** מצבי הקומפוננטה - לחיבור עם הטמפלט */
-  BarcodeValidationStatus = BarcodeValidationStatus;
+  searchResults$: Observable<PriceComparisonResponse | null>;
+  searchStatus$: Observable<SearchStatus>;
+  localDataStatus: LocalDataStatus | null = null;
+  
+  currentErrorMessage: string = '';
+  isLoading: boolean = false;
+  useLocalSearch: boolean = true; // ברירת מחדל לחיפוש מקומי
+  validationStatus: BarcodeValidationStatus = BarcodeValidationStatus.NOT_VALIDATED;
+  
+  // Enum references for template
   SearchStatus = SearchStatus;
-
-  /** מצב בדיקת הברקוד הנוכחי */
-  validationStatus = BarcodeValidationStatus.NOT_VALIDATED;
-
-  /** מצב החיפוש הנוכחי */
-  searchStatus$!: Observable<SearchStatus>;
-
-  /** תוצאות החיפוש האחרונות */
-  searchResults$!: Observable<any>;
-
-  /** הודעת שגיאה נוכחית */
-  currentErrorMessage = '';
-
-  /** האם הטופס נשלח */
-  isFormSubmitted = false;
-
-  /** Subject לניהול הרשמות ל-Observables */
+  BarcodeValidationStatus = BarcodeValidationStatus;
+  
   private destroy$ = new Subject<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private barcodeValidationService: BarcodeValidationService,
-    private priceComparisonService: PriceComparisonService
+    private fb: FormBuilder,
+    private priceComparisonService: PriceComparisonService,
+    private barcodeValidationService: BarcodeValidationService
   ) {
-    this.barcodeForm = this.createBarcodeForm();
-    
-    // הגדרת ה-Observables כאן לאחר שה-services זמינים
-    this.searchStatus$ = this.priceComparisonService.searchStatus$;
+    this.barcodeForm = this.createForm();
     this.searchResults$ = this.priceComparisonService.lastResults$;
+    this.searchStatus$ = this.priceComparisonService.searchStatus$;
   }
 
   ngOnInit(): void {
-    console.log('[BarcodeSearchComponent] התחלת טעינת קומפוננטה');
+    console.log('[BarcodeSearchComponent] רכיב הופעל');
     
-    // הגדרת מאזינים לשינויים בשדה הברקוד
-    this.setupBarcodeFieldListeners();
-    
-    // איפוס מצב החיפוש כשנכנסים לקומפוננטה
-    this.priceComparisonService.resetSearch();
+    // מעקב אחר מצב החיפוש
+    this.searchStatus$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((status: SearchStatus) => {
+        this.isLoading = status === SearchStatus.SEARCHING;
+        console.log(`[BarcodeSearchComponent] מצב חיפוש: ${status}`);
+      });
+
+    // טעינת מצב נתונים מקומיים
+    this.loadLocalDataStatus();
   }
 
   ngOnDestroy(): void {
-    console.log('[BarcodeSearchComponent] השמדת קומפוננטה');
     this.destroy$.next();
     this.destroy$.complete();
   }
 
   /**
-   * יצירת טופס הברקוד עם ולידציות
+   * יצירת טופס החיפוש
    */
-  private createBarcodeForm(): FormGroup {
-    return this.formBuilder.group({
+  private createForm(): FormGroup {
+    return this.fb.group({
       barcode: ['', [
         Validators.required,
-        barcodeValidator() // הולידטור המותאם שיצרנו
+        Validators.pattern(/^\d{8,13}$/),
+        Validators.minLength(8),
+        Validators.maxLength(13)
       ]]
     });
   }
 
   /**
-   * הגדרת מאזינים לשינויים בשדה הברקוד
-   * בדיקה בזמן אמת בזמן הקלדה
-   */
-  private setupBarcodeFieldListeners(): void {
-    const barcodeControl = this.barcodeForm.get('barcode');
-    
-    if (barcodeControl) {
-      barcodeControl.valueChanges
-        .pipe(
-          takeUntil(this.destroy$),
-          debounceTime(300), // המתנה של 300ms לאחר הפסקת הקלדה
-          distinctUntilChanged() // רק אם הערך באמת השתנה
-        )
-        .subscribe(value => {
-          console.log('[BarcodeSearchComponent] שינוי בשדה ברקוד:', value);
-          this.onBarcodeValueChange(value);
-        });
-    }
-  }
-
-  /**
-   * טיפול בשינוי ערך הברקוד
-   * בדיקה מהירה אם הפורמט נראה תקין
-   */
-  private onBarcodeValueChange(value: string): void {
-    // איפוס הודעות שגיאה קודמות
-    this.currentErrorMessage = '';
-    
-    if (!value || value.trim() === '') {
-      this.validationStatus = BarcodeValidationStatus.NOT_VALIDATED;
-      return;
-    }
-
-    // בדיקה מהירה של הפורמט
-    const isValidFormat = this.barcodeValidationService.isValidBarcodeFormat(value);
-    
-    if (isValidFormat) {
-      this.validationStatus = BarcodeValidationStatus.VALID;
-    } else {
-      this.validationStatus = BarcodeValidationStatus.INVALID;
-    }
-  }
-
-  /**
-   * שליחת הטופס וביצוע חיפוש
+   * טיפול בהגשת הטופס - קריאה מה-template
    */
   onSubmit(): void {
-    console.log('[BarcodeSearchComponent] שליחת טופס');
-    
-    this.isFormSubmitted = true;
-    
-    // בדיקת תקינות הטופס
+    this.onSearchSubmit();
+  }
+
+  /**
+   * חיפוש מוצר לפי ברקוד
+   */
+  onSearchSubmit(): void {
     if (this.barcodeForm.invalid) {
-      console.log('[BarcodeSearchComponent] טופס לא תקין:', this.barcodeForm.errors);
       this.markFormGroupTouched();
+      this.currentErrorMessage = 'אנא הזן ברקוד תקין (8-13 ספרות)';
       return;
     }
 
-    const barcodeValue = this.barcodeForm.get('barcode')?.value?.trim();
-    if (!barcodeValue) {
+    const barcode = this.barcodeForm.get('barcode')?.value?.trim();
+    if (!barcode) {
+      this.currentErrorMessage = 'אנא הזן ברקוד';
       return;
     }
 
-    // ניקוי הברקוד
-    const cleanedBarcode = this.barcodeValidationService.cleanBarcode(barcodeValue);
-    console.log('[BarcodeSearchComponent] ברקוד מנוקה:', cleanedBarcode);
-
-    // תחילת תהליך הבדיקה והחיפוש
-    this.searchProduct(cleanedBarcode);
+    this.currentErrorMessage = '';
+    this.searchProduct(barcode);
   }
 
   /**
@@ -194,40 +140,98 @@ export class BarcodeSearchComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * ביצוע השוואת מחירים לאחר בדיקת הברקוד
+   * ביצוע השוואת מחירים
    */
   private performPriceComparison(barcode: string): void {
-    console.log('[BarcodeSearchComponent] מתחיל השוואת מחירים עבור:', barcode);
+    console.log(`[BarcodeSearchComponent] מבצע חיפוש מחירים עבור: ${barcode}`);
 
-    this.priceComparisonService.searchProductByBarcode(barcode)
+    // בחירת סוג החיפוש
+    const searchObservable = this.useLocalSearch 
+      ? this.priceComparisonService.searchByBarcodeLocal(barcode)
+      : this.priceComparisonService.searchByBarcode(barcode);
+
+    searchObservable
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (results) => {
-          console.log('[BarcodeSearchComponent] תוצאות השוואת מחירים:', results);
-          // התוצאות נשמרות אוטומטית בשירות ומוצגות דרך searchResults$
+        next: (response: PriceComparisonResponse) => {
+          console.log('[BarcodeSearchComponent] חיפוש הושלם:', response);
+          if (!response.success) {
+            this.currentErrorMessage = response.errorMessage || 'מוצר לא נמצא';
+          }
         },
-        error: (error) => {
-          console.error('[BarcodeSearchComponent] שגיאה בהשוואת מחירים:', error);
+        error: (error: any) => {
+          console.error('[BarcodeSearchComponent] שגיאה בחיפוש:', error);
           this.currentErrorMessage = error.errorMessage || 'שגיאה בחיפוש המוצר';
         }
       });
   }
 
   /**
-   * איפוס הטופס והתוצאות
+   * איפוס הטופס
    */
   resetForm(): void {
-    console.log('[BarcodeSearchComponent] איפוס טופס');
-    
     this.barcodeForm.reset();
-    this.isFormSubmitted = false;
-    this.validationStatus = BarcodeValidationStatus.NOT_VALIDATED;
     this.currentErrorMessage = '';
+    this.validationStatus = BarcodeValidationStatus.NOT_VALIDATED;
+    this.priceComparisonService.resetSearch();
+    console.log('[BarcodeSearchComponent] טופס אופס');
+  }
+
+  /**
+   * שינוי סוג החיפוש (מקומי vs מסד נתונים)
+   */
+  toggleSearchType(): void {
+    this.useLocalSearch = !this.useLocalSearch;
+    console.log(`[BarcodeSearchComponent] סוג חיפוש שונה ל: ${this.useLocalSearch ? 'מקומי' : 'מסד נתונים'}`);
+    
+    // איפוס תוצאות קיימות
     this.priceComparisonService.resetSearch();
   }
 
   /**
-   * סימון כל השדות בטופס כ-touched (להצגת שגיאות)
+   * רענון נתונים מקומיים
+   */
+  refreshLocalData(): void {
+    console.log('[BarcodeSearchComponent] מתחיל רענון נתונים מקומיים');
+    
+    this.priceComparisonService.refreshLocalData()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (success: boolean) => {
+          if (success) {
+            console.log('[BarcodeSearchComponent] רענון נתונים הצליח');
+            this.loadLocalDataStatus();
+          } else {
+            console.warn('[BarcodeSearchComponent] רענון נתונים נכשל');
+            this.currentErrorMessage = 'רענון נתונים נכשל';
+          }
+        },
+        error: (error: any) => {
+          console.error('[BarcodeSearchComponent] שגיאה ברענון נתונים:', error);
+          this.currentErrorMessage = 'שגיאה ברענון נתונים';
+        }
+      });
+  }
+
+  /**
+   * טעינת מצב נתונים מקומיים
+   */
+  private loadLocalDataStatus(): void {
+    this.priceComparisonService.getLocalDataStatus()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (status: LocalDataStatus) => {
+          this.localDataStatus = status;
+          console.log('[BarcodeSearchComponent] מצב נתונים מקומיים:', status);
+        },
+        error: (error: any) => {
+          console.error('[BarcodeSearchComponent] שגיאה בקבלת מצב נתונים:', error);
+        }
+      });
+  }
+
+  /**
+   * סימון כל השדות כנגעו
    */
   private markFormGroupTouched(): void {
     Object.keys(this.barcodeForm.controls).forEach(key => {
@@ -237,54 +241,51 @@ export class BarcodeSearchComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * בדיקה אם שדה ספציפי מציג שגיאה
+   * בדיקה האם צריך להציג שגיאה לשדה
    */
   shouldShowFieldError(fieldName: string): boolean {
     const field = this.barcodeForm.get(fieldName);
-    return !!(field && field.invalid && (field.dirty || field.touched || this.isFormSubmitted));
+    return !!(field && field.invalid && (field.dirty || field.touched));
   }
 
   /**
-   * קבלת הודעת השגיאה של שדה ספציפי
+   * בדיקה האם שדה מסוים שגוי
+   */
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.barcodeForm.get(fieldName);
+    return !!(field && field.invalid && (field.dirty || field.touched));
+  }
+
+  /**
+   * קבלת הודעת שגיאה לשדה
    */
   getFieldErrorMessage(fieldName: string): string {
     const field = this.barcodeForm.get(fieldName);
     
-    if (!field || !field.errors) {
-      return '';
-    }
-
-    // טיפול בסוגי שגיאות שונים
-    if (field.errors['required']) {
-      return 'שדה חובה';
-    }
-    
-    if (field.errors['barcodeInvalid']) {
-      return field.errors['barcodeInvalid'].message;
+    if (field?.errors) {
+      if (field.errors['required']) {
+        return 'שדה זה הוא חובה';
+      }
+      if (field.errors['pattern'] || field.errors['minlength'] || field.errors['maxlength']) {
+        return 'ברקוד חייב להכיל 8-13 ספרות בלבד';
+      }
     }
     
-    if (field.errors['barcodeInvalidLength']) {
-      return field.errors['barcodeInvalidLength'].message;
-    }
-    
-    if (field.errors['barcodeInvalidChecksum']) {
-      return field.errors['barcodeInvalidChecksum'].message;
-    }
-
-    return 'שגיאה לא ידועה';
+    return '';
   }
 
   /**
-   * האם הטופס במצב טעינה
+   * פורמט תאריך עבור התצוגה
    */
-  get isLoading(): boolean {
-    return this.validationStatus === BarcodeValidationStatus.VALIDATING;
-  }
-
-  /**
-   * קבלת כתובת ערך הברקוד הנוכחי
-   */
-  get currentBarcodeValue(): string {
-    return this.barcodeForm.get('barcode')?.value || '';
+  formatDate(date: Date): string {
+    if (!date) return 'לא זמין';
+    
+    return new Date(date).toLocaleDateString('he-IL', {
+      day: '2-digit',
+      month: '2-digit', 
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   }
 }

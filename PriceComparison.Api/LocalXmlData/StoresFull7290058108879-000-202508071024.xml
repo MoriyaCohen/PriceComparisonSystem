@@ -1,0 +1,248 @@
+<Root>
+  <ChainId>7290058108879</ChainId>
+  <ChainName>אלמשהדאוי קינג סטור בע"מ</ChainName>
+  <LastUpdateDate>2025-08-07</LastUpdateDate>
+  <LastUpdateTime>10:24:17</LastUpdateTime>
+  <SubChains>
+    <SubChain>
+      <SubChainId>1</SubChainId>
+      <SubChainName>1</SubChainName>
+      <Stores>
+        <Store>
+          <StoreId>1</StoreId>
+          <BikoretNo>6</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>אום אלפחם</StoreName>
+          <Address>שרפה 22 0</Address>
+          <City>אום אל פחם</City>
+          <ZipCode>30010</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>2</StoreId>
+          <BikoretNo>3</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>דבוריה</StoreName>
+          <Address>דרך אלשראר 0</Address>
+          <City>דבוריה</City>
+          <ZipCode>16910</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>3</StoreId>
+          <BikoretNo>9</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>פרידיס</StoreName>
+          <Address>דירה 1 0</Address>
+          <City>פוריידיס</City>
+          <ZipCode>30898</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>5</StoreId>
+          <BikoretNo>3</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>קלנסווה</StoreName>
+          <Address>unknown</Address>
+          <City>קלנסווה</City>
+          <ZipCode>40640</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>6</StoreId>
+          <BikoretNo>0</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>שפרעם</StoreName>
+          <Address>אלשכארה 19 0</Address>
+          <City>שפרעם</City>
+          <ZipCode>20200</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>7</StoreId>
+          <BikoretNo>5</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>סכנין</StoreName>
+          <Address>אל ג'ליל 0</Address>
+          <City>סכנין</City>
+          <ZipCode>30810</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>8</StoreId>
+          <BikoretNo>3</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>באר שבע</StoreName>
+          <Address>קישון  32 0</Address>
+          <City>באר שבע</City>
+          <ZipCode>8413301</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>9</StoreId>
+          <BikoretNo>3</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>טמרה</StoreName>
+          <Address>unknown</Address>
+          <City>טמרה</City>
+          <ZipCode>30811</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>10</StoreId>
+          <BikoretNo>0</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>דליית אל כרמל</StoreName>
+          <Address>ואדי אלפש 0</Address>
+          <City>דליית אל כרמל</City>
+          <ZipCode>30056</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>12</StoreId>
+          <BikoretNo>2</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>נוף הגליל דודג' סנטר</StoreName>
+          <Address>דרך העמק 4 0</Address>
+          <City>נצרת עילית -  נוף הגליל</City>
+          <ZipCode>17091</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>13</StoreId>
+          <BikoretNo>6</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>קאסם</StoreName>
+          <Address>לב הארץ , אזור תעשייה 5</Address>
+          <City>כפר קאסם</City>
+          <ZipCode>48810</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>14</StoreId>
+          <BikoretNo>7</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>כבאביר חיפה</StoreName>
+          <Address>הלבונה 7 0</Address>
+          <City>חיפה</City>
+          <ZipCode>34386</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>15</StoreId>
+          <BikoretNo>6</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>כרמיאל</StoreName>
+          <Address>היוצרים 15</Address>
+          <City>כרמיאל</City>
+          <ZipCode>21626</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>16</StoreId>
+          <BikoretNo>0</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>עכו</StoreName>
+          <Address>בן עמי 69</Address>
+          <City>עכו</City>
+          <ZipCode>24120</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>17</StoreId>
+          <BikoretNo>1</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>יפיע</StoreName>
+          <Address>unknown</Address>
+          <City>יפיע</City>
+          <ZipCode>16955</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>18</StoreId>
+          <BikoretNo>7</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>יפת-יפו תל אביב יום ביום</StoreName>
+          <Address>יפת 65 0</Address>
+          <City>תל אביב - יפו</City>
+          <ZipCode>16955</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>19</StoreId>
+          <BikoretNo>3</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>רמלה</StoreName>
+          <Address>קריית הממשלה 0</Address>
+          <City>רמלה</City>
+          <ZipCode>16955</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>27</StoreId>
+          <BikoretNo>8</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>בסמת טבעון</StoreName>
+          <Address>דרך יצחק רבין 0</Address>
+          <City>בסמת טבעון</City>
+          <ZipCode>360080</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>28</StoreId>
+          <BikoretNo>1</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>מיני קינגסטור רהט</StoreName>
+          <Address>אלפג'ר 37 0</Address>
+          <City>רהט</City>
+          <ZipCode>853570</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>31</StoreId>
+          <BikoretNo>4</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>צים סנטר נוף הגליל</StoreName>
+          <Address>שדרות מעלה יצחק 29 0</Address>
+          <City>נצרת עילית -  נוף הגליל</City>
+          <ZipCode>0000000</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>200</StoreId>
+          <BikoretNo>7</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>ואדי אלגוז'</StoreName>
+          <Address>חאלד אבן אל וליד 0</Address>
+          <City>ירושלים</City>
+          <ZipCode>9740257</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>334</StoreId>
+          <BikoretNo>2</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>מיני קינגסטור דיר חנא</StoreName>
+          <Address>אלקודס 0</Address>
+          <City>דיר חנא</City>
+          <ZipCode>249730</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>335</StoreId>
+          <BikoretNo>3</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>מיני קינג כפר ברא</StoreName>
+          <Address>סלאח אלדין 0</Address>
+          <City>כפר ברא</City>
+          <ZipCode>45863</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>336</StoreId>
+          <BikoretNo>0</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>מיני קינגסטור קלנסווה</StoreName>
+          <Address>אלרשיד 0</Address>
+          <City>קלנסווה</City>
+          <ZipCode>40640</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>338</StoreId>
+          <BikoretNo>8</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>מיני קינג חיי אלוורוד</StoreName>
+          <Address>עומר אבן אל ח'טאב 0</Address>
+          <City>נצרת</City>
+          <ZipCode>1601003</ZipCode>
+        </Store>
+        <Store>
+          <StoreId>339</StoreId>
+          <BikoretNo>8</BikoretNo>
+          <StoreType>1</StoreType>
+          <StoreName>יפו מכללה יום ביום</StoreName>
+          <Address>unknown</Address>
+          <City>תל אביב - יפו</City>
+          <ZipCode>0000000</ZipCode>
+        </Store>
+      </Stores>
+    </SubChain>
+  </SubChains>
+</Root>

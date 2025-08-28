@@ -10,14 +10,14 @@
         "projectUniqueName": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
         "projectName": "PriceComparison.Api",
         "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
-        "packagesPath": "C:\\Users\\sbhtk\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
         "outputPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sbhtk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,9 +35,6 @@
             "projectReferences": {
               "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj": {
                 "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj"
-              },
-              "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj": {
-                "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj"
               },
               "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj": {
                 "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj"
@@ -53,8 +51,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -98,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -108,14 +105,14 @@
         "projectUniqueName": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj",
         "projectName": "PriceComparison.Application",
         "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj",
-        "packagesPath": "C:\\Users\\sbhtk\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
         "outputPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sbhtk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -124,6 +121,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -145,8 +143,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -185,119 +182,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj",
-        "projectName": "PriceComparison.Download",
-        "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download\\PriceComparison.Download.csproj",
-        "packagesPath": "C:\\Users\\sbhtk\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\sbhtk\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "allWarningsAsErrors": true,
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
-      },
-      "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "dependencies": {
-            "Azure.Storage.Blobs": {
-              "target": "Package",
-              "version": "[12.19.1, )"
-            },
-            "HtmlAgilityPack": {
-              "target": "Package",
-              "version": "[1.11.0, )"
-            },
-            "Microsoft.Extensions.Configuration": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Configuration.Binder": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Configuration.Json": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.DependencyInjection": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Hosting": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Http": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Logging.Abstractions": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Options": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "System.IO.Compression.ZipFile": {
-              "target": "Package",
-              "version": "[4.3.0, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -307,14 +192,14 @@
         "projectUniqueName": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj",
         "projectName": "PriceComparison.Infrastructure",
         "projectPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\sbhtk\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
         "outputPath": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sbhtk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -323,6 +208,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -340,8 +226,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -380,7 +265,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

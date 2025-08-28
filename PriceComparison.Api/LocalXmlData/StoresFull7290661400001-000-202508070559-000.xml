@@ -1,0 +1,1189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Store Date="07/08/25" Time="06:00:03">
+  <Branches>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>001</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>1 ב"ש-בית אשל</StoreName>
+      <Address>בית אשל 1</Address>
+      <City>באר שבע</City>
+      <ZIPCode>8421901</ZIPCode>
+      <LastUpdateDate>07/11/2024 11:35:00</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>011</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>11  עין יהב</StoreName>
+      <Address>ד.נ.ערבה 86820</Address>
+      <City>עין יהב</City>
+      <ZIPCode>8682000</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:54:04</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>015</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>15  שכונה ט ב"ש</StoreName>
+      <Address>שד` ירושלים 10</Address>
+      <City>באר שבע</City>
+      <ZIPCode>8477105</ZIPCode>
+      <LastUpdateDate>07/11/2024 11:35:43</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>016</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>16 יעלים ב"ש</StoreName>
+      <Address>יעלים 34</Address>
+      <City>באר שבע</City>
+      <ZIPCode>8473913</ZIPCode>
+      <LastUpdateDate>07/11/2024 11:37:38</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>018</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>18 נוף הגליל</StoreName>
+      <Address>הגלבוע 1</Address>
+      <City>נוף הגליל</City>
+      <ZIPCode>1767201</ZIPCode>
+      <LastUpdateDate>31/07/2024 13:55:25</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>020</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>20 להבים</StoreName>
+      <Address>מרכז מסחרי להבים 1</Address>
+      <City>להבים</City>
+      <ZIPCode>8533800</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:31:20</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>026</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>26  רמות- ב"ש</StoreName>
+      <Address>מנחם דידנר 18</Address>
+      <City>באר שבע</City>
+      <ZIPCode>8476745</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:32:09</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>030</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>30 נווה זאב- ב"ש</StoreName>
+      <Address>מאפו 7</Address>
+      <City>באר שבע</City>
+      <ZIPCode>8426507</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:33:14</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>035</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>35 שלומי</StoreName>
+      <Address>ההשראה 2</Address>
+      <City>שלומי</City>
+      <ZIPCode>2284201</ZIPCode>
+      <LastUpdateDate>31/07/2024 13:55:50</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>036</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>36 עפולה ביה"ח העמק</StoreName>
+      <Address>יוסף ברזילאי 7</Address>
+      <City>עפולה</City>
+      <ZIPCode>0000000</ZIPCode>
+      <LastUpdateDate>09/06/2025 10:46:28</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>040</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>40 אופקים</StoreName>
+      <Address>יהדות דרום אפריקה 14</Address>
+      <City>אופקים</City>
+      <ZIPCode>8757313</ZIPCode>
+      <LastUpdateDate>07/11/2024 11:41:11</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>041</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>אופקים שקד 41</StoreName>
+      <Address> </Address>
+      <City />
+      <ZIPCode />
+      <LastUpdateDate>01/01/0001 00:00:00</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>044</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>44 ערד</StoreName>
+      <Address>שמיר 5</Address>
+      <City>ערד</City>
+      <ZIPCode>8909452</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:34:45</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>045</StoreID>
+      <BikoretNo />
+      <StoreType>3</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>45 מיתרים</StoreName>
+      <Address>דרום הר חברון 1</Address>
+      <City>מיתרים</City>
+      <ZIPCode>0000000</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:36:26</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>050</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>50 רד"ק- ב"ש</StoreName>
+      <Address>רחבת רד"ק 28</Address>
+      <City>באר שבע</City>
+      <ZIPCode>8475308</ZIPCode>
+      <LastUpdateDate>07/11/2024 11:42:21</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>051</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>51 חיפה - נשר</StoreName>
+      <Address>דרך בר יהודה http 147</Address>
+      <City>נשר</City>
+      <ZIPCode>3688306</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:20:55</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>052</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>52 מודיעין</StoreName>
+      <Address>עמק דותן 24</Address>
+      <City>מודיעין</City>
+      <ZIPCode>7170110</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:57:22</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>054</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>54 רחובות - הנשיא</StoreName>
+      <Address>הכרמל 76</Address>
+      <City>רחובות</City>
+      <ZIPCode>7630560</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:59:23</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>055</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>55  יד בנימין</StoreName>
+      <Address>מרכז מסחרי 1</Address>
+      <City>יד בנימין</City>
+      <ZIPCode>7681200</ZIPCode>
+      <LastUpdateDate>01/08/2024 15:37:35</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>058</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>58 סניף אורגים- ב"ש</StoreName>
+      <Address>האורגים http://ww 1</Address>
+      <City>באר שבע</City>
+      <ZIPCode>0000000</ZIPCode>
+      <LastUpdateDate>14/11/2024 11:52:18</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>059</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>59 יקנעם</StoreName>
+      <Address>התמר 1</Address>
+      <City>יקנעם</City>
+      <ZIPCode>2062001</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:21:38</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>060</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>60 דימונה</StoreName>
+      <Address>מרכז פרץ סנטר </Address>
+      <City>דימונה</City>
+      <ZIPCode>0000000</ZIPCode>
+      <LastUpdateDate>14/11/2024 11:52:46</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>061</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>61 דימונה ממשית</StoreName>
+      <Address>תל לכיש 6</Address>
+      <City>דימונה</City>
+      <ZIPCode>0000000</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:55:22</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>065</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>65 קרית אתא</StoreName>
+      <Address>חנקין 1</Address>
+      <City>קרית אתא</City>
+      <ZIPCode>2821201</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:22:18</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>066</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>66 צופים</StoreName>
+      <Address>מרכז מסחרי 1</Address>
+      <City>צופים</City>
+      <ZIPCode>4486500</ZIPCode>
+      <LastUpdateDate>09/06/2025 10:18:39</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>071</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>71 קריית מלאכי</StoreName>
+      <Address>צה"ל 1</Address>
+      <City>קרית מלאכי</City>
+      <ZIPCode>8306201</ZIPCode>
+      <LastUpdateDate>09/06/2025 10:19:24</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>004</SubChainID>
+      <StoreID>072</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק מהדרין</SubChainName>
+      <StoreName>72 הפלמח (ג) אשדוד</StoreName>
+      <Address>הפלמ"ח 20</Address>
+      <City>אשדוד</City>
+      <ZIPCode>7737652</ZIPCode>
+      <LastUpdateDate>07/11/2024 12:08:18</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>075</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>75 טבריה הדר</StoreName>
+      <Address>יהודה הלוי 113</Address>
+      <City>טבריה</City>
+      <ZIPCode>1421636</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:22:47</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>076</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>76 צפת</StoreName>
+      <Address>לוחמי הגטאות 1</Address>
+      <City>צפת</City>
+      <ZIPCode>1340167</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:23:58</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>077</StoreID>
+      <BikoretNo />
+      <StoreType>3</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>77 קרית גת</StoreName>
+      <Address>דרך הדרום http:// 1</Address>
+      <City>קרית גת</City>
+      <ZIPCode>8202101</ZIPCode>
+      <LastUpdateDate>07/11/2024 12:08:33</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>078</StoreID>
+      <BikoretNo />
+      <StoreType>3</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>78 כפר עציון</StoreName>
+      <Address>הלולים </Address>
+      <City>כפר עציון</City>
+      <ZIPCode>9091200</ZIPCode>
+      <LastUpdateDate>07/11/2024 13:39:14</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>080</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>80 המשחררים-ב"ש</StoreName>
+      <Address>דרך המשחררים 100</Address>
+      <City>באר שבע</City>
+      <ZIPCode>8472319</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:40:13</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>081</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>81 מבצע עובדה- ב"ש</StoreName>
+      <Address>מבצע עובדה 2</Address>
+      <City>באר שבע</City>
+      <ZIPCode>8446003</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:41:20</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>082</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>82 קריה חרדית מהדרין ב"ש</StoreName>
+      <Address>טולדנו 12</Address>
+      <City>באר שבע</City>
+      <ZIPCode>8452311</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:47:35</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>083</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>83 גבעת שמואל</StoreName>
+      <Address>דוד בן גוריון 18</Address>
+      <City>גבעת שמואל</City>
+      <ZIPCode>5401783</ZIPCode>
+      <LastUpdateDate>09/06/2025 10:21:02</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>090</StoreID>
+      <BikoretNo />
+      <StoreType>0</StoreType>
+      <ChainName />
+      <SubChainName />
+      <StoreName>90 מרלוג-מרכז רשת</StoreName>
+      <Address> </Address>
+      <City />
+      <ZIPCode />
+      <LastUpdateDate>01/01/0001 00:00:00</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>091</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>91 זבוטינסקי- ת"א</StoreName>
+      <Address>ז`בוטינסקי 128</Address>
+      <City>רמת גן</City>
+      <ZIPCode>5260203</ZIPCode>
+      <LastUpdateDate>09/06/2025 10:22:03</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>096</StoreID>
+      <BikoretNo />
+      <StoreType>2</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>96 אינטרנט אילת</StoreName>
+      <Address> </Address>
+      <City />
+      <ZIPCode />
+      <LastUpdateDate>01/01/0001 00:00:00</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>097</StoreID>
+      <BikoretNo />
+      <StoreType>2</StoreType>
+      <ChainName />
+      <SubChainName />
+      <StoreName>97 אינטרנט</StoreName>
+      <Address> </Address>
+      <City />
+      <ZIPCode />
+      <LastUpdateDate>01/01/0001 00:00:00</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>098</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>98 אילת</StoreName>
+      <Address>הספן 1</Address>
+      <City>אילת</City>
+      <ZIPCode>8850419</ZIPCode>
+      <LastUpdateDate>07/11/2024 11:47:37</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>099</StoreID>
+      <BikoretNo />
+      <StoreType>0</StoreType>
+      <ChainName />
+      <SubChainName />
+      <StoreName>99 מרכז רשת</StoreName>
+      <Address> </Address>
+      <City />
+      <ZIPCode />
+      <LastUpdateDate>01/01/0001 00:00:00</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>202</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>202 בית הכרם ירושלים</StoreName>
+      <Address>כיכר דניה 1</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9634301</ZIPCode>
+      <LastUpdateDate>07/11/2024 13:44:36</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>203</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>203 הפלמ"ח ירושלים</StoreName>
+      <Address>הפלמח 42</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9254265</ZIPCode>
+      <LastUpdateDate>09/06/2025 13:41:03</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>205</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>205 קרית מנחם ירושלים</StoreName>
+      <Address>דהומי 6</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9658731</ZIPCode>
+      <LastUpdateDate>01/08/2024 08:00:32</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>207</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>207 גבעת זאב- ירושלים</StoreName>
+      <Address>מרכז מסחרי 1</Address>
+      <City>גבעז זאב</City>
+      <ZIPCode>0000000</ZIPCode>
+      <LastUpdateDate>14/11/2024 11:53:44</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>211</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>211 פסגת זאב ירושלים</StoreName>
+      <Address>שדרות משה דיין 1</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9783701</ZIPCode>
+      <LastUpdateDate>09/06/2025 13:43:21</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>212</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>212 תלפיות מזרח ירושלים</StoreName>
+      <Address>דב גרונר מרכז מסח 2</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9380405</ZIPCode>
+      <LastUpdateDate>07/11/2024 13:45:09</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>217</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>217 גבעת שפירא ירושלים</StoreName>
+      <Address>ההגנה 19</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9785112</ZIPCode>
+      <LastUpdateDate>01/08/2024 08:01:37</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>004</SubChainID>
+      <StoreID>218</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק מהדרין</SubChainName>
+      <StoreName>218 נווה יעקב ירושלים</StoreName>
+      <Address>מרכז מסחרי נווה י 1</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9735001</ZIPCode>
+      <LastUpdateDate>07/11/2024 13:45:29</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>222</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>222 וולפסון ירושלים</StoreName>
+      <Address>דיסקין 7</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9644007</ZIPCode>
+      <LastUpdateDate>09/06/2025 14:03:10</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>223</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>223 פסגת זאב מזרח ירושלים</StoreName>
+      <Address>מאיר גרשון פ.יוסף 3/1</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9778103</ZIPCode>
+      <LastUpdateDate>01/08/2024 08:03:57</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>230</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>230 קייזר מודיעין בשבילך</StoreName>
+      <Address>גינת זבולון קייזר 24</Address>
+      <City>מודיעין</City>
+      <ZIPCode>0000000</ZIPCode>
+      <LastUpdateDate>14/11/2024 11:53:58</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>238</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>238 קריית ים שרת</StoreName>
+      <Address>משה שרת 2</Address>
+      <City>קרית ים</City>
+      <ZIPCode>2902158</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:29:29</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>239</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>239 קצרין</StoreName>
+      <Address>קניון לב קצרין 1</Address>
+      <City>קצרין</City>
+      <ZIPCode>1291304</ZIPCode>
+      <LastUpdateDate>09/06/2025 12:09:42</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>241</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>241 אורה -ירושלים</StoreName>
+      <Address>הנריטה סולד 1</Address>
+      <City>ירושלים</City>
+      <ZIPCode>9650201</ZIPCode>
+      <LastUpdateDate>01/08/2024 08:04:37</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>242</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName />
+      <SubChainName />
+      <StoreName>242 אפרת</StoreName>
+      <Address>מרכז מסחרי ג רחוב 1</Address>
+      <City>אפרת</City>
+      <ZIPCode>90448801</ZIPCode>
+      <LastUpdateDate>09/06/2025 10:43:54</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>244</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>244 יבנה</StoreName>
+      <Address>האגוז 2</Address>
+      <City>יבנה</City>
+      <ZIPCode>8151004</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:52:28</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>245</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>245 גדרה</StoreName>
+      <Address>מנחם בגין 40</Address>
+      <City>גדרה</City>
+      <ZIPCode>7049114</ZIPCode>
+      <LastUpdateDate>09/06/2025 13:16:09</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>246</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>246 חפץ חיים נתניה</StoreName>
+      <Address>חפץ חיים 4</Address>
+      <City>נתניה</City>
+      <ZIPCode>4201954</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:30:47</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>247</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>247 לב יסמין נתניה</StoreName>
+      <Address>פנחס ליבון 18</Address>
+      <City>נתניה</City>
+      <ZIPCode>4270121</ZIPCode>
+      <LastUpdateDate>09/06/2025 12:15:58</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>250</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>250 עפולה מחסני השוק</StoreName>
+      <Address>קפלן 10</Address>
+      <City>עפולה עילית</City>
+      <ZIPCode>1850810</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:25:19</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>260</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>260 אשדוד דב גור</StoreName>
+      <Address>דב גור 27</Address>
+      <City>אשדוד</City>
+      <ZIPCode>7754210</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:53:17</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>261</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>261 ראשל"צ</StoreName>
+      <Address>השדה 12</Address>
+      <City>ראשון לציון</City>
+      <ZIPCode>7520440</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:54:52</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>262</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>262 ויצמן נתניה</StoreName>
+      <Address>הרצוג 23</Address>
+      <City>נתניה</City>
+      <ZIPCode>4244957</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:36:31</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>263</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>263 בנימין נתניה</StoreName>
+      <Address>שדרות בנימין 60</Address>
+      <City>נתניה</City>
+      <ZIPCode>4231424</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:36:51</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>264</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>264 פולג נתניה</StoreName>
+      <Address>אמנון ותמר 6</Address>
+      <City>נתניה</City>
+      <ZIPCode>4220209</ZIPCode>
+      <LastUpdateDate>09/06/2025 12:20:03</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>265</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>265 רחובות - גורודצקי</StoreName>
+      <Address>גורודסקי 51</Address>
+      <City>רחובות</City>
+      <ZIPCode>7623127</ZIPCode>
+      <LastUpdateDate>01/08/2024 15:38:12</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>267</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>267 צור הדסה-ירושלים</StoreName>
+      <Address>רכסים 2</Address>
+      <City>צור הדסה</City>
+      <ZIPCode>9987500</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:56:15</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>268</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>268 נהריה מחסני השוק</StoreName>
+      <Address>הזמיר 63</Address>
+      <City>נהריה</City>
+      <ZIPCode>2226061</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:25:31</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>002</SubChainID>
+      <StoreID>274</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בסיטי</SubChainName>
+      <StoreName>274 ברקת אילת מחסני השוק</StoreName>
+      <Address>ברקת 13</Address>
+      <City>אילת</City>
+      <ZIPCode>8854038</ZIPCode>
+      <LastUpdateDate>09/06/2025 09:56:43</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>277</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>277 הראשונים ראשל"צ</StoreName>
+      <Address>הנחשול 30</Address>
+      <City>ראשון לציון</City>
+      <ZIPCode>7543730</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:56:40</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>289</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>289 ניצה  נתניה</StoreName>
+      <Address>שדרות ניצה 8</Address>
+      <City>נתניה</City>
+      <ZIPCode>4226236</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:38:01</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>003</SubChainID>
+      <StoreID>290</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק בשבילך</SubChainName>
+      <StoreName>290 כפר סבא</StoreName>
+      <Address>לוי אשכול 37</Address>
+      <City>כפר סבא</City>
+      <ZIPCode>4442801</ZIPCode>
+      <LastUpdateDate>01/08/2024 07:38:18</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+    <Branch>
+      <ChainID>7290661400001</ChainID>
+      <SubChainID>001</SubChainID>
+      <StoreID>801</StoreID>
+      <BikoretNo />
+      <StoreType>1</StoreType>
+      <ChainName>מחסני השוק</ChainName>
+      <SubChainName>מחסני השוק</SubChainName>
+      <StoreName>801 אבן שמואל TOGO - זכיין</StoreName>
+      <Address> </Address>
+      <City />
+      <ZIPCode />
+      <LastUpdateDate>01/01/0001 00:00:00</LastUpdateDate>
+      <Latitude />
+      <Longitude />
+    </Branch>
+  </Branches>
+</Store>

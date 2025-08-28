@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PriceComparison.Download.New.MVP;
+using PriceComparison.Download.New.BinaProject;
 
 namespace PriceComparison.Download.New.MishnatYosef
 {

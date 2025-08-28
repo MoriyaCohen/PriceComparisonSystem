@@ -17,4 +17,8 @@
     <ProjectReference Include="..\PriceComparison.Infrastructure\PriceComparison.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="LocalXmlData\" />
+  </ItemGroup>
+
 </Project>

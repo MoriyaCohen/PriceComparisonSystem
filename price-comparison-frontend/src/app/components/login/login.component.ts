@@ -12,7 +12,6 @@ import { LoginRequest, RegisterRequest } from '../../interfaces/auth.interfaces'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-
 export class LoginComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
@@ -54,8 +53,11 @@ export class LoginComponent {
         next: (response) => {
           console.log('📨 Login response in component:', response);
           if (response.success) {
-            console.log('✅ Login successful, navigating to dashboard');
-            this.router.navigate(['/dashboard']);
+            console.log('✅ Login successful, navigating to barcode search');
+            // 🎯 תיקון: ניווט למסך חיפוש ברקוד במקום dashboard
+            this.router.navigate(['/barcodeSearch']).then(() => {
+              console.log('📍 נווט בהצלחה למסך חיפוש ברקוד');
+            });
           }
         },
         error: (error) => {

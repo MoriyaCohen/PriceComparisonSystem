@@ -1,106 +1,73 @@
-// src/app/shared/interfaces/price-comparison.interface.ts
+// interfaces/price-comparison.interfaces.ts
 
-/**
- * ממשק לבקשת השוואת מחירים
- */
-export interface PriceComparisonRequest {
-  /** ברקוד המוצר לחיפוש */
-  barcode: string;
-}
-
-/**
- * מידע על מוצר וסניף ספציפי
- */
-export interface ProductPriceInfo {
-  /** מזהה המוצר */
-  productId: number;
-  /** שם המוצר */
-  productName: string;
-  /** שם הרשת */
-  chainName: string;
-  /** שם הסניף */
-  storeName: string;
-  /** כתובת הסניף */
-  storeAddress?: string;
-  /** מחיר נוכחי */
-  currentPrice: number;
-  /** מחיר ליחידה (אם רלוונטי) */
-  unitPrice?: number;
-  /** יחידת מידה */
-  unitOfMeasure?: string;
-  /** האם מוצר שקיל */
-  isWeighted: boolean;
-  /** האם מותר הנחה */
-  allowDiscount: boolean;
-  /** תאריך עדכון אחרון */
-  lastUpdated: Date;
-    isMinPrice?: boolean;
-
-}
-
-/**
- * סטטיסטיקות מחירים
- */
-export interface PriceStatistics {
-  /** מחיר זול ביותר */
-  minPrice: number;
-  /** מחיר יקר ביותר */
-  maxPrice: number;
-  /** מחיר ממוצע */
-  averagePrice: number;
-  /** כמות סניפים שנמצאו */
-  storeCount: number;
-  /** כמות רשתות שנמצאו */
-  chainCount: number;
-}
-
-/**
- * תגובת השוואת מחירים מהשרת
- */
 export interface PriceComparisonResponse {
-  /** האם החיפוש היה מוצלח */
   success: boolean;
-  /** הודעת שגיאה במקרה של כישלון */
   errorMessage?: string;
-  /** פרטי המוצר שנמצא */
-  productInfo?: {
-    productName: string;
-    barcode: string;
-    manufacturerName?: string;
-  };
-  /** סטטיסטיקות המחירים */
-  statistics?: PriceStatistics;
-  /** רשימת כל המחירים שנמצאו, ממוינת לפי מחיר */
+  productInfo?: ProductInfo;
   priceDetails: ProductPriceInfo[];
+  statistics?: PriceStatistics;
 }
 
-/**
- * מצבי חיפוש מוצר
- */
+export interface ProductInfo {
+  productName: string;
+  barcode: string;
+  manufacturerName?: string;
+}
+
+export interface ProductPriceInfo {
+  productId: number;
+  productName: string;
+  chainName: string;
+  storeName: string;
+  storeAddress?: string;
+  currentPrice: number;
+  unitPrice?: number;
+  unitOfMeasure?: string;
+  isWeighted: boolean;
+  allowDiscount: boolean;
+  lastUpdated: Date;
+  isMinPrice?: boolean;
+}
+
+export interface PriceStatistics {
+  minPrice: number;
+  maxPrice: number;
+  averagePrice: number;
+  chainCount: number;
+  storeCount: number;
+  totalResults: number;
+}
+
+export interface LocalDataStatus {
+  loadedChains: number;
+  loadedStores: number;
+  totalProducts: number;
+  lastRefresh: Date;
+  isDataAvailable: boolean;
+  statusMessage: string;
+}
+
 export enum SearchStatus {
-  /** לא בוצע חיפוש */
   IDLE = 'idle',
-  /** בתהליך חיפוש */
   SEARCHING = 'searching',
-  /** נמצאו תוצאות */
   SUCCESS = 'success',
-  /** לא נמצאו תוצאות */
   NOT_FOUND = 'not_found',
-  /** שגיאה בחיפוש */
   ERROR = 'error'
 }
 
-/**
- * אפשרויות מיון תוצאות
- */
 export enum SortOption {
-  /** מיון לפי מחיר - מהזול ליקר */
   PRICE_ASC = 'price_asc',
-  /** מיון לפי מחיר - מהיקר לזול */
   PRICE_DESC = 'price_desc',
-  /** מיון לפי שם רשת */
   CHAIN_NAME = 'chain_name',
-  /** מיון לפי שם סניף */
   STORE_NAME = 'store_name'
-  
+}
+
+export interface BarcodeSearchRequest {
+  barcode: string;
+}
+
+export interface BarcodeValidationResponse {
+  isValid: boolean;
+  errorMessage?: string;
+  normalizedBarcode?: string;
 }

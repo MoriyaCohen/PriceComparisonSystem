@@ -42,7 +42,7 @@ Developed by two Full Stack developers as an independent project, designed to me
 
 ## 👩‍💻 Team
 - **Moriya Cohen** – Full Stack Developer (Angular, .NET, SQL)  
-- **Shoshi X** – Full Stack Developer (Angular, C#, Azure)  
+- **Shoshi Hershler** – Full Stack Developer (Angular, C#, Azure)  
 
 ---
 

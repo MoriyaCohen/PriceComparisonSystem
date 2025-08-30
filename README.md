@@ -49,7 +49,7 @@ Developed by two Full Stack developers as an independent project, designed to me
 ## ⚙️ Installation
 ```bash
 # Clone repo
-git clone https://github.com/<your-org>/PriceComparisonSystem.git
+git clone https://github.com/MoriyaCohen/PriceComparisonSystem.git
 
 # Backend
 cd PriceComparison.Api

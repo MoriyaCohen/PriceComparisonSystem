@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace PriceComparison.Application.Services
 {
-  
     public class PriceComparisonService : IPriceComparisonService
     {
         private readonly IStorePriceRepository _storePriceRepository;
@@ -25,10 +24,8 @@ namespace PriceComparison.Application.Services
         }
 
         /// <summary>
-        /// חיפוש מוצר לפי ברקוד והשוואת מחירים
+        /// חיפוש מוצר לפי ברקוד והשוואת מחירים - 4 תוצאות מהזול ליקר
         /// </summary>
-        /// <param name="barcode">ברקוד המוצר</param>
-        /// <returns>תוצאות החיפוש והשוואת המחירים</returns>
         public async Task<PriceComparisonResponseDto> SearchProductByBarcodeAsync(string barcode)
         {
             try
@@ -69,21 +66,22 @@ namespace PriceComparison.Application.Services
                     };
                 }
 
-                // המרה ל-DTO והכנת תוצאות
-                var priceDetails = storePrices.Select(MapToPriceInfoDto).ToList();
+                // 👈 שינוי עיקרי: מיון ולקיחת 4 תוצאות מהזול ליקר
+                var priceDetails = storePrices
+                    .OrderBy(p => p.CurrentPrice)  // מיון מהזול ליקר
+                    .Take(4)                       // 4 תוצאות במקום 3
+                    .Select(MapToPriceInfoDto)
+                    .ToList();
+
                 var statistics = CalculateStatistics(priceDetails);
 
-                // סימון המחיר הזול ביותר
+                // 👈 שינוי עיקרי: סימון רק הראשון (הזול ביותר) כ-IsMinPrice
                 if (priceDetails.Any())
                 {
-                    var minPrice = priceDetails.Min(p => p.CurrentPrice);
-                    foreach (var price in priceDetails.Where(p => p.CurrentPrice == minPrice))
-                    {
-                        price.IsMinPrice = true;
-                    }
+                    priceDetails[0].IsMinPrice = true;  // רק הראשון מסומן
                 }
 
-                _logger.LogInformation("נמצאו {Count} מחירים עבור מוצר {ProductName}",
+                _logger.LogInformation("נמצאו {Count} מחירים עבור מוצר: {ProductName}",
                     priceDetails.Count, product.ProductName);
 
                 return new PriceComparisonResponseDto
@@ -101,76 +99,13 @@ namespace PriceComparison.Application.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "שגיאה בחיפוש מוצר עבור ברקוד: {Barcode}", barcode);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// חישוב סטטיסטיקות מחירים עבור ברקוד
-        /// </summary>
-        /// <param name="barcode">ברקוד המוצר</param>
-        /// <returns>סטטיסטיקות מחירים</returns>
-        public async Task<PriceStatisticsDto?> GetPriceStatisticsAsync(string barcode)
-        {
-            try
-            {
-                var priceDetails = await GetPricesByBarcodeAsync(barcode);
-
-                if (!priceDetails.Any())
-                    return null;
-
-                return CalculateStatistics(priceDetails);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "שגיאה בחישוב סטטיסטיקות עבור ברקוד: {Barcode}", barcode);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// קבלת המחיר הזול ביותר עבור ברקוד
-        /// </summary>
-        /// <param name="barcode">ברקוד המוצר</param>
-        /// <returns>פרטי המחיר הזול ביותר</returns>
-        public async Task<ProductPriceInfoDto?> GetCheapestPriceAsync(string barcode)
-        {
-            try
-            {
-                var priceDetails = await GetPricesByBarcodeAsync(barcode);
-
-                if (!priceDetails.Any())
-                    return null;
-
-                var cheapest = priceDetails.OrderBy(p => p.CurrentPrice).First();
-                cheapest.IsMinPrice = true;
-
-                return cheapest;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "שגיאה בחיפוש מחיר זול ביותר עבור ברקוד: {Barcode}", barcode);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// קבלת כל המחירים עבור ברקוד מסוים
-        /// </summary>
-        /// <param name="barcode">ברקוד המוצר</param>
-        /// <returns>רשימת מחירים</returns>
-        public async Task<List<ProductPriceInfoDto>> GetPricesByBarcodeAsync(string barcode)
-        {
-            try
-            {
-                var storePrices = await _storePriceRepository.GetPricesByBarcodeAsync(barcode);
-                return storePrices.Select(MapToPriceInfoDto).ToList();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "שגיאה בקבלת מחירים עבור ברקוד: {Barcode}", barcode);
-                throw;
+                _logger.LogError(ex, "שגיאה בחיפוש מוצר: {Barcode}", barcode);
+                return new PriceComparisonResponseDto
+                {
+                    Success = false,
+                    ErrorMessage = "שגיאה בחיפוש המוצר",
+                    PriceDetails = new List<ProductPriceInfoDto>()
+                };
             }
         }
 
@@ -186,6 +121,7 @@ namespace PriceComparison.Application.Services
                 ChainName = storePrice.Store?.Chain?.ChainName ?? "לא זמין",
                 StoreName = storePrice.Store?.StoreName ?? "לא זמין",
                 StoreAddress = storePrice.Store?.Address,
+                SubChainName = storePrice.Store?.SubChainName,  // 👈 הוסף שדה חדש
                 CurrentPrice = (decimal)storePrice.CurrentPrice,
                 UnitPrice = storePrice.UnitPrice.HasValue ? (decimal)storePrice.UnitPrice.Value : null,
                 UnitOfMeasure = storePrice.Product?.UnitOfMeasure,
@@ -215,6 +151,25 @@ namespace PriceComparison.Application.Services
                 StoreCount = priceDetails.Count,
                 ChainCount = chains.Count
             };
+        }
+
+        // שאר המתודות נשארות כמו שהן
+        public async Task<PriceStatisticsDto?> GetPriceStatisticsAsync(string barcode)
+        {
+            var result = await SearchProductByBarcodeAsync(barcode);
+            return result.Statistics;
+        }
+
+        public async Task<ProductPriceInfoDto?> GetCheapestPriceAsync(string barcode)
+        {
+            var result = await SearchProductByBarcodeAsync(barcode);
+            return result.PriceDetails.FirstOrDefault();
+        }
+
+        public async Task<List<ProductPriceInfoDto>> GetPricesByBarcodeAsync(string barcode)
+        {
+            var result = await SearchProductByBarcodeAsync(barcode);
+            return result.PriceDetails;
         }
     }
 }

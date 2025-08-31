@@ -1,3 +1,4 @@
+import { ProductPriceInfo } from '../../interfaces/price-comparison.interface';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -287,5 +288,37 @@ export class BarcodeSearchComponent implements OnInit, OnDestroy {
       hour: '2-digit',
       minute: '2-digit'
     });
+  }
+  
+  getCheapestPrice(): ProductPriceInfo | null {
+    let currentResults: PriceComparisonResponse | null = null;
+    this.searchResults$.subscribe(res => currentResults = res).unsubscribe();
+    
+    if (!currentResults?.priceDetails || currentResults.priceDetails.length === 0) {
+      return null;
+    }
+    
+    return currentResults.priceDetails[0]; // הראשון הוא הזול ביותר
+  }
+
+  /**
+   * מחזיר את שאר התוצאות (2-4)
+   */
+  getAdditionalResults(): ProductPriceInfo[] {
+    let currentResults: PriceComparisonResponse | null = null;
+    this.searchResults$.subscribe(res => currentResults = res).unsubscribe();
+    
+    if (!currentResults?.priceDetails || currentResults.priceDetails.length <= 1) {
+      return [];
+    }
+    
+    return currentResults.priceDetails.slice(1); // מהשני ואילך
+  }
+
+  /**
+   * trackBy function לביצועים
+   */
+  trackByPrice(index: number, price: ProductPriceInfo): string {
+    return `${price.chainName}-${price.storeName}-${price.currentPrice}`;
   }
 }

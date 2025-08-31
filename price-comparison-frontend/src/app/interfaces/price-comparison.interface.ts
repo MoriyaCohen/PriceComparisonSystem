@@ -27,6 +27,7 @@ export interface ProductPriceInfo {
   allowDiscount: boolean;
   lastUpdated: Date;
   isMinPrice?: boolean;
+  subChainName?: string; 
 }
 
 export interface PriceStatistics {

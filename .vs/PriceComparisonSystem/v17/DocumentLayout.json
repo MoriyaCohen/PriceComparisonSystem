@@ -3,12 +3,52 @@
   "WorkspaceRootPath": "C:\\Projects\\PriceComparisonSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.api\\localxmldata\\pricefull7290058156016-264-202508071028.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\localxmldata\\pricefull7290058156016-264-202508071028.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\services\\localxmlsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\localxmlsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.api\\localxmldata\\storesfull7290058156016-000-202508071028.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\localxmldata\\storesfull7290058156016-000-202508071028.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.api\\localxmldata\\storesfull7290058108879-000-202508071024.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\localxmldata\\storesfull7290058108879-000-202508071024.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.api\\localxmldata\\pricefull7290058108879-339-202508071024.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\localxmldata\\pricefull7290058108879-339-202508071024.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\dtos\\localsearchdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\dtos\\localsearchdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\services\\ilocalxmlsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\ilocalxmlsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\services\\xmlfilemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\xmlfilemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.api\\pricecomparison.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\pricecomparison.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\dtos\\barcodevalidationrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\dtos\\barcodevalidationrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\services\\pricecomparisonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\pricecomparisonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CFC41D3F-6443-4F63-88C5-1E959E9BDD9E}|PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.infrastructure\\models\\pricecomparisondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,36 +59,16 @@
       "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\services\\localxmlsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\localxmlsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.api\\controllers\\pricecomparisoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\controllers\\pricecomparisoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\services\\xmlfilemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\xmlfilemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\dtos\\barcodevalidationrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\dtos\\barcodevalidationrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\services\\xmldatapreloaderhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\xmldatapreloaderhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\dtos\\localsearchdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\dtos\\localsearchdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\dtos\\xmldatadtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\dtos\\xmldatadtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\services\\ilocalxmlsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\ilocalxmlsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\projects\\pricecomparisonsystem\\pricecomparison.application\\pricecomparison.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
@@ -94,29 +114,120 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PriceComparisonDbContext.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
-              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
-              "RelativeToolTip": "PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAiwB4AAAA+AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T14:51:28.186Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PriceFull7290058156016-264-202508071028.xml",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\LocalXmlData\\PriceFull7290058156016-264-202508071028.xml",
+              "RelativeDocumentMoniker": "PriceComparison.Api\\LocalXmlData\\PriceFull7290058156016-264-202508071028.xml",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\LocalXmlData\\PriceFull7290058156016-264-202508071028.xml",
+              "RelativeToolTip": "PriceComparison.Api\\LocalXmlData\\PriceFull7290058156016-264-202508071028.xml",
+              "ViewState": "AQIAACYAAAAAAAAAAAAAACsAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-08-28T18:51:35.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StoresFull7290058156016-000-202508071028.xml",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\LocalXmlData\\StoresFull7290058156016-000-202508071028.xml",
+              "RelativeDocumentMoniker": "PriceComparison.Api\\LocalXmlData\\StoresFull7290058156016-000-202508071028.xml",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\LocalXmlData\\StoresFull7290058156016-000-202508071028.xml",
+              "RelativeToolTip": "PriceComparison.Api\\LocalXmlData\\StoresFull7290058156016-000-202508071028.xml",
+              "ViewState": "AQIAACgAAAAAAAAAAAAAAD0AAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-08-31T17:20:08.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PriceComparison.Api",
+              "Title": "LocalXmlSearchService.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\LocalXmlSearchService.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\LocalXmlSearchService.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\LocalXmlSearchService.cs",
+              "RelativeToolTip": "PriceComparison.Application\\Services\\LocalXmlSearchService.cs",
+              "ViewState": "AQIAAPsBAAAAAAAAAAAAwAQCAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T16:26:57.83Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StoresFull7290058108879-000-202508071024.xml",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\LocalXmlData\\StoresFull7290058108879-000-202508071024.xml",
+              "RelativeDocumentMoniker": "PriceComparison.Api\\LocalXmlData\\StoresFull7290058108879-000-202508071024.xml",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\LocalXmlData\\StoresFull7290058108879-000-202508071024.xml",
+              "RelativeToolTip": "PriceComparison.Api\\LocalXmlData\\StoresFull7290058108879-000-202508071024.xml",
+              "ViewState": "AQIAAOEAAAAAAAAAAAAjwOcAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-08-31T17:19:35.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PriceFull7290058108879-339-202508071024.xml",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\LocalXmlData\\PriceFull7290058108879-339-202508071024.xml",
+              "RelativeDocumentMoniker": "PriceComparison.Api\\LocalXmlData\\PriceFull7290058108879-339-202508071024.xml",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\LocalXmlData\\PriceFull7290058108879-339-202508071024.xml",
+              "RelativeToolTip": "PriceComparison.Api\\LocalXmlData\\PriceFull7290058108879-339-202508071024.xml",
+              "ViewState": "AQIAAD0fAAAAAADQroIKwEAfAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-08-28T18:51:33.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LocalSearchDTOs.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\DTOs\\LocalSearchDTOs.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Application\\DTOs\\LocalSearchDTOs.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\DTOs\\LocalSearchDTOs.cs",
+              "RelativeToolTip": "PriceComparison.Application\\DTOs\\LocalSearchDTOs.cs",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAQwGMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-06T22:24:06.505Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ILocalXmlSearchService.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\ILocalXmlSearchService.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\ILocalXmlSearchService.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\ILocalXmlSearchService.cs",
+              "RelativeToolTip": "PriceComparison.Application\\Services\\ILocalXmlSearchService.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBQAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T16:26:57.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "XmlFileManager.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\XmlFileManager.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\XmlFileManager.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\XmlFileManager.cs",
+              "RelativeToolTip": "PriceComparison.Application\\Services\\XmlFileManager.cs",
+              "ViewState": "AQIAADcBAAAAAAAAAAAAwIIBAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T16:26:57.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PriceComparison.Api.csproj",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
               "RelativeDocumentMoniker": "PriceComparison.Api\\PriceComparison.Api.csproj",
               "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\PriceComparison.Api.csproj",
@@ -128,33 +239,58 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
+              "Title": "BarcodeValidationRequestDto.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\DTOs\\BarcodeValidationRequestDto.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Application\\DTOs\\BarcodeValidationRequestDto.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\DTOs\\BarcodeValidationRequestDto.cs",
+              "RelativeToolTip": "PriceComparison.Application\\DTOs\\BarcodeValidationRequestDto.cs",
+              "ViewState": "AQIAADwAAAAAAAAAAAAjwIYAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T19:34:04.598Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\Program.cs",
               "RelativeDocumentMoniker": "PriceComparison.Api\\Program.cs",
               "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\Program.cs",
               "RelativeToolTip": "PriceComparison.Api\\Program.cs",
-              "ViewState": "AQIAAFkAAAAAAAAAAAAAAGQAAAAKAAAA",
+              "ViewState": "AQIAAFkAAAAAAAAAAAAAAGIAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-04T16:26:58.518Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LocalXmlSearchService.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\LocalXmlSearchService.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\LocalXmlSearchService.cs",
-              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\LocalXmlSearchService.cs",
-              "RelativeToolTip": "PriceComparison.Application\\Services\\LocalXmlSearchService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYBAAABAAAA",
+              "DocumentIndex": 11,
+              "Title": "PriceComparisonService.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\PriceComparisonService.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\PriceComparisonService.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\PriceComparisonService.cs",
+              "RelativeToolTip": "PriceComparison.Application\\Services\\PriceComparisonService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAK4AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T16:26:57.83Z",
+              "WhenOpened": "2025-08-28T20:33:07.211Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 12,
+              "Title": "PriceComparisonDbContext.cs",
+              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
+              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
+              "RelativeToolTip": "PriceComparison.Infrastructure\\Models\\PriceComparisonDbContext.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAiwB4AAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T14:51:28.186Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\appsettings.json",
               "RelativeDocumentMoniker": "PriceComparison.Api\\appsettings.json",
@@ -162,12 +298,11 @@
               "RelativeToolTip": "PriceComparison.Api\\appsettings.json",
               "ViewState": "AQIAAAUAAAAAAAAAAAAswAoAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-04T16:26:57.925Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-04T16:26:57.925Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 14,
               "Title": "PriceComparisonController.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\Controllers\\PriceComparisonController.cs",
               "RelativeDocumentMoniker": "PriceComparison.Api\\Controllers\\PriceComparisonController.cs",
@@ -175,38 +310,11 @@
               "RelativeToolTip": "PriceComparison.Api\\Controllers\\PriceComparisonController.cs",
               "ViewState": "AQIAANAAAAAAAAAAAAAkwOMAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T16:26:58.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-04T16:26:58.556Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "XmlFileManager.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\XmlFileManager.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\XmlFileManager.cs",
-              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\XmlFileManager.cs",
-              "RelativeToolTip": "PriceComparison.Application\\Services\\XmlFileManager.cs",
-              "ViewState": "AQIAACQBAAAAAAAAAAAkwDcBAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T16:26:57.786Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "BarcodeValidationRequestDto.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\DTOs\\BarcodeValidationRequestDto.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Application\\DTOs\\BarcodeValidationRequestDto.cs",
-              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\DTOs\\BarcodeValidationRequestDto.cs",
-              "RelativeToolTip": "PriceComparison.Application\\DTOs\\BarcodeValidationRequestDto.cs",
-              "ViewState": "AQIAALMAAAAAAAAAAAAkwMYAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T19:34:04.598Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "XmlDataPreloaderHostedService.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\XmlDataPreloaderHostedService.cs",
               "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\XmlDataPreloaderHostedService.cs",
@@ -214,25 +322,11 @@
               "RelativeToolTip": "PriceComparison.Application\\Services\\XmlDataPreloaderHostedService.cs",
               "ViewState": "AQIAADUAAAAAAAAAAAAkwEgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-06T22:33:08.141Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-06T22:33:08.141Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "LocalSearchDTOs.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\DTOs\\LocalSearchDTOs.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Application\\DTOs\\LocalSearchDTOs.cs",
-              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\DTOs\\LocalSearchDTOs.cs",
-              "RelativeToolTip": "PriceComparison.Application\\DTOs\\LocalSearchDTOs.cs",
-              "ViewState": "AQIAAEIAAAAAAAAAAAA5wFUAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-06T22:24:06.505Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "XmlDataDTOs.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\DTOs\\XmlDataDTOs.cs",
               "RelativeDocumentMoniker": "PriceComparison.Application\\DTOs\\XmlDataDTOs.cs",
@@ -240,26 +334,12 @@
               "RelativeToolTip": "PriceComparison.Application\\DTOs\\XmlDataDTOs.cs",
               "ViewState": "AQIAACQAAAAAAAAAAAA7wDUAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T16:26:57.089Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-04T16:26:57.089Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ILocalXmlSearchService.cs",
-              "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\ILocalXmlSearchService.cs",
-              "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\ILocalXmlSearchService.cs",
-              "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\Services\\ILocalXmlSearchService.cs",
-              "RelativeToolTip": "PriceComparison.Application\\Services\\ILocalXmlSearchService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T16:26:57.877Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "PriceComparison.Application",
+              "DocumentIndex": 17,
+              "Title": "PriceComparison.Application.csproj",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj",
               "RelativeDocumentMoniker": "PriceComparison.Application\\PriceComparison.Application.csproj",
               "ToolTip": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Application\\PriceComparison.Application.csproj",
@@ -271,7 +351,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "TestLocalPriceController.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Api\\Controllers\\TestLocalPriceController.cs",
               "RelativeDocumentMoniker": "PriceComparison.Api\\Controllers\\TestLocalPriceController.cs",
@@ -282,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "LaibcatalogDownloader.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\Laibcatalog\\LaibcatalogDownloader.cs",
               "RelativeDocumentMoniker": "PriceComparison.Download.New\\Laibcatalog\\LaibcatalogDownloader.cs",
@@ -294,7 +374,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "SuperPharmDownloader.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\SuperPharm\\SuperPharmDownloader.cs",
               "RelativeDocumentMoniker": "PriceComparison.Download.New\\SuperPharm\\SuperPharmDownloader.cs",
@@ -306,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "MishnatYosefDownloader.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\MishnatYosef\\MishnatYosefDownloader.cs",
               "RelativeDocumentMoniker": "PriceComparison.Download.New\\MishnatYosef\\MishnatYosefDownloader.cs",
@@ -318,7 +398,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\Program.cs",
               "RelativeDocumentMoniker": "PriceComparison.Download.New\\Program.cs",
@@ -330,7 +410,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "PublishedPricesDownloader.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\PublishedPrices\\PublishedPricesDownloader.cs",
               "RelativeDocumentMoniker": "PriceComparison.Download.New\\PublishedPrices\\PublishedPricesDownloader.cs",
@@ -342,7 +422,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "PriceComparison.Download.New.csproj",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\PriceComparison.Download.New.csproj",
               "RelativeDocumentMoniker": "PriceComparison.Download.New\\PriceComparison.Download.New.csproj",
@@ -355,7 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "FileManager.cs",
               "DocumentMoniker": "C:\\Projects\\PriceComparisonSystem\\PriceComparison.Download.New\\Storage\\FileManager.cs",
               "RelativeDocumentMoniker": "PriceComparison.Download.New\\Storage\\FileManager.cs",

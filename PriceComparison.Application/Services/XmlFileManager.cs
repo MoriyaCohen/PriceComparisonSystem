@@ -308,5 +308,82 @@ namespace PriceComparison.Application.Services
 
             return DateTime.Now;
         }
+
+        /// <summary>
+        /// טעינת נתוני רשתות וסניפים מקובץ StoresFull
+        /// </summary>
+        public Dictionary<string, ChainStoreInfoDto> LoadStoresFullData(string filePath)
+        {
+            var storeMapping = new Dictionary<string, ChainStoreInfoDto>();
+
+            try
+            {
+                var doc = XDocument.Load(filePath);
+                var root = doc.Root;
+
+                if (root == null) return storeMapping;
+
+                var chainName = GetElementValue(root, "ChainName") ?? "לא זמין";
+                var chainId = GetElementValue(root, "ChainId") ?? "";
+
+                // חיפוש כל הסניפים
+                var stores = root.Descendants("Store");
+                foreach (var store in stores)
+                {
+                    var storeId = GetElementValue(store, "StoreId");
+                    var storeName = GetElementValue(store, "StoreName");
+                    var address = GetElementValue(store, "Address");
+                    var city = GetElementValue(store, "City");
+
+                    if (!string.IsNullOrEmpty(storeId))
+                    {
+                        var key = $"{chainId}-{storeId}";
+                        storeMapping[key] = new ChainStoreInfoDto
+                        {
+                            ChainId = chainId,
+                            ChainName = chainName,
+                            StoreId = storeId,
+                            StoreName = storeName ?? "לא זמין",
+                            Address = $"{address}, {city}".Trim().Trim(','),
+                            SubChainName = GetSubChainName(chainName, storeName)
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "שגיאה בטעינת קובץ StoresFull: {FilePath}", filePath);
+            }
+
+            return storeMapping;
+        }
+
+        /// <summary>
+        /// זיהוי תת-רשת לפי שם הרשת והסניף
+        /// </summary>
+        private string GetSubChainName(string chainName, string storeName)
+        {
+            if (string.IsNullOrEmpty(chainName) || string.IsNullOrEmpty(storeName))
+                return "";
+
+            // רשת שופרסל - זיהוי BE
+            if (chainName.Contains("שופרסל") && storeName.Contains("BE"))
+                return "BE";
+
+            // רשת רמי לוי - זיהוי סופר קופיקס
+            if (chainName.Contains("רמי לוי") && storeName.Contains("קופיקס"))
+                return "סופר קופיקס";
+
+            // רשת ויקטורי - זיהוי מחסני השוק וח.כהן
+            if (chainName.Contains("ויקטורי"))
+            {
+                if (storeName.Contains("מחסני"))
+                    return "מחסני השוק";
+                if (storeName.Contains("כהן"))
+                    return "ח.כהן";
+            }
+
+            return "";
+        }
     }
 }

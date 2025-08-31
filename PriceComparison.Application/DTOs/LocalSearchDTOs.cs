@@ -59,6 +59,7 @@ namespace PriceComparison.Application.DTOs
         public string ProductName { get; set; } = string.Empty;
         public string ManufacturerName { get; set; } = string.Empty;
         public decimal Price { get; set; }
+        public string SubChainName { get; set; } = string.Empty;
         public decimal? UnitPrice { get; set; }
         public string UnitOfMeasure { get; set; } = string.Empty;
         public bool IsWeighted { get; set; }
@@ -83,4 +84,18 @@ namespace PriceComparison.Application.DTOs
         public bool LoadedSuccessfully { get; set; }
         public string ErrorMessage { get; set; } = string.Empty;
     }
+
+    /// <summary>
+    /// מידע על רשת וסניף מקובץ StoresFull
+    /// </summary>
+    public class ChainStoreInfoDto
+    {
+        public string ChainId { get; set; } = string.Empty;
+        public string ChainName { get; set; } = string.Empty;
+        public string StoreId { get; set; } = string.Empty;
+        public string StoreName { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string SubChainName { get; set; } = string.Empty;
+    }
+
 }

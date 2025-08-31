@@ -500,4 +500,126 @@
   .statistics-grid {
     grid-template-columns: 1fr;
   }
+
+  // המחיר הזול ביותר - מודגש
+.cheapest-result {
+  margin-bottom: 2rem;
+  
+  .cheapest-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #16a34a;
+    margin-bottom: 1rem;
+  }
+  
+  .price-card.primary {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    border: 2px solid #16a34a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.1);
+    
+    .price-main {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #15803d;
+      margin-bottom: 0.5rem;
+    }
+    
+    .store-details {
+      .chain-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #374151;
+      }
+      
+      .sub-chain {
+        font-size: 0.9rem;
+        color: #6b7280;
+        font-style: italic;
+      }
+      
+      .store-name {
+        font-size: 1rem;
+        color: #4b5563;
+        margin-top: 0.25rem;
+      }
+      
+      .store-address {
+        font-size: 0.875rem;
+        color: #9ca3af;
+        margin-top: 0.25rem;
+      }
+    }
+  }
+}
+
+// תוצאות נוספות
+.additional-results {
+  margin-bottom: 2rem;
+  
+  .additional-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 1rem;
+  }
+  
+  .price-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .price-row {
+    display: flex;
+    align-items: center;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    
+    &:hover {
+      background: #f3f4f6;
+    }
+    
+    .price-amount {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #059669;
+      min-width: 80px;
+      margin-left: 1rem;
+    }
+    
+    .store-info {
+      flex: 1;
+      
+      .chain {
+        font-weight: 600;
+        color: #374151;
+      }
+      
+      .sub-chain {
+        color: #6b7280;
+        font-style: italic;
+        margin: 0 0.25rem;
+      }
+      
+      .separator {
+        color: #9ca3af;
+        margin: 0 0.5rem;
+      }
+      
+      .store {
+        color: #4b5563;
+      }
+      
+      .address {
+        font-size: 0.875rem;
+        color: #9ca3af;
+        margin-top: 0.25rem;
+      }
+    }
+   }
+  }
 }

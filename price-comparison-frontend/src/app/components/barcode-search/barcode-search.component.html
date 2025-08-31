@@ -159,6 +159,37 @@
         </div>
       </div>
 
+      <!-- המחיר הזול ביותר - מודגש -->
+      <div class="cheapest-result" *ngIf="getCheapestPrice()">
+        <h3 class="cheapest-title">💰 המחיר הזול ביותר</h3>
+        <div class="price-card primary">
+          <div class="price-main">₪{{ getCheapestPrice()?.currentPrice | number:'1.2-2' }}</div>
+          <div class="store-details">
+            <div class="chain-name">{{ getCheapestPrice()?.chainName }}</div>
+            <div class="sub-chain" *ngIf="getCheapestPrice()?.subChainName">({{ getCheapestPrice()?.subChainName }})</div>
+            <div class="store-name">{{ getCheapestPrice()?.storeName }}</div>
+            <div class="store-address" *ngIf="getCheapestPrice()?.storeAddress">{{ getCheapestPrice()?.storeAddress }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- תוצאות נוספות -->
+      <div class="additional-results" *ngIf="getAdditionalResults().length > 0">
+        <h4 class="additional-title">📋 תוצאות נוספות</h4>
+        <div class="price-list">
+          <div *ngFor="let price of getAdditionalResults(); trackBy: trackByPrice" class="price-row">
+            <div class="price-amount">₪{{ price.currentPrice | number:'1.2-2' }}</div>
+            <div class="store-info">
+              <span class="chain">{{ price.chainName }}</span>
+              <span class="sub-chain" *ngIf="price.subChainName">({{ price.subChainName }})</span>
+              <span class="separator">•</span>
+              <span class="store">{{ price.storeName }}</span>
+              <div class="address" *ngIf="price.storeAddress">{{ price.storeAddress }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- סטטיסטיקות מחירים -->
       <div class="price-statistics" *ngIf="results.statistics">
         <h3 class="statistics-title">סיכום מחירים</h3>
@@ -183,25 +214,4 @@
           </p>
         </div>
       </div>
-
-      <!-- רשימת מחירים מפורטת -->
-      <!-- <div class="detailed-prices">
-        <app-price-results 
-          [priceDetails]="results.priceDetails"
-          [minPrice]="results.statistics?.minPrice"
-        ></app-price-results>
-      </div> -->
     </div>
-  </div>
-
-  <!-- עצות לשימוש -->
-  <div class="usage-tips" *ngIf="(searchStatus$ | async) === SearchStatus.IDLE">
-    <h3>עצות לשימוש:</h3>
-    <ul>
-      <li>הזן את מספר הברקוד המלא המופיע על המוצר</li>
-      <li>ברקוד תקין מכיל 8-13 ספרות</li>
-      <li>ודא שהברקוד ברור וללא נזק</li>
-      <li>אם המוצר לא נמצא, ייתכן שהוא לא נמכר ברשתות שבמערכת</li>
-    </ul>
-  </div>
-</div>

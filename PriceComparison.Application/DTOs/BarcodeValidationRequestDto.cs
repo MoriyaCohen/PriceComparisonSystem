@@ -128,6 +128,11 @@
         /// האם זהו המחיר הזול ביותר
         /// </summary>
         public bool IsMinPrice { get; set; }
+
+        /// <summary>
+        /// שם תת רשת (BE, סופר קופיקס וכו')
+        /// </summary>
+        public string? SubChainName { get; set; }
     }
 
     /// <summary>

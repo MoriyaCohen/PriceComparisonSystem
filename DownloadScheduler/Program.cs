@@ -36,7 +36,7 @@ namespace DownloadScheduler
                     Console.WriteLine($"💥 Scheduler Error: {ex.Message}");
                 }
             })
-            .Cron("15 18 * * *"); // כל יום בשעה 20:15 ישראל
+            .Cron("23 16 * * *"); // כל יום בשעה 20:15 ישראל
 
 
             await host.StartAsync();

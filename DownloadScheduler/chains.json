@@ -1,0 +1,150 @@
+{
+  "Description": "הגדרות רשתות להורדה - MVP מתוקן + וולט + משנת יוסף",
+  "LastUpdated": "2025-07-22 14:30:00",
+  "Chains": [
+    {
+      "Id": "shufersal",
+      "Name": "שופרסל בע\"מ (כולל רשת BE)",
+      "BaseUrl": "https://prices.shufersal.co.il/",
+      "Prefix": "Shufersal",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "mishnatyosef",
+      "Name": "משנת יוסף (קיי.טי.)",
+      "BaseUrl": "https://chp-kt.pages.dev/",
+      "Prefix": "MishnatYosef",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "superpharm",
+      "Name": "סופר פארם (ישראל) בע\"מ",
+      "BaseUrl": "https://prices.super-pharm.co.il/",
+      "Prefix": "SuperPharm",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "cityMarket",
+      "Name": "סיטי מרקט",
+      "BaseUrl": "https://www.citymarket-shops.co.il/",
+      "Prefix": "cityMarket",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "colBoHaziHinam",
+      "Name": "כל בו חצי חינם",
+      "BaseUrl": "https://shop.hazi-hinam.co.il/Prices",
+      "Prefix": "colBoHaziHinam",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "wolt",
+      "Name": "וולט אופריישנס סרוויסס ישראל",
+      "BaseUrl": "https://wm-gateway.wolt.com/isr-prices/public/v1",
+      "Prefix": "Wolt",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "laibcatalog",
+      "Name": "ח.כהן וויקטורי ומחסני השוק",
+      "BaseUrl": "https://laibcatalog.co.il/",
+      "Prefix": "laibcatalog",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "barcolAndNativChesed",
+      "Name": "נתיב החסד - סופר חסד בע",
+      "BaseUrl": "http://141.226.203.152/",
+      "Prefix": "barcolAndNativChesed",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "kingstore",
+      "Name": "קינג סטור",
+      "BaseUrl": "https://kingstore.binaprojects.com",
+      "Prefix": "KingStore",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "maayan",
+      "Name": "מעיין אלפיים",
+      "BaseUrl": "https://maayan2000.binaprojects.com",
+      "Prefix": "Maayan",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "goodpharm",
+      "Name": "גוד פארם",
+      "BaseUrl": "https://goodpharm.binaprojects.com",
+      "Prefix": "GoodPharm",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "supersapir",
+      "Name": "סופר ספיר",
+      "BaseUrl": "https://supersapir.binaprojects.com",
+      "Prefix": "SuperSapir",
+      "HasNetworkColumn": true,
+      "Enabled": true
+    },
+    {
+      "Id": "ktshivuk",
+      "Name": "קיי.טי. יבוא ושיווק (בינה פרוגקט)",
+      "BaseUrl": "https://ktshivuk.binaprojects.com",
+      "Prefix": "KTShivuk",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "shefabirkathashem",
+      "Name": "שפע ברכת השם",
+      "BaseUrl": "https://shefabirkathashem.binaprojects.com",
+      "Prefix": "ShefaBirkatHashem",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "shukhayir",
+      "Name": "שוק העיר (ט.ע.מ.ס)",
+      "BaseUrl": "https://shuk-hayir.binaprojects.com",
+      "Prefix": "ShukHayir",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "zolvebegadol",
+      "Name": "זול ובגדול",
+      "BaseUrl": "https://zolvebegadol.binaprojects.com",
+      "Prefix": "ZolVeBegadol",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "citymarketkiryatgat",
+      "Name": "סיטי מרקטגט",
+      "BaseUrl": "https://citymarketkiryatgat.binaprojects.com/Main.aspx",
+      "Prefix": "citymarketkiryatgat",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    },
+    {
+      "Id": "superbareket",
+      "Name": "עוף והודו ברקת - חנות המפעל",
+      "BaseUrl": "https://superbareket.binaprojects.com",
+      "Prefix": "SuperBareket",
+      "HasNetworkColumn": false,
+      "Enabled": true
+    }
+  ]
+}

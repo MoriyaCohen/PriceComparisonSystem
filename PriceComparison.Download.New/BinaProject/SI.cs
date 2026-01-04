@@ -6,7 +6,9 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -139,59 +141,57 @@ namespace PriceComparison.Download.New.BinaProject
             _httpClient.Timeout = TimeSpan.FromMinutes(15);
 
             Console.WriteLine($"      🎭 נבחר User-Agent: {userAgent.Substring(0, Math.Min(50, userAgent.Length))}...");
+
         }
 
         // ✅ עיכוב מתקדם נגד זיהוי בוט
-        private async Task AdvancedAntiDetectionDelay(string context = "", int baseMinMs = 3000, int baseMaxMs = 8000)
+        private async Task AdvancedAntiDetectionDelay(string context = "", int baseMinMs = 1200, int baseMaxMs = 2500)
         {
-            await _downloadSemaphore.WaitAsync();
+            //await _downloadSemaphore.WaitAsync();
 
-            try
-            {
-                // חישוב עיכוב דינמי לפי מספר הבקשות
-                var requestCount = Interlocked.Increment(ref _requestCounter);
-                var timeSinceLastRequest = DateTime.Now - _lastRequestTime;
+            //try
+            //{
+            //    var requestCount = Interlocked.Increment(ref _requestCounter);
+            //    var timeSinceLastRequest = DateTime.Now - _lastRequestTime;
 
-                // אם הבקשות צפופות מדי, תעכב יותר
-                var multiplier = 1.0;
-                if (timeSinceLastRequest.TotalSeconds < 2)
-                {
-                    multiplier = 2.0; // כפל את העיכוב
-                }
+            //    double multiplier = 1.0;
 
-                if (requestCount % 10 == 0)
-                {
-                    multiplier = 3.0; // עיכוב ארוך כל 10 בקשות
-                }
+            //    // אם הבקשות צפופות מדי — עכב קצת
+            //    if (timeSinceLastRequest.TotalSeconds < 1)
+            //        multiplier = 1.5;
 
-                var minMs = (int)(baseMinMs * multiplier);
-                var maxMs = (int)(baseMaxMs * multiplier);
+            //    // כל 10 בקשות תעכב קצת יותר
+            //    if (requestCount % 10 == 0)
+            //        multiplier = 2.0;
 
-                var delayMs = _random.Next(minMs, maxMs);
+            //    var minMs = (int)(baseMinMs * multiplier);
+            //    var maxMs = (int)(baseMaxMs * multiplier);
 
-                // הוסף רעש אקראי לעיכוב
-                var noise = _random.Next(-200, 200);
-                delayMs = Math.Max(1000, delayMs + noise);
+            //    var delayMs = _random.Next(minMs, maxMs);
 
-                Console.WriteLine($"      ⏳ {context} - ממתין {delayMs / 1000:F1} שניות (בקשה #{requestCount}, רעש אנטי-בוט)...");
+            //    // רעש קל
+            //    delayMs += _random.Next(-100, 150);
+            //    delayMs = Math.Max(700, delayMs);
 
-                await Task.Delay(delayMs);
-                _lastRequestTime = DateTime.Now;
-            }
-            finally
-            {
-                _downloadSemaphore.Release();
-            }
+            //    Console.WriteLine($"      ⏳ {context} - ממתין {delayMs}ms (בקשה #{requestCount})...");
+
+            //    await Task.Delay(delayMs);
+            //    _lastRequestTime = DateTime.Now;
+            //}
+            //finally
+            //{
+            //    _downloadSemaphore.Release();
+            //}
         }
+
 
         // ✅ עיכוב קצר עם הגנה
         private async Task ShortProtectedDelay(string context = "")
         {
-            var delayMs = _random.Next(800, 2000);
-            Console.WriteLine($"      ⏱️ {context} - המתנה מוגנת {delayMs}ms...");
-            await Task.Delay(delayMs);
+            //var delayMs = _random.Next(100, 600); // במקום 800–2000
+            //Console.WriteLine($"      ⏱️ {context} - המתנה מוגנת {delayMs}ms...");
+            //await Task.Delay(delayMs);
         }
-
         public abstract bool CanHandle(string chainId);
 
         // ========== קבלת קבצים זמינים עם הגנה ==========
@@ -199,49 +199,56 @@ namespace PriceComparison.Download.New.BinaProject
         {
             const int maxRetries = 3;
 
+            // וידוא שהתאריך תקין, אחרת נשתמש בתאריך היום
+            if (string.IsNullOrEmpty(date))
+                date = DateTime.Now.ToString("dd/MM/yyyy");
+            else
+            {
+                // ניסיון להמיר תאריך קיים לפורמט dd/MM/yyyy
+                if (DateTime.TryParse(date, out var parsedDate))
+                    date = parsedDate.ToString("dd/MM/yyyy");
+                else
+                    date = DateTime.Now.ToString("dd/MM/yyyy");
+            }
+
             for (int attempt = 1; attempt <= maxRetries; attempt++)
             {
                 try
                 {
                     var fullUrl = $"{BaseUrl}/MainIO_Hok.aspx";
-                    var israeliDate = ConvertToIsraeliDateFormat(date);
 
                     Console.WriteLine($"      🌐 מתחבר ל: {BaseUrl} (ניסיון {attempt}/{maxRetries})");
 
-                    // עיכוב מתקדם לפני הבקשה
                     await AdvancedAntiDetectionDelay($"לפני קבלת קבצים זמינים - ניסיון {attempt}");
 
                     var content = new FormUrlEncodedContent(new[]
                     {
-                        new KeyValuePair<string, string>("WStore", "0"),
-                        new KeyValuePair<string, string>("WDate", israeliDate),
-                        new KeyValuePair<string, string>("WFileType", "0")
-                    });
+                new KeyValuePair<string, string>("WStore", "0"),
+                new KeyValuePair<string, string>("WDate", date),   // שולחים תאריך נכון
+                new KeyValuePair<string, string>("WFileType", "0")
+            });
 
                     using var request = new HttpRequestMessage(HttpMethod.Post, fullUrl)
                     {
                         Content = content
                     };
 
-                    // הוספת headers מתקדמים לבקשה הספציפית
                     request.Headers.Add("X-Requested-With", "XMLHttpRequest");
                     request.Headers.Add("Referer", BaseUrl + "/Main.aspx");
                     request.Headers.Add("Origin", BaseUrl);
 
                     var response = await _httpClient.SendAsync(request);
 
-                    if (response.StatusCode == (HttpStatusCode)418) // 418
+                    if (response.StatusCode == (HttpStatusCode)418)
                     {
                         Console.WriteLine($"      🫖 זוהינו כבוט (418) - ניסיון {attempt}");
                         if (attempt < maxRetries)
                         {
-                            // עיכוב ארוך יותר אחרי 418
                             await AdvancedAntiDetectionDelay($"אחרי שגיאת 418", 8000, 15000);
                             continue;
                         }
                         return new List<FileMetadata>();
                     }
-
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -297,23 +304,28 @@ namespace PriceComparison.Download.New.BinaProject
             return new List<FileMetadata>();
         }
 
+
         private string ConvertToIsraeliDateFormat(string date)
         {
             try
             {
-                if (DateTime.TryParseExact(date, "MM/dd/yyyy", null, DateTimeStyles.None, out var parsedDate))
+                DateTime parsedDate;
+                string[] formats = { "MM/dd/yyyy", "dd/MM/yyyy" };
+                if (DateTime.TryParseExact(date, formats, null, DateTimeStyles.None, out parsedDate))
+                {
                     return parsedDate.ToString("dd/MM/yyyy");
-                if (DateTime.TryParseExact(date, "dd/MM/yyyy", null, DateTimeStyles.None, out parsedDate))
-                    return date;
+                }
+                // ניסיון כללי לפורמט כלשהו
                 if (DateTime.TryParse(date, out parsedDate))
                     return parsedDate.ToString("dd/MM/yyyy");
-                return date;
+                return date; // אם לא ניתן להמיר
             }
             catch
             {
                 return date;
             }
         }
+
 
         // ========== הורדה ראשית - מתקדמת ==========
         public virtual async Task<DownloadResult> DownloadChain(ChainConfig config, string date)
@@ -356,7 +368,6 @@ namespace PriceComparison.Download.New.BinaProject
 
                 // שלב 1: הורדת קבצי חנויות (StoresFull/Stores)
                 result.StoresFiles = await DownloadStoresFiles(availableFiles, chainDir);
-
                 // שלב 2: זיהוי סניפים
                 var stores = GetUniqueStores(availableFiles);
                 Console.WriteLine($"      📍 זוהו {stores.Count} סניפים");
@@ -441,20 +452,61 @@ namespace PriceComparison.Download.New.BinaProject
 
             int downloaded = 0;
             int failedDueToBot = 0;
+            var limitedStores = stores.ToList();
 
-            foreach (var store in stores)
+            foreach (var store in limitedStores)
             {
-                var priceFiles = availableFiles
+                var priceFullFiles = availableFiles
                     .Where(f => (f.FileNm.Contains("PriceFull") || (f.FileNm.Contains("Price") && !f.FileNm.Contains("Full") && !f.FileNm.Contains("Promo"))) &&
-                               ExtractStoreFromFileName(f.FileNm) == store)
+                               ExtractStoreFromBranch(f.FileNm) == store)
                     .OrderByDescending(f => f.FileNm.Contains("PriceFull") ? 1 : 0)
                     .ThenByDescending(f => ExtractTimeFromFileName(f.FileNm))
                     .ToList();
 
+                //חיפוש קבצי Price רגיל
+                var priceFiles = availableFiles
+              .Where(f => (f.FileNm.ToLower().Contains("price")) &&
+                          !f.FileNm.ToLower().Contains("pricefull") &&
+                          ExtractStoreFromBranch(f.FileNm) == store)
+                           .OrderByDescending(f => f.FileNm.Contains("Price") ? 1 : 0)
+                    .ThenByDescending(f => ExtractTimeFromFileName(f.FileNm))
+                    .ToList();
+                if (priceFullFiles.Any())
+                {
+                    var latestPrice = priceFullFiles.First();
+                    var fileType = latestPrice.FileNm.Contains("PriceFull") ? "PriceFull" : "Price";
+
+                    Console.WriteLine($"         🎯 סניף {store}: {latestPrice.FileNm}");
+
+                    await AdvancedAntiDetectionDelay($"לפני הורדת Price לסניף {store}");
+
+                    var success = await DownloadAndSaveXmlWithRetry(latestPrice, chainDir, fileType);
+                    if (success)
+                    {
+                        downloaded++;
+                    }
+                    else
+                    {
+                        failedDueToBot++;
+                        // אם יש יותר מדי כישלונות, תפסיק
+                        if (failedDueToBot > 5)
+                        {
+                            Console.WriteLine($"         ⚠️ יותר מדי כישלונות (418) - מדלג על שאר הסניפים");
+                            break;
+                        }
+                    }
+
+                    if (store != stores.Last())
+                    {
+                        await ShortProtectedDelay($"אחרי הורדת Price לסניף {store}");
+                    }
+
+                }
                 if (priceFiles.Any())
                 {
+
                     var latestPrice = priceFiles.First();
-                    var fileType = latestPrice.FileNm.Contains("PriceFull") ? "PriceFull" : "Price";
+                    var fileType = "Price";
 
                     Console.WriteLine($"         🎯 סניף {store}: {latestPrice.FileNm}");
 
@@ -494,19 +546,29 @@ namespace PriceComparison.Download.New.BinaProject
 
             int downloaded = 0;
             int failedDueToBot = 0;
+            var limitedStores = stores.ToList();
 
-            foreach (var store in stores)
+            foreach (var store in limitedStores)
             {
-                var promoFiles = availableFiles
+
+                var promoFullFiles = availableFiles
                     .Where(f => (f.FileNm.Contains("PromoFull") || (f.FileNm.Contains("Promo") && !f.FileNm.Contains("Full"))) &&
-                               ExtractStoreFromFileName(f.FileNm) == store)
+                               ExtractStoreFromBranch( f.FileNm) == store)
                     .OrderByDescending(f => f.FileNm.Contains("PromoFull") ? 1 : 0)
                     .ThenByDescending(f => ExtractTimeFromFileName(f.FileNm))
                     .ToList();
 
-                if (promoFiles.Any())
+                var promoFiles = availableFiles
+                  .Where(f => (f.FileNm.ToLower().Contains("promo") && 
+                  !f.FileNm.ToLower().Contains("promofull")) &&
+                             ExtractStoreFromBranch( f.FileNm) == store)
+                  .OrderByDescending(f => f.FileNm.Contains("PromoFull") ? 1 : 0)
+                  .ThenByDescending(f => ExtractTimeFromFileName(f.FileNm))
+                  .ToList();
+
+                if (promoFullFiles.Any())
                 {
-                    var latestPromo = promoFiles.First();
+                    var latestPromo = promoFullFiles.First();
                     var fileType = latestPromo.FileNm.Contains("PromoFull") ? "PromoFull" : "Promo";
 
                     Console.WriteLine($"         🎯 סניף {store}: {latestPromo.FileNm}");
@@ -533,6 +595,38 @@ namespace PriceComparison.Download.New.BinaProject
                     {
                         await ShortProtectedDelay($"אחרי הורדת Promo לסניף {store}");
                     }
+
+                }
+                if (promoFiles.Any())
+                {
+                    var latestPromo = promoFiles.First();
+                    var fileType =  "Promo";
+
+                    Console.WriteLine($"         🎯 סניף {store}: {latestPromo.FileNm}");
+
+                    await AdvancedAntiDetectionDelay($"לפני הורדת Promo לסניף {store}");
+
+                    var success = await DownloadAndSaveXmlWithRetry(latestPromo, chainDir, fileType);
+                    if (success)
+                    {
+                        downloaded++;
+                    }
+                    else
+                    {
+                        failedDueToBot++;
+                        // אם יש יותר מדי כישלונות, תפסיק
+                        if (failedDueToBot > 5)
+                        {
+                            Console.WriteLine($"         ⚠️ יותר מדי כישלונות (418) - מדלג על שאר קבצי Promo");
+                            break;
+                        }
+                    }
+
+                    if (store != stores.Last())
+                    {
+                        await ShortProtectedDelay($"אחרי הורדת Promo לסניף {store}");
+                    }
+
                 }
             }
 
@@ -560,6 +654,33 @@ namespace PriceComparison.Download.New.BinaProject
                     var typeDir = Path.Combine(chainDir, fileType);
                     Directory.CreateDirectory(typeDir);
 
+                    // ★ חדש — בדיקה אם כבר יש קובץ מעודכן יותר
+                    var fileName = fileInfo.FileNm;
+                    var storeId = ExtractStoreFromBranch( fileName);   // משתמש בפונקציה הקיימת שלך
+                    var newDate = ExtractDateFromFileName(fileInfo.FileNm);
+
+                    string searchPattern = $"*-{storeId}-*.*";
+                    var existingFiles = Directory.GetFiles(typeDir, searchPattern);
+                    if (existingFiles.Any())
+                    {
+                        var existing = existingFiles
+                            .Select(f => new { File = f, Date = ExtractDateFromFileName(f) })
+                            .Where(x => x.Date != DateTime.MinValue)
+                            .OrderByDescending(x => x.Date)
+                            .FirstOrDefault();
+
+                        if (existing != null)
+                        {
+                            Console.WriteLine($"         🔍 השוואת תאריכים: חדש = {newDate}, ישן = {existing.Date}");
+
+                            if (existing.Date >= newDate)
+                            {
+                                Console.WriteLine($"         📁 סניף {storeId} כבר מעודכן — מדלג על הורדה.");
+                                return true;
+                            }
+                        }
+                    }
+
                     var downloadUrl = await GetDownloadUrlWithRetry(fileInfo.FileNm);
                     if (string.IsNullOrEmpty(downloadUrl))
                     {
@@ -571,9 +692,8 @@ namespace PriceComparison.Download.New.BinaProject
                         }
                         return false;
                     }
-
+                    Console.WriteLine(downloadUrl);
                     var response = await _httpClient.GetAsync(downloadUrl);
-
                     if (response.StatusCode == (HttpStatusCode)418) // 418
                     {
                         Console.WriteLine($"         🫖 זוהינו כבוט בהורדה (418) - ניסיון {attempt}");
@@ -602,6 +722,24 @@ namespace PriceComparison.Download.New.BinaProject
                     if (savedFiles > 0)
                     {
                         Console.WriteLine($"         ✅ נשמרו {savedFiles} קבצי XML");
+
+                        // ★ חדש — מחיקת קובץ ישן לאחר שמירה מוצלחת
+                        if (existingFiles?.Any() == true)
+                        {
+                            foreach (var old in existingFiles)
+                            {
+                                try
+                                {
+                                    File.Delete(old);
+                                    Console.WriteLine($"         🧹 נמחק קובץ ישן: {Path.GetFileName(old)}");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"         ⚠️ שגיאה במחיקת {old}: {ex.Message}");
+                                }
+                            }
+                        }
+
                         return true;
                     }
 
@@ -621,6 +759,45 @@ namespace PriceComparison.Download.New.BinaProject
             return false;
         }
 
+        private DateTime ExtractDateFromFileName(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+                return DateTime.MinValue;
+
+            // Regex שמחפש רצף של 12 ספרות שמתחיל ב-20, לא מחובר למספרים אחרים
+            var match = System.Text.RegularExpressions.Regex.Match(fileName, @"(?<!\d)20\d{10}(?!\d)");
+            if (match.Success)
+            {
+                var candidate = match.Value;
+
+                // בדיקה בסיסית שהחודש והיום הגיוניים
+                int year = int.Parse(candidate.Substring(0, 4));
+                int month = int.Parse(candidate.Substring(4, 2));
+                int day = int.Parse(candidate.Substring(6, 2));
+
+                if (month >= 1 && month <= 12 && day >= 1 && day <= 31)
+                {
+                    if (DateTime.TryParseExact(candidate, "yyyyMMddHHmm", null,
+                                               System.Globalization.DateTimeStyles.None, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+            }
+
+            return DateTime.MinValue;
+        }
+        private string ExtractStoreFromBranch( string fileName)
+        {
+
+                var match = Regex.Match(fileName, @"-(\d+)-");
+
+                if (match.Success)
+                {
+                    return match.Groups[1].Value; // זה יהיה "250"
+                }
+            return "";
+        }
         // ========== חילוץ ושמירת XML ==========
         private async Task<int> ExtractAndSaveXml(byte[] fileBytes, FileMetadata fileInfo, string typeDir)
         {
@@ -674,6 +851,7 @@ namespace PriceComparison.Download.New.BinaProject
             }
         }
 
+
         // ========== פונקציות עזר עם Retry ==========
         private async Task<string> GetDownloadUrlWithRetry(string fileName)
         {
@@ -683,15 +861,16 @@ namespace PriceComparison.Download.New.BinaProject
             {
                 try
                 {
-                    var downloadPageUrl = $"{BaseUrl}/Download.aspx?FileNm={fileName}";
-                    var response = await _httpClient.PostAsync(downloadPageUrl, new StringContent(""));
+                    var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                    var apiUrl = $"{BaseUrl}/Download.aspx?FileNm={fileName}&_={timestamp}";
+
+                    var response = await _httpClient.PostAsync(apiUrl, new StringContent(""));
 
                     if (response.StatusCode == (HttpStatusCode)418)
                     {
-                        Console.WriteLine($"         🫖 418 בקבלת קישור הורדה (ניסיון {attempt})");
                         if (attempt < maxRetries)
                         {
-                            await AdvancedAntiDetectionDelay($"אחרי 418 בקישור", 8000, 15000);
+                            await Task.Delay(4000);
                             continue;
                         }
                         return "";
@@ -702,33 +881,27 @@ namespace PriceComparison.Download.New.BinaProject
 
                     var json = await response.Content.ReadAsStringAsync();
 
-                    try
-                    {
-                        var downloadData = JsonSerializer.Deserialize<List<DownloadResponse>>(json);
-                        var downloadUrl = downloadData?.FirstOrDefault()?.SPath ?? "";
+                    // הפורמט תמיד [{"SPath":"url"}]
+                    var doc = JsonDocument.Parse(json);
+                    var root = doc.RootElement;
 
-                        if (!string.IsNullOrEmpty(downloadUrl) && !downloadUrl.StartsWith("http"))
-                        {
-                            downloadUrl = BaseUrl + "/" + downloadUrl.TrimStart('/');
-                        }
-
-                        return downloadUrl;
-                    }
-                    catch (JsonException)
+                    if (root.ValueKind == JsonValueKind.Array &&
+                        root.GetArrayLength() > 0 &&
+                        root[0].TryGetProperty("SPath", out var spathProp))
                     {
-                        if (attempt < maxRetries)
-                        {
-                            await AdvancedAntiDetectionDelay($"אחרי שגיאת JSON בקישור", 3000, 6000);
-                            continue;
-                        }
-                        return "";
+                        var spath = spathProp.GetString();
+
+                        if (!string.IsNullOrEmpty(spath))
+                            return spath;  // ← זה הקישור האמיתי לקובץ!
                     }
+
+                    return "";
                 }
                 catch
                 {
                     if (attempt < maxRetries)
                     {
-                        await AdvancedAntiDetectionDelay($"אחרי שגיאה בקבלת קישור", 4000, 8000);
+                        await Task.Delay(4000);
                         continue;
                     }
                 }
@@ -737,11 +910,13 @@ namespace PriceComparison.Download.New.BinaProject
             return "";
         }
 
+
+
         private List<string> GetUniqueStores(List<FileMetadata> files)
         {
             return files
                 .Where(f => f.FileNm.Contains("Price") || f.FileNm.Contains("Promo"))
-                .Select(f => ExtractStoreFromFileName(f.FileNm))
+                .Select(f => ExtractStoreFromBranch(f.FileNm))
                 .Where(s => !string.IsNullOrEmpty(s))
                 .Distinct()
                 .OrderBy(s => s)
@@ -759,18 +934,7 @@ namespace PriceComparison.Download.New.BinaProject
             return "Unknown";
         }
 
-        private string ExtractStoreFromFileName(string fileName)
-        {
-            try
-            {
-                var parts = fileName.Split('-');
-                return parts.Length >= 2 ? parts[1] : "";
-            }
-            catch
-            {
-                return "";
-            }
-        }
+       
 
         private string ExtractTimeFromFileName(string fileName)
         {
@@ -922,7 +1086,23 @@ namespace PriceComparison.Download.New.BinaProject
                    chainId.Equals("זול-ובגדול", StringComparison.OrdinalIgnoreCase);
         }
     }
+    public class citymarketkiryatgatDownloader : BinaProjectsDownloaderBase
+    {
+        public override string ChainName => "סיטי מרקטגט";
+        public override string ChainId => "citymarketkiryatgat";
+        protected override string BaseUrl => "https://citymarketkiryatgat.binaprojects.com";
+        protected override string ChainPrefix => "citymarketkiryatgat";
 
+        public override bool CanHandle(string chainId)
+        {
+            return chainId.Equals("citymarketkiryatgat", StringComparison.OrdinalIgnoreCase) 
+                //||
+                //   chainId.Equals("zol", StringComparison.OrdinalIgnoreCase) ||
+                //   chainId.Equals("begadol", StringComparison.OrdinalIgnoreCase) ||
+                //   chainId.Equals("זול-ובגדול", StringComparison.OrdinalIgnoreCase)
+                   ;
+        }
+    }
     public class SuperBareketDownloader : BinaProjectsDownloaderBase
     {
         public override string ChainName => "עוף והודו ברקת - חנות המפעל";
@@ -957,6 +1137,7 @@ namespace PriceComparison.Download.New.BinaProject
                 new ShefaBirkatHashemDownloader(),
                 new ShukHayirDownloader(),
                 new ZolVeBegadolDownloader(),
+                new citymarketkiryatgatDownloader(),
                 new SuperBareketDownloader()
             };
 

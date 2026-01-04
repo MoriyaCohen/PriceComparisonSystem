@@ -1,0 +1,149 @@
+{
+  "Description": "הגדרות רשתות PublishedPrices להורדה - כל הרשתות ממסמך החקירה",
+  "LastUpdated": "2025-10-28 13:01:12",
+ 
+    "Chains": [
+      {
+        "Id": "politzer",
+        "Name": "פוליצר חדרה (1982) בע\"מ",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "politzer",
+        "Password": "",
+        "Type": 0,
+        "Enabled": true,
+        "Notes": "ללא סיסמה"
+      },
+      {
+        "Id": "paz_yellow",
+        "Name": "פז קמעונאות ואנרגיה בע\"מ - יילו",
+        "LoginUrl": "https://url.publishedprices.co.il/login?r=%2Ffile",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "Paz_bo",
+        "Password": "paz468",
+        "Type": 0,
+        "Enabled": true
+      },
+      {
+        "Id": "yuda_super",
+        "Name": "פז קמעונאות ואנרגיה בע\"מ - יודה סופר",
+        "LoginUrl": "https://publishedprices.co.il/login?r=%2Ffile",
+        "FileUrl": "https://publishedprices.co.il/file/d/Yuda/",
+        "Username": "yuda_ho",
+        "Password": "Yud@147",
+        "Type": 0,
+        "Enabled": true
+      },
+      {
+        "Id": "freshmarket",
+        "Name": "פז קמעונאות ואנרגיה בע\"מ - פרשמרקט",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "freshmarket",
+        "Password": "",
+        "Type": 0,
+        "Enabled": true,
+        "Notes": "ללא סיסמה"
+      },
+      {
+        "Id": "yohananof",
+        "Name": "מ. יוחננוף ובניו (1988) בע\"מ",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "yohananof",
+        "Password": "",
+        "Type": 0,
+        "Enabled": true,
+        "Notes": "ללא סיסמה"
+      },
+      {
+        "Id": "osherad",
+        "Name": "מרב-מזון כל בע\"מ (אושר עד)",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "osherad",
+        "Password": "",
+        "Type": 0,
+        "Enabled": true,
+        "Notes": "ללא סיסמה"
+      },
+      {
+        "Id": "salach_dabah",
+        "Name": "סאלח דבאח ובניו בע\"מ",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "SalachD",
+        "Password": "12345",
+        "Type": 0,
+        "Enabled": true
+      },
+      {
+        "Id": "tivtaam",
+        "Name": "טיב טעם רשתות בע\"מ",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "TivTaam",
+        "Password": "",
+        "Type": 0,
+        "Enabled": true,
+        "Notes": "ללא סיסמה"
+      },
+      {
+        "Id": "keshet",
+        "Name": "קשת טעמים בע\"מ",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "Keshet",
+        "Password": "",
+        "Type": 0,
+        "Enabled": true,
+        "Notes": "ללא סיסמה"
+      },
+      {
+        "Id": "rami_levi",
+        "Name": "חנויות רמי לוי שיווק השקמה 2006 בע\"מ",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "RamiLevi",
+        "Password": "",
+        "Type": 0,
+        "Enabled": true,
+        "Notes": "ללא סיסמה"
+      },
+      {
+        "Id": "super_cofix",
+        "Name": "רמי לוי - סופר קופיקס",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "SuperCofixApp",
+        "Password": "",
+        "Type": 0,
+        "Enabled": true,
+        "Notes": "ללא סיסמה"
+      },
+      {
+        "Id": "doralon",
+        "Name": "דור אלון ניהול מתחמים קמעונאיים בע\"מ",
+        "LoginUrl": "https://url.publishedprices.co.il/login",
+        "FileUrl": "https://url.publishedprices.co.il/file",
+        "Username": "doralon",
+        "Password": "",
+        "Type": 0,
+        "Enabled": true,
+        "Notes": "ללא סיסמה"
+      },
+      {
+        "Id": "stop_market",
+        "Name": "סטופ מרקט בע\"מ",
+        "LoginUrl": "https://url.retail.publishedprices.co.il/login",
+        "FileUrl": "https://url.retail.publishedprices.co.il/file",
+        "Username": "Market_Stop",
+        "Password": "",
+        "Type": 0,
+        "Enabled": false,
+        "Notes": "ללא סיסמה - אתר לא מאובטח"
+      }
+    ]
+  
+
+}

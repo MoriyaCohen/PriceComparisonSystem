@@ -11,7 +11,10 @@ using PriceComparison.Download.New.SuperPharm;
 using PriceComparison.Download.New.Shufersal;
 using PriceComparison.Download.New.Storage;
 using PriceComparison.Download.New.PublishedPrices;
+using PriceComparison.Download.New.Laibcatalog;
 using System.Net.Http;
+using PriceComparison.Download.New.colBoHaziHinam;
+using PriceComparison.Download.New.Citymarket;
 
 namespace PriceComparison.Download.New
 {
@@ -176,8 +179,11 @@ namespace PriceComparison.Download.New
 
         static async Task RunOriginalBinaProjectLogic(List<ChainConfig> enabledChains, string currentDate, List<DownloadResult> allResults)
         {
-            // בדיקה איזה רשתות מופעלות
             var shuferSalEnabled = enabledChains.Any(c => c.Id.Equals("shufersal", StringComparison.OrdinalIgnoreCase));
+            var laibcatalogEnabled = enabledChains.Any(c => c.Id.Equals("laibcatalog", StringComparison.OrdinalIgnoreCase));
+            var barcolAndNativChesedEnabled = enabledChains.Any(c => c.Id.Equals("barcolAndNativChesed", StringComparison.OrdinalIgnoreCase));
+            var cityMarketEnabled = enabledChains.Any(c => c.Id.Equals("cityMarket", StringComparison.OrdinalIgnoreCase));
+            var colBoHaziHinamEnabled = enabledChains.Any(c => c.Id.Equals("colBoHaziHinam", StringComparison.OrdinalIgnoreCase));
             var woltEnabled = enabledChains.Any(c => c.Id.Equals("wolt", StringComparison.OrdinalIgnoreCase));
             var mishnatYosefEnabled = enabledChains.Any(c => c.Id.Equals("mishnatyosef", StringComparison.OrdinalIgnoreCase));
             var superPharmEnabled = enabledChains.Any(c => c.Id.Equals("superpharm", StringComparison.OrdinalIgnoreCase));
@@ -185,18 +191,19 @@ namespace PriceComparison.Download.New
                 !c.Id.Equals("shufersal", StringComparison.OrdinalIgnoreCase) &&
                 !c.Id.Equals("wolt", StringComparison.OrdinalIgnoreCase) &&
                 !c.Id.Equals("mishnatyosef", StringComparison.OrdinalIgnoreCase) &&
+                !c.Id.Equals("cityMarket", StringComparison.OrdinalIgnoreCase) &&
+                !c.Id.Equals("laibcatalog", StringComparison.OrdinalIgnoreCase) &&
+                !c.Id.Equals("colBoHaziHinam", StringComparison.OrdinalIgnoreCase) &&
+                !c.Id.Equals("barcolAndNativChesed", StringComparison.OrdinalIgnoreCase) &&
                 !c.Id.Equals("superpharm", StringComparison.OrdinalIgnoreCase)).ToList();
 
-            // הפעלת הורדות רשתות בינה פרוגקט במקביל
             if (binaChains.Any())
             {
                 Console.WriteLine($"\n⚡ מתחיל {binaChains.Count} הורדות בינה פרוגקט במקביל...");
-
                 var factory = new ChainDownloaderFactory();
                 var downloadTasks = binaChains.Select(async chain =>
                 {
                     Console.WriteLine($"\n🔍 זוהה {chain.Id} → {chain.Name}");
-
                     var downloader = factory.GetDownloader(chain.Id);
                     if (downloader != null)
                     {
@@ -204,7 +211,6 @@ namespace PriceComparison.Download.New
                     }
                     else
                     {
-                        Console.WriteLine($"❌ לא נמצא מטפל עבור: {chain.Id}");
                         return new DownloadResult
                         {
                             ChainName = chain.Name,
@@ -218,62 +224,66 @@ namespace PriceComparison.Download.New
                 allResults.AddRange(binaResults);
             }
 
-            // יצירת HttpClient ו-FileManager משותפים
-            using var httpClient = new HttpClient();
-            var fileManager = new FileManager();
-
-            // הפעלת הורדת שופרסל בנפרד
+            // הפעלת רשתות עם HttpClient נפרד לכל אחת
             if (shuferSalEnabled)
             {
-                Console.WriteLine($"\n🛒 מתחיל הורדת רשת שופרסל...");
-                var shuferSalDownloader = new ShuferSalDownloader(httpClient, fileManager);
-                var shuferSalResult = await DownloadShuferSal(shuferSalDownloader);
-                allResults.Add(shuferSalResult);
+                using var httpShufer = new HttpClient();
+                var fileManager = new FileManager();
+                var downloader = new ShuferSalDownloader(httpShufer, fileManager);
+                allResults.Add(await DownloadShuferSal(downloader));
             }
 
-            // הפעלת הורדת וולט בנפרד
             if (woltEnabled)
             {
-                Console.WriteLine($"\n🛍️ מתחיל הורדת רשת וולט...");
-                var woltDownloader = new WoltDownloader(httpClient);
-                var woltResult = await DownloadWolt(woltDownloader);
-                allResults.Add(woltResult);
+                using var httpWolt = new HttpClient();
+                var downloader = new WoltDownloader(httpWolt);
+                allResults.Add(await DownloadWolt(downloader));
             }
 
-            // הפעלת הורדת משנת יוסף בנפרד
+            if (laibcatalogEnabled)
+            {
+                using var httpLaib = new HttpClient();
+                var fileManager = new FileManager();
+                var downloader = new LaibcatalogDownloader(httpLaib, fileManager);
+                var config = enabledChains.First(c => c.Id == "laibcatalog");
+                allResults.Add(await downloader.DownloadChain(config, currentDate));
+            }
+
+            if (barcolAndNativChesedEnabled)
+            {
+                using var httpBarcol = new HttpClient();
+                var fileManager = new FileManager();
+                var downloader = new LaibcatalogDownloader(httpBarcol, fileManager);
+                var config = enabledChains.First(c => c.Id == "barcolAndNativChesed");
+                allResults.Add(await downloader.DownloadChain(config, currentDate));
+            }
+
             if (mishnatYosefEnabled)
             {
-                Console.WriteLine($"\n🏪 מתחיל הורדת רשת משנת יוסף...");
-                var mishnatYosefDownloader = new MishnatYosefDownloader();
-                var mishnatYosefConfig = new ChainConfig
-                {
-                    Id = "mishnatyosef",
-                    Name = "משנת יוסף (קיי.טי.)",
-                    BaseUrl = "https://chp-kt.pages.dev/",
-                    Prefix = "MishnatYosef",
-                    HasNetworkColumn = false,
-                    Enabled = true
-                };
-                var mishnatYosefResult = await mishnatYosefDownloader.DownloadChain(mishnatYosefConfig, currentDate);
-                allResults.Add(mishnatYosefResult);
+                var downloader = new MishnatYosefDownloader();
+                var config = enabledChains.First(c => c.Id == "mishnatyosef");
+                allResults.Add(await downloader.DownloadChain(config, currentDate));
             }
 
-            // הפעלת הורדת סופר פארם בנפרד
             if (superPharmEnabled)
             {
-                Console.WriteLine($"\n🏥 מתחיל הורדת רשת סופר פארם...");
-                var superPharmDownloader = new SuperPharmDownloader();
-                var superPharmConfig = new ChainConfig
-                {
-                    Id = "superpharm",
-                    Name = "סופר פארם (ישראל) בע\"מ",
-                    BaseUrl = "https://prices.super-pharm.co.il/",
-                    Prefix = "SuperPharm",
-                    HasNetworkColumn = false,
-                    Enabled = true
-                };
-                var superPharmResult = await superPharmDownloader.DownloadChain(superPharmConfig, currentDate);
-                allResults.Add(superPharmResult);
+                var downloader = new SuperPharmDownloader();
+                var config = enabledChains.First(c => c.Id == "superpharm");
+                allResults.Add(await downloader.DownloadChain(config, currentDate));
+            }
+
+            if (cityMarketEnabled)
+            {
+                var downloader = new citymarketDownloader();
+                var config = enabledChains.First(c => c.Id == "cityMarket");
+                allResults.Add(await downloader.DownloadChain(config, currentDate));
+            }
+
+            if (colBoHaziHinamEnabled)
+            {
+                var downloader = new ColBoHaziHinamDownloader();
+                var config = enabledChains.First(c => c.Id == "colBoHaziHinam");
+                allResults.Add(await downloader.DownloadChain(config, currentDate));
             }
         }
 
@@ -355,7 +365,7 @@ namespace PriceComparison.Download.New
                         BaseUrl = "https://wm-gateway.wolt.com/isr-prices/public/v1",
                         Prefix = "Wolt",
                         HasNetworkColumn = false,
-                        Enabled = true
+                        Enabled = false
                     },
                     new ChainConfig
                     {
@@ -396,7 +406,7 @@ namespace PriceComparison.Download.New
                         Username = "RamiLevi",
                         Password = "",
                         Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
+                        Enabled = false,
                         Notes = "ללא סיסמה"
                     },
                     new PublishedPricesChain
@@ -408,7 +418,7 @@ namespace PriceComparison.Download.New
                         Username = "TivTaam",
                         Password = "",
                         Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
+                        Enabled = false,
                         Notes = "ללא סיסמה"
                     }
                     // תוספות נוספות יתווספו בהרצה הראשונה

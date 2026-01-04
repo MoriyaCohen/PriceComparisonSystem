@@ -132,7 +132,7 @@ namespace PriceComparison.Download.New.Wolt
                 if (stores.Any())
                 {
                     // הגבלה ל-5 סניפים לבדיקה
-                    var limitedStores = stores.Take(5).ToList();
+                    var limitedStores = stores.ToList();
                     Console.WriteLine($"      🔍 מגביל ל-{limitedStores.Count} סניפים לבדיקה");
 
                     // שלב 5: הורדת קבצי מחירים
@@ -191,7 +191,7 @@ namespace PriceComparison.Download.New.Wolt
                 var sortedDates = dates.OrderByDescending(d => d).ToList();
 
                 Console.WriteLine($"      📅 נמצאו {dates.Count} תאריכים זמינים");
-                Console.WriteLine($"      🔍 דוגמאות: {string.Join(", ", sortedDates.Take(3))}");
+                //Console.WriteLine($"      🔍 דוגמאות: {string.Join(", ", sortedDates.Take(3))}");
 
                 return sortedDates.First();
             }
@@ -356,17 +356,65 @@ namespace PriceComparison.Download.New.Wolt
                 return 0;
             }
 
-            var latestStores = storesFiles.First();
-            Console.WriteLine($"      🎯 מוריד: {latestStores.FileName}");
+            var latestStores = storesFiles.First(); // הקובץ הכי עדכני מהרשימה באתר
+            var storesDir = Path.Combine(chainDir, "Stores");
+            Directory.CreateDirectory(storesDir);
 
+            // 🎯 מחפש קובץ קיים בתקיית Stores (לא משנה שם, לא משנה סניף)
+            var existingFile = Directory.GetFiles(storesDir, "*-000-*")
+                                        .FirstOrDefault();
+            if (existingFile != null)
+            {
+                var existingTime = ExtractDateFromFileName(existingFile);
+                var newTime = ExtractDateFromFileName(latestStores.FileName);
+
+                // אם הקיים חדש יותר → לא להוריד
+                if (existingTime >= newTime)
+                {
+                    Console.WriteLine($"      ✔️ הקובץ הקיים עדכני — לא מוריד מחדש");
+                    return 0;
+                }
+
+                Console.WriteLine($"      🎯 נמצא קובץ חדש יותר — מתחיל להוריד: {latestStores.FileName}");
+            }
+            else
+            {
+                Console.WriteLine($"      🎯 לא נמצא קובץ קודם — מתחיל להוריד: {latestStores.FileName}");
+            }
+
+            // קודם מורידים
             var success = await DownloadAndSaveFile(latestStores, chainDir, "Stores");
-            return success ? 1 : 0;
-        }
 
-        /// <summary>
-        /// הורדת קבצי מחירים
-        /// </summary>
-        private async Task<int> DownloadPriceFiles(List<WoltFileInfo> availableFiles, List<string> stores, string chainDir)
+            // אם לא הצליח — לא מוחקים כלום
+            if (!success)
+            {
+                Console.WriteLine($"      ❌ ההורדה נכשלה — הקובץ הישן לא נמחק");
+                return 0;
+            }
+
+            // אם יש קובץ ישן → מוחקים אותו אחרי הצלחה
+            if (existingFile != null)
+            {
+                try
+                {
+                    File.Delete(existingFile);
+                    Console.WriteLine($"      🗑️ הקובץ הישן נמחק בהצלחה אחרי הורדה מוצלחת");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"      ❌ שגיאה במחיקת הקובץ הישן: {ex.Message}");
+                }
+            }
+
+            return 1;
+         }
+
+
+
+            /// <summary>
+            /// הורדת קבצי מחירים
+            /// </summary>
+            private async Task<int> DownloadPriceFiles(List<WoltFileInfo> availableFiles, List<string> stores, string chainDir)
         {
             Console.WriteLine($"      💰 מוריד קבצי Price...");
 
@@ -392,7 +440,7 @@ namespace PriceComparison.Download.New.Wolt
                     var latestPriceFull = priceFullFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} PriceFull: {latestPriceFull.FileName}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(500, 1500));
                     var success = await DownloadAndSaveFileWithRetry(latestPriceFull, chainDir, "PriceFull");
                     if (success) downloaded++;
                 }
@@ -403,7 +451,7 @@ namespace PriceComparison.Download.New.Wolt
                     var latestPrice = priceFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} Price: {latestPrice.FileName}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(500, 1500));
                     var success = await DownloadAndSaveFileWithRetry(latestPrice, chainDir, "Price");
                     if (success) downloaded++;
                 }
@@ -442,7 +490,7 @@ namespace PriceComparison.Download.New.Wolt
                     var latestPromoFull = promoFullFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} PromoFull: {latestPromoFull.FileName}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(500, 1500));
                     var success = await DownloadAndSaveFileWithRetry(latestPromoFull, chainDir, "PromoFull");
                     if (success) downloaded++;
                 }
@@ -453,7 +501,7 @@ namespace PriceComparison.Download.New.Wolt
                     var latestPromo = promoFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} Promo: {latestPromo.FileName}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(500, 1500));
                     var success = await DownloadAndSaveFileWithRetry(latestPromo, chainDir, "Promo");
                     if (success) downloaded++;
                 }
@@ -476,6 +524,44 @@ namespace PriceComparison.Download.New.Wolt
         /// </summary>
         private async Task<bool> DownloadAndSaveFileWithRetry(WoltFileInfo fileInfo, string chainDir, string fileType, int maxRetries = 3)
         {
+            // תיקיית עדכון
+            var updatedDir = Path.Combine(chainDir, fileType);
+            Directory.CreateDirectory(updatedDir);
+
+            var fileName = fileInfo.FileName;
+            var storeId = ExtractStoreFromFileName(fileName);
+            if (string.IsNullOrEmpty(storeId))
+            {
+                Console.WriteLine($"         ⚠️ לא הצליח לזהות סניף מתוך הקובץ: {fileName}");
+                return false;
+            }
+
+            // תאריך של הקובץ החדש
+            var newDate = ExtractDateFromFileName(fileName);
+            if (newDate == null)
+            {
+                Console.WriteLine($"         ⚠️ לא מצליח לחלץ תאריך מהקובץ: {fileName}");
+                return false;
+            }
+
+            // מחפש קובץ קיים לאותו סניף
+            var existingFile = Directory.GetFiles(updatedDir, $"*-{storeId}-*")
+                            .FirstOrDefault();
+
+            if (existingFile != null)
+            {
+                var existingDate = ExtractDateFromFileName(Path.GetFileName(existingFile));
+                Console.WriteLine(existingDate+" "+ newDate);
+                if (existingDate != null && existingDate >= newDate)
+                {
+                    Console.WriteLine($"         ⏩ קובץ עדכני כבר קיים לסניף {storeId}, דילוג על הורדה");
+                    return true;
+                }
+
+                Console.WriteLine($"         🔄 נמצא קובץ ישן לסניף {storeId}, יוחלף אם ההורדה תצליח");
+            }
+
+            // ניסיון הורדה עם ריטריי
             for (int attempt = 1; attempt <= maxRetries; attempt++)
             {
                 try
@@ -483,18 +569,35 @@ namespace PriceComparison.Download.New.Wolt
                     if (attempt > 1)
                     {
                         Console.WriteLine($"         🔄 ניסיון {attempt}/{maxRetries}: {fileInfo.FileName}");
-                        await Task.Delay(_random.Next(2000, 5000));
+                        await Task.Delay(_random.Next(300, 600));
                     }
 
-                    var success = await DownloadAndSaveFile(fileInfo, chainDir, fileType);
-                    if (success)
+                    var downloadSuccess = await DownloadAndSaveFile(fileInfo, chainDir, fileType);
+                    if (downloadSuccess)
                     {
+                        Console.WriteLine($"         ✔ הורדה הצליחה: {fileName}");
+
+                        // מוחקים קובץ ישן רק אם הייתה הורדה מוצלחת
+                        if (existingFile != null)
+                        {
+                            try
+                            {
+                                File.Delete(existingFile);
+                                Console.WriteLine($"         🗑 נמחק קובץ ישן: {Path.GetFileName(existingFile)}");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"         ⚠️ שגיאה במחיקת קובץ ישן: {ex.Message}");
+                            }
+                        }
+
                         return true;
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"         ⚠️ ניסיון {attempt} נכשל: {ex.Message}");
+
                     if (attempt == maxRetries)
                     {
                         Console.WriteLine($"         ❌ נכשל לאחר {maxRetries} ניסיונות: {fileInfo.FileName}");
@@ -504,6 +607,7 @@ namespace PriceComparison.Download.New.Wolt
 
             return false;
         }
+
 
         /// <summary>
         /// הורדה ושמירת קובץ - גרסה משופרת עם anti-bot protection
@@ -524,7 +628,7 @@ namespace PriceComparison.Download.New.Wolt
                 request.Headers.Add("Pragma", "no-cache");
 
                 // עיכוב אקראי ארוך יותר
-                await Task.Delay(_random.Next(2000, 5000));
+                await Task.Delay(_random.Next(300, 600));
 
                 var response = await _httpClient.SendAsync(request);
 
@@ -587,7 +691,7 @@ namespace PriceComparison.Download.New.Wolt
                         altClient.DefaultRequestHeaders.Add("User-Agent",
                             "curl/7.68.0"); // מנסה כ-curl במקום דפדפן
 
-                        await Task.Delay(_random.Next(3000, 6000)); // עיכוב ארוך יותר
+                        //await Task.Delay(_random.Next(3000, 6000)); // עיכוב ארוך יותר
 
                         var response = await altClient.GetAsync(altUrl);
 
@@ -706,23 +810,16 @@ namespace PriceComparison.Download.New.Wolt
         {
             try
             {
-                // דפוס לחילוץ מספר סניף: PriceFull_12345_20250725.xml
-                var storePattern = @"_(\d+)_";
-                var match = Regex.Match(fileName, storePattern);
+                // אם זה קובץ Stores – תמיד הסניף הוא 000
+                if (fileName.StartsWith("Stores", StringComparison.OrdinalIgnoreCase))
+                    return "000";
+
+                // לכל שאר הקבצים: תופס שלוש ספרות אחרי -000-
+                var pattern = @"-000-(\d{3})";
+                var match = Regex.Match(fileName, pattern);
 
                 if (match.Success)
-                {
                     return match.Groups[1].Value;
-                }
-
-                // דפוס חלופי: Price-12345-20250725.xml
-                var altPattern = @"-(\d+)-";
-                var altMatch = Regex.Match(fileName, altPattern);
-
-                if (altMatch.Success)
-                {
-                    return altMatch.Groups[1].Value;
-                }
 
                 return "";
             }
@@ -731,6 +828,28 @@ namespace PriceComparison.Download.New.Wolt
                 return "";
             }
         }
+        private DateTime? ExtractDateFromFileName(string fileName)
+        {
+            try
+            {
+                var pattern = @"-(\d{8})-(\d{6})"; // YYYYMMDD-HHMMSS
+                var m = Regex.Match(fileName, pattern);
+
+                if (!m.Success)
+                    return null;
+
+                var date = m.Groups[1].Value; // yyyyMMdd
+                var time = m.Groups[2].Value; // HHmmss
+
+                return DateTime.ParseExact(date + time, "yyyyMMddHHmmss", null);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
 
         private bool IsZipFile(byte[] fileBytes)
         {

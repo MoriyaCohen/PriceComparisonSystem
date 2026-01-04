@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using PriceComparison.Download.New.BinaProject;
 
@@ -39,7 +41,15 @@ namespace PriceComparison.Download.New.MishnatYosef
 
         public MishnatYosefDownloader()
         {
-            _httpClient = new HttpClient();
+            var handler = new HttpClientHandler
+            {
+                AutomaticDecompression =
+         DecompressionMethods.GZip |
+         DecompressionMethods.Deflate |
+         DecompressionMethods.Brotli
+            };
+
+            _httpClient = new HttpClient(handler);
             SetupHttpClient();
         }
 
@@ -55,6 +65,7 @@ namespace PriceComparison.Download.New.MishnatYosef
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
 
             // Headers נוספים
+
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/json,text/html,application/xhtml+xml,*/*");
             _httpClient.DefaultRequestHeaders.Add("Accept-Language", "he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7");
             _httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
@@ -140,7 +151,7 @@ namespace PriceComparison.Download.New.MishnatYosef
                     {
                         FileNm = file.name,
                         DateFile = file.date,
-                        WStore = ExtractStoreFromFileName(file.name),
+                        WStore = ExtractStoreFromBranch(file.name),
                         WFileType = DetermineFileType(file.name),
                         Company = "משנת יוסף",
                         LastUpdateDate = file.date,
@@ -316,7 +327,7 @@ namespace PriceComparison.Download.New.MishnatYosef
                 // חיפוש קבצי PriceFull
                 var priceFullFiles = availableFiles
                     .Where(f => f.FileNm.ToLower().Contains("pricefull") &&
-                               ExtractStoreFromFileName(f.FileNm) == store)
+                               ExtractStoreFromBranch(f.FileNm) == store)
                     .OrderByDescending(f => ExtractTimeFromFileName(f.FileNm))
                     .ToList();
 
@@ -325,7 +336,7 @@ namespace PriceComparison.Download.New.MishnatYosef
                     .Where(f => f.FileNm.ToLower().Contains("price") &&
                                !f.FileNm.ToLower().Contains("pricefull") &&
                                !f.FileNm.ToLower().Contains("promo") &&
-                               ExtractStoreFromFileName(f.FileNm) == store)
+                               ExtractStoreFromBranch(f.FileNm) == store)
                     .OrderByDescending(f => ExtractTimeFromFileName(f.FileNm))
                     .ToList();
 
@@ -369,7 +380,7 @@ namespace PriceComparison.Download.New.MishnatYosef
             {
                 var promoFiles = availableFiles
                     .Where(f => f.FileNm.ToLower().Contains("promo") &&
-                               ExtractStoreFromFileName(f.FileNm) == store)
+                               ExtractStoreFromBranch(f.FileNm) == store)
                     .OrderByDescending(f => f.FileNm.ToLower().Contains("promofull") ? 1 : 0)
                     .ThenByDescending(f => ExtractTimeFromFileName(f.FileNm))
                     .ToList();
@@ -404,29 +415,111 @@ namespace PriceComparison.Download.New.MishnatYosef
         /// <summary>
         /// הורדה ושמירת קובץ - גרסה מיוחדת למשנת יוסף
         /// </summary>
+        //private async Task<bool> DownloadAndSaveFile(FileMetadata fileInfo, string chainDir, string fileType)
+        //{
+        //    try
+        //    {
+        //        var typeDir = Path.Combine(chainDir, fileType);
+        //        Directory.CreateDirectory(typeDir);
+
+        //        // במשנת יוסף, ה-URL מגיע מוכן להורדה מה-API
+        //        var downloadUrl = await GetDirectDownloadUrl(fileInfo.FileNm);
+
+        //        if (string.IsNullOrEmpty(downloadUrl))
+        //        {
+        //            Console.WriteLine($"         ❌ לא נמצא קישור הורדה עבור {fileInfo.FileNm}");
+        //            return false;
+        //        }
+
+        //        Console.WriteLine($"         📥 מוריד מ: {downloadUrl}");
+
+        //        var response = await _httpClient.GetAsync(downloadUrl);
+
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            Console.WriteLine($"         ❌ שגיאה בהורדה: {response.StatusCode}");
+        //            return false;
+        //        }
+
+        //        var fileBytes = await response.Content.ReadAsByteArrayAsync();
+        //        var savedFiles = await ExtractAndSaveXml(fileBytes, fileInfo, typeDir);
+
+        //        if (savedFiles > 0)
+        //        {
+        //            Console.WriteLine($"         ✅ נשמרו {savedFiles} קבצי XML");
+        //            return true;
+        //        }
+
+        //        return false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"         ❌ שגיאה בהורדה: {ex.Message}");
+        //        return false;
+        //    }
+        //}
         private async Task<bool> DownloadAndSaveFile(FileMetadata fileInfo, string chainDir, string fileType)
         {
+            string? oldFilePath = null;
+
             try
             {
+                var fileName = Path.GetFileName(fileInfo.FileNm ?? "");
+                Console.WriteLine(fileName);
+
+                var storeId = ExtractStoreFromBranch(fileName);
+                Console.WriteLine(storeId);
+
+                // חילוץ תאריך מהקובץ
+                var newDate = ParseUpdateTimeForSorting(fileInfo.DateFile ?? "", fileInfo.FileNm ?? "");
+                if (newDate == DateTime.MinValue)
+                {
+                    Console.WriteLine($"⚠️ לא זוהה תאריך לקובץ {fileName}, לא ניתן להשוות.");
+                }
+
                 var typeDir = Path.Combine(chainDir, fileType);
                 Directory.CreateDirectory(typeDir);
 
-                // במשנת יוסף, ה-URL מגיע מוכן להורדה מה-API
+                var searchPattern = $"*-{storeId}-*.*";
+                Console.WriteLine(searchPattern);
+                var existingFiles = Directory.GetFiles(typeDir, searchPattern);
+
+                Console.WriteLine($"📄 נמצאו {existingFiles.Length} קבצים תואמים.");
+
+                if (existingFiles.Any())
+                {
+                    var existingFile = existingFiles.First();
+                    var existingDate = ExtractDateFromFileName(existingFile);
+
+                    Console.WriteLine($"🔍 השוואת תאריכים: חדש = {newDate}, ישן = {existingDate}");
+
+                    if (existingDate != DateTime.MinValue && newDate <= existingDate)
+                    {
+                        Console.WriteLine($"📁 סניף {storeId} כבר מעודכן ({existingDate:yyyy-MM-dd HH:mm}), מדלג על הורדה.");
+                        return true;
+                    }
+                    else
+                    {
+                        oldFilePath = existingFile;
+                        Console.WriteLine($"🆕 נמצא קובץ חדש לסניף {storeId}, נוריד ונטפל בישן לאחר ההורדה.");
+                    }
+                }
+
+                // הורדת הקובץ
                 var downloadUrl = await GetDirectDownloadUrl(fileInfo.FileNm);
 
                 if (string.IsNullOrEmpty(downloadUrl))
                 {
-                    Console.WriteLine($"         ❌ לא נמצא קישור הורדה עבור {fileInfo.FileNm}");
+                    Console.WriteLine($"❌ לא נמצא קישור הורדה עבור {fileInfo.FileNm}");
                     return false;
                 }
 
-                Console.WriteLine($"         📥 מוריד מ: {downloadUrl}");
+                Console.WriteLine($"📥 מוריד מ: {downloadUrl}");
 
                 var response = await _httpClient.GetAsync(downloadUrl);
-
                 if (!response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine($"         ❌ שגיאה בהורדה: {response.StatusCode}");
+                    Console.WriteLine($"❌ שגיאה בהורדה: {response.StatusCode}");
                     return false;
                 }
 
@@ -435,7 +528,15 @@ namespace PriceComparison.Download.New.MishnatYosef
 
                 if (savedFiles > 0)
                 {
-                    Console.WriteLine($"         ✅ נשמרו {savedFiles} קבצי XML");
+                    Console.WriteLine($"✅ נשמרו {savedFiles} קבצי XML");
+
+                    // מחיקת הקובץ הישן אם יש
+                    if (!string.IsNullOrEmpty(oldFilePath) && File.Exists(oldFilePath))
+                    {
+                        File.Delete(oldFilePath);
+                        Console.WriteLine($"🧹 נמחק הקובץ הישן: {Path.GetFileName(oldFilePath)}");
+                    }
+
                     return true;
                 }
 
@@ -443,7 +544,7 @@ namespace PriceComparison.Download.New.MishnatYosef
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"         ❌ שגיאה בהורדה: {ex.Message}");
+                Console.WriteLine($"❌ שגיאה בהורדה: {ex.Message}");
                 return false;
             }
         }
@@ -535,7 +636,7 @@ namespace PriceComparison.Download.New.MishnatYosef
         {
             return files
                 .Where(f => f.FileNm.ToLower().Contains("price") || f.FileNm.ToLower().Contains("promo"))
-                .Select(f => ExtractStoreFromFileName(f.FileNm))
+                .Select(f => ExtractStoreFromBranch(f.FileNm))
                 .Where(s => !string.IsNullOrEmpty(s))
                 .Distinct()
                 .OrderBy(s => s)
@@ -554,18 +655,68 @@ namespace PriceComparison.Download.New.MishnatYosef
             return "Unknown";
         }
 
-        private string ExtractStoreFromFileName(string fileName)
+        private string ExtractStoreFromBranch( string fileName)
         {
-            try
-            {
-                var parts = fileName.Split('-');
-                return parts.Length >= 2 ? parts[1] : "";
-            }
-            catch
-            {
-                return "";
-            }
+
+                var match = Regex.Match(fileName, @"-(\d+)-");
+
+                if (match.Success)
+                {
+                    return match.Groups[1].Value; // זה יהיה "250"
+                }
+            return "";
         }
+        private DateTime ParseUpdateTimeForSorting(string updateTime, string fileName)
+        {
+            // ננסה קודם כל לקרוא מה־updateTime (אם הוא במבנה תקין)
+            if (!string.IsNullOrEmpty(updateTime) &&
+                DateTime.TryParseExact(updateTime, "yyyyMMddHHmm", null,
+                    System.Globalization.DateTimeStyles.None, out var parsed))
+            {
+                Console.WriteLine("נכנס לif הראשון");
+                return parsed;
+            }
+
+            // אם לא הצלחנו – ננסה להוציא את התאריך מתוך שם הקובץ
+            var dateFromFileName = ExtractDateFromFileName(fileName);
+            if (dateFromFileName != DateTime.MinValue)
+            {
+                Console.WriteLine("נכנס לif השני");
+                return dateFromFileName;
+            }
+            // אם גם זה לא הצליח – נחזיר תאריך ישן כדי לא לפספס עדכונים
+            return DateTime.MinValue;
+        }
+        private DateTime ExtractDateFromFileName(string fileName)
+        {
+            Console.WriteLine("נכנס");
+            if (string.IsNullOrEmpty(fileName))
+                return DateTime.MinValue;
+
+            // Regex שמחפש רצף של 8 ספרות שמתחיל ב-20, לא מחובר למספרים אחרים
+            var match = System.Text.RegularExpressions.Regex.Match(fileName, @"(?<!\d)(20\d{6})(?!\d)");
+            if (match.Success)
+            {
+                var candidate = match.Value;
+
+                // בדיקה בסיסית שהחודש והיום הגיוניים
+                int year = int.Parse(candidate.Substring(0, 4));
+                int month = int.Parse(candidate.Substring(4, 2));
+                int day = int.Parse(candidate.Substring(6, 2));
+
+                if (month >= 1 && month <= 12 && day >= 1 && day <= 31)
+                {
+                    if (DateTime.TryParseExact(candidate, "yyyyMMdd", null,
+                                               System.Globalization.DateTimeStyles.None, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+            }
+
+            return DateTime.MinValue;
+        }
+
 
         private string ExtractTimeFromFileName(string fileName)
         {

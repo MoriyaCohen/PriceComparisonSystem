@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -7,7 +8,6 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
-using PriceComparison.Download.New.MVP;
 using PriceComparison.Download.New.Storage;
 
 namespace PriceComparison.Download.New.Shufersal
@@ -85,79 +85,22 @@ namespace PriceComparison.Download.New.Shufersal
                 Console.WriteLine($"🛒 מתחיל הורדת רשת שופרסל...");
                 Console.WriteLine($"🎯 מטרה: קבצים עדכניים מ-HTML parsing עם pagination");
 
-                // יצירת תיקיית רשת
                 var chainDir = Path.Combine(BaseDownloadPath, "Shufersal");
                 Directory.CreateDirectory(chainDir);
 
-                // קבלת כל הקבצים הזמינים מכל העמודים
-                var availableFiles = await GetAllAvailableFiles();
-
-                if (!availableFiles.Any())
-                {
-                    Console.WriteLine($"      ❌ לא נמצאו קבצים זמינים למרות מספר ניסיונות");
-                    return 0;
-                }
-
-                Console.WriteLine($"      ✅ נמצאו {availableFiles.Count} קבצים זמינים מכל העמודים");
-
-                // ניתוח הקבצים
-                AnalyzeAvailableFiles(availableFiles);
-
                 int totalDownloaded = 0;
+                int page = 1;
 
-                // שלב 1: הורדת קבצי Stores
-                totalDownloaded += await DownloadStoresFiles(availableFiles, chainDir);
-
-                // שלב 2: זיהוי סניפים
-                var stores = GetUniqueStores(availableFiles);
-                Console.WriteLine($"      📍 זוהו {stores.Count} סניפים");
-
-                if (stores.Any())
-                {
-                    // שלב 3: הורדת קבצי מחירים
-                    totalDownloaded += await DownloadPriceFiles(availableFiles, stores, chainDir);
-
-                    // שלב 4: הורדת קבצי מבצעים
-                    totalDownloaded += await DownloadPromoFiles(availableFiles, stores, chainDir);
-                }
-
-                Console.WriteLine($"      ✅ {ChainName}: הורדה הושלמה בהצלחה - {totalDownloaded} קבצים");
-
-                return totalDownloaded;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"      ❌ שגיאה כללית ב{ChainName}: {ex.Message}");
-                return 0;
-            }
-        }
-
-        /// <summary>
-        /// קבלת רשימת קבצים זמינים על ידי parsing HTML עם תמיכה ב-pagination
-        /// </summary>
-        private async Task<List<ShuferSalFileInfo>> GetAllAvailableFiles()
-        {
-            try
-            {
-                Console.WriteLine($"      🌐 מתחבר לשופרסל עם תמיכה ב-pagination: {SHUFERSAL_BASE_URL}");
-
-                var allFiles = new List<ShuferSalFileInfo>();
-
-                // קריאה לכל העמודים
-                for (int page = 1; page <= 90; page++) // שופרסל יכול להיות עד 86 עמודים
+                while (true)
                 {
                     Console.WriteLine($"      📄 קורא עמוד {page}...");
-
-                    // עיכוב קל למניעת זיהוי בוט
-                    await Task.Delay(_random.Next(1000, 3000));
-
                     var pageUrl = page == 1 ? SHUFERSAL_BASE_URL : $"{SHUFERSAL_BASE_URL}?page={page}";
                     var response = await _httpClient.GetAsync(pageUrl);
 
                     if (!response.IsSuccessStatusCode)
                     {
                         Console.WriteLine($"      ❌ שגיאת HTTP בעמוד {page}: {response.StatusCode}");
-                        break; // יוצאים מהלולאה אם העמוד לא קיים
+                        break;
                     }
 
                     var htmlContent = await response.Content.ReadAsStringAsync();
@@ -168,42 +111,128 @@ namespace PriceComparison.Download.New.Shufersal
                         break;
                     }
 
-                    // בדיקה אם יש תוכן בעמוד
                     var pageFiles = ParseShuferSalHtml(htmlContent);
 
-                    if (pageFiles.Count == 0)
+                    if (!pageFiles.Any())
                     {
-                        Console.WriteLine($"      ✅ הגענו לסוף העמודים (עמוד {page} ריק)");
+                        Console.WriteLine($"      ✅ עמוד {page} ריק — אין יותר קבצים.");
                         break;
                     }
 
                     Console.WriteLine($"      📄 עמוד {page}: נמצאו {pageFiles.Count} קבצים");
-                    allFiles.AddRange(pageFiles);
+
+                    // ניתוח הקבצים מהעמוד הנוכחי
+                    AnalyzeAvailableFiles(pageFiles);
+
+                    // הורדת Stores
+                    totalDownloaded += await DownloadStoresFiles(pageFiles, chainDir);
+
+                    // זיהוי סניפים
+                    var stores = GetUniqueStores(pageFiles);
+
+                    if (stores.Any())
+                    {
+                        // הורדת Price
+                        totalDownloaded += await DownloadPriceFiles(pageFiles, stores, chainDir);
+
+                        // הורדת Promo
+                        totalDownloaded += await DownloadPromoFiles(pageFiles, stores, chainDir);
+                    }
 
                     // בדיקה אם יש עמוד הבא
                     if (!HasNextPage(htmlContent))
                     {
-                        Console.WriteLine($"      ✅ זה העמוד האחרון (עמוד {page})");
+                        Console.WriteLine($"      ✅ הגענו לעמוד האחרון ({page})");
                         break;
                     }
+
+                    page++;
                 }
 
-                Console.WriteLine($"      ✅ סה\"כ נמצאו {allFiles.Count} קבצים זמינים מכל העמודים");
-
-                // המרה לפורמט המוכר של המערכת וסינון לקבצים עדכניים
-                var convertedFiles = ConvertToStandardFormat(allFiles);
-
-                Console.WriteLine($"      🔍 לאחר המרה וסינון: {convertedFiles.Count} קבצים רלוונטיים");
-
-                return convertedFiles;
+                Console.WriteLine($"      ✅ {ChainName}: הורדה הושלמה בהצלחה - {totalDownloaded} קבצים");
+                return totalDownloaded;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"      💥 שגיאה בקבלת קבצים: {ex.Message}");
-                Console.WriteLine($"      💥 פרטי שגיאה: {ex.StackTrace}");
-                return new List<ShuferSalFileInfo>();
+                Console.WriteLine($"      ❌ שגיאה כללית ב{ChainName}: {ex.Message}");
+                return 0;
             }
         }
+
+
+        /// <summary>
+        /// קבלת רשימת קבצים זמינים על ידי parsing HTML עם תמיכה ב-pagination
+        /// </summary>
+        //private async Task<List<ShuferSalFileInfo>> GetAllAvailableFiles()
+        //{
+        //    try
+        //    {
+        //        Console.WriteLine($"      🌐 מתחבר לשופרסל עם תמיכה ב-pagination: {SHUFERSAL_BASE_URL}");
+
+        //        var allFiles = new List<ShuferSalFileInfo>();
+        //        int page = 1;
+
+        //        while (true)
+        //        {
+        //            Console.WriteLine($"      📄 קורא עמוד {page}...");
+
+        //            // עיכוב קל למניעת זיהוי בוט
+        //            //await Task.Delay(_random.Next(200, 500));
+
+        //            var pageUrl = page == 1 ? SHUFERSAL_BASE_URL : $"{SHUFERSAL_BASE_URL}?page={page}";
+        //            var response = await _httpClient.GetAsync(pageUrl);
+
+        //            if (!response.IsSuccessStatusCode)
+        //            {
+        //                Console.WriteLine($"      ❌ שגיאת HTTP בעמוד {page}: {response.StatusCode}");
+        //                break; // אין טעם להמשיך אם השרת לא מחזיר תקין
+        //            }
+
+        //            var htmlContent = await response.Content.ReadAsStringAsync();
+
+        //            if (string.IsNullOrWhiteSpace(htmlContent))
+        //            {
+        //                Console.WriteLine($"      ⚠️ תגובה ריקה מהשרת בעמוד {page}");
+        //                break;
+        //            }
+
+        //            var pageFiles = ParseShuferSalHtml(htmlContent);
+
+        //            if (pageFiles.Count == 0)
+        //            {
+        //                Console.WriteLine($"      ✅ עמוד {page} ריק — אין יותר קבצים.");
+        //                break;
+        //            }
+
+        //            Console.WriteLine($"      📄 עמוד {page}: נמצאו {pageFiles.Count} קבצים");
+        //            allFiles.AddRange(pageFiles);
+
+        //            // בדיקה אם יש עמוד הבא
+        //            if (!HasNextPage(htmlContent))
+        //            {
+        //                Console.WriteLine($"      ✅ הגענו לעמוד האחרון ({page})");
+        //                break;
+        //            }
+
+        //            page++;
+        //        }
+
+        //        Console.WriteLine($"      ✅ סה\"כ נמצאו {allFiles.Count} קבצים זמינים מכל העמודים");
+
+        //        var convertedFiles = ConvertToStandardFormat(allFiles);
+
+        //        Console.WriteLine($"      🔍 לאחר המרה וסינון: {convertedFiles.Count} קבצים רלוונטיים");
+
+        //        return convertedFiles;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"      💥 שגיאה בקבלת קבצים: {ex.Message}");
+        //        Console.WriteLine($"      💥 פרטי שגיאה: {ex.StackTrace}");
+        //        return new List<ShuferSalFileInfo>();
+        //    }
+        //}
+
 
         /// <summary>
         /// בדיקה אם יש עמוד הבא
@@ -212,30 +241,25 @@ namespace PriceComparison.Download.New.Shufersal
         {
             try
             {
-                // חיפוש כפתור "הבא" או pagination
-                var nextPagePatterns = new[]
-                {
-                    @"<a[^>]*data-swhglnk=""true""[^>]*href=""/\?page=(\d+)""[^>]*>&gt;</a>",
-                    @"<a[^>]*href=""/\?page=\d+""[^>]*>.*?(הבא|Next|>).*?</a>",
-                    @"<a[^>]*class=""[^""]*next[^""]*""[^>]*>",
-                    @"href=""/\?page=\d+"""
-                };
+                // ננקה רווחים מיותרים ונמיר לאותיות קטנות
+                var clean = htmlContent.Replace(" ", "").ToLowerInvariant();
 
-                foreach (var pattern in nextPagePatterns)
-                {
-                    if (Regex.IsMatch(htmlContent, pattern, RegexOptions.IgnoreCase))
-                    {
-                        return true;
-                    }
-                }
+                // נחפש אם יש קישור אמיתי לעמוד הבא (כלומר: href עם page=)
+                // אבל נוודא שזה לא "כפתור מושבת" (ללא href או עם class=disabled)
+                var hasActiveNextLink = Regex.IsMatch(
+                    clean,
+                    @"<a[^>]+href=.*?page=\d+[^>]*>(?:&gt;|>)<\/a>",
+                    RegexOptions.IgnoreCase
+                );
 
-                return false;
+                return hasActiveNextLink;
             }
             catch
             {
-                return false; // במקרה של ספק, נפסיק
+                return false;
             }
         }
+
 
         /// <summary>
         /// פרסור HTML של שופרסל לחילוץ נתוני הקבצים - גרסה משופרת
@@ -250,9 +274,9 @@ namespace PriceComparison.Download.New.Shufersal
                 files.AddRange(ParseWebGridTable(htmlContent));
 
                 // הסרת כפילויות לפי שם קובץ
-                files = files.GroupBy(f => f.FileName)
-                            .Select(g => g.OrderByDescending(x => ParseUpdateTimeForSorting(x.UpdateTime)).First())
-                            .ToList();
+                //files = files.GroupBy(f => f.FileName)
+                //            .Select(g => g.OrderByDescending(x => ParseUpdateTimeForSorting(x.UpdateTime)).First())
+                //            .ToList();
             }
             catch (Exception ex)
             {
@@ -280,13 +304,26 @@ namespace PriceComparison.Download.New.Shufersal
                     var rowHtml = row.Groups[1].Value;
 
                     // חילוץ תאים מהשורה
-                    var cellPattern = @"<td[^>]*>(.*?)</td>";
+                    //var cellPattern = @"<td[^>]*>(.*?)</td>";
+                    //var cells = Regex.Matches(rowHtml, cellPattern, RegexOptions.Singleline | RegexOptions.IgnoreCase);
+
+                    //if (cells.Count >= 7) // לפחות 7 עמודות כפי שראינו ב-HTML
+                    //{
+                    //    // מיפוי העמודות לפי הטבלה שראינו:
+                    //    // הורדה, זמן עידכון, גודל, סוג קובץ, קטגוריה, סניף, שם
+                    //    var downloadCell = cells[0].Groups[1].Value;
+                    //    var updateTimeCell = cells[1].Groups[1].Value;
+                    //    var sizeCell = cells[2].Groups[1].Value;
+                    //    var fileTypeCell = cells[3].Groups[1].Value;
+                    //    var categoryCell = cells[4].Groups[1].Value;
+                    //    var branchCell = cells[5].Groups[1].Value;
+                    //    var nameCell = cells[6].Groups[1].Value;
+
+                    var cellPattern = @"<td[^>]*>\s*(.*?)\s*</td>";
                     var cells = Regex.Matches(rowHtml, cellPattern, RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
-                    if (cells.Count >= 7) // לפחות 7 עמודות כפי שראינו ב-HTML
+                    if (cells.Count >= 7)
                     {
-                        // מיפוי העמודות לפי הטבלה שראינו:
-                        // הורדה, זמן עידכון, גודל, סוג קובץ, קטגוריה, סניף, שם
                         var downloadCell = cells[0].Groups[1].Value;
                         var updateTimeCell = cells[1].Groups[1].Value;
                         var sizeCell = cells[2].Groups[1].Value;
@@ -294,9 +331,11 @@ namespace PriceComparison.Download.New.Shufersal
                         var categoryCell = cells[4].Groups[1].Value;
                         var branchCell = cells[5].Groups[1].Value;
                         var nameCell = cells[6].Groups[1].Value;
+                   
 
-                        // חילוץ נתונים
-                        var downloadUrl = ExtractDownloadUrl(downloadCell);
+
+                    // חילוץ נתונים
+                    var downloadUrl = ExtractDownloadUrl(downloadCell);
                         var fileName = CleanHtmlText(nameCell);
                         var updateTime = CleanHtmlText(updateTimeCell);
                         var size = CleanHtmlText(sizeCell);
@@ -405,10 +444,6 @@ namespace PriceComparison.Download.New.Shufersal
 
             Console.WriteLine($"      🔍 בודק {shuferSalFiles.Count} קבצים לתאריך היום: {today:dd/MM/yyyy}");
 
-            // דיבוג - הצגת כמה דוגמאות של תאריכים
-            var sampleDates = shuferSalFiles.Take(5).Select(f => f.UpdateTime).ToList();
-            Console.WriteLine($"      📅 דוגמאות תאריכים מהשרת: {string.Join(", ", sampleDates)}");
-
             foreach (var file in shuferSalFiles)
             {
                 try
@@ -428,7 +463,10 @@ namespace PriceComparison.Download.New.Shufersal
             Console.WriteLine($"      ✅ אחרי סינון: {result.Count} קבצים מהיום");
 
             // מיון לפי זמן עדכון (העדכניים ראשונים)
-            return result.OrderByDescending(f => ParseUpdateTimeForSorting(f.UpdateTime)).ToList();
+            return result
+.GroupBy(f => new { f.Category, f.BranchName })           // קיבוץ לפי קטגוריה + סניף
+.Select(g => g.OrderByDescending(f => ParseUpdateTimeForSorting(f.UpdateTime)).First())
+.ToList();
         }
 
         /// <summary>
@@ -442,13 +480,12 @@ namespace PriceComparison.Download.New.Shufersal
             try
             {
                 // ניסיון 1: פרסור ישיר
-                if (DateTime.TryParse(updateTimeStr, out var updateTime))
+                if (DateTime.TryParse(updateTimeStr, new System.Globalization.CultureInfo("en-US"),
+                      System.Globalization.DateTimeStyles.None, out var updateTime))
+
                 {
-                    bool isToday = updateTime.Date == today.Date;
-                    if (isToday)
-                    {
-                        Console.WriteLine($"         ✅ קובץ מהיום: {updateTimeStr} -> {updateTime:dd/MM/yyyy}");
-                    }
+                    var nowDate = DateTime.Now.Date;
+                    bool isToday = updateTime.ToLocalTime().Date == nowDate;
                     return isToday;
                 }
 
@@ -545,9 +582,6 @@ namespace PriceComparison.Download.New.Shufersal
                 Console.WriteLine($"         📄 {type.Key}: {type.Value}");
         }
 
-        /// <summary>
-        /// הורדת קבצי Stores
-        /// </summary>
         private async Task<int> DownloadStoresFiles(List<ShuferSalFileInfo> availableFiles, string chainDir)
         {
             Console.WriteLine($"      📋 מחפש קבצי Stores...");
@@ -555,34 +589,36 @@ namespace PriceComparison.Download.New.Shufersal
             // חיפוש קבצי Stores לפי קטגוריה וגם לפי שם
             var storesFiles = availableFiles
                 .Where(f => f.Category.ToLower() == "stores" ||
-                           f.FileName.ToLower().Contains("stores") ||
-                           f.FileName.ToLower().Contains("7290027600007-001"))  // קוד שופרסל הכללי
+                            f.FileName.ToLower().Contains("stores"))
                 .OrderByDescending(f => f.FileName.ToLower().Contains("storesfull") ? 1 : 0)
                 .ThenByDescending(f => ParseUpdateTimeForSorting(f.UpdateTime))
                 .ToList();
 
-            Console.WriteLine($"      🔍 Debug - מחפש Stores בקטגוריות:");
-            var categorySample = availableFiles.Take(10).Select(f => $"{f.FileName}: {f.Category}").ToList();
-            foreach (var sample in categorySample)
-                Console.WriteLine($"         {sample}");
+            //Console.WriteLine($"      🔍 Debug - מחפש Stores בקטגוריות:");
+            //foreach (var sample in availableFiles.Take(10))
+            //    Console.WriteLine($"         {sample.FileName}: {sample.Category}");
 
+            // אם לא נמצאו קבצי Stores רגילים
             if (!storesFiles.Any())
             {
                 Console.WriteLine($"      ⚠️ לא נמצאו קבצי Stores בחיפוש ראשוני");
 
-                // חיפוש חלופי - כל קובץ שלא שייך לסניף ספציפי
+                // חיפוש חלופי - קבצים כלליים שלא משויכים לסניף ספציפי
                 var generalFiles = availableFiles
-                    .Where(f => !Regex.IsMatch(f.FileName, @"-\d{3}-"))  // לא מכיל -XXX- (מספר סניף)
+                    .Where(f => !Regex.IsMatch(f.FileName, @"-\d{3}-")) // לא מכיל -XXX-
                     .ToList();
 
                 Console.WriteLine($"      🔍 חיפוש חלופי - קבצים כלליים: {generalFiles.Count}");
 
                 if (generalFiles.Any())
                 {
-                    var latestGeneral = generalFiles.OrderByDescending(f => ParseUpdateTimeForSorting(f.UpdateTime)).First();
+                    var latestGeneral = generalFiles
+                        .OrderByDescending(f => ParseUpdateTimeForSorting(f.UpdateTime))
+                        .First();
+
                     Console.WriteLine($"      🎯 מוריד קובץ כללי כ-Stores: {latestGeneral.FileName}");
 
-                    var success = await DownloadAndSaveFile(latestGeneral, chainDir, "Stores");
+                    var success = await DownloadAndSaveFileWithRetry(latestGeneral, chainDir, "Stores");
                     return success ? 1 : 0;
                 }
 
@@ -590,10 +626,11 @@ namespace PriceComparison.Download.New.Shufersal
                 return 0;
             }
 
+            // אם נמצאו קבצי Stores — נוריד את העדכני ביותר
             var latestStores = storesFiles.First();
             Console.WriteLine($"      🎯 מוריד: {latestStores.FileName}");
 
-            var storesSuccess = await DownloadAndSaveFile(latestStores, chainDir, "Stores");
+            var storesSuccess = await DownloadAndSaveFileWithRetry(latestStores, chainDir, "Stores");
             return storesSuccess ? 1 : 0;
         }
 
@@ -603,11 +640,9 @@ namespace PriceComparison.Download.New.Shufersal
         private async Task<int> DownloadPriceFiles(List<ShuferSalFileInfo> availableFiles, List<string> stores, string chainDir)
         {
             Console.WriteLine($"      💰 מוריד קבצי Price...");
-
             int downloaded = 0;
-
             // הגבלה ל-5 סניפים לבדיקה
-            var limitedStores = stores.Take(5).ToList();
+            var limitedStores = stores.ToList();
             Console.WriteLine($"      🔍 מגביל ל-{limitedStores.Count} סניפים לבדיקה: {string.Join(", ", limitedStores)}");
 
             foreach (var store in limitedStores)
@@ -619,7 +654,7 @@ namespace PriceComparison.Download.New.Shufersal
                     .OrderByDescending(f => ParseUpdateTimeForSorting(f.UpdateTime))
                     .ToList();
 
-                // חיפוש קבצי Price רגיל
+                //חיפוש קבצי Price רגיל
                 var priceFiles = availableFiles
                     .Where(f => (f.Category.ToLower() == "prices" || f.Category.ToLower() == "price") &&
                                !f.FileName.ToLower().Contains("pricefull") &&
@@ -635,18 +670,18 @@ namespace PriceComparison.Download.New.Shufersal
                     var latestPriceFull = priceFullFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} PriceFull: {latestPriceFull.FileName}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(100, 600));
                     var success = await DownloadAndSaveFileWithRetry(latestPriceFull, chainDir, "PriceFull");
                     if (success) downloaded++;
                 }
 
-                // הורדת Price רגיל אם קיים
+                //הורדת Price רגיל אם קיים
                 if (priceFiles.Any())
                 {
                     var latestPrice = priceFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} Price: {latestPrice.FileName}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(100, 600));
                     var success = await DownloadAndSaveFileWithRetry(latestPrice, chainDir, "Price");
                     if (success) downloaded++;
                 }
@@ -666,7 +701,7 @@ namespace PriceComparison.Download.New.Shufersal
             int downloaded = 0;
 
             // הגבלה ל-5 סניפים לבדיקה
-            var limitedStores = stores.Take(5).ToList();
+            var limitedStores = stores.ToList();
 
             foreach (var store in limitedStores)
             {
@@ -677,7 +712,7 @@ namespace PriceComparison.Download.New.Shufersal
                     .OrderByDescending(f => ParseUpdateTimeForSorting(f.UpdateTime))
                     .ToList();
 
-                // חיפוש קבצי Promo רגיל
+                //חיפוש קבצי Promo רגיל
                 var promoFiles = availableFiles
                     .Where(f => (f.Category.ToLower() == "promos" || f.Category.ToLower() == "promo") &&
                                !f.FileName.ToLower().Contains("promofull") &&
@@ -693,18 +728,18 @@ namespace PriceComparison.Download.New.Shufersal
                     var latestPromoFull = promoFullFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} PromoFull: {latestPromoFull.FileName}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(100, 600));
                     var success = await DownloadAndSaveFileWithRetry(latestPromoFull, chainDir, "PromoFull");
                     if (success) downloaded++;
                 }
 
-                // הורדת Promo רגיל אם קיים
+                //הורדת Promo רגיל אם קיים
                 if (promoFiles.Any())
                 {
                     var latestPromo = promoFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} Promo: {latestPromo.FileName}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(100, 600));
                     var success = await DownloadAndSaveFileWithRetry(latestPromo, chainDir, "Promo");
                     if (success) downloaded++;
                 }
@@ -722,39 +757,211 @@ namespace PriceComparison.Download.New.Shufersal
             return downloaded;
         }
 
-        /// <summary>
-        /// הורדה ושמירת קובץ עם retry mechanism
-        /// </summary>
         private async Task<bool> DownloadAndSaveFileWithRetry(ShuferSalFileInfo fileInfo, string chainDir, string fileType, int maxRetries = 3)
         {
-            for (int attempt = 1; attempt <= maxRetries; attempt++)
+            try
             {
-                try
+                // חילוץ storeId (מ־BranchName אם קיים, אחרת מחלוץ מה־FileName)
+                var storeId = ExtractStoreFromBranch(fileInfo.BranchName);
+                if (string.IsNullOrEmpty(storeId))
                 {
-                    if (attempt > 1)
+                    var m = Regex.Match(fileInfo.FileName ?? "", @"-(\d{1,})-"); // תומך גם ביותר מ-3 ספרות
+                    if (m.Success)
+                        storeId = m.Groups[1].Value;
+                }
+
+                // 🧩 נרמול storeId – אם קצר מ־3 ספרות מוסיף אפסים משמאל
+                if (!string.IsNullOrEmpty(storeId))
+                {
+                    if (storeId.Length < 3)
+                        storeId = storeId.PadLeft(3, '0');
+
+                    Console.WriteLine($"         🏪 storeId לאחר נרמול: {storeId}");
+                }
+
+                var typeDir = Path.Combine(chainDir, fileType);
+                Directory.CreateDirectory(typeDir);
+
+                bool isGeneralFile = (fileInfo.FileName ?? "").IndexOf("Stores", StringComparison.OrdinalIgnoreCase) >= 0;
+
+                // pattern גמיש: יתפוס xml/gz/כל סיומת
+                string searchPattern = isGeneralFile
+                    ? $"{fileType}*.*"
+                    : $"*-{storeId}-*.*";
+
+                Console.WriteLine($"         🔎 מחפש קבצים ב: {typeDir}, pattern: {searchPattern}");
+
+                var existingFiles = Directory.GetFiles(typeDir, searchPattern).ToList();
+                Console.WriteLine($"         🔎 נמצאו {existingFiles.Count} קבצים תואמים");
+
+                var newDate = ParseUpdateTimeForSorting("", fileInfo.FileName ?? "");
+                Console.WriteLine($"         🔎 newDate = {(newDate == DateTime.MinValue ? "MinValue" : newDate.ToString("yyyy-MM-dd HH:mm"))}");
+
+                if (existingFiles.Any())
+                {
+                    if (newDate == DateTime.MinValue)
                     {
-                        Console.WriteLine($"         🔄 ניסיון {attempt}/{maxRetries}: {fileInfo.FileName}");
-                        await Task.Delay(_random.Next(2000, 5000)); // עיכוב מוגדל בין ניסיונות
+                        Console.WriteLine($"         🌐 תאריך הקובץ מהאתר (newDate): {(newDate == DateTime.MinValue ? "לא זוהה" : newDate.ToString("yyyy-MM-dd HH:mm"))}");
+                        return false;
                     }
 
-                    var success = await DownloadAndSaveFile(fileInfo, chainDir, fileType);
-                    if (success)
+                    bool shouldDownload = false;
+                    foreach (var ef in existingFiles)
                     {
-                        return true;
+                        var existingDate = ExtractDateFromFileName(ef);
+                        Console.WriteLine($"             מצא קיים: {Path.GetFileName(ef)} -> existingDate = {(existingDate == DateTime.MinValue ? "MinValue" : existingDate.ToString("yyyy-MM-dd HH:mm"))}");
+
+                        if (existingDate == DateTime.MinValue)
+                        {
+                            Console.WriteLine("             ⚠️ existingDate לא זוהה — נמשיך לבדוק את הקבצים האחרים.");
+                            continue;
+                        }
+
+                        if (newDate > existingDate)
+                        {
+                            Console.WriteLine($"             ✅ newDate ({newDate:yyyy-MM-dd HH:mm}) חדש יותר מ-existingDate ({existingDate:yyyy-MM-dd HH:mm})");
+                            shouldDownload = true;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"             ⏭️ newDate ({newDate:yyyy-MM-dd HH:mm}) אינו חדש יותר מ-existingDate ({existingDate:yyyy-MM-dd HH:mm}) — דילג.");
+                        }
+                    }
+
+                    if (!existingFiles.Any() || !existingFiles.Any(f => ExtractDateFromFileName(f) != DateTime.MinValue))
+                    {
+                        Console.WriteLine("             ⚠️ לא נמצאו תאריכים תקינים בקבצים — נוריד מחדש.");
+                        shouldDownload = true;
+                    }
+
+                    if (!shouldDownload)
+                        return false;
+                }
+
+                // הורדה עם retry
+                for (int attempt = 1; attempt <= maxRetries; attempt++)
+                {
+                    try
+                    {
+                        if (attempt > 1)
+                        {
+                            Console.WriteLine($"         🔄 ניסיון {attempt}/{maxRetries}: {fileInfo.FileName}");
+                            await Task.Delay(_random.Next(100, 600));
+                        }
+
+                        var success = await DownloadAndSaveFile(fileInfo, chainDir, fileType);
+                        if (success)
+                        {
+                            Console.WriteLine($"         ✅ הורדה הושלמה ונשמרה: {fileInfo.FileName}");
+                            foreach (var ef in existingFiles)
+                            {
+                                try
+                                {
+                                    Console.WriteLine($"             🔁 מוחק ישן: {Path.GetFileName(ef)}");
+                                    File.Delete(ef);
+                                }
+                                catch (Exception exDel)
+                                {
+                                    Console.WriteLine($"             ⚠️ שגיאה במחיקה של {Path.GetFileName(ef)}: {exDel.Message}");
+                                }
+                            }
+                            return true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"         ⚠️ ניסיון {attempt} נכשל: {ex.Message}");
+                        if (attempt == maxRetries)
+                            Console.WriteLine($"         ❌ נכשל לאחר {maxRetries} ניסיונות: {fileInfo.FileName}");
                     }
                 }
-                catch (Exception ex)
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"         ❌ שגיאה ב־DownloadAndSaveFileWithRetry: {ex.Message}");
+                return false;
+            }
+        }
+
+
+        private DateTime ParseUpdateTimeForSorting(string updateTime, string fileName)
+        {
+            // ננסה קודם כל לקרוא מה־updateTime (אם הוא במבנה תקין)
+            if (!string.IsNullOrEmpty(updateTime) &&
+                DateTime.TryParseExact(updateTime, "yyyyMMddHHmm", null,
+                    System.Globalization.DateTimeStyles.None, out var parsed))
+            {
+                return parsed;
+            }
+
+            // אם לא הצלחנו – ננסה להוציא את התאריך מתוך שם הקובץ
+            var dateFromFileName = ExtractDateFromFileName(fileName);
+            if (dateFromFileName != DateTime.MinValue)
+                return dateFromFileName;
+
+            // אם גם זה לא הצליח – נחזיר תאריך ישן כדי לא לפספס עדכונים
+            return DateTime.MinValue;
+        }
+
+        private DateTime ExtractDateFromFileName(string fileName)
+        {
+            try
+            {
+                // חילוץ החלק האחרון אחרי '-' האחרון
+                var parts = fileName.Split('-');
+                if (parts.Length >= 3)
                 {
-                    Console.WriteLine($"         ⚠️ ניסיון {attempt} נכשל: {ex.Message}");
-                    if (attempt == maxRetries)
+                    var dateStr = parts[parts.Length - 1].Replace(".gz", "").Replace(".xml", "");
+
+                    if (DateTime.TryParseExact(dateStr, "yyyyMMddHHmm", null,
+                        System.Globalization.DateTimeStyles.None, out var dt))
                     {
-                        Console.WriteLine($"         ❌ נכשל לאחר {maxRetries} ניסיונות: {fileInfo.FileName}");
+                        return dt;
                     }
                 }
             }
+            catch
+            {
+                // במקרה של שגיאה נחזיר MinValue
+            }
 
-            return false;
+            return DateTime.MinValue;
         }
+
+        //private DateTime ExtractDateFromFileName(string fileName)
+        //{
+        //    // מחפש את ה־12 ספרות האחרונות (yyyyMMddHHmm)
+        //    var match = Regex.Match(fileName, @"(\d{12})(?:\.\w+)?$");
+        //    if (match.Success && DateTime.TryParseExact(
+        //        match.Value,
+        //        "yyyyMMddHHmm",
+        //        null,
+        //        System.Globalization.DateTimeStyles.None,
+        //        out var dt))
+        //    {
+        //        Console.WriteLine("נכנס");
+        //        return dt;
+        //    }
+
+        //    try
+        //    {
+        //        if (File.Exists(fileName))
+        //            return File.GetLastWriteTime(fileName);
+        //    }
+        //    catch
+        //    {
+        //        // אם יש בעיה בגישה לקובץ, נחזיר ערך ישן
+        //    }
+
+        //    return DateTime.MinValue;
+        //}
+
+
+
+
 
         /// <summary>
         /// הורדה ושמירת קובץ - גרסה מיוחדת לשופרסל
@@ -802,7 +1009,9 @@ namespace PriceComparison.Download.New.Shufersal
             try
             {
                 int savedCount = 0;
+                string baseName = Path.GetFileNameWithoutExtension(fileInfo.FileName);  // שם בסיסי לכל הקבצים
 
+                // --- טיפול בקובץ ZIP ---
                 if (IsZipFile(fileBytes))
                 {
                     using var zipStream = new MemoryStream(fileBytes);
@@ -810,37 +1019,44 @@ namespace PriceComparison.Download.New.Shufersal
 
                     foreach (var entry in archive.Entries)
                     {
-                        if (!string.IsNullOrEmpty(entry.Name) && entry.Name.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                        if (!string.IsNullOrEmpty(entry.Name) &&
+                            entry.Name.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
                         {
-                            var xmlPath = Path.Combine(typeDir, entry.Name);
+                            string xmlName = baseName + ".xml";   // תמיד שמור בשם XML
+                            string xmlPath = Path.Combine(typeDir, xmlName);
+
                             entry.ExtractToFile(xmlPath, true);
                             savedCount++;
                         }
                     }
+
+                    return savedCount;
                 }
-                else if (IsGzFile(fileBytes))
+
+                // --- טיפול בקובץ GZ ---
+                if (IsGzFile(fileBytes))
                 {
                     using var gzStream = new MemoryStream(fileBytes);
                     using var decompressionStream = new GZipStream(gzStream, CompressionMode.Decompress);
                     using var reader = new StreamReader(decompressionStream);
 
-                    var xmlContent = await reader.ReadToEndAsync();
-                    var xmlFileName = fileInfo.FileName.Replace(".gz", ".xml");
-                    var xmlPath = Path.Combine(typeDir, xmlFileName);
+                    string xmlContent = await reader.ReadToEndAsync();
+
+                    string xmlName = baseName + ".xml";
+                    string xmlPath = Path.Combine(typeDir, xmlName);
 
                     await File.WriteAllTextAsync(xmlPath, xmlContent);
-                    savedCount = 1;
+                    return 1;
                 }
-                else
+
+                // --- טיפול בקובץ רגיל (לא ZIP ולא GZ) ---
                 {
-                    var xmlFileName = fileInfo.FileName.EndsWith(".xml") ? fileInfo.FileName : fileInfo.FileName + ".xml";
-                    var xmlPath = Path.Combine(typeDir, xmlFileName);
+                    string xmlName = baseName + ".xml";
+                    string xmlPath = Path.Combine(typeDir, xmlName);
 
                     await File.WriteAllBytesAsync(xmlPath, fileBytes);
-                    savedCount = 1;
+                    return 1;
                 }
-
-                return savedCount;
             }
             catch (Exception ex)
             {
@@ -848,6 +1064,7 @@ namespace PriceComparison.Download.New.Shufersal
                 return 0;
             }
         }
+
 
         // ========== פונקציות עזר ==========
 
@@ -858,8 +1075,10 @@ namespace PriceComparison.Download.New.Shufersal
                 .Select(f => ExtractStoreFromBranch(f.BranchName))
                 .Where(s => !string.IsNullOrEmpty(s))
                 .Distinct()
-                .OrderBy(s => s)
+                .OrderBy(s => int.Parse(s))
                 .ToList();
+
+         
         }
 
         private string DetermineFileType(string fileName, string category)

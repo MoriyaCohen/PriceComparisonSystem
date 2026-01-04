@@ -14,6 +14,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -76,14 +77,33 @@ namespace PriceComparison.Download.New.PublishedPrices
         public string Size { get; set; } = "";
         public DateTime ParsedDate { get; set; }
     }
+    public class JsonFileItem
+    {
+        public string DT_RowId { get; set; } = "";
+        public string fname { get; set; } = "";
+        public string ftime { get; set; } = "";
+        public string name { get; set; } = "";
+        public JsonElement size { get; set; }
+        public string time { get; set; } = "";
+        public string type { get; set; } = "";
+        public string value { get; set; } = "";
+    }
+
+    public class JsonRoot
+    {
+        public List<JsonFileItem> aaData { get; set; } = new();
+        public string iTotalDisplayRecords { get; set; } = "0";
+        public string iTotalRecords { get; set; } = "0";
+        public int sEcho { get; set; }
+    }
 
     // ========== מחלקת בסיס מתקדמת נגד חסימות ==========
 
     public abstract class PublishedPricesDownloaderBase : IDisposable
     {
         protected readonly HttpClient _httpClient;
-        protected const string BaseDownloadPath = "Downloads\\PublishedPrices";
-
+        protected const string BaseDownloadPath = "Downloads\\";
+        
         // ✅ משתנים לניהול אנטי-בוט מתקדם
         private static readonly SemaphoreSlim _downloadSemaphore = new(2, 2);
         private static int _requestCounter = 0;
@@ -102,6 +122,7 @@ namespace PriceComparison.Download.New.PublishedPrices
 
         public abstract string ChainName { get; protected set; }
         public abstract string ChainId { get; protected set; }
+
         public abstract PublishedPricesType SiteType { get; }
 
         protected PublishedPricesDownloaderBase()
@@ -143,44 +164,44 @@ namespace PriceComparison.Download.New.PublishedPrices
         // ✅ עיכוב מתקדם נגד זיהוי בוט
         protected async Task AdvancedAntiDetectionDelay(string context = "", int baseMinMs = 2000, int baseMaxMs = 5000)
         {
-            await _downloadSemaphore.WaitAsync();
+            //await _downloadSemaphore.WaitAsync();
 
-            try
-            {
-                var requestCount = Interlocked.Increment(ref _requestCounter);
-                var timeSinceLastRequest = DateTime.Now - _lastRequestTime;
+            //try
+            //{
+            //    var requestCount = Interlocked.Increment(ref _requestCounter);
+            //    var timeSinceLastRequest = DateTime.Now - _lastRequestTime;
 
-                var multiplier = 1.0;
-                if (timeSinceLastRequest.TotalSeconds < 2)
-                {
-                    multiplier = 2.0;
-                }
+            //    var multiplier = 1.0;
+            //    if (timeSinceLastRequest.TotalSeconds < 2)
+            //    {
+            //        multiplier = 2.0;
+            //    }
 
-                if (requestCount % 10 == 0)
-                {
-                    multiplier = 3.0;
-                }
+            //    if (requestCount % 10 == 0)
+            //    {
+            //        multiplier = 3.0;
+            //    }
 
-                var minMs = (int)(baseMinMs * multiplier);
-                var maxMs = (int)(baseMaxMs * multiplier);
-                var delayMs = _random.Next(minMs, maxMs);
-                var noise = _random.Next(-300, 300);
-                delayMs = Math.Max(1000, delayMs + noise);
+            //    var minMs = (int)(baseMinMs * multiplier);
+            //    var maxMs = (int)(baseMaxMs * multiplier);
+            //    var delayMs = _random.Next(minMs, maxMs);
+            //    var noise = _random.Next(-300, 300);
+            //    delayMs = Math.Max(1000, delayMs + noise);
 
-                Console.WriteLine($"      ⏳ {context} - ממתין {delayMs / 1000:F1} שניות (בקשה #{requestCount})...");
+            //    Console.WriteLine($"      ⏳ {context} - ממתין {delayMs / 1000:F1} שניות (בקשה #{requestCount})...");
 
-                await Task.Delay(delayMs);
-                _lastRequestTime = DateTime.Now;
-            }
-            finally
-            {
-                _downloadSemaphore.Release();
-            }
+            //    await Task.Delay(delayMs);
+            //    _lastRequestTime = DateTime.Now;
+            //}
+            //finally
+            //{
+            //    _downloadSemaphore.Release();
+            //}
         }
 
         // ========== שיטות מופשטות ==========
-        public abstract Task<bool> LoginAsync(PublishedPricesChain config);
-        public abstract Task<List<FileEntry>> GetFileListAsync(PublishedPricesChain config);
+        public abstract Task<string> LoginAsync(PublishedPricesChain config);
+        public abstract Task<List<FileEntry>> GetFileListAsync(PublishedPricesChain config,string html);
         public abstract Task<bool> DownloadFileAsync(FileEntry file, string localPath);
 
         // ========== הורדה ראשית ==========
@@ -213,7 +234,7 @@ namespace PriceComparison.Download.New.PublishedPrices
                 await AdvancedAntiDetectionDelay("לפני התחברות");
 
                 var loginSuccess = await LoginAsync(config);
-                if (!loginSuccess)
+                if (loginSuccess=="")
                 {
                     result.ErrorMessage = "כישלון בהתחברות לאתר";
                     Console.WriteLine($"      ❌ כישלון בהתחברות");
@@ -227,7 +248,7 @@ namespace PriceComparison.Download.New.PublishedPrices
                 Console.WriteLine($"      📋 מקבל רשימת קבצים...");
                 await AdvancedAntiDetectionDelay("לפני קבלת רשימת קבצים");
 
-                var fileList = await GetFileListAsync(config);
+                var fileList = await GetFileListAsync(config,loginSuccess);
                 if (!fileList.Any())
                 {
                     result.ErrorMessage = "לא נמצאו קבצים זמינים";
@@ -249,21 +270,55 @@ namespace PriceComparison.Download.New.PublishedPrices
                 {
                     Console.WriteLine($"         📥 מוריד: {file.Name}");
 
-                    await AdvancedAntiDetectionDelay($"לפני הורדת {file.Name}");
 
-                    var fileName = SanitizeFileName(file.Name);
-                    var localPath = Path.Combine(chainDir, GetFileTypeFolder(file.Type), fileName);
-                    var directory = Path.GetDirectoryName(localPath);
-                    if (!string.IsNullOrEmpty(directory))
-                        Directory.CreateDirectory(directory);
+                    var originalFileName = SanitizeFileName(file.Name);
 
+                    // תמיד עובדים עם XML
+                    var xmlFileName = Path.ChangeExtension(originalFileName, ".xml");
+
+                    // תיקיית סוג הקובץ
+                    var folderPath = Path.Combine(
+                        chainDir,
+                        GetFileTypeFolder(xmlFileName, file.Type)
+                    );
+                    Directory.CreateDirectory(folderPath);
+
+                    // נתיב סופי
+                    var localPath = Path.Combine(folderPath, xmlFileName);
+
+                    // זיהוי סניף
+                    var branch = ExtractBranchFromFileName(file.Name);
+
+                    // חיפוש קובץ קיים לאותו סניף
+                    var existingFilePath = FindExistingFileForBranch(folderPath,branch, file.Type);
+                    Console.WriteLine(existingFilePath!=null);
+                    // אם קיים קובץ – בדיקת תאריך
+                    if (existingFilePath != null)
+                    {
+                        var existingFileName = Path.GetFileName(existingFilePath);
+                        var existingDate = ExtractDateFromFileName(existingFileName);
+                        var existingDateNew = ExtractDateFromFileName(file.Name);
+                        Console.WriteLine(existingDate + " "+existingDateNew);
+                        if (existingDate >= existingDateNew)
+                        {
+                            Console.WriteLine("         ⏭️ קובץ קיים עדכני יותר – מדלג");
+                            continue;
+                        }
+
+                        Console.WriteLine("         🔄 נמצא קובץ ישן – יוחלף");
+                    }
+
+                    // הורדה בפועל
                     var downloadSuccess = await DownloadFileAsync(file, localPath);
+
                     if (downloadSuccess)
                     {
-                        result.DownloadedFiles++;
-                        result.SampleFiles.Add(fileName);
+                        // מחיקת הקובץ הישן – רק אחרי הצלחה
+                       
 
-                        // ספירת סוגי קבצים
+                        result.DownloadedFiles++;
+                        result.SampleFiles.Add(xmlFileName);
+
                         if (file.Type.Contains("Store"))
                             result.StoresFiles++;
                         else if (file.Type.Contains("Price"))
@@ -271,12 +326,26 @@ namespace PriceComparison.Download.New.PublishedPrices
                         else if (file.Type.Contains("Promo"))
                             result.PromoFiles++;
 
-                        Console.WriteLine($"         ✅ הורד בהצלחה");
+                        Console.WriteLine("         ✅ הורד בהצלחה");
+                        if (existingFilePath != null)
+                        {
+                            try
+                            {
+                                File.Delete(existingFilePath);
+                                Console.WriteLine("         🗑️ הקובץ הישן נמחק");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"         ⚠️ שגיאה במחיקת קובץ ישן: {ex.Message}");
+                            }
+                        }
                     }
                     else
                     {
-                        Console.WriteLine($"         ❌ כישלון בהורדה");
+                        Console.WriteLine("         ❌ כישלון בהורדה");
                     }
+
+                  
                 }
 
                 // סיכום
@@ -296,18 +365,100 @@ namespace PriceComparison.Download.New.PublishedPrices
                 return result;
             }
         }
+        protected string? FindExistingFileForBranch(string folderPath, string branchCode, string fileType)
+        {
+            if (!Directory.Exists(folderPath))
+                return null;
+
+            var existingFiles = Directory.GetFiles(folderPath, "*.xml");
+
+            var existingFile = existingFiles.FirstOrDefault(f =>
+            {
+                var name = Path.GetFileName(f);
+
+                // בודק סוג הקובץ
+                if (!name.Contains(fileType, StringComparison.OrdinalIgnoreCase))
+                    return false;
+
+                // מחלץ את הסניף מתוך שם הקובץ ומשווה
+                var fileBranch = ExtractBranchFromFileName(name);
+                return fileBranch == branchCode;
+            });
+
+            return existingFile;
+        }
+
+
+        protected DateTime ExtractDateFromFileName(string fileName)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(fileName))
+                    return DateTime.MinValue;
+
+                string nameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+
+                // ---- 1) פורמט: 12 ספרות רצופות בסוף (yyyyMMddHHmm) ----
+                var matchShort = Regex.Match(nameWithoutExt, @"(\d{12})$");
+                if (matchShort.Success)
+                {
+                    if (DateTime.TryParseExact(matchShort.Value, "yyyyMMddHHmm",
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dtShort))
+                    {
+                        return dtShort;
+                    }
+                }
+
+                // ---- 2) פורמט: yyyyMMdd-HHmmss ----
+                var matchLong = Regex.Match(nameWithoutExt, @"(\d{8})-(\d{6})$");
+                if (matchLong.Success)
+                {
+                    string combined = matchLong.Groups[1].Value + matchLong.Groups[2].Value.Substring(0, 4); // yyyyMMddHHmm
+                    if (DateTime.TryParseExact(combined, "yyyyMMddHHmm",
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dtLong))
+                    {
+                        return dtLong;
+                    }
+                }
+
+                // ---- fallback: תאריך בלבד ----
+                var matchDateOnly = Regex.Match(nameWithoutExt, @"(\d{8})$");
+                if (matchDateOnly.Success)
+                {
+                    string fallback = matchDateOnly.Value + "0000"; // משלים שעה 00:00
+                    if (DateTime.TryParseExact(fallback, "yyyyMMddHHmm",
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dtFallback))
+                    {
+                        return dtFallback;
+                    }
+                }
+
+                return DateTime.MinValue;
+            }
+            catch
+            {
+                return DateTime.MinValue;
+            }
+        }
 
         // ========== פונקציות עזר ==========
 
         protected List<FileEntry> FilterLatestFiles(List<FileEntry> files, DateTime targetDate)
         {
             var result = new List<FileEntry>();
-
+            Console.WriteLine(targetDate);
             // סינון קבצי Stores (העדכני ביותר)
             var storeFiles = files
                 .Where(f => f.Type.Contains("Store"))
-                .Where(f => f.ParsedDate.Date == targetDate)
-                .OrderByDescending(f => f.ParsedDate)
+                  .Where(f =>
+                  {
+                      if (DateTime.TryParseExact(f.Date, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out var fileDate))
+                      {
+                          return fileDate.Date == targetDate.Date; // רק התאריך
+                      }
+                      return false;
+                  })
+                .OrderByDescending(f => f.Date)
                 .Take(1);
             result.AddRange(storeFiles);
 
@@ -325,22 +476,73 @@ namespace PriceComparison.Download.New.PublishedPrices
             foreach (var branch in branches)
             {
                 // קבצי PriceFull
-                var priceFiles = files
-                    .Where(f => f.Type.Contains("Price") && ExtractBranchFromFileName(f.Name) == branch)
-                    .Where(f => f.ParsedDate.Date == targetDate)
-                    .OrderByDescending(f => f.Type.Contains("Full") ? 1 : 0)
-                    .ThenByDescending(f => f.ParsedDate)
+                var priceFullFiles = files
+                    .Where(f => f.Name.Contains("PriceFull") && !f.Name.Contains("NULL") && ExtractBranchFromFileName(f.Name) == branch)
+                      .Where(f =>
+                      {
+                          if (DateTime.TryParseExact(f.Date, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out var fileDate))
+                          {
+                              return fileDate.Date == targetDate.Date; // רק התאריך
+                          }
+                          return false;
+                      })
+                    .OrderByDescending(f => f.Date)
                     .Take(1);
-                result.AddRange(priceFiles);
+                result.AddRange(priceFullFiles);
 
-                // קבצי PromoFull
-                var promoFiles = files
-                    .Where(f => f.Type.Contains("Promo") && ExtractBranchFromFileName(f.Name) == branch)
-                    .Where(f => f.ParsedDate.Date == targetDate)
-                    .OrderByDescending(f => f.Type.Contains("Full") ? 1 : 0)
-                    .ThenByDescending(f => f.ParsedDate)
+                var priceFiles = files 
+                    .Where(f => f.Name.Contains("Price") && !f.Name.Contains("PriceFull") &&  !f.Name.Contains("NULL") 
+                    && ExtractBranchFromFileName(f.Name) == branch)
+                    .Where(f =>
+                    {
+                        if (DateTime.TryParseExact(f.Date, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out var fileDate))
+                        {
+                            return fileDate.Date == targetDate.Date; // רק התאריך
+                        }
+                        return false;
+                    })
+                    .OrderByDescending(f => f.Date)
                     .Take(1);
+                     result.AddRange(priceFiles);
+
+                if(branch=="183")
+                    Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@");
+                // קבצי PromoFull
+                var promoFullFiles = files
+                    .Where(f => f.Name.Contains("PromoFull") && !f.Name.Contains("NULL") && ExtractBranchFromFileName(f.Name) == branch)
+                      .Where(f =>
+                      {
+                          if (DateTime.TryParseExact(f.Date, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out var fileDate))
+                          {
+                              Console.WriteLine("נכנס)()()()()()()()");
+                              return fileDate.Date == targetDate.Date; // רק התאריך
+                          }
+                          return false;
+                      })
+                  .OrderByDescending(f => f.Date)
+                    .Take(1);
+                result.AddRange(promoFullFiles);
+
+
+                var promoFiles = files
+                   .Where(f => f.Name.Contains("Promo") && !f.Name.Contains("PromoFull") && !f.Name.Contains("NULL") 
+                   && ExtractBranchFromFileName(f.Name) == branch)
+                     .Where(f =>
+                     {
+                         if (DateTime.TryParseExact(f.Date, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out var fileDate))
+                         {
+                             return fileDate.Date == targetDate.Date; // רק התאריך
+                         }
+                         return false;
+                     })
+                   .OrderByDescending(f => f.Date)
+                   .Take(1);
                 result.AddRange(promoFiles);
+
+            }
+            foreach (var file in result)
+            {
+                Console.WriteLine(file.Name);
             }
 
             return result.ToList();
@@ -348,24 +550,42 @@ namespace PriceComparison.Download.New.PublishedPrices
 
         protected string ExtractBranchFromFileName(string fileName)
         {
-            try
-            {
-                // פורמט: TypeXXXXXXXXXXXXXX-BBB-YYYYMMDDHHMMSS-XXX
-                var parts = fileName.Split('-');
-                return parts.Length >= 2 ? parts[1] : "";
-            }
-            catch
-            {
+            if (string.IsNullOrWhiteSpace(fileName))
                 return "";
+
+            var name = Path.GetFileNameWithoutExtension(fileName);
+            var parts = name.Split('-');
+
+            // Promo מורחב: יש לפחות 5 מקטעים
+            // PromoFullXXXX-XXX-BBB-YYYYMMDD-HHMMSS
+            if (parts.Length >= 5 )
+            {
+                return parts[2]; // הסניף
             }
+
+            // פורמט רגיל
+            // PriceFullXXXX-BBB-YYYYMMDDHHMM
+            if (parts.Length >= 3)
+            {
+                return parts[1];
+            }
+
+            return "";
         }
 
-        protected string GetFileTypeFolder(string type)
+
+        protected string GetFileTypeFolder(string fileName,string type)
         {
-            if (type.Contains("Store")) return "Stores";
-            if (type.Contains("Price")) return "Prices";
-            if (type.Contains("Promo")) return "Promos";
-            return "Other";
+            var lowerName = fileName.ToLower();
+            var lowerCategory = type.ToLower();
+
+            if (lowerName.Contains("storesfull") || lowerCategory.Contains("storesfull")) return "StoresFull";
+            if (lowerName.Contains("pricefull") || lowerCategory.Contains("pricefull")) return "PriceFull";
+            if (lowerName.Contains("promofull") || lowerCategory.Contains("promofull")) return "PromoFull";
+            if (lowerName.Contains("stores") || lowerCategory.Contains("stores")) return "Stores";
+            if (lowerName.Contains("price") || lowerCategory.Contains("price")) return "Price";
+            if (lowerName.Contains("promo") || lowerCategory.Contains("promo")) return "Promo";
+            return "Unknown";
         }
 
         protected string SanitizeFileName(string fileName)
@@ -396,56 +616,122 @@ namespace PriceComparison.Download.New.PublishedPrices
             ChainId = chainId;
         }
 
-        public override async Task<bool> LoginAsync(PublishedPricesChain config)
+        public override async Task<string> LoginAsync(PublishedPricesChain config)
         {
             try
             {
                 // שלב 1: קבלת דף הלוגין
+                Console.WriteLine(config.LoginUrl);
                 var loginResponse = await _httpClient.GetAsync(config.LoginUrl);
                 if (!loginResponse.IsSuccessStatusCode)
-                    return false;
+                    return "";
 
                 var loginHtml = await loginResponse.Content.ReadAsStringAsync();
 
-                // שלב 2: חילוץ CSRF token עם Regex
-                var csrfToken = ExtractCsrfTokenWithRegex(loginHtml);
+                // שלב 2: חילוץ CSRF token
+                var csrfMatch = Regex.Match(loginHtml, "<meta name=\"csrftoken\" content=\"([^\"]+)\"",
+                                            RegexOptions.IgnoreCase);
+                var csrfToken = csrfMatch.Success ? csrfMatch.Groups[1].Value : "";
+                Console.WriteLine(csrfToken);
 
-                // שלב 3: שליחת נתוני התחברות
+                if (string.IsNullOrEmpty(csrfToken))
+                    return "";
+
+
+                // שלב 3: הכנת POST
                 var formData = new FormUrlEncodedContent(new[]
                 {
-                    new KeyValuePair<string, string>("username", config.Username),
-                    new KeyValuePair<string, string>("password", config.Password ?? ""),
-                    new KeyValuePair<string, string>("r", "")
-                });
+                        new KeyValuePair<string,string>("username", config.Username),
+                  new KeyValuePair<string,string>("password", config.Password),
+                  new KeyValuePair<string,string>("csrftoken", csrfToken),
+                  config.LoginUrl==" https://publishedprices.co.il/login?r=%2Ffile"?
+                  new KeyValuePair<string, string>("r", "/file"):new KeyValuePair<string,string>("r", "")
+                
+                     //new KeyValuePair<string,string>("r", "")
+                 });
 
-                var loginPostResponse = await _httpClient.PostAsync(config.LoginUrl.Replace("/login", "/login/user"), formData);
+                // שלב 4: שליחת POST
+                var loginUri = new Uri(config.LoginUrl);
+                var baseUri = loginUri.GetLeftPart(UriPartial.Authority);
+                var loginPostUrl = baseUri + "/login/user";
 
-                // שלב 4: בדיקת הצלחת התחברות
-                if (loginPostResponse.IsSuccessStatusCode)
-                {
-                    var responseContent = await loginPostResponse.Content.ReadAsStringAsync();
-                    return !responseContent.Contains("login-form") && !responseContent.Contains("Client Login");
-                }
+                var loginPostResponse = await _httpClient.PostAsync(loginPostUrl, formData);
 
-                return false;
+                if (!loginPostResponse.IsSuccessStatusCode &&
+                    loginPostResponse.StatusCode != System.Net.HttpStatusCode.Found)
+                    return "";
+
+                var responseContent = await loginPostResponse.Content.ReadAsStringAsync();
+                // שלב 5: בדיקה אם ההתחברות הצליחה
+                bool loginSuccess = !responseContent.Contains("login-form");
+                if (loginSuccess)
+                    return responseContent;
+                else
+                    return "";
+
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine($"      ❌ שגיאה בהתחברות: {ex.Message}");
-                return false;
+                return "";
             }
         }
 
-        public override async Task<List<FileEntry>> GetFileListAsync(PublishedPricesChain config)
+
+
+        public override async Task<List<FileEntry>> GetFileListAsync(PublishedPricesChain config,string html)
         {
             try
             {
-                var response = await _httpClient.GetAsync(config.FileUrl);
-                if (!response.IsSuccessStatusCode)
-                    return new List<FileEntry>();
+                if (config.FileUrl == "https://publishedprices.co.il/file/d/Yuda/")
+                {
+                    Console.WriteLine("📂 כניסה לתקיית Yuda לפני שליפת קבצים");
 
-                var html = await response.Content.ReadAsStringAsync();
-                return ParseCerberusFileListWithRegex(html, config.FileUrl);
+                    var folderResponse = await _httpClient.GetAsync(config.FileUrl);
+                    var folderHtml = await folderResponse.Content.ReadAsStringAsync();
+
+                    // אם את משתמשת ב-html בהמשך – תחליפי
+                    html = folderHtml;
+                    Console.WriteLine(html);
+                }
+                var csrfMatch = Regex.Match(html, "<meta name=\"csrftoken\" content=\"([^\"]+)\"",
+                                         RegexOptions.IgnoreCase);
+                var csrfToken = csrfMatch.Success ? csrfMatch.Groups[1].Value : "";
+                Console.WriteLine(csrfToken);
+
+                var url = config.FileUrl == "https://publishedprices.co.il/file/d/Yuda/"?
+                    "https://publishedprices.co.il/file/json/dir" :
+                    "https://url.publishedprices.co.il/file/json/dir";
+                var today = DateTime.Now.ToString("yyyyMMdd");
+                Console.WriteLine(today);
+                var content = new FormUrlEncodedContent(new[]
+{
+    new KeyValuePair<string,string>("sEcho","1"),
+    new KeyValuePair<string,string>("iColumns","5"),
+    new KeyValuePair<string,string>("iDisplayStart","0"),
+    new KeyValuePair<string,string>("iDisplayLength","10000"),
+
+    new KeyValuePair<string,string>("mDataProp_0","fname"),
+    new KeyValuePair<string,string>("mDataProp_1","typeLabel"),
+    new KeyValuePair<string,string>("mDataProp_2","size"),
+    new KeyValuePair<string,string>("mDataProp_3","ftime"),
+    new KeyValuePair<string,string>("mDataProp_4",""),
+
+    new KeyValuePair<string,string>("sSearch",today),
+    new KeyValuePair<string,string>("bRegex","false"),
+    new KeyValuePair<string,string>("iSortingCols","0"),
+    config.FileUrl=="https://publishedprices.co.il/file/d/Yuda/"? new KeyValuePair<string,string>("cd","/Yuda"):
+     new KeyValuePair<string,string>("cd","/"),
+    new KeyValuePair<string,string>("csrftoken", csrfToken),
+
+   
+});
+
+                var response = await _httpClient.PostAsync(url, content);
+                Console.WriteLine(response.IsSuccessStatusCode);
+                var json = await response.Content.ReadAsStringAsync();
+                //return ParseCerberusFileListWithRegex(html, config.FileUrl);
+                return ParseCerberusFileListFromJson(json,config);
+
             }
             catch (Exception ex)
             {
@@ -458,20 +744,33 @@ namespace PriceComparison.Download.New.PublishedPrices
         {
             try
             {
+                Console.WriteLine(file.DownloadUrl);
                 var response = await _httpClient.GetAsync(file.DownloadUrl);
                 if (!response.IsSuccessStatusCode)
                     return false;
 
                 var fileBytes = await response.Content.ReadAsByteArrayAsync();
 
-                // אם זה ZIP, חלץ את ה-XML
+                // תמיד נשמור כ-XML
+                localPath = Path.ChangeExtension(localPath, ".xml");
+
                 if (IsZipFile(fileBytes))
                 {
+                    // ZIP → חילוץ XML
                     return await ExtractZipToXml(fileBytes, localPath);
+                }
+                else if (IsGzipFile(fileBytes))
+                {
+                    // GZ → חילוץ XML
+                    using var ms = new MemoryStream(fileBytes);
+                    using var gz = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Decompress);
+                    using var outFile = new FileStream(localPath, FileMode.Create, FileAccess.Write);
+                    await gz.CopyToAsync(outFile);
+                    return true;
                 }
                 else
                 {
-                    // שמירה ישירה
+                    // XML רגיל → שמירה ישירה
                     await File.WriteAllBytesAsync(localPath, fileBytes);
                     return true;
                 }
@@ -483,87 +782,67 @@ namespace PriceComparison.Download.New.PublishedPrices
             }
         }
 
+
+
         // ========== פונקציות עזר ספציפיות - ללא HtmlAgilityPack ==========
 
-        private string ExtractCsrfTokenWithRegex(string html)
-        {
-            try
-            {
-                var match = Regex.Match(html, @"<meta\s+name=['""]csrftoken['""]\s+content=['""]([^'""]+)['""]", RegexOptions.IgnoreCase);
-                return match.Success ? match.Groups[1].Value : "";
-            }
-            catch
-            {
-                return "";
-            }
-        }
 
-        private List<FileEntry> ParseCerberusFileListWithRegex(string html, string baseUrl)
+        private List<FileEntry> ParseCerberusFileListFromJson(string json, PublishedPricesChain config)
         {
             var files = new List<FileEntry>();
 
             try
             {
-                // חיפוש שורות הטבלה עם Regex
-                var tableRowPattern = @"<tr[^>]*>(.*?)</tr>";
-                var cellPattern = @"<td[^>]*>(.*?)</td>";
-                var linkPattern = @"<a[^>]+href=['""]([^'""]+)['""][^>]*>(.*?)</a>";
-
-                var rowMatches = Regex.Matches(html, tableRowPattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
-
-                foreach (Match rowMatch in rowMatches)
+                Console.WriteLine("⏳ מתחיל פענוח JSON");
+                var root = JsonSerializer.Deserialize<JsonRoot>(json);
+                if (root?.aaData == null || root.aaData.Count == 0)
                 {
-                    var rowHtml = rowMatch.Groups[1].Value;
-                    var cellMatches = Regex.Matches(rowHtml, cellPattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
-
-                    if (cellMatches.Count >= 4)
-                    {
-                        var nameCell = cellMatches[0].Groups[1].Value;
-                        var typeCell = cellMatches[1].Groups[1].Value;
-                        var sizeCell = cellMatches[2].Groups[1].Value;
-                        var dateCell = cellMatches[3].Groups[1].Value;
-
-                        // חילוץ שם קובץ וקישור הורדה
-                        var linkMatch = Regex.Match(nameCell, linkPattern, RegexOptions.IgnoreCase);
-                        if (linkMatch.Success)
-                        {
-                            var downloadLink = linkMatch.Groups[1].Value;
-                            var fileName = StripHtmlTags(linkMatch.Groups[2].Value).Trim();
-
-                            if (!string.IsNullOrEmpty(fileName) && !string.IsNullOrEmpty(downloadLink))
-                            {
-                                var fullDownloadUrl = downloadLink.StartsWith("http") ? downloadLink :
-                                    new Uri(new Uri(baseUrl), downloadLink).ToString();
-
-                                files.Add(new FileEntry
-                                {
-                                    Name = fileName,
-                                    Type = DetermineFileType(fileName),
-                                    Size = StripHtmlTags(sizeCell).Trim(),
-                                    Date = StripHtmlTags(dateCell).Trim(),
-                                    DownloadUrl = fullDownloadUrl,
-                                    ParsedDate = ParseFileDate(fileName)
-                                });
-                            }
-                        }
-                    }
+                    Console.WriteLine("⚠️ אין נתונים ב-aaData");
+                    return files;
                 }
+
+                foreach (var item in root.aaData)
+                {
+                    var fileName = item.fname ?? item.name;
+                    if (string.IsNullOrEmpty(fileName)) continue;
+
+                    // ניסיון לחלץ תאריך מה-ftime
+                    DateTime parsedDate = DateTime.MinValue;
+                    if (!string.IsNullOrEmpty(item.ftime))
+                    {
+                        DateTime.TryParseExact(
+                            item.ftime,
+                            "dd/MM/yyyy HH:mm",
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
+                            out parsedDate
+                        );
+                    }
+
+                    files.Add(new FileEntry
+                    {
+                        Name = fileName,
+                        Type = DetermineFileType(fileName),
+                        Size = item.size.ToString(),
+                        Date = item.ftime,
+                        ParsedDate = parsedDate,
+                        DownloadUrl= config.FileUrl == "https://publishedprices.co.il/file/d/Yuda/"?
+                        "https://publishedprices.co.il/file/d/Yuda/" + item.value : 
+                        "https://url.publishedprices.co.il/file/d/" +item.value
+
+                    });
+                }
+
+                Console.WriteLine($"✅ סיימתי פענוח JSON - נמצאו {files.Count} קבצים");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"      ⚠️ שגיאה בעיבוד HTML: {ex.Message}");
+                Console.WriteLine($"⚠️ שגיאה בפענוח JSON: {ex.Message}");
             }
 
             return files;
         }
 
-        private string StripHtmlTags(string html)
-        {
-            if (string.IsNullOrEmpty(html))
-                return "";
-
-            return Regex.Replace(html, @"<[^>]+>", "").Replace("&nbsp;", " ").Trim();
-        }
 
         private string DetermineFileType(string fileName)
         {
@@ -576,23 +855,6 @@ namespace PriceComparison.Download.New.PublishedPrices
             return "Unknown";
         }
 
-        private DateTime ParseFileDate(string fileName)
-        {
-            try
-            {
-                // פורמט: TypeXXXXXXXXXXXXXX-BBB-YYYYMMDDHHMMSS-XXX
-                var match = Regex.Match(fileName, @"-(\d{14})-");
-                if (match.Success)
-                {
-                    var dateStr = match.Groups[1].Value;
-                    return DateTime.ParseExact(dateStr, "yyyyMMddHHmmss", CultureInfo.InvariantCulture);
-                }
-            }
-            catch { }
-
-            return DateTime.MinValue;
-        }
-
         private bool IsZipFile(byte[] fileBytes)
         {
             return fileBytes.Length >= 4 &&
@@ -600,6 +862,12 @@ namespace PriceComparison.Download.New.PublishedPrices
                    (fileBytes[2] == 0x03 || fileBytes[2] == 0x05) &&
                    (fileBytes[3] == 0x04 || fileBytes[3] == 0x06);
         }
+        private bool IsGzipFile(byte[] bytes)
+        {
+            // קובץ GZ מתחיל תמיד ב־1F 8B
+            return bytes.Length > 2 && bytes[0] == 0x1F && bytes[1] == 0x8B;
+        }
+
 
         private async Task<bool> ExtractZipToXml(byte[] zipBytes, string outputPath)
         {
@@ -674,354 +942,9 @@ namespace PriceComparison.Download.New.PublishedPrices
         {
             return _downloaderFactories.Keys.ToList();
         }
+       
+
     }
 
-    // ========== תוכנית ראשית ==========
 
-    public class PublishedPricesProgram
-    {
-        public static async Task Main(string[] args)
-        {
-            try
-            {
-                Console.WriteLine("🚀 מערכת הורדות PublishedPrices - כל הרשתות");
-                Console.WriteLine("🎯 רשתות: Cerberus WebClient + אתרים מיוחדים");
-                Console.WriteLine("============================================================");
-
-                var currentDate = DateTime.Now.ToString("dd/MM/yyyy");
-                Console.WriteLine($"📅 תאריך היום: {currentDate}");
-
-                // טעינת הגדרות רשתות
-                var chainsConfig = await LoadChainsConfiguration();
-                var enabledChains = chainsConfig.Where(c => c.Enabled).ToList();
-
-                Console.WriteLine($"📖 נטען קובץ הגדרות: {chainsConfig.Count} רשתות מוגדרות");
-                Console.WriteLine($"📋 רשתות מופעלות: {string.Join(", ", enabledChains.Select(c => c.Name))}");
-
-                if (!enabledChains.Any())
-                {
-                    Console.WriteLine("⚠️ אין רשתות מופעלות להורדה");
-                    return;
-                }
-
-                var factory = new PublishedPricesDownloaderFactory();
-                var allResults = new List<PublishedPricesDownloadResult>();
-
-                // הפעלת הורדות במקביל
-                var downloadTasks = enabledChains.Select(async chain =>
-                {
-                    Console.WriteLine($"\n🔍 מתחיל הורדה: {chain.Name}");
-
-                    var downloader = factory.GetDownloader(chain.Type, chain.Name, chain.Id);
-                    if (downloader != null)
-                    {
-                        try
-                        {
-                            return await downloader.DownloadChain(chain, currentDate);
-                        }
-                        finally
-                        {
-                            downloader.Dispose();
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine($"❌ לא נמצא מטפל עבור: {chain.Name}");
-                        return new PublishedPricesDownloadResult
-                        {
-                            ChainName = chain.Name,
-                            Success = false,
-                            ErrorMessage = "לא נמצא מטפל מתאים"
-                        };
-                    }
-                });
-
-                var results = await Task.WhenAll(downloadTasks);
-                allResults.AddRange(results);
-
-                // הצגת תוצאות
-                await DisplayAllResults(allResults);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"💥 שגיאה כללית: {ex.Message}");
-                Console.WriteLine($"📋 פרטים: {ex}");
-            }
-
-            Console.WriteLine("\n🔍 לחץ מקש כלשהו לסיום...");
-            Console.ReadKey();
-        }
-
-        private static async Task<List<PublishedPricesChain>> LoadChainsConfiguration()
-        {
-            const string configFile = "publishedprices_chains.json";
-
-            if (!File.Exists(configFile))
-            {
-                Console.WriteLine($"⚠️ קובץ {configFile} לא נמצא, יוצר דוגמה...");
-                await CreateSampleConfiguration(configFile);
-                Console.WriteLine($"✅ נוצר קובץ דוגמה: {configFile}");
-                Console.WriteLine("📝 ערוך את הקובץ לפי הצורך והפעל מחדש");
-                return new List<PublishedPricesChain>();
-            }
-
-            try
-            {
-                var json = await File.ReadAllTextAsync(configFile);
-                var config = JsonSerializer.Deserialize<PublishedPricesConfig>(json);
-                return config?.Chains ?? new List<PublishedPricesChain>();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"❌ שגיאה בטעינת קובץ הגדרות: {ex.Message}");
-                return new List<PublishedPricesChain>();
-            }
-        }
-
-        private static async Task CreateSampleConfiguration(string configFile)
-        {
-            var sampleConfig = new PublishedPricesConfig
-            {
-                Description = "הגדרות רשתות PublishedPrices להורדה - כל הרשתות ממסמך החקירה",
-                LastUpdated = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                Chains = new List<PublishedPricesChain>
-                {
-                    // ========== רשתות Cerberus Standard ==========
-                    new PublishedPricesChain
-                    {
-                        Id = "politzer",
-                        Name = "פוליצר חדרה (1982) בע\"מ",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "politzer",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
-                        Notes = "ללא סיסמה"
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "paz_yellow",
-                        Name = "פז קמעונאות ואנרגיה בע\"מ - יילו",
-                        LoginUrl = "https://url.publishedprices.co.il/login?r=%2Ffile",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "b_Paz",
-                        Password = "468paz",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "yuda_super",
-                        Name = "פז קמעונאות ואנרגיה בע\"מ - יודה סופר",
-                        LoginUrl = "https://publishedprices.co.il/login?r=%2Ffile",
-                        FileUrl = "https://publishedprices.co.il/file",
-                        Username = "yuda_ho",
-                        Password = "Yud@147",
-                        Type = PublishedPricesType.PublishedPricesStandard,
-                        Enabled = true
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "freshmarket",
-                        Name = "פז קמעונאות ואנרגיה בע\"מ - פרשמרקט",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "freshmarket",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
-                        Notes = "ללא סיסמה"
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "yohananof",
-                        Name = "מ. יוחננוף ובניו (1988) בע\"מ",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "yohananof",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
-                        Notes = "ללא סיסמה"
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "osherad",
-                        Name = "מרב-מזון כל בע\"מ (אושר עד)",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "osherad",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
-                        Notes = "ללא סיסמה"
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "salach_dabah",
-                        Name = "סאלח דבאח ובניו בע\"מ",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "SalachD",
-                        Password = "12345",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "tivtaam",
-                        Name = "טיב טעם רשתות בע\"מ",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "TivTaam",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
-                        Notes = "ללא סיסמה"
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "keshet",
-                        Name = "קשת טעמים בע\"מ",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "Keshet",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
-                        Notes = "ללא סיסמה"
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "rami_levi",
-                        Name = "חנויות רמי לוי שיווק השקמה 2006 בע\"מ",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "RamiLevi",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
-                        Notes = "ללא סיסמה"
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "super_cofix",
-                        Name = "רמי לוי - סופר קופיקס",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "SuperCofixApp",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
-                        Notes = "ללא סיסמה"
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "doralon",
-                        Name = "דור אלון ניהול מתחמים קמעונאיים בע\"מ",
-                        LoginUrl = "https://url.publishedprices.co.il/login",
-                        FileUrl = "https://url.publishedprices.co.il/file",
-                        Username = "doralon",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusStandard,
-                        Enabled = true,
-                        Notes = "ללא סיסמה"
-                    },
-                    new PublishedPricesChain
-                    {
-                        Id = "stop_market",
-                        Name = "סטופ מרקט בע\"מ",
-                        LoginUrl = "https://url.retail.publishedprices.co.il/login",
-                        FileUrl = "https://url.retail.publishedprices.co.il/file",
-                        Username = "Market_Stop",
-                        Password = "",
-                        Type = PublishedPricesType.CerberusRetail,
-                        Enabled = true,
-                        Notes = "ללא סיסמה - אתר לא מאובטח"
-                    }
-                }
-            };
-
-            var json = JsonSerializer.Serialize(sampleConfig, new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-            });
-
-            await File.WriteAllTextAsync(configFile, json);
-        }
-
-        private static async Task DisplayAllResults(List<PublishedPricesDownloadResult> results)
-        {
-            Console.WriteLine("\n" + "=".PadRight(70, '='));
-            Console.WriteLine("📊 סיכום הורדות PublishedPrices - כל הרשתות");
-            Console.WriteLine("=".PadRight(70, '='));
-
-            var totalSuccessful = results.Count(r => r.Success);
-            var totalFiles = results.Sum(r => r.DownloadedFiles);
-
-            Console.WriteLine($"✅ רשתות שהצליחו: {totalSuccessful}/{results.Count}");
-            Console.WriteLine($"📁 סה\"כ קבצים: {totalFiles}");
-
-            foreach (var result in results.OrderBy(r => r.ChainName))
-            {
-                DisplayResult(result);
-            }
-
-            // שמירת לוג מפורט
-            await SaveDetailedLog(results);
-        }
-
-        private static void DisplayResult(PublishedPricesDownloadResult result)
-        {
-            var status = result.Success ? "✅" : "❌";
-            Console.WriteLine($"  {status} {result.ChainName}: {result.DownloadedFiles} קבצים");
-
-            if (!result.Success && !string.IsNullOrEmpty(result.ErrorMessage))
-            {
-                Console.WriteLine($"     💬 {result.ErrorMessage}");
-            }
-            else if (result.Success)
-            {
-                Console.WriteLine($"     📋 {result.StoresFiles} Stores + {result.PriceFiles} Prices + {result.PromoFiles} Promos");
-                Console.WriteLine($"     ⏱️ זמן ביצוע: {result.Duration:F1} שניות");
-            }
-        }
-
-        private static async Task SaveDetailedLog(List<PublishedPricesDownloadResult> results)
-        {
-            var logData = new
-            {
-                Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                Version = "PublishedPrices Downloader v1.0 - כל הרשתות",
-                TotalChains = results.Count,
-                SuccessfulChains = results.Count(r => r.Success),
-                TotalFiles = results.Sum(r => r.DownloadedFiles),
-                Results = results.Select(r => new
-                {
-                    ChainName = r.ChainName,
-                    Success = r.Success,
-                    DownloadedFiles = r.DownloadedFiles,
-                    StoresFiles = r.StoresFiles,
-                    PriceFiles = r.PriceFiles,
-                    PromoFiles = r.PromoFiles,
-                    ErrorMessage = r.ErrorMessage ?? "",
-                    Duration = r.Duration,
-                    SampleFiles = r.SampleFiles ?? new List<string>()
-                })
-            };
-
-            var json = JsonSerializer.Serialize(logData, new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-            });
-
-            var logFileName = $"publishedprices_download_log_{DateTime.Now:yyyyMMdd_HHmmss}.json";
-            await File.WriteAllTextAsync(logFileName, json);
-
-            Console.WriteLine($"\n📄 לוג נשמר: {logFileName}");
-        }
-    }
 }

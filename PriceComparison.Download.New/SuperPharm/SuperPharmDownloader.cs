@@ -7,7 +7,9 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.VisualBasic.FileIO;
 using PriceComparison.Download.New.BinaProject;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PriceComparison.Download.New.SuperPharm
 {
@@ -77,134 +79,153 @@ namespace PriceComparison.Download.New.SuperPharm
                    chainId.Equals("super_pharm", StringComparison.OrdinalIgnoreCase) ||
                    chainId.Equals("סופר-פארם", StringComparison.OrdinalIgnoreCase);
         }
-
-        /// <summary>
-        /// קבלת רשימת קבצים זמינים על ידי parsing HTML עם תמיכה ב-pagination
-        /// </summary>
         public async Task<List<FileMetadata>> GetAvailableFiles(string date)
         {
             try
             {
-                Console.WriteLine($"      🌐 מתחבר לסופר פארם עם תמיכה ב-pagination: {SUPER_PHARM_BASE_URL}");
+                var targetDate = DateTime.Parse(date);
+                // אם לא הועבר תאריך מבחוץ, ניקח את תאריך היום בפורמט הנכון
+                string currentDate = targetDate.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                string encodedDate = Uri.EscapeDataString(currentDate);
+
+                string baseUrl = $"{SUPER_PHARM_BASE_URL}?Date-equals={encodedDate}";
+                Console.WriteLine($"      🌐 מתחבר לסופר-פארם עם סינון לפי תאריך {currentDate}");
 
                 var allFiles = new List<SuperPharmFileInfo>();
 
-                // קריאה לכל העמודים
-                for (int page = 1; page <= 10; page++) // מקסימום 10 עמודים
+                // נוריד את העמוד הראשון כדי לדעת כמה עמודים יש
+                Console.WriteLine("      📄 קורא עמוד 1 (ראשוני)...");
+                var firstResponse = await _httpClient.GetAsync(baseUrl);
+
+                if (!firstResponse.IsSuccessStatusCode)
                 {
-                    Console.WriteLine($"      📄 קורא עמוד {page}...");
+                    Console.WriteLine($"      ❌ שגיאת HTTP בעמוד הראשון: {firstResponse.StatusCode}");
+                    return new List<FileMetadata>();
+                }
 
-                    // עיכוב קל למניעת זיהוי בוט
-                    await Task.Delay(_random.Next(1000, 3000));
+                var firstHtml = await firstResponse.Content.ReadAsStringAsync();
+                var firstPageFiles = ParseSuperPharmHtml(firstHtml, targetDate);
+                allFiles.AddRange(firstPageFiles);
 
-                    var pageUrl = page == 1 ? SUPER_PHARM_BASE_URL : $"{SUPER_PHARM_BASE_URL}?page={page}";
-                    var response = await _httpClient.GetAsync(pageUrl);
+                // נחשב את מספר העמודים הכולל מה-HTML
+                int totalPages = GetTotalPages(firstHtml);
+                if (totalPages <= 1)
+                {
+                    Console.WriteLine("      ✅ רק עמוד אחד — אין צורך בלולאה.");
+                }
+                else
+                {
+                    Console.WriteLine($"      📚 נמצאו {totalPages} עמודים — מתחיל לעבור עליהם...");
 
-                    if (!response.IsSuccessStatusCode)
+                    for (int page = 2; page <= totalPages; page++)
                     {
-                        Console.WriteLine($"      ❌ שגיאת HTTP בעמוד {page}: {response.StatusCode}");
-                        break; // יוצאים מהלולאה אם העמוד לא קיים
-                    }
+                        Console.WriteLine($"      📄 קורא עמוד {page}/{totalPages}...");
+                        //await Task.Delay(_random.Next(1000, 3000)); // מנוחה קצרה
 
-                    var htmlContent = await response.Content.ReadAsStringAsync();
+                        var pageUrl = $"{baseUrl}&page={page}";
+                        var response = await _httpClient.GetAsync(pageUrl);
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            Console.WriteLine($"      ⚠️ שגיאת HTTP בעמוד {page}: {response.StatusCode}");
+                            break;
+                        }
 
-                    if (string.IsNullOrWhiteSpace(htmlContent))
-                    {
-                        Console.WriteLine($"      ⚠️ תגובה ריקה מהשרת בעמוד {page}");
-                        break;
-                    }
+                        var htmlContent = await response.Content.ReadAsStringAsync();
+                        var pageFiles = ParseSuperPharmHtml(htmlContent, targetDate);
 
-                    // בדיקה אם יש תוכן בעמוד
-                    var pageFiles = ParseSuperPharmHtml(htmlContent);
+                        if (pageFiles.Count == 0)
+                        {
+                            Console.WriteLine($"      ⚠️ עמוד {page} ריק — עוצרים.");
+                            break;
+                        }
 
-                    if (pageFiles.Count == 0)
-                    {
-                        Console.WriteLine($"      ✅ הגענו לסוף העמודים (עמוד {page} ריק)");
-                        break;
-                    }
-
-                    Console.WriteLine($"      📄 עמוד {page}: נמצאו {pageFiles.Count} קבצים");
-                    allFiles.AddRange(pageFiles);
-
-                    // בדיקה אם יש עמוד הבא
-                    if (!HasNextPage(htmlContent))
-                    {
-                        Console.WriteLine($"      ✅ זה העמוד האחרון (עמוד {page})");
-                        break;
+                        allFiles.AddRange(pageFiles);
                     }
                 }
 
-                Console.WriteLine($"      ✅ סה\"כ נמצאו {allFiles.Count} קבצים זמינים מכל העמודים");
+                Console.WriteLine($"      ✅ סה\"כ נמצאו {allFiles.Count} קבצים זמינים לכל העמודים של {currentDate}");
 
-                // המרה לפורמט המוכר של המערכת
-                var convertedFiles = ConvertToStandardFormat(allFiles, date);
-
-                Console.WriteLine($"      🔍 לאחר סינון לתאריך {date}: {convertedFiles.Count} קבצים רלוונטיים");
+                var convertedFiles = ConvertToStandardFormat(allFiles);
+                Console.WriteLine($"      🔍 לאחר סינון לתאריך {currentDate}: {convertedFiles.Count} קבצים רלוונטיים");
 
                 return convertedFiles;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"      💥 שגיאה בקבלת קבצים: {ex.Message}");
-                Console.WriteLine($"      💥 פרטי שגיאה: {ex.StackTrace}");
                 return new List<FileMetadata>();
             }
         }
 
-        /// <summary>
-        /// בדיקה אם יש עמוד הבא
-        /// </summary>
-        private bool HasNextPage(string htmlContent)
+
+        private int GetTotalPages(string htmlContent)
         {
             try
             {
-                // חיפוש כפתור "הבא" או "עמוד הבא"
-                var nextPagePatterns = new[]
-                {
-                    @"<a[^>]*href=[""'][^""']*page=\d+[""'][^>]*>.*?(הבא|Next|>).*?</a>",
-                    @"<a[^>]*class=[""'][^""']*next[^""']*[""'][^>]*>",
-                    @"href=[""'][^""']*page=\d+[""']",
-                    @"pagination.*?href"
-                };
+                if (string.IsNullOrWhiteSpace(htmlContent))
+                    return 1;
 
-                foreach (var pattern in nextPagePatterns)
+                var clean = Regex.Replace(htmlContent, @"\s+", " ");
+                var options = RegexOptions.IgnoreCase | RegexOptions.Singleline;
+
+                // 1. ניסיון פשוט: לקחת את כל data-page ולשלוף את הגדול ביותר
+                var dataPageMatches = Regex.Matches(clean, @"data-page\s*=\s*[""']?(\d+)[""']?", options);
+                if (dataPageMatches.Count > 0)
                 {
-                    if (Regex.IsMatch(htmlContent, pattern, RegexOptions.IgnoreCase))
-                    {
-                        return true;
-                    }
+                    var maxFromDataPage = dataPageMatches
+                        .Select(m => int.Parse(m.Groups[1].Value))
+                        .Max();
+                    return maxFromDataPage;
                 }
 
-                return false;
+                // 2. fallback: חיפוש קישורים עם ?page=NN
+                var hrefPageMatches = Regex.Matches(clean, @"[?&]page=(\d+)", options);
+                if (hrefPageMatches.Count > 0)
+                {
+                    return hrefPageMatches.Select(m => int.Parse(m.Groups[1].Value)).Max();
+                }
+
+                // 3. fallback מתקדם: אם יש תגית link rel="last" עם href שמכיל page=
+                var relLast = Regex.Match(clean, @"<link[^>]*rel\s*=\s*[""']last[""'][^>]*href\s*=\s*[""']([^""']+)[""']", options);
+                if (relLast.Success)
+                {
+                    var href = relLast.Groups[1].Value;
+                    var m = Regex.Match(href, @"[?&]page=(\d+)");
+                    if (m.Success) return int.Parse(m.Groups[1].Value);
+                }
+
+                // אם לא נמצא שום סימן, נחזור 1
             }
-            catch
+            catch (Exception ex)
             {
-                return false; // במקרה של ספק, נפסיק
+                Console.WriteLine($"⚠️ שגיאה בחישוב סה\"כ עמודים: {ex.Message}");
             }
+
+            return 1;
         }
 
         /// <summary>
         /// פרסור HTML של סופר פארם לחילוץ נתוני הקבצים - גרסה משופרת
         /// </summary>
-        private List<SuperPharmFileInfo> ParseSuperPharmHtml(string htmlContent)
+        private List<SuperPharmFileInfo> ParseSuperPharmHtml(string htmlContent, DateTime targetDate)
         {
             var files = new List<SuperPharmFileInfo>();
 
             try
             {
                 // שיטה 1: חיפוש טבלאות קלסיות
-                files.AddRange(ParseTableRows(htmlContent));
+                files.AddRange(ParseTableRows(htmlContent, targetDate));
 
                 // שיטה 2: חיפוש קישורי הורדה ישירים
                 if (files.Count == 0)
                 {
-                    files.AddRange(ParseDirectDownloadLinks(htmlContent));
+                    files.AddRange(ParseDirectDownloadLinks(htmlContent, targetDate));
                 }
 
                 // שיטה 3: חיפוש במבנה div
                 if (files.Count == 0)
                 {
-                    files.AddRange(ParseDivStructure(htmlContent));
+                    files.AddRange(ParseDivStructure(htmlContent, targetDate));
                 }
 
                 // הסרת כפילויות לפי שם קובץ
@@ -223,7 +244,7 @@ namespace PriceComparison.Download.New.SuperPharm
         /// <summary>
         /// פרסור שורות טבלה קלסיות
         /// </summary>
-        private List<SuperPharmFileInfo> ParseTableRows(string htmlContent)
+        private List<SuperPharmFileInfo> ParseTableRows(string htmlContent, DateTime targetDate)
         {
             var files = new List<SuperPharmFileInfo>();
 
@@ -277,7 +298,7 @@ namespace PriceComparison.Download.New.SuperPharm
                             files.Add(new SuperPharmFileInfo
                             {
                                 FileName = fileName,
-                                Date = date,
+                                Date = targetDate.ToString("dd/MM/yyyy"),
                                 Category = category,
                                 BranchName = branchName,
                                 DownloadUrl = downloadUrl
@@ -297,7 +318,7 @@ namespace PriceComparison.Download.New.SuperPharm
         /// <summary>
         /// חיפוש קישורי הורדה ישירים בHTML
         /// </summary>
-        private List<SuperPharmFileInfo> ParseDirectDownloadLinks(string htmlContent)
+        private List<SuperPharmFileInfo> ParseDirectDownloadLinks(string htmlContent, DateTime targetDate)
         {
             var files = new List<SuperPharmFileInfo>();
 
@@ -306,10 +327,10 @@ namespace PriceComparison.Download.New.SuperPharm
                 // דפוסים שונים לקישורי הורדה
                 var linkPatterns = new[]
                 {
-                    @"<a[^>]*href=[""']([^""']*\.(?:zip|gz|xml))[""'][^>]*>([^<]*)</a>",
-                    @"href=[""']([^""']*Download/[^""']*)[""']",
-                    @"href=[""']([^""']*\.(zip|gz|xml))[""']"
-                };
+            @"<a[^>]*href=[""']([^""']*\.(?:zip|gz|xml))[""'][^>]*>([^<]*)</a>",
+            @"href=[""']([^""']*Download/[^""']*)[""']",
+            @"href=[""']([^""']*\.(?:zip|gz|xml)(\?[^""']*)?)[""']"
+        };
 
                 foreach (var pattern in linkPatterns)
                 {
@@ -321,22 +342,23 @@ namespace PriceComparison.Download.New.SuperPharm
                         var fileName = match.Groups.Count > 2 ? CleanHtmlText(match.Groups[2].Value) : Path.GetFileName(url);
 
                         if (string.IsNullOrEmpty(fileName) || fileName.Contains("Download/"))
-                        {
                             fileName = Path.GetFileName(url);
-                        }
 
                         if (!string.IsNullOrEmpty(url) && !string.IsNullOrEmpty(fileName))
                         {
-                            // תיקון URL יחסי לאבסולוטי
-                            if (!url.StartsWith("http"))
+                            // ✅ תיקון URL יחסי לאבסולוטי (כדי שיכלול /Download/)
+                            if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                             {
-                                url = SUPER_PHARM_BASE_URL.TrimEnd('/') + "/" + url.TrimStart('/');
+                                if (!url.Contains("Download/"))
+                                    url = SUPER_PHARM_BASE_URL.TrimEnd('/') + "/Download/" + url.TrimStart('/');
+                                else
+                                    url = SUPER_PHARM_BASE_URL.TrimEnd('/') + "/" + url.TrimStart('/');
                             }
 
                             files.Add(new SuperPharmFileInfo
                             {
                                 FileName = fileName,
-                                Date = DateTime.Now.ToString("dd/MM/yyyy"), // ברירת מחדל
+                                Date = targetDate.ToString("dd/MM/yyyy"),
                                 Category = DetermineFileType(fileName, ""),
                                 BranchName = ExtractStoreFromFileName(fileName, ""),
                                 DownloadUrl = url
@@ -347,7 +369,7 @@ namespace PriceComparison.Download.New.SuperPharm
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"      ⚠️ שגיאה בחיפוש קישורים: {ex.Message}");
+                Console.WriteLine($"⚠️ שגיאה בחיפוש קישורים: {ex.Message}");
             }
 
             return files;
@@ -356,7 +378,7 @@ namespace PriceComparison.Download.New.SuperPharm
         /// <summary>
         /// פרסור מבנה div
         /// </summary>
-        private List<SuperPharmFileInfo> ParseDivStructure(string htmlContent)
+        private List<SuperPharmFileInfo> ParseDivStructure(string htmlContent, DateTime targetDate)
         {
             var files = new List<SuperPharmFileInfo>();
 
@@ -387,7 +409,7 @@ namespace PriceComparison.Download.New.SuperPharm
                         files.Add(new SuperPharmFileInfo
                         {
                             FileName = fileName,
-                            Date = DateTime.Now.ToString("dd/MM/yyyy"),
+                            Date =targetDate.ToString("dd/MM/yyyy"),
                             Category = DetermineFileType(fileName, ""),
                             BranchName = ExtractStoreFromFileName(fileName, ""),
                             DownloadUrl = url
@@ -472,7 +494,7 @@ namespace PriceComparison.Download.New.SuperPharm
         /// <summary>
         /// המרת קבצים מפורמט סופר פארם לפורמט סטנדרטי
         /// </summary>
-        private List<FileMetadata> ConvertToStandardFormat(List<SuperPharmFileInfo> superPharmFiles, string targetDate)
+        private List<FileMetadata> ConvertToStandardFormat(List<SuperPharmFileInfo> superPharmFiles)
         {
             var result = new List<FileMetadata>();
 
@@ -480,14 +502,10 @@ namespace PriceComparison.Download.New.SuperPharm
             {
                 try
                 {
-                    // בדיקת תאריך - האם הקובץ רלוונטי ליום המבוקש
-                    if (!IsDateRelevant(file.Date, targetDate))
-                        continue;
-
                     var convertedFile = new FileMetadata
                     {
                         FileNm = file.FileName,
-                        DateFile = file.Date,
+                        DateFile = file.Date, // כבר תואם ל-targetDate
                         WStore = ExtractStoreFromFileName(file.FileName, file.BranchName),
                         WFileType = DetermineFileType(file.FileName, file.Category),
                         Company = "סופר פארם",
@@ -504,49 +522,12 @@ namespace PriceComparison.Download.New.SuperPharm
                 }
             }
 
-            return result.OrderByDescending(f => ExtractTimeFromFileName(f.FileNm)).ToList();
-        }
+            // מיון לפי שעת הקובץ בשם (אם יש)
+                    return result
+            .GroupBy(f => new { f.WFileType, f.WStore })           // קיבוץ לפי קטגוריה + סניף
+            .Select(g => g.OrderByDescending(f => ExtractTimeFromFileName(f.FileNm)).First())
+            .ToList();
 
-        /// <summary>
-        /// בדיקה האם תאריך הקובץ רלוונטי ליום המבוקש
-        /// </summary>
-        private bool IsDateRelevant(string fileDate, string targetDate)
-        {
-            try
-            {
-                if (DateTime.TryParse(targetDate, out var targetDateTime))
-                {
-                    // ניסיון פרסור פורמטים שונים של תאריך
-                    var dateFormats = new[]
-                    {
-                        "dd/MM/yyyy HH:mm:ss",
-                        "MM/dd/yyyy HH:mm:ss",
-                        "yyyy-MM-dd HH:mm:ss",
-                        "dd/MM/yyyy",
-                        "MM/dd/yyyy",
-                        "yyyy-MM-dd"
-                    };
-
-                    foreach (var format in dateFormats)
-                    {
-                        if (DateTime.TryParseExact(fileDate, format, null, System.Globalization.DateTimeStyles.None, out var fileDateTime))
-                        {
-                            return fileDateTime.Date == targetDateTime.Date;
-                        }
-                    }
-
-                    // אם לא הצלחנו להמיר, נבדוק אם התאריך מופיע בשם הקובץ
-                    return fileDate.Contains(targetDateTime.ToString("yyyy-MM-dd")) ||
-                           fileDate.Contains(targetDateTime.ToString("dd/MM/yyyy")) ||
-                           fileDate.Contains(targetDateTime.ToString("MM/dd/yyyy"));
-                }
-
-                return true; // במקרה של ספק, נכלול את הקובץ
-            }
-            catch
-            {
-                return true; // במקרה של ספק, נכלול את הקובץ
-            }
         }
 
         /// <summary>
@@ -569,49 +550,91 @@ namespace PriceComparison.Download.New.SuperPharm
             try
             {
                 Console.WriteLine($"\n🏪 מתחיל הורדה: {ChainName}");
-                Console.WriteLine($"🎯 מטרה: קבצים עדכניים מ-HTML parsing עם pagination");
+                Console.WriteLine($"🎯 מטרה: הורדה לפי עמודים (totalPages)");
 
-                // יצירת תיקיית רשת
+                var targetDate = DateTime.Parse(date);
+                string currentDate = targetDate.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                string encodedDate = Uri.EscapeDataString(currentDate);
+
                 var chainDir = Path.Combine(BaseDownloadPath, "SuperPharm");
                 Directory.CreateDirectory(chainDir);
 
-                // קבלת כל הקבצים הזמינים מכל העמודים
-                var availableFiles = await GetAvailableFiles(date);
+                string baseUrl = $"{SUPER_PHARM_BASE_URL}?Date-equals={encodedDate}";
 
-                if (!availableFiles.Any())
+                // --- עמוד ראשון: גם פרסור וגם חישוב totalPages
+                Console.WriteLine("      📄 קורא עמוד 1...");
+                var firstResponse = await _httpClient.GetAsync(baseUrl);
+
+                if (!firstResponse.IsSuccessStatusCode)
                 {
-                    result.ErrorMessage = "לא נמצאו קבצים זמינים למרות מספר ניסיונות";
-                    Console.WriteLine($"      ❌ לא נמצאו קבצים זמינים להיום");
-                    result.Duration = (DateTime.Now - startTime).TotalSeconds;
+                    Console.WriteLine($"      ❌ שגיאת HTTP בעמוד הראשון: {firstResponse.StatusCode}");
                     return result;
                 }
 
-                // ניתוח הקבצים
-                AnalyzeAvailableFiles(availableFiles);
+                var firstHtml = await firstResponse.Content.ReadAsStringAsync();
+                int totalPages = GetTotalPages(firstHtml);
 
-                // שלב 1: הורדת קבצי Stores
-                result.StoresFiles = await DownloadStoresFiles(availableFiles, chainDir);
+                Console.WriteLine($"      📚 נמצאו {totalPages} עמודים");
 
-                // שלב 2: זיהוי סניפים
-                var stores = GetUniqueStores(availableFiles);
-                Console.WriteLine($"      📍 זוהו {stores.Count} סניפים");
-
-                if (stores.Any())
+                // לולאה על כל העמודים
+                for (int page = 1; page <= totalPages; page++)
                 {
-                    // שלב 3: הורדת קבצי מחירים
-                    result.PriceFiles = await DownloadPriceFiles(availableFiles, stores, chainDir);
+                    string pageUrl = page == 1
+                        ? baseUrl
+                        : $"{baseUrl}&page={page}";
 
-                    // שלב 4: הורדת קבצי מבצעים
-                    result.PromoFiles = await DownloadPromoFiles(availableFiles, stores, chainDir);
+                    if (page > 1)
+                    {
+                        Console.WriteLine($"      📄 קורא עמוד {page}/{totalPages}...");
+                        var response = await _httpClient.GetAsync(pageUrl);
+
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            Console.WriteLine($"      ⚠️ שגיאת HTTP בעמוד {page}: {response.StatusCode}");
+                            break;
+                        }
+
+                        firstHtml = await response.Content.ReadAsStringAsync();
+                    }
+
+                    var rawFiles = ParseSuperPharmHtml(firstHtml, targetDate);
+
+                    if (!rawFiles.Any())
+                    {
+                        Console.WriteLine($"      ⚠️ עמוד {page} ריק — ממשיך");
+                        continue;
+                    }
+
+                    var pageFiles = ConvertToStandardFormat(rawFiles);
+
+                    Console.WriteLine($"      📄 עמוד {page}: נמצאו {pageFiles.Count} קבצים");
+
+                    // ניתוח
+                    AnalyzeAvailableFiles(pageFiles);
+
+                    // Stores
+                    result.StoresFiles += await DownloadStoresFiles(pageFiles, chainDir);
+
+                    // סניפים
+                    var stores = GetUniqueStores(pageFiles);
+
+                    if (stores.Any())
+                    {
+                        result.PriceFiles += await DownloadPriceFiles(pageFiles, stores, chainDir);
+                        result.PromoFiles += await DownloadPromoFiles(pageFiles, stores, chainDir);
+                    }
+
+                    //await Task.Delay(_random.Next(1000, 2500));
                 }
 
-                // סיכום
-                result.DownloadedFiles = result.StoresFiles + result.PriceFiles + result.PromoFiles;
+                result.DownloadedFiles =
+                    result.StoresFiles + result.PriceFiles + result.PromoFiles;
+
                 result.Success = true;
                 result.Duration = (DateTime.Now - startTime).TotalSeconds;
 
-                Console.WriteLine($"      📊 סיכום סופר פארם: {result.StoresFiles} Stores + {result.PriceFiles} Prices + {result.PromoFiles} Promos = {result.DownloadedFiles} סה\"כ");
-                Console.WriteLine($"      ✅ {ChainName}: הורדה הושלמה בהצלחה");
+                Console.WriteLine(
+                    $"      📊 סיכום סופר פארם: {result.StoresFiles} Stores + {result.PriceFiles} Prices + {result.PromoFiles} Promos = {result.DownloadedFiles}");
 
                 return result;
             }
@@ -623,6 +646,7 @@ namespace PriceComparison.Download.New.SuperPharm
                 return result;
             }
         }
+
 
         /// <summary>
         /// ניתוח קבצים זמינים
@@ -653,11 +677,12 @@ namespace PriceComparison.Download.New.SuperPharm
                 Console.WriteLine($"      ⚠️ לא נמצאו קבצי Stores");
                 return 0;
             }
-
+            
             var latestStores = storesFiles.First();
-            Console.WriteLine($"      🎯 מוריד: {latestStores.FileNm}");
+            var success = await DownloadAndSaveFileWithRetry(latestStores, chainDir, "Stores");
+            //Console.WriteLine($"      🎯 מוריד: {latestStores.FileNm}");
 
-            var success = await DownloadAndSaveFile(latestStores, chainDir, "Stores");
+            //var success = await DownloadAndSaveFile(latestStores, chainDir, "Stores");
             return success ? 1 : 0;
         }
 
@@ -669,8 +694,9 @@ namespace PriceComparison.Download.New.SuperPharm
             Console.WriteLine($"      💰 מוריד קבצי Price...");
 
             int downloaded = 0;
+            var limitedStores = stores.ToList();
 
-            foreach (var store in stores)
+            foreach (var store in limitedStores)
             {
                 // חיפוש קבצי PriceFull
                 var priceFullFiles = availableFiles
@@ -694,7 +720,7 @@ namespace PriceComparison.Download.New.SuperPharm
                     var latestPriceFull = priceFullFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} PriceFull: {latestPriceFull.FileNm}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(500, 1500));
                     var success = await DownloadAndSaveFileWithRetry(latestPriceFull, chainDir, "PriceFull");
                     if (success) downloaded++;
                 }
@@ -705,7 +731,7 @@ namespace PriceComparison.Download.New.SuperPharm
                     var latestPrice = priceFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} Price: {latestPrice.FileNm}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(500, 1500));
                     var success = await DownloadAndSaveFileWithRetry(latestPrice, chainDir, "Price");
                     if (success) downloaded++;
                 }
@@ -723,8 +749,8 @@ namespace PriceComparison.Download.New.SuperPharm
             Console.WriteLine($"      🎁 מחפש קבצי Promo...");
 
             int downloaded = 0;
-
-            foreach (var store in stores)
+            var limitedStores = stores.ToList();
+            foreach (var store in limitedStores)
             {
                 // חיפוש קבצי PromoFull
                 var promoFullFiles = availableFiles
@@ -747,7 +773,7 @@ namespace PriceComparison.Download.New.SuperPharm
                     var latestPromoFull = promoFullFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} PromoFull: {latestPromoFull.FileNm}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(500, 1500));
                     var success = await DownloadAndSaveFileWithRetry(latestPromoFull, chainDir, "PromoFull");
                     if (success) downloaded++;
                 }
@@ -758,7 +784,7 @@ namespace PriceComparison.Download.New.SuperPharm
                     var latestPromo = promoFiles.First();
                     Console.WriteLine($"         🎯 סניף {store} Promo: {latestPromo.FileNm}");
 
-                    await Task.Delay(_random.Next(500, 1500));
+                    //await Task.Delay(_random.Next(500, 1500));
                     var success = await DownloadAndSaveFileWithRetry(latestPromo, chainDir, "Promo");
                     if (success) downloaded++;
                 }
@@ -776,35 +802,90 @@ namespace PriceComparison.Download.New.SuperPharm
             return downloaded;
         }
 
-        /// <summary>
-        /// הורדה ושמירת קובץ עם retry mechanism
-        /// </summary>
         private async Task<bool> DownloadAndSaveFileWithRetry(FileMetadata fileInfo, string chainDir, string fileType, int maxRetries = 3)
         {
-            for (int attempt = 1; attempt <= maxRetries; attempt++)
-            {
-                try
-                {
-                    if (attempt > 1)
-                    {
-                        Console.WriteLine($"         🔄 ניסיון {attempt}/{maxRetries}: {fileInfo.FileNm}");
-                        await Task.Delay(_random.Next(2000, 5000)); // עיכוב מוגדל בין ניסיונות
-                    }
+            string? oldFilePath = null; 
 
-                    var success = await DownloadAndSaveFile(fileInfo, chainDir, fileType);
-                    if (success)
-                    {
-                        return true;
-                    }
-                }
-                catch (Exception ex)
+            try
+            {
+
+                var fileName = Path.GetFileName(fileInfo.FileNm);
+                fileName = fileName.Split('?')[0];
+                var storeId = ExtractStoreFromFileName(fileName, "");
+                var newDateStr = ExtractTimeFromFileName(fileName);
+
+                if (!DateTime.TryParseExact(newDateStr, "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var newDate))
+                    newDate = DateTime.MinValue;
+
+                var searchPattern = $"*-{storeId}-*.*";
+                //Console.WriteLine($"🔎 מחפש קובץ קיים לפי תבנית: {searchPattern} בתוך {chainDir}");
+                //Console.WriteLine($"📂 נתיב מלא לתיקייה: {Path.GetFullPath(chainDir)}");
+
+                var typeDir = Path.Combine(chainDir, fileType);
+                Directory.CreateDirectory(typeDir);
+                var existingFiles = Directory.GetFiles(typeDir, searchPattern);
+                Console.WriteLine($"📄 נמצאו {existingFiles.Length} קבצים תואמים.");
+
+                if (existingFiles.Any())
                 {
-                    Console.WriteLine($"         ⚠️ ניסיון {attempt} נכשל: {ex.Message}");
-                    if (attempt == maxRetries)
+                    Console.WriteLine("הצליח-----");
+
+                    var existingFile = existingFiles.First();
+                    var existingDateStr = ExtractTimeFromFileName(Path.GetFileName(existingFile));
+                    existingDateStr = existingDateStr.Split('_')[0];
+                    if (DateTime.TryParseExact(existingDateStr, "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var existingDate))
                     {
-                        Console.WriteLine($"         ❌ נכשל לאחר {maxRetries} ניסיונות: {fileInfo.FileNm}");
+                        Console.WriteLine($"🔍 השוואת תאריכים: חדש = {newDateStr} ({newDate}), ישן = {existingDateStr} ({existingDate})");
+
+                        if (newDate <= existingDate)
+                        {
+                            Console.WriteLine($"📁 הסניף {storeId} כבר מעודכן ({existingDate:yyyy-MM-dd HH:mm}), מדלג על הורדה.");
+                            return true;
+                        }
+                        else
+                        {
+                            // נשמור את הנתיב למחיקה רק אחרי הורדה מוצלחת
+                            oldFilePath = existingFile;
+                            Console.WriteLine($"🆕 נמצא קובץ חדש לסניף {storeId}, נמחוק את הישן רק לאחר שהחדש ירד בהצלחה.");
+                        }
                     }
                 }
+
+                // הורדה עם ניסיונות חוזרים
+                for (int attempt = 1; attempt <= maxRetries; attempt++)
+                {
+                    try
+                    {
+                        if (attempt > 1)
+                        {
+                            Console.WriteLine($"         🔄 ניסיון {attempt}/{maxRetries}: {fileInfo.FileNm}");
+                            //await Task.Delay(_random.Next(2000, 5000));
+                        }
+
+                        var success = await DownloadAndSaveFile(fileInfo, chainDir, fileType);
+                        if (success)
+                        {
+                            // רק כאן מוחקים את הקובץ הישן
+                            if (!string.IsNullOrEmpty(oldFilePath) && File.Exists(oldFilePath))
+                            {
+                                File.Delete(oldFilePath);
+                                Console.WriteLine($"🧹 נמחק הקובץ הישן: {Path.GetFileName(oldFilePath)}");
+                            }
+
+                            return true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"         ⚠️ ניסיון {attempt} נכשל: {ex.Message}");
+                        if (attempt == maxRetries)
+                            Console.WriteLine($"         ❌ נכשל לאחר {maxRetries} ניסיונות: {fileInfo.FileNm}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"         ⚠️ שגיאה בתהליך הורדה: {ex.Message}");
             }
 
             return false;
@@ -822,7 +903,7 @@ namespace PriceComparison.Download.New.SuperPharm
 
                 // בסופר פארם, ה-URL מגיע מוכן להורדה מה-HTML parsing
                 var downloadUrl = await GetDirectDownloadUrl(fileInfo.FileNm);
-
+                
                 if (string.IsNullOrEmpty(downloadUrl))
                 {
                     Console.WriteLine($"         ❌ לא נמצא קישור הורדה עבור {fileInfo.FileNm}");
@@ -860,28 +941,31 @@ namespace PriceComparison.Download.New.SuperPharm
         /// <summary>
         /// קבלת קישור הורדה ישיר - צריך לחזור ל-HTML לקבלת ה-URL המעודכן
         /// </summary>
+
         private async Task<string> GetDirectDownloadUrl(string fileName)
         {
             try
             {
-                // בחזרה ל-HTML לקבלת הקישור המעודכן
-                var response = await _httpClient.GetAsync(SUPER_PHARM_BASE_URL);
+                // אם הקובץ הוא כבר כתובת מלאה, נשתמש בה כמות שהיא
+                string url = fileName.StartsWith("http", StringComparison.OrdinalIgnoreCase)
+                    ? fileName
+                    : $"{SUPER_PHARM_BASE_URL.TrimEnd('/')}/Download/{fileName.TrimStart('/')}";
 
-                if (!response.IsSuccessStatusCode)
-                    return "";
+                // נוודא שהקובץ באמת קיים לפני הורדה
+                var response = await _httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Head, url));
+                if (response.IsSuccessStatusCode)
+                    return url;
 
-                var htmlContent = await response.Content.ReadAsStringAsync();
-                var files = ParseSuperPharmHtml(htmlContent);
-
-                var matchingFile = files.FirstOrDefault(f => f.FileName.Equals(fileName, StringComparison.OrdinalIgnoreCase));
-
-                return matchingFile?.DownloadUrl ?? "";
+                Console.WriteLine($"⚠️ לא נמצא קישור הורדה עבור {fileName}");
+                return "";
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine($"❌ שגיאה ב-GetDirectDownloadUrl: {ex.Message}");
                 return "";
             }
         }
+
 
         /// <summary>
         /// חילוץ ושמירת XML - זהה לגרסה הרגילה
@@ -892,6 +976,23 @@ namespace PriceComparison.Download.New.SuperPharm
             {
                 int savedCount = 0;
 
+                // ניקוי שם קובץ מתווים אסורים
+                string Sanitize(string name)
+                {
+                    foreach (var c in Path.GetInvalidFileNameChars())
+                        name = name.Replace(c, '_');
+                    return name;
+                }
+
+                // יצירת שם קובץ XML חד משמעי
+                string BuildXmlName(string originalName)
+                {
+                    var clean = Sanitize(originalName);
+                    clean = clean.Replace(".gz", "").Replace(".zip", "").Replace(".xml", "");
+                    return clean + ".xml";   // ❗ תמיד מסתיים ב-xml
+                }
+
+                // ---------------- ZIP ----------------
                 if (IsZipFile(fileBytes))
                 {
                     using var zipStream = new MemoryStream(fileBytes);
@@ -899,14 +1000,18 @@ namespace PriceComparison.Download.New.SuperPharm
 
                     foreach (var entry in archive.Entries)
                     {
-                        if (!string.IsNullOrEmpty(entry.Name) && entry.Name.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                        if (!string.IsNullOrEmpty(entry.Name))
                         {
-                            var xmlPath = Path.Combine(typeDir, entry.Name);
+                            var targetName = BuildXmlName(entry.Name);
+                            var xmlPath = Path.Combine(typeDir, targetName);
+
                             entry.ExtractToFile(xmlPath, true);
                             savedCount++;
                         }
                     }
                 }
+
+                // ---------------- GZ ----------------
                 else if (IsGzFile(fileBytes))
                 {
                     using var gzStream = new MemoryStream(fileBytes);
@@ -914,21 +1019,25 @@ namespace PriceComparison.Download.New.SuperPharm
                     using var reader = new StreamReader(decompressionStream);
 
                     var xmlContent = await reader.ReadToEndAsync();
-                    var xmlFileName = fileInfo.FileNm.Replace(".gz", ".xml");
-                    var xmlPath = Path.Combine(typeDir, xmlFileName);
+
+                    var xmlName = BuildXmlName(fileInfo.FileNm);
+                    var xmlPath = Path.Combine(typeDir, xmlName);
 
                     await File.WriteAllTextAsync(xmlPath, xmlContent);
                     savedCount = 1;
                 }
+
+                // ---------------- RAW XML ----------------
                 else
                 {
-                    var xmlFileName = fileInfo.FileNm.EndsWith(".xml") ? fileInfo.FileNm : fileInfo.FileNm + ".xml";
-                    var xmlPath = Path.Combine(typeDir, xmlFileName);
+                    var xmlName = BuildXmlName(fileInfo.FileNm);
+                    var xmlPath = Path.Combine(typeDir, xmlName);
 
                     await File.WriteAllBytesAsync(xmlPath, fileBytes);
                     savedCount = 1;
                 }
 
+                Console.WriteLine($"         ✅ נשמרו {savedCount} קבצי XML ({fileInfo.FileNm})");
                 return savedCount;
             }
             catch (Exception ex)
@@ -937,6 +1046,7 @@ namespace PriceComparison.Download.New.SuperPharm
                 return 0;
             }
         }
+
 
         // ========== פונקציות עזר ==========
 

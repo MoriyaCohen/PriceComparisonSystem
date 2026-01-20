@@ -1,228 +1,298 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PriceComparison.Application.DTOs;
-using PriceComparison.Application.Services;
+using PriceComparison.Application.DTOs; 
+using PriceComparison.Application.Services; 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace PriceComparison.Api.Controllers
 {
-    /// <summary>
-    /// קונטרולר לטיפול בהשוואת מחירים
-    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class PriceComparisonController : ControllerBase
     {
-        private readonly IPriceComparisonService _priceComparisonService;
-        private readonly IBarcodeValidationService _barcodeValidationService;
-        private readonly ILocalXmlSearchService _localXmlSearchService;
         private readonly ILogger<PriceComparisonController> _logger;
+        private readonly PriceSyncService _priceSyncService;
+
+  
+        private const string BaseFolder = @"C:\Users\ADMIN\projects\LocalXmlData";
+        private string PriceDir => Path.Combine(BaseFolder, "PRICEFULL");
+        private string PromoDir => Path.Combine(BaseFolder, "PROMOFULL");
+        private string StoresFullDir => Path.Combine(BaseFolder, "STORESFULL");
+
+        // --- התיקון המרכזי: המפתח במילון הוא ייחודי (ChainId-StoreId) ---
+        private readonly Dictionary<string, (string ChainName, string StoreName, string Address, string City)> _storeData = new();
 
         public PriceComparisonController(
-            IPriceComparisonService priceComparisonService,
-            IBarcodeValidationService barcodeValidationService,
-            ILocalXmlSearchService localXmlSearchService,
-            ILogger<PriceComparisonController> logger)
+            ILogger<PriceComparisonController> logger,
+            PriceSyncService priceSyncService)
         {
-            _priceComparisonService = priceComparisonService;
-            _barcodeValidationService = barcodeValidationService;
-            _localXmlSearchService = localXmlSearchService;
             _logger = logger;
+            _priceSyncService = priceSyncService;
+
+            // טעינת הנתונים לזיכרון בעת עליית השרת
+            LoadStoreData();
         }
 
-        /// <summary>
-        /// חיפוש מוצר לפי ברקוד במסד הנתונים (הפונקציונליות הקיימת)
-        /// </summary>
-        [HttpPost("search")]
-        public async Task<ActionResult<PriceComparisonResponseDto>> SearchProductByBarcode([FromBody] PriceComparisonRequestDto request)
+        // --- קריאה בטוחה של תגית XML ---
+        private string? GetXmlVal(XElement item, string tagName)
         {
-            try
-            {
-                _logger.LogInformation("מתחיל חיפוש מוצר במסד נתונים עבור ברקוד: {Barcode}", request.Barcode);
+            var element = item.Elements()
+                .FirstOrDefault(e => e.Name.LocalName.Equals(tagName, StringComparison.OrdinalIgnoreCase));
+            return element?.Value;
+        }
 
-                // בדיקת תקינות בסיסית
-                if (string.IsNullOrWhiteSpace(request.Barcode))
+        // --- טעינת סניפים חכמה ומתוקנת ---
+        private void LoadStoreData()
+        {
+            _storeData.Clear(); // ניקוי לפני טעינה
+
+            if (!Directory.Exists(StoresFullDir))
+            {
+                _logger.LogError($"Store directory not found: {StoresFullDir}");
+                return;
+            }
+
+            var storeFiles = Directory.GetFiles(StoresFullDir, "*.xml", SearchOption.AllDirectories);
+            _logger.LogInformation($"Loading stores from {storeFiles.Length} files...");
+
+            foreach (var file in storeFiles)
+            {
+                try
                 {
-                    return BadRequest(new PriceComparisonResponseDto
+                    var xDoc = XDocument.Load(file);
+
+                    // 1. זיהוי הרשת של הקובץ הזה (חשוב מאוד!)
+                    string chainId = GetXmlVal(xDoc.Root, "ChainId")?.Trim() ?? "0";
+                    string chainName = GetXmlVal(xDoc.Root, "ChainName")?.Trim() ?? "";
+
+                    // ירידה לרמת תתי-רשתות וסניפים
+                    var subChains = xDoc.Descendants().Where(e => e.Name.LocalName == "SubChain");
+                    foreach (var subChain in subChains)
                     {
-                        Success = false,
-                        ErrorMessage = "ברקוד לא יכול להיות ריק",
-                        PriceDetails = new List<ProductPriceInfoDto>()
-                    });
+                        var stores = subChain.Descendants().Where(e => e.Name.LocalName == "Store");
+                        foreach (var s in stores)
+                        {
+                            string? storeId = GetXmlVal(s, "StoreId")?.Trim();
+                            if (string.IsNullOrEmpty(storeId)) continue;
+
+                            // 2. נרמול: הסרת אפסים מובילים (0340 -> 340)
+                            storeId = storeId.TrimStart('0');
+
+                            // 3. יצירת מפתח ייחודי: ChainId-StoreId
+                            // זה מונע התנגשויות בין רשתות שונות שיש להן אותו מספר סניף
+                            string uniqueKey = $"{chainId}-{storeId}";
+
+                            string name = GetXmlVal(s, "StoreName")?.Trim() ?? "לא ידוע";
+                            string address = GetXmlVal(s, "Address")?.Trim() ?? "";
+                            string city = GetXmlVal(s, "City")?.Trim() ?? "";
+
+                            // שמירה במילון
+                            _storeData[uniqueKey] = (chainName, name, address, city);
+                        }
+                    }
                 }
-
-                // שלב 1: בדיקת תקינות ברקוד
-                var validationResult = await _barcodeValidationService.ValidateBarcodeAsync(request.Barcode);
-                if (!validationResult.IsValid)
+                catch (Exception ex)
                 {
-                    _logger.LogWarning("ברקוד לא תקין: {Barcode}, שגיאה: {Error}",
-                        request.Barcode, validationResult.ErrorMessage);
+                    _logger.LogError($"Error loading store file {Path.GetFileName(file)}: {ex.Message}");
+                }
+            }
 
-                    return BadRequest(new PriceComparisonResponseDto
+            _logger.LogInformation($"Total unique stores loaded: {_storeData.Count}");
+
+            // בדיקת דיבאג ללוג: האם סניף 340 של קינג סטור נטען?
+            // המזהה של קינג סטור הוא 7290058108879
+            string debugKey = "7290058108879-340";
+            if (_storeData.ContainsKey(debugKey))
+                _logger.LogInformation("SUCCESS: King Store Branch 340 loaded successfully!");
+            else
+                _logger.LogWarning("WARNING: King Store Branch 340 was NOT found in the loaded XMLs.");
+        }
+
+        // --- סנכרון ידני (נשאר ללא שינוי, כפי שביקשת) ---
+        [HttpPost("run-daily-sync")]
+        public IActionResult RunDailySyncManual()
+        {
+            try
+            {
+                if (!Directory.Exists(PriceDir))
+                    return NotFound($"Price directory missing: {PriceDir}");
+
+                var allPriceFiles = Directory.GetFiles(PriceDir, "PriceFull*.xml", SearchOption.AllDirectories);
+                var allPromoFiles = Directory.Exists(PromoDir)
+                    ? Directory.GetFiles(PromoDir, "PromoFull*.xml", SearchOption.AllDirectories)
+                    : new string[0];
+
+                int count = 0;
+                _logger.LogInformation($"🔄 Starting Sync on {allPriceFiles.Length} files...");
+
+                foreach (var pricePath in allPriceFiles)
+                {
+                    try
                     {
-                        Success = false,
-                        ErrorMessage = validationResult.ErrorMessage ?? "ברקוד לא תקין",
-                        PriceDetails = new List<ProductPriceInfoDto>()
-                    });
-                }
+                        string fileName = Path.GetFileName(pricePath);
+                        string clean = fileName.Replace("PriceFull", "");
+                        var parts = clean.Split('-');
 
-                // שלב 2: חיפוש מוצר והשוואת מחירים במסד הנתונים
-                var normalizedBarcode = validationResult.NormalizedBarcode ?? request.Barcode;
-                var searchResult = await _priceComparisonService.SearchProductByBarcodeAsync(normalizedBarcode);
+                        if (parts.Length >= 2)
+                        {
+                            var matchingPromo = allPromoFiles
+                                .FirstOrDefault(f => Path.GetFileName(f).Contains(parts[0]));
 
-                _logger.LogInformation("תוצאות חיפוש במסד נתונים עבור ברקוד {Barcode}: {Success}, {ProductCount} מוצרים",
-                    request.Barcode, searchResult.Success, searchResult.PriceDetails?.Count ?? 0);
-
-                return Ok(searchResult);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "שגיאה לא צפויה בחיפוש מוצר במסד נתונים: {Barcode}", request.Barcode);
-                return StatusCode(500, new PriceComparisonResponseDto
-                {
-                    Success = false,
-                    ErrorMessage = "שגיאה פנימית בשרת",
-                    PriceDetails = new List<ProductPriceInfoDto>()
-                });
-            }
-        }
-
-        /// <summary>
-        /// חיפוש מוצר לפי ברקוד בקבצי XML מקומיים - נדרש לפרונטאנד
-        /// </summary>
-        [HttpPost("search-local")]
-        public async Task<ActionResult<PriceComparisonResponseDto>> SearchProductByBarcodeLocal([FromBody] BarcodeSearchRequestDto request)
-        {
-            try
-            {
-                _logger.LogInformation("מתחיל חיפוש מקומי עבור ברקוד: {Barcode}", request.Barcode);
-
-                // בדיקת תקינות בסיסית
-                if (string.IsNullOrWhiteSpace(request.Barcode))
-                {
-                    return BadRequest(new PriceComparisonResponseDto
+                            _priceSyncService.GenerateSyncedFile(pricePath, matchingPromo, PriceDir);
+                            count++;
+                        }
+                    }
+                    catch (Exception ex)
                     {
-                        Success = false,
-                        ErrorMessage = "ברקוד לא יכול להיות ריק",
-                        PriceDetails = new List<ProductPriceInfoDto>()
-                    });
+                        _logger.LogError(ex, $"Error processing file: {Path.GetFileName(pricePath)}");
+                    }
                 }
 
-                // שלב 1: בדיקת תקינות ברקוד
-                var validationResult = await _barcodeValidationService.ValidateBarcodeAsync(request.Barcode);
-                if (!validationResult.IsValid)
-                {
-                    _logger.LogWarning("חיפוש מקומי - ברקוד לא תקין: {Barcode}, שגיאה: {Error}",
-                        request.Barcode, validationResult.ErrorMessage);
+                return Ok(new { Message = "Sync completed & Files Updated.", FilesProcessed = count });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Fatal Sync Error");
+                return StatusCode(500, ex.Message);
+            }
+        }
 
-                    return BadRequest(new PriceComparisonResponseDto
+        // --- חיפוש חכם (הותאם להשתמש במפתח הייחודי) ---
+        [HttpGet("get-cheapest-smart/{barcode}")]
+        public IActionResult GetCheapestSmart(string barcode, [FromQuery] bool showClub = false, [FromQuery] bool showQuantity = false)
+        {
+            try
+            {
+                if (!Directory.Exists(PriceDir))
+                    return BadRequest("Price directory not found.");
+
+                var results = new List<ProductData>();
+                var priceFiles = Directory.GetFiles(PriceDir, "PriceFull*.xml", SearchOption.AllDirectories);
+
+                foreach (var file in priceFiles)
+                {
+                    try
                     {
-                        Success = false,
-                        ErrorMessage = validationResult.ErrorMessage ?? "ברקוד לא תקין",
-                        PriceDetails = new List<ProductPriceInfoDto>()
-                    });
+                        var xDoc = XDocument.Load(file);
+
+                        // זיהוי הרשת והסניף מקובץ המחירים
+                        string chainId = GetXmlVal(xDoc.Root, "ChainId") ?? "0";
+                        string chainNameFromFile = GetXmlVal(xDoc.Root, "ChainName") ?? "";
+                        string storeId = GetXmlVal(xDoc.Root, "StoreId") ?? GetXmlVal(xDoc.Root, "SubChainId") ?? "0";
+
+                     
+                        storeId = storeId.TrimStart('0');
+
+           
+                        var itemNode = xDoc.Descendants()
+                            .Where(e => e.Name.LocalName == "Item")
+                            .FirstOrDefault(x => GetXmlVal(x, "ItemCode")?.Trim() == barcode.Trim());
+
+                        if (itemNode != null)
+                        {
+                            // שליפת נתוני המוצר
+                            string[] nameTags = { "ItemName", "ItemNm", "ItemNameHeb", "ItemDescription", "ItemDesc", "ItemNameEng" };
+                            string name = nameTags.Select(tag => GetXmlVal(itemNode, tag))
+                                .FirstOrDefault(v => !string.IsNullOrWhiteSpace(v)) ?? "Unknown";
+
+                            decimal.TryParse(GetXmlVal(itemNode, "ItemPrice"), out decimal price);
+                            decimal.TryParse(GetXmlVal(itemNode, "PromoPrice"), out decimal promoPrice);
+
+                            bool hasPromo = GetXmlVal(itemNode, "HasPromo") == "true";
+                            bool isClubPromo = GetXmlVal(itemNode, "IsClub") == "true";
+                            bool isQtyPromo = GetXmlVal(itemNode, "IsQuantity") == "true";
+                            string promoEnd = GetXmlVal(itemNode, "PromoEndDate");
+
+                            decimal finalPrice = price;
+                            string label = "מחיר רגיל";
+
+
+                            if (hasPromo)
+                            {
+                                bool showPromo = false;
+                                if (!isClubPromo && !isQtyPromo) showPromo = true;
+                                else if (isClubPromo && showClub) { showPromo = true; label = "מבצע לחברי מועדון"; }
+                                else if (isQtyPromo && showQuantity) { showPromo = true; label = "מבצע כמות"; }
+
+                                if (showPromo)
+                                {
+                                    finalPrice = promoPrice;
+                                    if (!string.IsNullOrEmpty(promoEnd)) label += $" (בתוקף עד {promoEnd})";
+                                }
+                            }
+
+                            string lookupKey = $"{chainId}-{storeId}";
+                            bool foundStore = _storeData.TryGetValue(lookupKey, out var s);
+
+                            string displayStoreName;
+                            string displayAddress = null;
+                            string displayCity = null;
+                            string displayStoreLabel;
+
+                            if (foundStore)
+                            {
+                               
+                                displayStoreName = s.StoreName;
+                                displayAddress = s.Address;
+                                displayCity = s.City;
+                                displayStoreLabel = $"{s.StoreName}, {s.Address}, {s.City}";
+                            }
+                            else
+                            {
+                               
+                                displayStoreName = $"סניף {storeId}";
+                                displayStoreLabel = $"סניף {storeId} (רשת {chainId})";
+                            }
+
+                    
+                            results.Add(new ProductData
+                            {
+                                ChainId = chainId,
+                                StoreId = storeId,
+                                ItemCode = barcode,
+                                ItemName = name,
+                                RegularPrice = price,
+                                FinalCalculatedPrice = finalPrice,
+                                PriceTypeLabel = label,
+                                HasPromo = hasPromo,
+                                PromoPrice = promoPrice,
+                                IsClubMemberPromo = isClubPromo,
+                                PromoDescription = GetXmlVal(itemNode, "PromoDescription"),
+
+                                StoreLabel = displayStoreLabel,
+                                StoreAddress = displayAddress,
+                                StoreCity = displayCity
+                            });
+                        }
+                    }
+                    catch { }
                 }
 
-                // שלב 2: חיפוש מוצר בקבצי XML המקומיים
-                var normalizedBarcode = validationResult.NormalizedBarcode ?? request.Barcode;
-                var searchResult = await _localXmlSearchService.SearchByBarcodeAsync(normalizedBarcode);
+                if (!results.Any())
+                    return NotFound("Product not found in any store.");
 
-                _logger.LogInformation("תוצאות חיפוש מקומי עבור ברקוד {Barcode}: {Success}, {ProductCount} מוצרים",
-                    request.Barcode, searchResult.Success, searchResult.PriceDetails?.Count ?? 0);
-
-                return Ok(searchResult);
+                return Ok(results.OrderBy(r => r.FinalCalculatedPrice).Take(3));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "שגיאה לא צפויה בחיפוש מקומי: {Barcode}", request.Barcode);
-                return StatusCode(500, new PriceComparisonResponseDto
-                {
-                    Success = false,
-                    ErrorMessage = "שגיאה פנימית בשרת",
-                    PriceDetails = new List<ProductPriceInfoDto>()
-                });
+                _logger.LogError(ex, "Error getting smart prices");
+                return StatusCode(500, "Internal Server Error");
             }
         }
 
-        /// <summary>
-        /// קבלת מצב נתוני XML המקומיים - נדרש לפרונטאנד
-        /// </summary>
-        [HttpGet("local-data-status")]
-        public async Task<ActionResult<LocalDataStatusDto>> GetLocalDataStatus()
+  
+        [HttpGet("debug-stores")]
+        public IActionResult DebugStores()
         {
-            try
+            return Ok(new
             {
-                _logger.LogInformation("מקבל מצב נתונים מקומיים");
-
-                var status = await _localXmlSearchService.GetDataStatusAsync();
-
-                _logger.LogInformation("מצב נתונים מקומיים: {IsAvailable}, {ProductCount} מוצרים, {ChainCount} רשתות",
-                    status.IsDataAvailable, status.TotalProducts, status.LoadedChains);
-
-                return Ok(status);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "שגיאה בקבלת מצב נתונים מקומיים");
-                return StatusCode(500, new LocalDataStatusDto
-                {
-                    IsDataAvailable = false,
-                    StatusMessage = "שגיאה בקבלת מצב הנתונים",
-                    LoadedChains = 0,
-                    LoadedStores = 0,
-                    TotalProducts = 0,
-                    LastRefresh = DateTime.MinValue
-                });
-            }
-        }
-
-        /// <summary>
-        /// רענון נתוני XML מקומיים - נדרש לפרונטאנד
-        /// </summary>
-        [HttpPost("refresh-local-data")]
-        public async Task<ActionResult<bool>> RefreshLocalData()
-        {
-            try
-            {
-                _logger.LogInformation("מתחיל רענון נתונים מקומיים");
-
-                var success = await _localXmlSearchService.RefreshDataAsync();
-
-                if (success)
-                {
-                    _logger.LogInformation("רענון נתונים מקומיים הצליח");
-                    return Ok(true);
-                }
-                else
-                {
-                    _logger.LogWarning("רענון נתונים מקומיים נכשל");
-                    return Ok(false);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "שגיאה ברענון נתונים מקומיים");
-                return StatusCode(500, false);
-            }
-        }
-
-        /// <summary>
-        /// קבלת סטטיסטיקות מחירים למוצר ספציפי
-        /// </summary>
-        [HttpGet("statistics/{barcode}")]
-        public async Task<ActionResult<PriceStatisticsDto?>> GetPriceStatistics(string barcode)
-        {
-            try
-            {
-                _logger.LogInformation("מקבל סטטיסטיקות מחירים עבור ברקוד: {Barcode}", barcode);
-
-                var statistics = await _priceComparisonService.GetPriceStatisticsAsync(barcode);
-
-                return Ok(statistics);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "שגיאה בקבלת סטטיסטיקות מחירים: {Barcode}", barcode);
-                return StatusCode(500, "שגיאה בקבלת סטטיסטיקות");
-            }
+                TotalStores = _storeData.Count,
+                Sample = _storeData.Take(10).Select(kv => $"{kv.Key} => {kv.Value.StoreName}")
+            });
         }
     }
 }

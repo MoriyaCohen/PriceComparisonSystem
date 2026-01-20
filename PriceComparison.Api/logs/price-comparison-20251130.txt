@@ -1,0 +1,263 @@
+2025-11-30 09:42:19.889 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-11-30 09:42:23.185 +02:00 [INF] Executed DbCommand (59ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-11-30 09:42:23.244 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-11-30 09:42:23.259 +02:00 [INF] תיקיית XML מקומית: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api\LocalXmlData
+2025-11-30 09:42:23.292 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-11-30 09:42:23.297 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-11-30 09:42:23.300 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-11-30 09:42:23.303 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-11-30 09:42:23.456 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-11-30 09:42:23.462 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-11-30 09:42:23.946 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-11-30 09:42:23.948 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-11-30 09:42:23.950 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-11-30 09:42:23.951 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-11-30 09:42:23.968 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-11-30 09:42:24.165 +02:00 [INF] Now listening on: http://localhost:5162
+2025-11-30 09:42:24.181 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-30 09:42:24.187 +02:00 [INF] Hosting environment: Development
+2025-11-30 09:42:24.188 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-11-30 09:44:01.839 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5162/api/auth/register - null null
+2025-11-30 09:44:01.919 +02:00 [INF] CORS policy execution successful.
+2025-11-30 09:44:01.944 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5162/api/auth/register - 204 null null 107.2989ms
+2025-11-30 09:44:01.951 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/auth/register - application/json 73
+2025-11-30 09:44:01.960 +02:00 [INF] CORS policy execution successful.
+2025-11-30 09:44:01.964 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.AuthController.Register (PriceComparison.Api)'
+2025-11-30 09:44:01.991 +02:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(PriceComparison.Application.DTOs.RegisterRequest) on controller PriceComparison.Api.Controllers.AuthController (PriceComparison.Api).
+2025-11-30 09:44:02.090 +02:00 [INF] 📝 Register endpoint called for: 0548433238/
+2025-11-30 09:44:02.095 +02:00 [INF] 📝 Registration attempt for: 0548433238/
+2025-11-30 09:44:02.702 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[@__phone_0='?' (Size = 20)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Phone] = @__phone_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2025-11-30 09:44:03.836 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 100), @p2='?' (Size = 100), @p3='?' (DbType = DateTime2), @p4='?' (Size = 255), @p5='?' (Size = 20)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([CreatedDate], [Email], [FullName], [LastLogin], [PasswordHash], [Phone])
+OUTPUT INSERTED.[Id], INSERTED.[IsActive]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-11-30 09:44:03.871 +02:00 [INF] ✅ User created successfully with ID: 1004
+2025-11-30 09:44:03.874 +02:00 [INF] ✅ Successful registration for user ID: 1004
+2025-11-30 09:44:03.875 +02:00 [INF] ✅ Registration endpoint success for: 0548433238/
+2025-11-30 09:44:03.884 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.AuthResult'.
+2025-11-30 09:44:03.906 +02:00 [INF] Executed action PriceComparison.Api.Controllers.AuthController.Register (PriceComparison.Api) in 1907.8865ms
+2025-11-30 09:44:03.910 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.AuthController.Register (PriceComparison.Api)'
+2025-11-30 09:44:03.918 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/auth/register - 200 null application/json; charset=utf-8 1966.4512ms
+2025-11-30 09:44:11.377 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5162/api/auth/login - null null
+2025-11-30 09:44:11.383 +02:00 [INF] CORS policy execution successful.
+2025-11-30 09:44:11.386 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5162/api/auth/login - 204 null null 8.7902ms
+2025-11-30 09:44:11.393 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/auth/login - application/json 52
+2025-11-30 09:44:11.397 +02:00 [INF] CORS policy execution successful.
+2025-11-30 09:44:11.398 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.AuthController.Login (PriceComparison.Api)'
+2025-11-30 09:44:11.408 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(PriceComparison.Application.DTOs.LoginRequest) on controller PriceComparison.Api.Controllers.AuthController (PriceComparison.Api).
+2025-11-30 09:44:11.422 +02:00 [INF] 🔐 Login endpoint called for: 0548433238
+2025-11-30 09:44:11.425 +02:00 [INF] 🔐 Login attempt for: 0548433238
+2025-11-30 09:44:11.558 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__identifier_0='?' (Size = 20), @__identifier_0_1='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedDate], [u].[Email], [u].[FullName], [u].[IsActive], [u].[LastLogin], [u].[PasswordHash], [u].[Phone]
+FROM [Users] AS [u]
+WHERE [u].[IsActive] = CAST(1 AS bit) AND (([u].[Phone] IS NOT NULL AND [u].[Phone] = @__identifier_0) OR ([u].[Email] IS NOT NULL AND [u].[Email] = @__identifier_0_1))
+2025-11-30 09:44:11.953 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [LastLogin] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2025-11-30 09:44:11.960 +02:00 [INF] ✅ Successful login for user ID: 1004
+2025-11-30 09:44:11.963 +02:00 [INF] ✅ Login endpoint success for: 0548433238
+2025-11-30 09:44:11.965 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.LoginResponse'.
+2025-11-30 09:44:12.019 +02:00 [INF] Executed action PriceComparison.Api.Controllers.AuthController.Login (PriceComparison.Api) in 606.859ms
+2025-11-30 09:44:12.022 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.AuthController.Login (PriceComparison.Api)'
+2025-11-30 09:44:12.024 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/auth/login - 200 null application/json; charset=utf-8 630.5298ms
+2025-11-30 09:44:12.054 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/pricecomparison/local-data-status - null null
+2025-11-30 09:44:12.061 +02:00 [INF] CORS policy execution successful.
+2025-11-30 09:44:12.063 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetLocalDataStatus (PriceComparison.Api)'
+2025-11-30 09:44:12.074 +02:00 [INF] Route matched with {action = "GetLocalDataStatus", controller = "PriceComparison"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[PriceComparison.Application.DTOs.LocalDataStatusDto]] GetLocalDataStatus() on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-11-30 09:44:12.091 +02:00 [INF] מקבל מצב נתונים מקומיים
+2025-11-30 09:44:12.093 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-11-30 09:44:12.095 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-11-30 09:44:12.132 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-11-30 09:44:12.135 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-11-30 09:44:12.339 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-11-30 09:44:12.341 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-11-30 09:44:12.347 +02:00 [INF] מצב נתונים מקומיים: true, 6284 מוצרים, 2 רשתות
+2025-11-30 09:44:12.350 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.LocalDataStatusDto'.
+2025-11-30 09:44:12.355 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetLocalDataStatus (PriceComparison.Api) in 273.0082ms
+2025-11-30 09:44:12.358 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetLocalDataStatus (PriceComparison.Api)'
+2025-11-30 09:44:12.360 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/pricecomparison/local-data-status - 200 null application/json; charset=utf-8 305.918ms
+2025-11-30 18:42:06.298 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-11-30 18:42:10.604 +02:00 [INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-11-30 18:42:10.622 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-11-30 18:42:10.628 +02:00 [INF] תיקיית XML מקומית: C:\Users\ADMIN\source\repos\PriceComparisonSystem\PriceComparison.Api\LocalXmlData
+2025-11-30 18:42:10.639 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-11-30 18:42:10.642 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-11-30 18:42:10.645 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-11-30 18:42:10.648 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-11-30 18:42:10.707 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-11-30 18:42:10.712 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-11-30 18:42:10.953 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-11-30 18:42:10.956 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-11-30 18:42:10.957 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-11-30 18:42:10.958 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-11-30 18:42:10.969 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-11-30 18:42:11.109 +02:00 [INF] Now listening on: http://localhost:5162
+2025-11-30 18:42:11.110 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-30 18:42:11.112 +02:00 [INF] Hosting environment: Development
+2025-11-30 18:42:11.114 +02:00 [INF] Content root path: C:\Users\ADMIN\source\repos\PriceComparisonSystem\PriceComparison.Api
+2025-11-30 18:44:37.604 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/auth/test - null null
+2025-11-30 18:44:37.671 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:44:37.676 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.AuthController.Test (PriceComparison.Api)'
+2025-11-30 18:44:37.697 +02:00 [INF] Route matched with {action = "Test", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Test() on controller PriceComparison.Api.Controllers.AuthController (PriceComparison.Api).
+2025-11-30 18:44:37.703 +02:00 [INF] 🧪 Test endpoint called
+2025-11-30 18:44:37.712 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-30 18:44:37.765 +02:00 [INF] Executed action PriceComparison.Api.Controllers.AuthController.Test (PriceComparison.Api) in 60.4726ms
+2025-11-30 18:44:37.768 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.AuthController.Test (PriceComparison.Api)'
+2025-11-30 18:44:37.773 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/auth/test - 200 null application/json; charset=utf-8 171.0688ms
+2025-11-30 18:44:41.286 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5162/api/auth/login - null null
+2025-11-30 18:44:41.300 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:44:41.306 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5162/api/auth/login - 204 null null 17.7977ms
+2025-11-30 18:44:41.311 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/auth/login - application/json 52
+2025-11-30 18:44:41.317 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:44:41.319 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.AuthController.Login (PriceComparison.Api)'
+2025-11-30 18:44:41.336 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(PriceComparison.Application.DTOs.LoginRequest) on controller PriceComparison.Api.Controllers.AuthController (PriceComparison.Api).
+2025-11-30 18:44:41.382 +02:00 [INF] 🔐 Login endpoint called for: 0548433238
+2025-11-30 18:44:41.385 +02:00 [INF] 🔐 Login attempt for: 0548433238
+2025-11-30 18:44:41.905 +02:00 [INF] Executed DbCommand (73ms) [Parameters=[@__identifier_0='?' (Size = 20), @__identifier_0_1='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedDate], [u].[Email], [u].[FullName], [u].[IsActive], [u].[LastLogin], [u].[PasswordHash], [u].[Phone]
+FROM [Users] AS [u]
+WHERE [u].[IsActive] = CAST(1 AS bit) AND (([u].[Phone] IS NOT NULL AND [u].[Phone] = @__identifier_0) OR ([u].[Email] IS NOT NULL AND [u].[Email] = @__identifier_0_1))
+2025-11-30 18:44:43.178 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [LastLogin] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2025-11-30 18:44:43.208 +02:00 [INF] ✅ Successful login for user ID: 1004
+2025-11-30 18:44:43.210 +02:00 [INF] ✅ Login endpoint success for: 0548433238
+2025-11-30 18:44:43.217 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.LoginResponse'.
+2025-11-30 18:44:43.238 +02:00 [INF] Executed action PriceComparison.Api.Controllers.AuthController.Login (PriceComparison.Api) in 1897.6361ms
+2025-11-30 18:44:43.241 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.AuthController.Login (PriceComparison.Api)'
+2025-11-30 18:44:43.250 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/auth/login - 200 null application/json; charset=utf-8 1938.4494ms
+2025-11-30 18:44:43.286 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/pricecomparison/local-data-status - null null
+2025-11-30 18:44:43.291 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:44:43.293 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetLocalDataStatus (PriceComparison.Api)'
+2025-11-30 18:44:43.304 +02:00 [INF] Route matched with {action = "GetLocalDataStatus", controller = "PriceComparison"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[PriceComparison.Application.DTOs.LocalDataStatusDto]] GetLocalDataStatus() on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-11-30 18:44:43.315 +02:00 [INF] מקבל מצב נתונים מקומיים
+2025-11-30 18:44:43.319 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-11-30 18:44:43.322 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-11-30 18:44:43.326 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-11-30 18:44:43.328 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-11-30 18:44:43.529 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-11-30 18:44:43.531 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-11-30 18:44:43.543 +02:00 [INF] מצב נתונים מקומיים: true, 6284 מוצרים, 2 רשתות
+2025-11-30 18:44:43.546 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.LocalDataStatusDto'.
+2025-11-30 18:44:43.555 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetLocalDataStatus (PriceComparison.Api) in 244.4288ms
+2025-11-30 18:44:43.557 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetLocalDataStatus (PriceComparison.Api)'
+2025-11-30 18:44:43.559 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/pricecomparison/local-data-status - 200 null application/json; charset=utf-8 273.8895ms
+2025-11-30 18:44:46.846 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5162/api/barcode/validate - null null
+2025-11-30 18:44:46.850 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:44:46.852 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5162/api/barcode/validate - 204 null null 6.002ms
+2025-11-30 18:44:46.856 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/barcode/validate - application/json 27
+2025-11-30 18:44:46.861 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:44:46.864 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.BarcodeController.ValidateBarcode (PriceComparison.Api)'
+2025-11-30 18:44:46.871 +02:00 [INF] Route matched with {action = "ValidateBarcode", controller = "Barcode"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[PriceComparison.Application.DTOs.BarcodeValidationResponseDto]] ValidateBarcode(PriceComparison.Application.DTOs.BarcodeValidationRequestDto) on controller PriceComparison.Api.Controllers.BarcodeController (PriceComparison.Api).
+2025-11-30 18:44:46.881 +02:00 [INF] מתחיל בדיקת ברקוד: 7290110115180
+2025-11-30 18:44:46.891 +02:00 [INF] תוצאת בדיקת ברקוד 7290110115180: true
+2025-11-30 18:44:46.893 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.BarcodeValidationResponseDto'.
+2025-11-30 18:44:46.900 +02:00 [INF] Executed action PriceComparison.Api.Controllers.BarcodeController.ValidateBarcode (PriceComparison.Api) in 25.3165ms
+2025-11-30 18:44:46.902 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.BarcodeController.ValidateBarcode (PriceComparison.Api)'
+2025-11-30 18:44:46.905 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/barcode/validate - 200 null application/json; charset=utf-8 48.9571ms
+2025-11-30 18:44:46.912 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5162/api/pricecomparison/search-local - null null
+2025-11-30 18:44:46.919 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:44:46.920 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5162/api/pricecomparison/search-local - 204 null null 8.7372ms
+2025-11-30 18:44:46.925 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/pricecomparison/search-local - application/json 27
+2025-11-30 18:44:46.932 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:44:46.933 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.SearchProductByBarcodeLocal (PriceComparison.Api)'
+2025-11-30 18:44:46.939 +02:00 [INF] Route matched with {action = "SearchProductByBarcodeLocal", controller = "PriceComparison"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[PriceComparison.Application.DTOs.PriceComparisonResponseDto]] SearchProductByBarcodeLocal(PriceComparison.Application.DTOs.BarcodeSearchRequestDto) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-11-30 18:44:46.950 +02:00 [INF] מתחיל חיפוש מקומי עבור ברקוד: 7290110115180
+2025-11-30 18:44:46.953 +02:00 [INF] מחפש ברקוד: 7290110115180
+2025-11-30 18:44:46.955 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-11-30 18:44:46.956 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-11-30 18:44:46.959 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-11-30 18:44:46.961 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-11-30 18:44:47.105 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-11-30 18:44:47.107 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-11-30 18:44:47.108 +02:00 [INF] מוצר לא נמצא עבור ברקוד: 7290110115180
+2025-11-30 18:44:47.111 +02:00 [INF] תוצאות חיפוש מקומי עבור ברקוד 7290110115180: false, 0 מוצרים
+2025-11-30 18:44:47.114 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.PriceComparisonResponseDto'.
+2025-11-30 18:44:47.134 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.SearchProductByBarcodeLocal (PriceComparison.Api) in 191.3761ms
+2025-11-30 18:44:47.137 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.SearchProductByBarcodeLocal (PriceComparison.Api)'
+2025-11-30 18:44:47.139 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/pricecomparison/search-local - 200 null application/json; charset=utf-8 214.1718ms
+2025-11-30 18:45:04.547 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5162/api/barcode/validate - null null
+2025-11-30 18:45:04.550 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:45:04.552 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5162/api/barcode/validate - 204 null null 5.2789ms
+2025-11-30 18:45:04.557 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/barcode/validate - application/json 27
+2025-11-30 18:45:04.564 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:45:04.566 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.BarcodeController.ValidateBarcode (PriceComparison.Api)'
+2025-11-30 18:45:04.568 +02:00 [INF] Route matched with {action = "ValidateBarcode", controller = "Barcode"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[PriceComparison.Application.DTOs.BarcodeValidationResponseDto]] ValidateBarcode(PriceComparison.Application.DTOs.BarcodeValidationRequestDto) on controller PriceComparison.Api.Controllers.BarcodeController (PriceComparison.Api).
+2025-11-30 18:45:04.573 +02:00 [INF] מתחיל בדיקת ברקוד: 7290002331018
+2025-11-30 18:45:04.578 +02:00 [INF] תוצאת בדיקת ברקוד 7290002331018: true
+2025-11-30 18:45:04.580 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.BarcodeValidationResponseDto'.
+2025-11-30 18:45:04.583 +02:00 [INF] Executed action PriceComparison.Api.Controllers.BarcodeController.ValidateBarcode (PriceComparison.Api) in 10.4882ms
+2025-11-30 18:45:04.586 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.BarcodeController.ValidateBarcode (PriceComparison.Api)'
+2025-11-30 18:45:04.588 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/barcode/validate - 200 null application/json; charset=utf-8 31.2664ms
+2025-11-30 18:45:04.598 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5162/api/pricecomparison/search-local - null null
+2025-11-30 18:45:04.602 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:45:04.604 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5162/api/pricecomparison/search-local - 204 null null 5.8352ms
+2025-11-30 18:45:04.614 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/pricecomparison/search-local - application/json 27
+2025-11-30 18:45:04.618 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:45:04.619 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.SearchProductByBarcodeLocal (PriceComparison.Api)'
+2025-11-30 18:45:04.622 +02:00 [INF] Route matched with {action = "SearchProductByBarcodeLocal", controller = "PriceComparison"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[PriceComparison.Application.DTOs.PriceComparisonResponseDto]] SearchProductByBarcodeLocal(PriceComparison.Application.DTOs.BarcodeSearchRequestDto) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-11-30 18:45:04.634 +02:00 [INF] מתחיל חיפוש מקומי עבור ברקוד: 7290002331018
+2025-11-30 18:45:04.635 +02:00 [INF] מחפש ברקוד: 7290002331018
+2025-11-30 18:45:04.637 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-11-30 18:45:04.638 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-11-30 18:45:04.642 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-11-30 18:45:04.645 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-11-30 18:45:04.723 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-11-30 18:45:04.725 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-11-30 18:45:04.727 +02:00 [INF] נמצאו 2 מוצרים עבור ברקוד: 7290002331018
+2025-11-30 18:45:04.737 +02:00 [INF] תוצאות חיפוש מקומי עבור ברקוד 7290002331018: true, 2 מוצרים
+2025-11-30 18:45:04.739 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.PriceComparisonResponseDto'.
+2025-11-30 18:45:04.764 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.SearchProductByBarcodeLocal (PriceComparison.Api) in 134.3682ms
+2025-11-30 18:45:04.767 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.SearchProductByBarcodeLocal (PriceComparison.Api)'
+2025-11-30 18:45:04.769 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/pricecomparison/search-local - 200 null application/json; charset=utf-8 155.016ms
+2025-11-30 18:49:07.487 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5162/api/barcode/validate - null null
+2025-11-30 18:49:07.494 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:49:07.496 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5162/api/barcode/validate - 204 null null 8.5723ms
+2025-11-30 18:49:07.506 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/barcode/validate - application/json 27
+2025-11-30 18:49:07.512 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:49:07.514 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.BarcodeController.ValidateBarcode (PriceComparison.Api)'
+2025-11-30 18:49:07.516 +02:00 [INF] Route matched with {action = "ValidateBarcode", controller = "Barcode"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[PriceComparison.Application.DTOs.BarcodeValidationResponseDto]] ValidateBarcode(PriceComparison.Application.DTOs.BarcodeValidationRequestDto) on controller PriceComparison.Api.Controllers.BarcodeController (PriceComparison.Api).
+2025-11-30 18:49:07.520 +02:00 [INF] מתחיל בדיקת ברקוד: 7290002331018
+2025-11-30 18:49:07.521 +02:00 [INF] תוצאת בדיקת ברקוד 7290002331018: true
+2025-11-30 18:49:07.523 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.BarcodeValidationResponseDto'.
+2025-11-30 18:49:07.529 +02:00 [INF] Executed action PriceComparison.Api.Controllers.BarcodeController.ValidateBarcode (PriceComparison.Api) in 8.9144ms
+2025-11-30 18:49:07.531 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.BarcodeController.ValidateBarcode (PriceComparison.Api)'
+2025-11-30 18:49:07.533 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/barcode/validate - 200 null application/json; charset=utf-8 27.0803ms
+2025-11-30 18:49:07.546 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5162/api/pricecomparison/search-local - null null
+2025-11-30 18:49:07.555 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:49:07.556 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5162/api/pricecomparison/search-local - 204 null null 10.4173ms
+2025-11-30 18:49:07.565 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/pricecomparison/search-local - application/json 27
+2025-11-30 18:49:07.569 +02:00 [INF] CORS policy execution successful.
+2025-11-30 18:49:07.570 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.SearchProductByBarcodeLocal (PriceComparison.Api)'
+2025-11-30 18:49:07.572 +02:00 [INF] Route matched with {action = "SearchProductByBarcodeLocal", controller = "PriceComparison"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[PriceComparison.Application.DTOs.PriceComparisonResponseDto]] SearchProductByBarcodeLocal(PriceComparison.Application.DTOs.BarcodeSearchRequestDto) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-11-30 18:49:07.579 +02:00 [INF] מתחיל חיפוש מקומי עבור ברקוד: 7290002331018
+2025-11-30 18:49:07.581 +02:00 [INF] מחפש ברקוד: 7290002331018
+2025-11-30 18:49:07.582 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-11-30 18:49:07.584 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-11-30 18:49:07.586 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-11-30 18:49:07.587 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-11-30 18:49:07.654 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-11-30 18:49:07.657 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-11-30 18:49:07.659 +02:00 [INF] נמצאו 2 מוצרים עבור ברקוד: 7290002331018
+2025-11-30 18:49:07.662 +02:00 [INF] תוצאות חיפוש מקומי עבור ברקוד 7290002331018: true, 2 מוצרים
+2025-11-30 18:49:07.664 +02:00 [INF] Executing OkObjectResult, writing value of type 'PriceComparison.Application.DTOs.PriceComparisonResponseDto'.
+2025-11-30 18:49:07.667 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.SearchProductByBarcodeLocal (PriceComparison.Api) in 87.9708ms
+2025-11-30 18:49:07.669 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.SearchProductByBarcodeLocal (PriceComparison.Api)'
+2025-11-30 18:49:07.671 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/pricecomparison/search-local - 200 null application/json; charset=utf-8 106.0154ms

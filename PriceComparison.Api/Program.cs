@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PriceComparison.Application.Services;
+using PriceComparison.Application.Services; 
 using PriceComparison.Infrastructure.Models;
 using PriceComparison.Infrastructure.Repositories;
-using PriceComparison.Api.Services;
+using PriceComparison.Api.Services; 
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,17 +41,29 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IStoreRepository, StoreRepository>();
 builder.Services.AddScoped<IStorePriceRepository, StorePriceRepository>();
 
+
+// הוסף את השורות האלו בקובץ Program.cs
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<PriceComparison.Api.Services.IBusStopService, PriceComparison.Api.Services.BusStopService>();
+builder.Services.AddScoped<PriceComparison.Api.Services.IStoreService, PriceComparison.Api.Services.StoreService>();
+
+
 // רישום שירותים - Application Layer
 builder.Services.AddScoped<IBarcodeValidationService, BarcodeValidationService>();
 builder.Services.AddScoped<IPriceComparisonService, PriceComparisonService>();
 builder.Services.AddScoped<ILocalXmlSearchService, LocalXmlSearchService>();
-
-// 🔧 AuthService האמיתי שלך (עם מסד נתונים)
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-// רישום XmlFileManager ו-XmlDataPreloaderHostedService
+// --- כאן התיקון החשוב ---
+// מחקנו את ה-Namespace הישן (ComparisonGraph...) ושמנו את החדש והנכון:
+builder.Services.AddScoped<PriceSyncService>();
+
+// רישום שירותים שרצים ברקע (Hosted Services)
 builder.Services.AddSingleton<XmlFileManager>();
 builder.Services.AddHostedService<XmlDataPreloaderHostedService>();
+
+// השירות החדש לסנכרון יומי אוטומטי
+builder.Services.AddHostedService<DailySyncBackgroundService>();
 
 var app = builder.Build();
 
@@ -62,9 +74,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
 app.UseCors("AllowAngularApp");
 
-app.UseRouting();
 app.MapControllers();
 
 // הודעת התחלה
@@ -85,17 +97,11 @@ catch (Exception ex)
 {
     logger.LogError(ex, "❌ שגיאה בחיבור למסד הנתונים");
 }
-
-// יצירת תיקיית XML מקומית
 var xmlDataPath = Path.Combine(Directory.GetCurrentDirectory(), "LocalXmlData");
 if (!Directory.Exists(xmlDataPath))
 {
     Directory.CreateDirectory(xmlDataPath);
     logger.LogInformation("נוצרה תיקיית XML מקומית: {Path}", xmlDataPath);
 }
-else
-{
-    logger.LogInformation("תיקיית XML מקומית: {Path}", xmlDataPath);
-}
 
-app.Run();
+app.Run("http://localhost:5162");

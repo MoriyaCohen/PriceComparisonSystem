@@ -1,0 +1,97 @@
+2025-12-24 11:27:55.228 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-24 11:27:59.541 +02:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-24 11:27:59.560 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-24 11:27:59.581 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-24 11:27:59.586 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-24 11:27:59.590 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-24 11:27:59.597 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-24 11:27:59.666 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-24 11:27:59.668 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-24 11:27:59.933 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-24 11:27:59.934 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-24 11:27:59.935 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-24 11:27:59.936 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-24 11:27:59.947 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-24 11:27:59.951 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-24 11:27:59.952 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-24 11:28:00.783 +02:00 [INF] ✅ Auto-Sync Finished. Processed 3 files.
+2025-12-24 11:28:00.965 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-24 11:28:00.966 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-24 11:28:00.967 +02:00 [INF] Hosting environment: Development
+2025-12-24 11:28:00.969 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-12-24 11:28:10.903 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.html - null null
+2025-12-24 11:28:11.041 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.html - 200 null text/html;charset=utf-8 146.7494ms
+2025-12-24 11:28:11.074 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.js - null null
+2025-12-24 11:28:11.082 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.js - 200 null application/javascript;charset=utf-8 8.2222ms
+2025-12-24 11:28:11.299 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - null null
+2025-12-24 11:28:11.311 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/favicon-32x32.png - null null
+2025-12-24 11:28:11.361 +02:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-12-24 11:28:11.391 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/favicon-32x32.png - 200 628 image/png 80.87ms
+2025-12-24 11:28:11.509 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 211.7595ms
+2025-12-24 11:39:43.219 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-24 11:39:46.578 +02:00 [INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-24 11:39:46.597 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-24 11:39:46.611 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-24 11:39:46.616 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-24 11:39:46.618 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-24 11:39:46.621 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-24 11:39:46.642 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-24 11:39:46.645 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-24 11:39:46.863 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-24 11:39:46.866 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-24 11:39:46.867 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-24 11:39:46.868 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-24 11:39:46.877 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-24 11:39:46.882 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-24 11:39:46.884 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-24 11:39:47.911 +02:00 [INF] ✅ Auto-Sync Finished. Processed 3 files.
+2025-12-24 11:39:48.095 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-24 11:39:48.098 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-24 11:39:48.099 +02:00 [INF] Hosting environment: Development
+2025-12-24 11:39:48.102 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-12-24 11:39:48.775 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/5000159555692?showClub=false&showQuantity=false - null null
+2025-12-24 11:39:48.899 +02:00 [INF] CORS policy execution successful.
+2025-12-24 11:39:48.914 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-24 11:39:48.953 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-24 11:39:48.971 +02:00 [INF] Loading stores from 3 files...
+2025-12-24 11:39:49.071 +02:00 [INF] Total unique stores loaded: 135
+2025-12-24 11:39:49.073 +02:00 [INF] SUCCESS: King Store Branch 340 loaded successfully!
+2025-12-24 11:39:49.392 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.OrderedPartition`1[[PriceComparison.Application.DTOs.ProductData, PriceComparison.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-24 11:39:49.484 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 513.5056ms
+2025-12-24 11:39:49.499 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/5000159555692?showClub=false&showQuantity=false - null null
+2025-12-24 11:39:49.500 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-24 11:39:49.507 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/5000159555692?showClub=false&showQuantity=false - 200 null application/json; charset=utf-8 742.4589ms
+2025-12-24 11:39:49.510 +02:00 [INF] CORS policy execution successful.
+2025-12-24 11:39:49.525 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-24 11:39:49.528 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-24 11:39:49.535 +02:00 [INF] Loading stores from 3 files...
+2025-12-24 11:39:49.539 +02:00 [INF] Total unique stores loaded: 135
+2025-12-24 11:39:49.541 +02:00 [INF] SUCCESS: King Store Branch 340 loaded successfully!
+2025-12-24 11:39:49.866 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.OrderedPartition`1[[PriceComparison.Application.DTOs.ProductData, PriceComparison.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-24 11:39:49.881 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 347.5299ms
+2025-12-24 11:39:49.885 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-24 11:39:49.888 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/5000159555692?showClub=false&showQuantity=false - 200 null application/json; charset=utf-8 388.3505ms
+2025-12-24 11:41:46.543 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-24 11:41:48.558 +02:00 [INF] Executed DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-24 11:41:48.575 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-24 11:41:48.591 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-24 11:41:48.594 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-24 11:41:48.597 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-24 11:41:48.601 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-24 11:41:48.623 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-24 11:41:48.627 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-24 11:41:48.803 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-24 11:41:48.807 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-24 11:41:48.808 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-24 11:41:48.809 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-24 11:41:48.820 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-24 11:41:48.825 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-24 11:41:48.827 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-24 11:41:49.292 +02:00 [INF] ✅ Auto-Sync Finished. Processed 3 files.
+2025-12-24 11:41:49.461 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-24 11:41:49.463 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-24 11:41:49.464 +02:00 [INF] Hosting environment: Development
+2025-12-24 11:41:49.465 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api

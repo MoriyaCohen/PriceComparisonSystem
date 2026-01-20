@@ -1,0 +1,129 @@
+2026-01-10 21:20:24.333 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2026-01-10 21:20:28.985 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-01-10 21:20:29.009 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2026-01-10 21:20:29.035 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2026-01-10 21:20:29.039 +02:00 [INF] מתחיל רענון נתונים ידני
+2026-01-10 21:20:29.041 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2026-01-10 21:20:29.046 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2026-01-10 21:20:29.170 +02:00 [INF] נטענו פרטי 82 סניפים
+2026-01-10 21:20:29.174 +02:00 [INF] נמצאו 2 קבצי נתונים
+2026-01-10 21:20:29.569 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2026-01-10 21:20:29.571 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2026-01-10 21:20:29.572 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2026-01-10 21:20:29.573 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2026-01-10 21:20:29.591 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2026-01-10 21:20:29.595 +02:00 [INF] Daily Sync Background Service is starting.
+2026-01-10 21:20:29.596 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2026-01-10 21:20:31.010 +02:00 [INF] ✅ Auto-Sync Finished. Processed 3 files.
+2026-01-10 21:20:31.251 +02:00 [INF] Now listening on: http://localhost:5162
+2026-01-10 21:20:31.253 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-01-10 21:20:31.254 +02:00 [INF] Hosting environment: Development
+2026-01-10 21:20:31.255 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2026-01-10 21:22:42.036 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.html - null null
+2026-01-10 21:22:42.175 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.html - 200 null text/html;charset=utf-8 149.8501ms
+2026-01-10 21:22:42.225 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.js - null null
+2026-01-10 21:22:42.232 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.js - 200 null application/javascript;charset=utf-8 7.0371ms
+2026-01-10 21:22:42.441 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - null null
+2026-01-10 21:22:42.635 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 194.5064ms
+2026-01-10 21:23:13.247 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/7290017617831?showClub=false&showQuantity=false - null null
+2026-01-10 21:23:13.296 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:23:13.330 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2026-01-10 21:23:13.341 +02:00 [INF] Loading stores from 3 files...
+2026-01-10 21:23:13.398 +02:00 [INF] Total unique stores loaded: 135
+2026-01-10 21:23:13.400 +02:00 [INF] SUCCESS: King Store Branch 340 loaded successfully!
+2026-01-10 21:23:13.578 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.OrderedPartition`1[[PriceComparison.Application.DTOs.ProductData, PriceComparison.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-01-10 21:23:13.624 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 285.7866ms
+2026-01-10 21:23:13.627 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:23:13.628 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/7290017617831?showClub=false&showQuantity=false - 200 null application/json; charset=utf-8 381.2108ms
+2026-01-10 21:23:48.477 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/7290100700396?showClub=false&showQuantity=false - null null
+2026-01-10 21:23:48.494 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:23:48.497 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2026-01-10 21:23:48.502 +02:00 [INF] Loading stores from 3 files...
+2026-01-10 21:23:48.506 +02:00 [INF] Total unique stores loaded: 135
+2026-01-10 21:23:48.507 +02:00 [INF] SUCCESS: King Store Branch 340 loaded successfully!
+2026-01-10 21:23:48.579 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.OrderedPartition`1[[PriceComparison.Application.DTOs.ProductData, PriceComparison.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-01-10 21:23:48.585 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 84.0526ms
+2026-01-10 21:23:48.588 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:23:48.590 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/7290100700396?showClub=false&showQuantity=false - 200 null application/json; charset=utf-8 115.7523ms
+2026-01-10 21:24:20.308 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/80879114?showClub=false&showQuantity=false - null null
+2026-01-10 21:24:20.314 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:24:20.316 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2026-01-10 21:24:20.319 +02:00 [INF] Loading stores from 3 files...
+2026-01-10 21:24:20.322 +02:00 [INF] Total unique stores loaded: 135
+2026-01-10 21:24:20.323 +02:00 [INF] SUCCESS: King Store Branch 340 loaded successfully!
+2026-01-10 21:24:20.393 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2026-01-10 21:24:20.395 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 75.9857ms
+2026-01-10 21:24:20.407 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:24:20.411 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/80879114?showClub=false&showQuantity=false - 404 null text/plain; charset=utf-8 102.7929ms
+2026-01-10 21:37:20.840 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/20006004?showClub=false&showQuantity=false - null null
+2026-01-10 21:37:20.845 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:37:20.847 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2026-01-10 21:37:20.850 +02:00 [INF] Loading stores from 3 files...
+2026-01-10 21:37:20.898 +02:00 [INF] Total unique stores loaded: 135
+2026-01-10 21:37:20.900 +02:00 [INF] SUCCESS: King Store Branch 340 loaded successfully!
+2026-01-10 21:37:21.171 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2026-01-10 21:37:21.175 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 325.6775ms
+2026-01-10 21:37:21.178 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:37:21.179 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/20006004?showClub=false&showQuantity=false - 404 null text/plain; charset=utf-8 340.6905ms
+2026-01-10 21:41:12.122 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/7290017617831?showClub=false&showQuantity=false - null null
+2026-01-10 21:41:12.134 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:41:12.136 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2026-01-10 21:41:12.139 +02:00 [INF] Loading stores from 3 files...
+2026-01-10 21:41:12.143 +02:00 [INF] Total unique stores loaded: 135
+2026-01-10 21:41:12.145 +02:00 [INF] SUCCESS: King Store Branch 340 loaded successfully!
+2026-01-10 21:41:12.217 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.OrderedPartition`1[[PriceComparison.Application.DTOs.ProductData, PriceComparison.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-01-10 21:41:12.219 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 80.4265ms
+2026-01-10 21:41:12.223 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 21:41:12.225 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/7290017617831?showClub=false&showQuantity=false - 200 null application/json; charset=utf-8 102.7114ms
+2026-01-10 23:14:51.230 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2026-01-10 23:14:55.413 +02:00 [INF] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-01-10 23:14:55.433 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2026-01-10 23:14:55.452 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2026-01-10 23:14:55.455 +02:00 [INF] מתחיל רענון נתונים ידני
+2026-01-10 23:14:55.457 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2026-01-10 23:14:55.462 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2026-01-10 23:14:55.531 +02:00 [INF] נטענו פרטי 82 סניפים
+2026-01-10 23:14:55.534 +02:00 [INF] נמצאו 2 קבצי נתונים
+2026-01-10 23:14:55.845 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2026-01-10 23:14:55.847 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2026-01-10 23:14:55.848 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2026-01-10 23:14:55.849 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2026-01-10 23:14:55.860 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2026-01-10 23:14:55.864 +02:00 [INF] Daily Sync Background Service is starting.
+2026-01-10 23:14:55.865 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2026-01-10 23:14:56.679 +02:00 [INF] ✅ Auto-Sync Finished. Processed 3 files.
+2026-01-10 23:14:56.897 +02:00 [INF] Now listening on: http://localhost:5162
+2026-01-10 23:14:56.898 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-01-10 23:14:56.899 +02:00 [INF] Hosting environment: Development
+2026-01-10 23:14:56.900 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2026-01-10 23:15:57.964 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/SmartShopping/GetCheapestByStop?stopId=20594&radiusKm=2&barcode=7290103056789 - null null
+2026-01-10 23:15:58.036 +02:00 [INF] CORS policy execution successful.
+2026-01-10 23:15:58.041 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.SmartShoppingController.GetCheapestByStop (PriceComparison.Api)'
+2026-01-10 23:15:58.087 +02:00 [INF] Route matched with {action = "GetCheapestByStop", controller = "SmartShopping"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCheapestByStop(System.String, Double, System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.SmartShoppingController (PriceComparison.Api).
+2026-01-10 23:15:58.288 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2026-01-10 23:15:58.302 +02:00 [INF] Executed action PriceComparison.Api.Controllers.SmartShoppingController.GetCheapestByStop (PriceComparison.Api) in 208.4524ms
+2026-01-10 23:15:58.306 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.SmartShoppingController.GetCheapestByStop (PriceComparison.Api)'
+2026-01-10 23:15:58.311 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/SmartShopping/GetCheapestByStop?stopId=20594&radiusKm=2&barcode=7290103056789 - 404 null text/plain; charset=utf-8 360.3083ms
+2026-01-10 23:50:29.676 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/ - null null
+2026-01-10 23:50:29.691 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/ - 404 0 null 23.3767ms
+2026-01-10 23:50:29.698 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5162/, Response status code: 404
+2026-01-10 23:50:33.642 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger - null null
+2026-01-10 23:50:33.651 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger - 301 0 null 8.2609ms
+2026-01-10 23:50:33.661 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.html - null null
+2026-01-10 23:50:33.779 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.html - 200 null text/html;charset=utf-8 117.1547ms
+2026-01-10 23:50:33.817 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.js - null null
+2026-01-10 23:50:33.829 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.js - 200 null application/javascript;charset=utf-8 11.9821ms
+2026-01-10 23:50:34.253 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - null null
+2026-01-10 23:50:34.497 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 244.3267ms
+2026-01-10 23:50:50.874 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/35586?showClub=false&showQuantity=false - null null
+2026-01-10 23:50:50.887 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 23:50:50.893 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2026-01-10 23:50:50.902 +02:00 [INF] Loading stores from 3 files...
+2026-01-10 23:50:50.907 +02:00 [INF] Total unique stores loaded: 135
+2026-01-10 23:50:50.911 +02:00 [INF] SUCCESS: King Store Branch 340 loaded successfully!
+2026-01-10 23:50:50.998 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2026-01-10 23:50:51.003 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 104.9276ms
+2026-01-10 23:50:51.006 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2026-01-10 23:50:51.009 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/35586?showClub=false&showQuantity=false - 404 null text/plain; charset=utf-8 134.6188ms

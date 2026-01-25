@@ -1,0 +1,123 @@
+<div class="smart-shopping-container" dir="rtl">
+  
+  <!-- Header -->
+  <header class="page-header">
+    <h1>חיפוש חכם</h1>
+    <p>מצא את המחירים המשתלמים ביותר ליד התחנה שלך</p>
+  </header>
+
+  <!-- Search Card -->
+  <div class="search-card">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      
+      <div class="form-grid">
+        <!-- Bus Stop Input -->
+        <div class="input-group">
+          <label for="stopId">מספר תחנה</label>
+          <input 
+            id="stopId" 
+            type="text" 
+            formControlName="stopId" 
+            placeholder="לדוגמה: 20543"
+            [class.error]="searchForm.get('stopId')?.invalid && searchForm.get('stopId')?.touched"
+          />
+          <span class="error-msg" *ngIf="searchForm.get('stopId')?.invalid && searchForm.get('stopId')?.touched">
+            חובה להזין מספר תחנה
+          </span>
+        </div>
+
+        <!-- Radius Input -->
+        <div class="input-group">
+          <label for="radiusKm">רדיוס (ק"מ)</label>
+          <input 
+            id="radiusKm" 
+            type="number" 
+            formControlName="radiusKm" 
+            min="0.1" 
+            step="0.1" 
+            placeholder="לדוגמה: 1.0"
+            [class.error]="searchForm.get('radiusKm')?.invalid && searchForm.get('radiusKm')?.touched"
+          />
+          <span class="error-msg" *ngIf="searchForm.get('radiusKm')?.invalid && searchForm.get('radiusKm')?.touched">
+            נדרש רדיוס תקין
+          </span>
+        </div>
+      </div>
+
+      <!-- Barcode Input (Full Width) -->
+      <div class="input-group full-width">
+        <label for="barcode">ברקוד מוצר</label>
+        <input 
+          id="barcode" 
+          type="text" 
+          formControlName="barcode" 
+          placeholder="סרוק או הקלד ברקוד"
+          [class.error]="searchForm.get('barcode')?.invalid && searchForm.get('barcode')?.touched"
+        />
+        <span class="error-msg" *ngIf="searchForm.get('barcode')?.invalid && searchForm.get('barcode')?.touched">
+          חובה להזין ברקוד
+        </span>
+      </div>
+
+      <!-- Options / Toggles -->
+      <div class="options-group">
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="showClub">
+          <span class="checkmark"></span>
+          הצג מחיר חבר מועדון
+        </label>
+
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="showQuantity">
+          <span class="checkmark"></span>
+          הצג מבצעי כמות
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="isLoading" class="btn-primary">
+        <span *ngIf="!isLoading">חפש את המחיר הטוב ביותר</span>
+        <span *ngIf="isLoading" class="spinner-inline"></span>
+        <span *ngIf="isLoading" style="margin-right: 8px">מחפש מחירים...</span>
+      </button>
+
+    </form>
+  </div>
+
+  <!-- Messages -->
+  <div *ngIf="errorMessage" class="state-message error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="hasSearched && !isLoading && results.length === 0 && !errorMessage" class="state-message empty">
+    <p>לא נמצאו מוצרים בטווח זה</p>
+  </div>
+
+  <!-- Results Grid -->
+  <div class="results-grid" *ngIf="results.length > 0 && !isLoading">
+    <div class="result-card" *ngFor="let item of results">
+      <div class="card-header">
+        <h3 class="store-name" title="{{ item.storeName }}">{{ item.storeName }}</h3>
+        <span class="chain-badge" *ngIf="item.chainName">{{ item.chainName }}</span>
+      </div>
+      
+      <div class="card-body">
+        <div class="address-row">
+          <i class="icon-location">📍</i>
+          <span class="address-text">{{ item.storeAddress }}</span>
+          <span class="distance-text" *ngIf="item.distanceKm">({{ item.distanceKm | number:'1.1-1' }} ק"מ)</span>
+        </div>
+
+        <div class="price-section">
+          <div class="original-price" *ngIf="item.hasPromo || item.originalPrice > item.finalPrice">
+            {{ item.originalPrice | currency:'ILS':'symbol':'1.2-2' }}
+          </div>
+          <div class="final-price">
+            {{ item.finalPrice | currency:'ILS':'symbol':'1.2-2' }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

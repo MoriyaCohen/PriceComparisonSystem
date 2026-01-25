@@ -25,6 +25,11 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder
   ) {
+    // Redirect if already logged in
+    if (this.authService.authState().isLoggedIn) {
+      this.router.navigate(['/barcodeSearch']);
+    }
+
     this.loginForm = this.fb.group({
       loginIdentifier: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]]

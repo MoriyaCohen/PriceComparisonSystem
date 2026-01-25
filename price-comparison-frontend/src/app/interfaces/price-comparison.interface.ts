@@ -72,3 +72,41 @@ export interface BarcodeValidationResponse {
   errorMessage?: string;
   normalizedBarcode?: string;
 }
+
+export interface CheapestPriceResponse {
+  storeId: string;
+  itemCode: string;
+  itemName: string;
+  finalPrice: number;
+  originalPrice?: number;
+  isPromoApplied: boolean;
+  promoDescription?: string;
+  promoStartDate?: string;
+  promoEndDate?: string;
+}
+
+export interface Product {
+  chainId: string;
+  storeId: string;
+  storeName?: string;
+  storeAddress?: string;
+  itemCode: string;
+  itemName: string;
+  regularPrice: number;
+  promoPrice?: number;
+  hasPromo: boolean;
+  promoDescription?: string;
+  promoEndDate?: string;
+  isClubMemberPromo: boolean;
+  isCreditCardPromo: boolean;
+  finalCalculatedPrice: number;
+  priceTypeLabel: string;
+}
+
+export interface StoreNearStop {
+  storeName: string;
+  city: string;
+  address: string;
+  distanceKm: number;
+  mapLink: string;
+}

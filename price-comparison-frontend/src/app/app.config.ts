@@ -8,6 +8,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient() // הוספת HTTP Client
+    provideHttpClient() // חיוני לתקשורת עם Backend
   ]
 };

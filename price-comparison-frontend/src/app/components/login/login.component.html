@@ -1,0 +1,193 @@
+<div class="login-container">
+  <div class="login-card">
+    
+    <!-- Header -->
+    <div class="login-header">
+      <h1>{{ isRegisterMode() ? 'הרשמה למערכת' : 'התחברות למערכת' }}</h1>
+      <p>מערכת השוואת מחירים</p>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div *ngIf="authState().isLoading" class="loading-overlay">
+      <div class="spinner"></div>
+      <p>{{ isRegisterMode() ? 'נרשם...' : 'מתחבר...' }}</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="authState().error" class="error-message">
+      <span class="error-icon">⚠️</span>
+      {{ authState().error }}
+      <button (click)="authService.clearError()" class="close-error" type="button">×</button>
+    </div>
+
+    <!-- Debug Info (רק בפיתוח) -->
+    <div class="debug-info" *ngIf="!authState().isLoading">
+      <button (click)="testServerConnection()" class="test-btn" type="button">
+        🧪 בדוק חיבור לשרת
+      </button>
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="!isRegisterMode()" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="auth-form" novalidate>
+      
+      <div class="form-group">
+        <label for="loginIdentifier">טלפון או אימייל</label>
+        <input 
+          type="text" 
+          id="loginIdentifier"
+          formControlName="loginIdentifier"
+          [class.invalid]="isFieldInvalid(loginForm, 'loginIdentifier')"
+          placeholder="הזן מספר טלפון או אימייל"
+          autocomplete="username"
+        >
+        <div *ngIf="getFieldError(loginForm, 'loginIdentifier')" class="field-error">
+          {{ getFieldError(loginForm, 'loginIdentifier') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">סיסמה</label>
+        <div class="password-field">
+          <input 
+            [type]="showPassword() ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            [class.invalid]="isFieldInvalid(loginForm, 'password')"
+            placeholder="הזן סיסמה"
+            autocomplete="current-password"
+          >
+          <button 
+            type="button" 
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword() ? 'הסתר סיסמה' : 'הצג סיסמה'"
+          >
+            {{ showPassword() ? '🙈' : '👁️' }}
+          </button>
+        </div>
+        <div *ngIf="getFieldError(loginForm, 'password')" class="field-error">
+          {{ getFieldError(loginForm, 'password') }}
+        </div>
+      </div>
+
+      <button 
+        type="submit" 
+        class="submit-btn"
+        [disabled]="!loginForm.valid || authState().isLoading"
+      >
+        <span *ngIf="!authState().isLoading">התחבר</span>
+        <span *ngIf="authState().isLoading">מתחבר...</span>
+      </button>
+
+      <p class="switch-mode">
+        אין לך חשבון? 
+        <button type="button" (click)="switchToRegister()" class="link-btn">
+          הירשם כאן
+        </button>
+      </p>
+
+      <!-- פרטי משתמשי בדיקה -->
+      <div class="demo-users">
+        <p><strong>משתמשי בדיקה:</strong></p>
+        <p>📱 <code>0501234567</code> / <code>123456</code></p>
+        <p>📧 <code>test&#64;example.com</code> / <code>mypassword</code></p>
+      </div>
+    </form>
+
+    <!-- Register Form -->
+    <form *ngIf="isRegisterMode()" [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" class="auth-form" novalidate>
+      
+      <div class="form-group">
+        <label for="fullName">שם מלא</label>
+        <input 
+          type="text" 
+          id="fullName"
+          formControlName="fullName"
+          [class.invalid]="isFieldInvalid(registerForm, 'fullName')"
+          placeholder="הזן שם מלא"
+          autocomplete="name"
+        >
+        <div *ngIf="getFieldError(registerForm, 'fullName')" class="field-error">
+          {{ getFieldError(registerForm, 'fullName') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">מספר טלפון</label>
+        <input 
+          type="tel" 
+          id="phone"
+          formControlName="phone"
+          [class.invalid]="isFieldInvalid(registerForm, 'phone')"
+          placeholder="הזן מספר טלפון (אופציונלי)"
+          autocomplete="tel"
+        >
+        <div *ngIf="getFieldError(registerForm, 'phone')" class="field-error">
+          {{ getFieldError(registerForm, 'phone') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">אימייל</label>
+        <input 
+          type="email" 
+          id="email"
+          formControlName="email"
+          [class.invalid]="isFieldInvalid(registerForm, 'email')"
+          placeholder="הזן כתובת אימייל (אופציונלי)"
+          autocomplete="email"
+        >
+        <div *ngIf="getFieldError(registerForm, 'email')" class="field-error">
+          {{ getFieldError(registerForm, 'email') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-password">סיסמה</label>
+        <div class="password-field">
+          <input 
+            [type]="showPassword() ? 'text' : 'password'"
+            id="reg-password"
+            formControlName="password"
+            [class.invalid]="isFieldInvalid(registerForm, 'password')"
+            placeholder="בחר סיסמה (לפחות 6 תווים)"
+            autocomplete="new-password"
+          >
+          <button 
+            type="button" 
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword() ? 'הסתר סיסמה' : 'הצג סיסמה'"
+          >
+            {{ showPassword() ? '🙈' : '👁️' }}
+          </button>
+        </div>
+        <div *ngIf="getFieldError(registerForm, 'password')" class="field-error">
+          {{ getFieldError(registerForm, 'password') }}
+        </div>
+      </div>
+
+      <div class="info-text">
+        <span class="info-icon">ℹ️</span>
+        נדרש לפחות מספר טלפון או כתובת אימייל
+      </div>
+
+      <button 
+        type="submit" 
+        class="submit-btn"
+        [disabled]="!registerForm.valid || authState().isLoading"
+      >
+        <span *ngIf="!authState().isLoading">הירשם</span>
+        <span *ngIf="authState().isLoading">נרשם...</span>
+      </button>
+
+      <p class="switch-mode">
+        כבר יש לך חשבון? 
+        <button type="button" (click)="switchToLogin()" class="link-btn">
+          התחבר כאן
+        </button>
+      </p>
+    </form>
+
+  </div>
+</div>

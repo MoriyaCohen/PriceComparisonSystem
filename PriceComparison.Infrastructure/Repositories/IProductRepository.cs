@@ -12,5 +12,11 @@ namespace PriceComparison.Infrastructure.Repositories
         Task<Product?> GetByProductIdAsync(string productId);
         Task<Product> AddAsync(Product product);
         Task<Product> UpdateAsync(Product product);
+        Task<IEnumerable<Product>> GetProductsWithPricesAsync();
+        Task<Product?> GetProductWithCategoryAsync(int id);
+        Task<bool> ExistsAsync(string barcode);
+      //  Task<bool> SoftDeleteAsync(int id);
+
+
     }
 }

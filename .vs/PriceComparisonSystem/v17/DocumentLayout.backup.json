@@ -1,0 +1,134 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\users\\admin\\source\\repos\\pricecomparisonsystem\\pricecomparison.api\\controllers\\smartshoppingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\controllers\\smartshoppingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFC41D3F-6443-4F63-88C5-1E959E9BDD9E}|PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj|c:\\users\\admin\\source\\repos\\pricecomparisonsystem\\pricecomparison.infrastructure\\repositories\\storepricerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFC41D3F-6443-4F63-88C5-1E959E9BDD9E}|PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj|solutionrelative:pricecomparison.infrastructure\\repositories\\storepricerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFC41D3F-6443-4F63-88C5-1E959E9BDD9E}|PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj|c:\\users\\admin\\source\\repos\\pricecomparisonsystem\\pricecomparison.infrastructure\\repositories\\chainrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFC41D3F-6443-4F63-88C5-1E959E9BDD9E}|PriceComparison.Infrastructure\\PriceComparison.Infrastructure.csproj|solutionrelative:pricecomparison.infrastructure\\repositories\\chainrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\users\\admin\\source\\repos\\pricecomparisonsystem\\pricecomparison.api\\controllers\\busstopsearchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\controllers\\busstopsearchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|c:\\users\\admin\\source\\repos\\pricecomparisonsystem\\pricecomparison.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E843B64E-1C86-4BE6-8AE3-D41B6DB74531}|PriceComparison.Api\\PriceComparison.Api.csproj|solutionrelative:pricecomparison.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\users\\admin\\source\\repos\\pricecomparisonsystem\\pricecomparison.application\\services\\istoreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\istoreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|c:\\users\\admin\\source\\repos\\pricecomparisonsystem\\pricecomparison.application\\services\\barcodevalidationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AEE022-8876-4F72-9A41-DE7EF7DB99B4}|PriceComparison.Application\\PriceComparison.Application.csproj|solutionrelative:pricecomparison.application\\services\\barcodevalidationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SmartShoppingController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Api\\Controllers\\SmartShoppingController.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Api\\Controllers\\SmartShoppingController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Api\\Controllers\\SmartShoppingController.cs",
+              "RelativeToolTip": "PriceComparison.Api\\Controllers\\SmartShoppingController.cs",
+              "ViewState": "AgIAAOEAAAAAAAAAAAAkwPMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T22:20:54.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StorePriceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Repositories\\StorePriceRepository.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Infrastructure\\Repositories\\StorePriceRepository.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Repositories\\StorePriceRepository.cs",
+              "RelativeToolTip": "PriceComparison.Infrastructure\\Repositories\\StorePriceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T19:14:04.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ChainRepository.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Repositories\\ChainRepository.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Infrastructure\\Repositories\\ChainRepository.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Infrastructure\\Repositories\\ChainRepository.cs",
+              "RelativeToolTip": "PriceComparison.Infrastructure\\Repositories\\ChainRepository.cs",
+              "ViewState": "AgIAABQAAAAAZ2ZmZqYowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T19:13:57.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IStoreService.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Application\\Services\\IStoreService.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\IStoreService.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Application\\Services\\IStoreService.cs",
+              "RelativeToolTip": "PriceComparison.Application\\Services\\IStoreService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T20:40:57.252Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BarcodeValidationService.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Application\\Services\\BarcodeValidationService.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Application\\Services\\BarcodeValidationService.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Application\\Services\\BarcodeValidationService.cs",
+              "RelativeToolTip": "PriceComparison.Application\\Services\\BarcodeValidationService.cs",
+              "ViewState": "AgIAAAYAAABAMzMzMzMrwBcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T20:37:56.893Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BusStopSearchController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Api\\Controllers\\BusStopSearchController.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Api\\Controllers\\BusStopSearchController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Api\\Controllers\\BusStopSearchController.cs",
+              "RelativeToolTip": "PriceComparison.Api\\Controllers\\BusStopSearchController.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAcwDoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T20:36:22.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Api\\Program.cs",
+              "RelativeDocumentMoniker": "PriceComparison.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\PriceComparisonSystem\\PriceComparison.Api\\Program.cs",
+              "RelativeToolTip": "PriceComparison.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T09:12:14.226Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

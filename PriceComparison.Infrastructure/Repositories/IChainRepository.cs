@@ -9,5 +9,10 @@ namespace PriceComparison.Infrastructure.Repositories
         Task<Chain?> GetByChainIdAsync(string chainId);
         Task<Chain> AddAsync(Chain chain);
         Task<Chain> UpdateAsync(Chain chain);
+        Task<IEnumerable<Chain>> GetChainsWithStoresAsync();
+        Task<Chain?> GetChainWithStoresAsync(int id);
+        Task<IEnumerable<Chain>> GetActiveAsync();
+        Task<bool> SoftDeleteAsync(int id);
     }
+  
 }

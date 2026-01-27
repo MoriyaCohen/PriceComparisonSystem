@@ -1,4 +1,6 @@
-﻿namespace PriceComparison.Application.DTOs
+﻿// החלף את כל התוכן בקובץ: PriceComparison.Application/DTOs/XmlDataDTOs.cs
+
+namespace PriceComparison.Application.DTOs
 {
     public class ProcessingResult
     {

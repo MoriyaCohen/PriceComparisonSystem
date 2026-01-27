@@ -1,0 +1,347 @@
+2025-12-07 12:55:34.016 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-07 12:55:38.654 +02:00 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-07 12:55:38.674 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-07 12:55:38.692 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-07 12:55:38.695 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-07 12:55:38.698 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-07 12:55:38.701 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-07 12:55:38.755 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-07 12:55:38.759 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-07 12:55:39.017 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-07 12:55:39.020 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-07 12:55:39.021 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-07 12:55:39.022 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-07 12:55:39.036 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-07 12:55:39.041 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-07 12:55:39.041 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-07 12:55:39.231 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-07 12:55:39.233 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-07 12:55:39.234 +02:00 [INF] Hosting environment: Development
+2025-12-07 12:55:39.235 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-12-07 13:01:25.651 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger - null null
+2025-12-07 13:01:25.782 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger - 301 0 null 144.2562ms
+2025-12-07 13:01:25.802 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.html - null null
+2025-12-07 13:01:25.903 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.html - 200 null text/html;charset=utf-8 101.1807ms
+2025-12-07 13:01:25.955 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/swagger-ui-bundle.js - null null
+2025-12-07 13:01:25.955 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/swagger-ui.css - null null
+2025-12-07 13:01:25.956 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.css - null null
+2025-12-07 13:01:25.956 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/swagger-ui-standalone-preset.js - null null
+2025-12-07 13:01:25.986 +02:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-12-07 13:01:25.988 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.css - 200 202 text/css 32.054ms
+2025-12-07 13:01:25.996 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.js - null null
+2025-12-07 13:01:26.002 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.js - 200 null application/javascript;charset=utf-8 6.6751ms
+2025-12-07 13:01:26.053 +02:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-12-07 13:01:26.064 +02:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-12-07 13:01:26.071 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/swagger-ui.css - 200 154948 text/css 115.7299ms
+2025-12-07 13:01:26.071 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 115.7363ms
+2025-12-07 13:01:26.094 +02:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-12-07 13:01:26.096 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/swagger-ui-bundle.js - 200 1466324 text/javascript 140.8997ms
+2025-12-07 13:01:26.455 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - null null
+2025-12-07 13:01:26.491 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/favicon-32x32.png - null null
+2025-12-07 13:01:26.496 +02:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-12-07 13:01:26.500 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/favicon-32x32.png - 200 628 image/png 9.5144ms
+2025-12-07 13:01:26.671 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 215.1373ms
+2025-12-07 13:11:44.700 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - null 0
+2025-12-07 13:11:44.742 +02:00 [INF] CORS policy execution failed.
+2025-12-07 13:11:44.743 +02:00 [INF] Request origin http://localhost:5162 does not have permission to access the resource.
+2025-12-07 13:11:44.749 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:11:44.781 +02:00 [INF] Route matched with {action = "RunDailySyncManual", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult RunDailySyncManual() on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:11:44.793 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-12-07 13:11:44.801 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api) in 12.6149ms
+2025-12-07 13:11:44.807 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:11:44.809 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - 404 null text/plain; charset=utf-8 109.3625ms
+2025-12-07 13:15:46.915 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-07 13:15:49.343 +02:00 [INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-07 13:15:49.360 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-07 13:15:49.377 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-07 13:15:49.380 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-07 13:15:49.381 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-07 13:15:49.385 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-07 13:15:49.409 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-07 13:15:49.412 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-07 13:15:49.667 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-07 13:15:49.669 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-07 13:15:49.670 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-07 13:15:49.671 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-07 13:15:49.681 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-07 13:15:49.685 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-07 13:15:49.686 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-07 13:15:49.803 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-07 13:15:49.805 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-07 13:15:49.806 +02:00 [INF] Hosting environment: Development
+2025-12-07 13:15:49.807 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-12-07 13:18:53.586 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.html - null null
+2025-12-07 13:18:53.708 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.html - 200 null text/html;charset=utf-8 130.0786ms
+2025-12-07 13:18:53.731 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/index.js - null null
+2025-12-07 13:18:53.739 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/index.js - 200 null application/javascript;charset=utf-8 8.1529ms
+2025-12-07 13:18:54.024 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - null null
+2025-12-07 13:18:54.192 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 167.6373ms
+2025-12-07 13:22:49.228 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - null 0
+2025-12-07 13:22:49.269 +02:00 [INF] CORS policy execution failed.
+2025-12-07 13:22:49.273 +02:00 [INF] Request origin http://localhost:5162 does not have permission to access the resource.
+2025-12-07 13:22:49.278 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:22:49.308 +02:00 [INF] Route matched with {action = "RunDailySyncManual", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult RunDailySyncManual() on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:22:49.907 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType7`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-07 13:22:49.939 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api) in 621.2532ms
+2025-12-07 13:22:49.942 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:22:49.945 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - 200 null application/json; charset=utf-8 716.7567ms
+2025-12-07 13:28:24.682 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-07 13:28:29.309 +02:00 [INF] Executed DbCommand (111ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-07 13:28:29.333 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-07 13:28:29.358 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-07 13:28:29.361 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-07 13:28:29.363 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-07 13:28:29.366 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-07 13:28:29.401 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-07 13:28:29.406 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-07 13:28:29.691 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-07 13:28:29.693 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-07 13:28:29.694 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-07 13:28:29.695 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-07 13:28:29.708 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-07 13:28:29.712 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-07 13:28:29.713 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-07 13:28:29.849 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-07 13:28:29.855 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-07 13:28:29.857 +02:00 [INF] Hosting environment: Development
+2025-12-07 13:28:29.858 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-12-07 13:43:53.235 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - null 0
+2025-12-07 13:43:53.295 +02:00 [INF] CORS policy execution failed.
+2025-12-07 13:43:53.297 +02:00 [INF] Request origin http://localhost:5162 does not have permission to access the resource.
+2025-12-07 13:43:53.302 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:43:53.318 +02:00 [INF] Route matched with {action = "RunDailySyncManual", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult RunDailySyncManual() on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:43:53.751 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType7`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-07 13:43:53.806 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api) in 479.766ms
+2025-12-07 13:43:53.809 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:43:53.813 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - 200 null application/json; charset=utf-8 585.6593ms
+2025-12-07 13:44:30.630 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/587730310?showClub=false&showQuantity=false - null null
+2025-12-07 13:44:30.726 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:44:30.747 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:44:30.885 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-12-07 13:44:30.888 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 132.7484ms
+2025-12-07 13:44:30.890 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:44:30.894 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/587730310?showClub=false&showQuantity=false - 404 null text/plain; charset=utf-8 263.551ms
+2025-12-07 13:46:18.550 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - null null
+2025-12-07 13:46:18.583 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:46:18.585 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:46:18.651 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-12-07 13:46:18.654 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 64.4323ms
+2025-12-07 13:46:18.663 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:46:18.665 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - 404 null text/plain; charset=utf-8 115.047ms
+2025-12-07 13:46:35.647 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - null null
+2025-12-07 13:46:35.652 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:46:35.655 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:46:35.722 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-12-07 13:46:35.725 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 64.9573ms
+2025-12-07 13:46:35.727 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:46:35.730 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - 404 null text/plain; charset=utf-8 83.0127ms
+2025-12-07 13:48:42.743 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-07 13:48:45.296 +02:00 [INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-07 13:48:45.313 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-07 13:48:45.330 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-07 13:48:45.333 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-07 13:48:45.336 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-07 13:48:45.339 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-07 13:48:45.362 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-07 13:48:45.365 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-07 13:48:45.569 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-07 13:48:45.571 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-07 13:48:45.571 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-07 13:48:45.573 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-07 13:48:45.582 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-07 13:48:45.586 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-07 13:48:45.587 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-07 13:48:45.708 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-07 13:48:45.710 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-07 13:48:45.711 +02:00 [INF] Hosting environment: Development
+2025-12-07 13:48:45.712 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-12-07 13:56:54.368 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - null 0
+2025-12-07 13:56:54.426 +02:00 [INF] CORS policy execution failed.
+2025-12-07 13:56:54.428 +02:00 [INF] Request origin http://localhost:5162 does not have permission to access the resource.
+2025-12-07 13:56:54.432 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:56:54.449 +02:00 [INF] Route matched with {action = "RunDailySyncManual", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult RunDailySyncManual() on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:56:55.081 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType7`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-07 13:56:55.153 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api) in 696.9601ms
+2025-12-07 13:56:55.159 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:56:55.165 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - 200 null application/json; charset=utf-8 807.0156ms
+2025-12-07 13:57:02.491 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - null null
+2025-12-07 13:57:02.518 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:57:02.536 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:57:02.566 +02:00 [INF] --- STARTING SEARCH FOR: 6253361803955 ---
+2025-12-07 13:57:02.567 +02:00 [INF] Found 3 files to scan.
+2025-12-07 13:57:02.681 +02:00 [WRN] ❌ PRODUCT NOT FOUND IN ANY FILE.
+2025-12-07 13:57:02.683 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-12-07 13:57:02.686 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 141.7966ms
+2025-12-07 13:57:02.689 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:57:02.693 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - 404 null text/plain; charset=utf-8 201.1541ms
+2025-12-07 13:59:40.357 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-07 13:59:41.775 +02:00 [INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-07 13:59:41.791 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-07 13:59:41.805 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-07 13:59:41.810 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-07 13:59:41.812 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-07 13:59:41.816 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-07 13:59:41.878 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-07 13:59:41.881 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-07 13:59:42.070 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-07 13:59:42.072 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-07 13:59:42.073 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-07 13:59:42.075 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-07 13:59:42.084 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-07 13:59:42.088 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-07 13:59:42.090 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-07 13:59:42.219 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-07 13:59:42.221 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-07 13:59:42.222 +02:00 [INF] Hosting environment: Development
+2025-12-07 13:59:42.223 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-12-07 13:59:48.438 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - null 0
+2025-12-07 13:59:48.491 +02:00 [INF] CORS policy execution failed.
+2025-12-07 13:59:48.493 +02:00 [INF] Request origin http://localhost:5162 does not have permission to access the resource.
+2025-12-07 13:59:48.497 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:59:48.512 +02:00 [INF] Route matched with {action = "RunDailySyncManual", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult RunDailySyncManual() on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:59:48.530 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-12-07 13:59:48.547 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api) in 28.4088ms
+2025-12-07 13:59:48.551 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 13:59:48.555 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - 200 null text/plain; charset=utf-8 122.2123ms
+2025-12-07 13:59:52.597 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - null null
+2025-12-07 13:59:52.620 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:59:52.633 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 13:59:52.658 +02:00 [INF] --- 🕵️ STARTING SPY SEARCH FOR: '6253361803955' ---
+2025-12-07 13:59:52.660 +02:00 [INF] 📂 Found 3 files to scan.
+2025-12-07 13:59:52.725 +02:00 [INF] 📄 File: PriceFull7290058108879-340-202511301024.xml contains 2246 items.
+2025-12-07 13:59:52.728 +02:00 [INF]    👀 First 3 items in this file are:
+2025-12-07 13:59:52.729 +02:00 [INF]       -> Code: '4761', Name: 'NULL'
+2025-12-07 13:59:52.731 +02:00 [INF]       -> Code: '12345', Name: 'NULL'
+2025-12-07 13:59:52.732 +02:00 [INF]       -> Code: '13006', Name: 'NULL'
+2025-12-07 13:59:52.735 +02:00 [WRN]    ❌ Barcode '6253361803955' NOT found in this file.
+2025-12-07 13:59:52.768 +02:00 [INF] 📄 File: PriceFull7290058159628-063-202511301024.xml contains 1115 items.
+2025-12-07 13:59:52.770 +02:00 [INF]    👀 First 3 items in this file are:
+2025-12-07 13:59:52.772 +02:00 [INF]       -> Code: '5', Name: 'NULL'
+2025-12-07 13:59:52.774 +02:00 [INF]       -> Code: '6', Name: 'NULL'
+2025-12-07 13:59:52.776 +02:00 [INF]       -> Code: '15', Name: 'NULL'
+2025-12-07 13:59:52.779 +02:00 [WRN]    ❌ Barcode '6253361803955' NOT found in this file.
+2025-12-07 13:59:52.881 +02:00 [INF] 📄 File: PriceFull7290058197699-970-202511301324.xml contains 3193 items.
+2025-12-07 13:59:52.882 +02:00 [INF]    👀 First 3 items in this file are:
+2025-12-07 13:59:52.884 +02:00 [INF]       -> Code: '1', Name: 'NULL'
+2025-12-07 13:59:52.885 +02:00 [INF]       -> Code: '30074576', Name: 'NULL'
+2025-12-07 13:59:52.886 +02:00 [INF]       -> Code: '30079236', Name: 'NULL'
+2025-12-07 13:59:52.891 +02:00 [WRN]    ❌ Barcode '6253361803955' NOT found in this file.
+2025-12-07 13:59:52.894 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-12-07 13:59:52.898 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 260.6458ms
+2025-12-07 13:59:52.901 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 13:59:52.904 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - 404 null text/plain; charset=utf-8 307.16ms
+2025-12-07 14:01:47.548 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-07 14:01:49.025 +02:00 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-07 14:01:49.059 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-07 14:01:49.112 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-07 14:01:49.118 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-07 14:01:49.126 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-07 14:01:49.131 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-07 14:01:49.161 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-07 14:01:49.164 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-07 14:01:49.370 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-07 14:01:49.372 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-07 14:01:49.373 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-07 14:01:49.374 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-07 14:01:49.386 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-07 14:01:49.389 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-07 14:01:49.390 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-07 14:01:49.580 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-07 14:01:49.583 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-07 14:01:49.584 +02:00 [INF] Hosting environment: Development
+2025-12-07 14:01:49.586 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-12-07 14:01:56.890 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - null 0
+2025-12-07 14:01:56.936 +02:00 [INF] CORS policy execution failed.
+2025-12-07 14:01:56.938 +02:00 [INF] Request origin http://localhost:5162 does not have permission to access the resource.
+2025-12-07 14:01:56.942 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 14:01:56.958 +02:00 [INF] Route matched with {action = "RunDailySyncManual", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult RunDailySyncManual() on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 14:01:56.965 +02:00 [INF] 🔄 Starting Sync on 3 files...
+2025-12-07 14:01:57.680 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType7`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-07 14:01:57.742 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api) in 775.0461ms
+2025-12-07 14:01:57.746 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 14:01:57.752 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - 200 null application/json; charset=utf-8 867.4808ms
+2025-12-07 14:02:01.200 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - null null
+2025-12-07 14:02:01.223 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 14:02:01.237 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 14:02:01.266 +02:00 [INF] --- 🕵️ STARTING SEARCH FOR: '6253361803955' ---
+2025-12-07 14:02:01.676 +02:00 [WRN] ❌ Barcode '6253361803955' NOT found in any of the 3 files.
+2025-12-07 14:02:01.679 +02:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-12-07 14:02:01.683 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 442.484ms
+2025-12-07 14:02:01.686 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 14:02:01.691 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/6253361803955?showClub=false&showQuantity=false - 404 null text/plain; charset=utf-8 491.1483ms
+2025-12-07 14:11:16.375 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-07 14:11:17.971 +02:00 [INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-07 14:11:17.988 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-07 14:11:18.002 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-07 14:11:18.004 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-07 14:11:18.007 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-07 14:11:18.011 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-07 14:11:18.032 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-07 14:11:18.037 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-07 14:11:18.277 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-07 14:11:18.279 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-07 14:11:18.280 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-07 14:11:18.281 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-07 14:11:18.294 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-07 14:11:18.298 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-07 14:11:18.299 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-07 14:11:18.436 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-07 14:11:18.438 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-07 14:11:18.439 +02:00 [INF] Hosting environment: Development
+2025-12-07 14:11:18.440 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api
+2025-12-07 14:11:52.151 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - null 0
+2025-12-07 14:11:52.205 +02:00 [INF] CORS policy execution failed.
+2025-12-07 14:11:52.207 +02:00 [INF] Request origin http://localhost:5162 does not have permission to access the resource.
+2025-12-07 14:11:52.212 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 14:11:52.226 +02:00 [INF] Route matched with {action = "RunDailySyncManual", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult RunDailySyncManual() on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 14:11:52.233 +02:00 [INF] 🔄 Starting Sync on 3 files...
+2025-12-07 14:11:52.850 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType7`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-07 14:11:52.902 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api) in 668.204ms
+2025-12-07 14:11:52.905 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.RunDailySyncManual (PriceComparison.Api)'
+2025-12-07 14:11:52.909 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5162/api/PriceComparison/run-daily-sync - 200 null application/json; charset=utf-8 765.2849ms
+2025-12-07 14:12:22.579 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/13006?showClub=false&showQuantity=false - null null
+2025-12-07 14:12:22.597 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 14:12:22.610 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 14:12:22.636 +02:00 [INF] --- 🕵️ STARTING SEARCH FOR: '13006' ---
+2025-12-07 14:12:22.701 +02:00 [INF] ✅ FOUND MATCH in file: PriceFull7290058108879-340-202511301024.xml
+2025-12-07 14:12:22.798 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.OrderedPartition`1[[PriceComparison.Application.DTOs.ProductData, PriceComparison.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-07 14:12:22.838 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 224.9593ms
+2025-12-07 14:12:22.841 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 14:12:22.845 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/13006?showClub=false&showQuantity=false - 200 null application/json; charset=utf-8 266.3881ms
+2025-12-07 14:15:19.287 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/13006?showClub=true&showQuantity=false - null null
+2025-12-07 14:15:19.321 +02:00 [INF] Executing endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 14:15:19.323 +02:00 [INF] Route matched with {action = "GetCheapestSmart", controller = "PriceComparison"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCheapestSmart(System.String, Boolean, Boolean) on controller PriceComparison.Api.Controllers.PriceComparisonController (PriceComparison.Api).
+2025-12-07 14:15:19.330 +02:00 [INF] --- 🕵️ STARTING SEARCH FOR: '13006' ---
+2025-12-07 14:15:19.355 +02:00 [INF] ✅ FOUND MATCH in file: PriceFull7290058108879-340-202511301024.xml
+2025-12-07 14:15:19.410 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.OrderedPartition`1[[PriceComparison.Application.DTOs.ProductData, PriceComparison.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-07 14:15:19.415 +02:00 [INF] Executed action PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api) in 86.5236ms
+2025-12-07 14:15:19.423 +02:00 [INF] Executed endpoint 'PriceComparison.Api.Controllers.PriceComparisonController.GetCheapestSmart (PriceComparison.Api)'
+2025-12-07 14:15:19.427 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5162/api/PriceComparison/get-cheapest-smart/13006?showClub=true&showQuantity=false - 200 null application/json; charset=utf-8 142.5586ms
+2025-12-07 14:20:45.292 +02:00 [INF] יישום PriceComparison הופעל בהצלחה
+2025-12-07 14:20:46.830 +02:00 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-12-07 14:20:46.848 +02:00 [INF] ✅ חיבור למסד הנתונים בוצע בהצלחה
+2025-12-07 14:20:46.862 +02:00 [INF] 📦 התחלת טעינת קבצי XML בעת עליית השרת...
+2025-12-07 14:20:46.866 +02:00 [INF] מתחיל רענון נתונים ידני
+2025-12-07 14:20:46.870 +02:00 [INF] מתחיל טעינת נתונים מקומיים...
+2025-12-07 14:20:46.874 +02:00 [INF] נמצאו 2 קבצי StoresFull
+2025-12-07 14:20:46.923 +02:00 [INF] נטענו פרטי 82 סניפים
+2025-12-07 14:20:46.927 +02:00 [INF] נמצאו 2 קבצי נתונים
+2025-12-07 14:20:47.187 +02:00 [INF] טעינה הושלמה: 6284 מוצרים מ-2 קבצים
+2025-12-07 14:20:47.189 +02:00 [INF] טעינת נתונים הושלמה בהצלחה
+2025-12-07 14:20:47.190 +02:00 [INF] רענון נתונים הושלם בהצלחה
+2025-12-07 14:20:47.191 +02:00 [INF] ✅ טעינת נתוני XML הושלמה בהצלחה
+2025-12-07 14:20:47.207 +02:00 [INF] 📊 נטענו: 6284 מוצרים מ-2 רשתות ו-2 סניפים
+2025-12-07 14:20:47.222 +02:00 [INF] Daily Sync Background Service is starting.
+2025-12-07 14:20:47.226 +02:00 [INF] ⏰ Auto-Sync Started (Daily Process)...
+2025-12-07 14:20:47.373 +02:00 [INF] Now listening on: http://localhost:5162
+2025-12-07 14:20:47.375 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-07 14:20:47.376 +02:00 [INF] Hosting environment: Development
+2025-12-07 14:20:47.377 +02:00 [INF] Content root path: C:\Users\ADMIN\Source\Repos\PriceComparisonSystem\PriceComparison.Api

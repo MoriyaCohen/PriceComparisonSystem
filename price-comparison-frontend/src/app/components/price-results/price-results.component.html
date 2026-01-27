@@ -1,0 +1,137 @@
+<!-- src/app/features/price-results/price-results.component.html -->
+
+<div class="price-results-container" *ngIf="priceDetails && priceDetails.length > 0">
+
+  <!-- כותרת ובקרות -->
+  <div class="results-header">
+    <div class="header-info">
+      <h3 class="results-title">השוואת מחירים</h3>
+      <p class="results-summary">נמצאו {{ filteredResults.length }} תוצאות מתוך {{ priceDetails.length }}</p>
+    </div>
+
+    <!-- בקרות מיון וסינון -->
+    <div class="controls-section">
+
+      <!-- מיון -->
+      <div class="control-group">
+        <label for="sort-select" class="control-label">מיון לפי:</label>
+        <select 
+          id="sort-select"
+          [(ngModel)]="currentSort" 
+          (ngModelChange)="onSortChange($event)"
+          class="form-select"
+        >
+          <option *ngFor="let option of sortOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+
+      <!-- סינון לפי רשת -->
+      <div class="control-group">
+        <label for="chain-select" class="control-label">רשת:</label>
+        <select 
+          id="chain-select"
+          [(ngModel)]="selectedChain" 
+          (ngModelChange)="onChainFilter($event)"
+          class="form-select"
+        >
+          <option value="all">כל הרשתות</option>
+          <option *ngFor="let chain of availableChains" [value]="chain">
+            {{ chain }}
+          </option>
+        </select>
+      </div>
+
+      <!-- סינון מחיר מינימום -->
+      <div class="control-group">
+        <label class="checkbox-label">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="showOnlyMinPrice"
+            (ngModelChange)="toggleMinPriceOnly()"
+            class="form-checkbox"
+          />
+          <span class="checkbox-text">הצג רק מחיר זול ביותר</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- רשימת תוצאות -->
+  <div class="results-list">
+
+    <!-- הודעה במידה ואין תוצאות מסוננות -->
+    <div *ngIf="filteredResults.length === 0" class="no-results-message">
+      <svg class="icon icon-info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <p>לא נמצאו תוצאות עבור הסינון הנבחר</p>
+    </div>
+
+    <!-- רשימת מחירים -->
+    <div class="price-items">
+      <div 
+        *ngFor="let item of filteredResults; trackBy: trackByStore"
+        class="price-item"
+        [class.min-price]="item['isMinPrice']"
+      >
+
+        <!-- פרטי הסניף -->
+        <div class="store-info">
+          <div class="store-header">
+            <h4 class="store-name">{{ item.storeName }}</h4>
+            <span class="chain-name">{{ item.chainName }}</span>
+          </div>
+          <p class="store-address">{{ item.storeAddress }}</p>
+        </div>
+
+        <!-- מידע על המחיר -->
+        <div class="price-info">
+          <div class="price-display">
+            <span class="price-amount">₪{{ item.currentPrice | number:'1.2-2' }}</span>
+          </div>
+
+          <!-- אינדיקטור מחיר זול ביותר -->
+          <div *ngIf="item['isMinPrice']" class="min-price-badge">
+            <svg class="icon icon-star" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span>זול ביותר</span>
+          </div>
+
+          <!-- הצגת חיסכון אפשרי -->
+          <div 
+            *ngIf="!item['isMinPrice'] && calculateSavings(item.currentPrice) > 0" 
+            class="savings-info"
+          >
+            <span class="savings-amount">+₪{{ calculateSavings(item.currentPrice) | number:'1.2-2' }}</span>
+            <span class="savings-label">יותר יקר</span>
+          </div>
+        </div>
+
+        <!-- מידע נוסף -->
+        <div class="additional-info">
+          <div class="last-updated">
+            <svg class="icon icon-clock" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>עודכן: {{ formatDate(item.lastUpdated) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- מידע נוסף על התוצאות -->
+  <div class="results-footer">
+    <div class="footer-info">
+      <p class="disclaimer">
+        * המחירים מעודכנים לפי הדיווחים האחרונים מהרשתות. יתכנו שינויים במחירים בפועל.
+      </p>
+      <p class="tip">
+        💡 <strong>טיפ:</strong> המחירים יכולים להשתנות בין סניפים באותה רשת. מומלץ לוודא מחירים לפני הרכישה.
+      </p>
+    </div>
+  </div>
+</div>

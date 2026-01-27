@@ -3,6 +3,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { XmlParserService } from '../../services/xml-parser.service';
 import { ParsedXMLData, PriceSummary, UploadState } from '../../interfaces/xml-data.interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-xml-upload',
@@ -21,11 +22,12 @@ export class XmlUploadComponent {
     error: null,
     success: false
   });
-  
+
   parsedData = signal<ParsedXMLData | null>(null);
   priceSummary = signal<PriceSummary | null>(null);
 
-  constructor(private xmlParserService: XmlParserService) {}
+  constructor(private xmlParserService: XmlParserService,  private router: Router,
+) {}
 
   // Drag & Drop handlers
   onDragOver(event: DragEvent) {
@@ -115,6 +117,9 @@ export class XmlUploadComponent {
     this.resetState();
     this.parsedData.set(null);
     this.priceSummary.set(null);
+  }
+  barcode(){
+     this.router.navigate(['/barcodeSearch']);
   }
 
   // Helper methods

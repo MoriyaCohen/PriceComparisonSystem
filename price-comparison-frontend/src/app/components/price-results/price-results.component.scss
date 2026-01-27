@@ -1,0 +1,357 @@
+/* src/app/features/price-results/price-results.component.scss */
+
+.price-results-container {
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* כותרת התוצאות ובקרות */
+.results-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #e5e7eb;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .header-info {
+    .results-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    .results-summary {
+      color: #6b7280;
+      margin: 0;
+    }
+  }
+}
+
+/* בקרות מיון וסינון */
+.controls-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    @media (min-width: 640px) {
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #374151;
+      white-space: nowrap;
+    }
+
+    .form-select {
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background-color: white;
+      font-size: 0.875rem;
+      min-width: 150px;
+
+      &:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+      }
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: #374151;
+
+      .form-checkbox {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 4px;
+        border: 2px solid #d1d5db;
+        background-color: white;
+        cursor: pointer;
+
+        &:checked {
+          background-color: #3b82f6;
+          border-color: #3b82f6;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+      }
+
+      .checkbox-text {
+        user-select: none;
+      }
+    }
+  }
+}
+
+/* הודעת אין תוצאות */
+.no-results-message {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6b7280;
+
+  .icon-info {
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto 1rem;
+    color: #9ca3af;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+}
+
+/* רשימת מחירים */
+.results-list {
+  .price-items {
+    display: grid;
+    gap: 1rem;
+
+    .price-item {
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+
+      &:hover {
+        border-color: #3b82f6;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+
+      &.min-price {
+        border-color: #10b981;
+        background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 100%);
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: -2px;
+          right: -2px;
+          bottom: -2px;
+          left: -2px;
+          background: linear-gradient(135deg, #10b981, #059669);
+          border-radius: 12px;
+          z-index: -1;
+        }
+      }
+
+      /* פרטי הסניף */
+      .store-info {
+        margin-bottom: 1rem;
+
+        .store-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.5rem;
+
+          .store-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0;
+          }
+
+          .chain-name {
+            background-color: #f3f4f6;
+            color: #4b5563;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+          }
+        }
+
+        .store-address {
+          color: #6b7280;
+          font-size: 0.875rem;
+          margin: 0;
+        }
+      }
+
+      /* מידע על המחיר */
+      .price-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .price-display {
+          display: flex;
+          align-items: baseline;
+          gap: 0.25rem;
+
+          .price-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+          }
+
+          .currency-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+          }
+        }
+
+        .min-price-badge {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          background-color: #10b981;
+          color: white;
+          padding: 0.25rem 0.75rem;
+          border-radius: 20px;
+          font-size: 0.75rem;
+          font-weight: 600;
+
+          .icon-star {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+
+        .savings-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+
+          .savings-amount {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #dc2626;
+          }
+
+          .savings-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+          }
+        }
+      }
+
+      /* מידע נוסף */
+      .additional-info {
+        .last-updated {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: #6b7280;
+          font-size: 0.75rem;
+
+          .icon-clock {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* כותרת תחתונה */
+.results-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+
+  .footer-info {
+    .disclaimer {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+    }
+
+    .tip {
+      font-size: 0.875rem;
+      color: #4b5563;
+      background-color: #f9fafb;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border-right: 4px solid #3b82f6;
+      margin: 0;
+    }
+  }
+}
+
+/* אייקונים כלליים */
+.icon {
+  flex-shrink: 0;
+}
+
+/* עיצוב מותאם למובייל */
+@media (max-width: 640px) {
+  .price-results-container {
+    padding: 1rem;
+  }
+
+  .results-header {
+    gap: 1rem;
+
+    .header-info .results-title {
+      font-size: 1.25rem;
+    }
+  }
+
+  .controls-section {
+    .control-group {
+      .form-select {
+        min-width: 120px;
+      }
+    }
+  }
+
+  .price-items .price-item {
+    padding: 1rem;
+
+    .store-info .store-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .price-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .price-display .price-amount {
+        font-size: 1.75rem;
+      }
+    }
+  }
+}

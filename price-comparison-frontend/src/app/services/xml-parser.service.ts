@@ -182,7 +182,7 @@ export class XmlParserService {
       totalItems: data.totalItems
     };
 
-    return this.http.post('http://localhost:5161/api/xmlprocessing/upload-from-frontend', payload)
+    return this.http.post('http://localhost:5162/api/xmlprocessing/upload-from-frontend', payload)
       .pipe(
         tap(response => console.log('Backend response:', response)),
         catchError(error => {

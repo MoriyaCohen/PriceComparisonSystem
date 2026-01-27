@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>חיפוש סופרים לפי תחנת אוטובוס</h2>
+  
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
+    <div class="form-group">
+      <label for="stopId">מספר תחנה:</label>
+      <input id="stopId" type="text" formControlName="stopId" placeholder="לדוגמה: 35586">
+    </div>
+    
+    <div class="form-group">
+      <label for="radiusKm">רדיוס (ק"מ):</label>
+      <input id="radiusKm" type="number" formControlName="radiusKm">
+    </div>
+    
+    <button type="submit" [disabled]="searchForm.invalid || isLoading">
+      {{ isLoading ? 'מחפש...' : 'חפש' }}
+    </button>
+  </form>
+
+  <div *ngIf="isLoading" class="loader-container">
+    <div class="loader"></div>
+    <p>טוען נתונים... (בפעם הראשונה זה עשוי לקחת זמן)</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && stores.length > 0" class="results-container">
+    <div *ngFor="let store of stores" class="store-card">
+      <h3>{{ store.storeName }}</h3>
+      <p class="address">{{ store.city }}, {{ store.address }}</p>
+      <p class="distance">{{ store.distanceKm | number:'1.2-2' }} ק"מ מהתחנה</p>
+    </div>
+  </div>
+</div>

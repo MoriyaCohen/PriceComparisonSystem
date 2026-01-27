@@ -1,277 +1,124 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { 
-  PriceComparisonResponse, 
-  ProductPriceInfo, 
-  SearchStatus, 
-  SortOption,
-  LocalDataStatus 
-} from '../interfaces/price-comparison.interface';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
+import { Product, PriceComparisonResponse, StoreNearStop } from '../interfaces/price-comparison.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PriceComparisonService {
-  private readonly apiUrl = 'http://localhost:5162/api/pricecomparison';
-  
-  // מצב החיפוש הנוכחי
-  private searchStatusSubject = new BehaviorSubject<SearchStatus>(SearchStatus.IDLE);
-  public searchStatus$ = this.searchStatusSubject.asObservable();
-  
-  // תוצאות החיפוש האחרונות
-  private lastResultsSubject = new BehaviorSubject<PriceComparisonResponse | null>(null);
-  public lastResults$ = this.lastResultsSubject.asObservable();
-  
-  // אפשרות מיון נוכחית
-  private currentSortOption: SortOption = SortOption.PRICE_ASC;
+  private apiUrl = 'http://localhost:5162/api/PriceComparison';
 
-  constructor(private http: HttpClient) {
-    console.log('[PriceComparisonService] שירות הושק');
-  }
+  private CHAIN_MAPPING: { [key: string]: string } = {
+    '7290058197699': 'ויקטורי',
+    '7290058140886': 'רמי לוי',
+    '7290027600007': 'שופרסל',
+    '7290103152017': 'אושר עד',
+    '7290803800003': 'יוחננוף',
+    '7290633800006': 'חצי חינם',
+    '7290873255550': 'טיב טעם',
+    '7290058173198': 'יינות ביתן',
+    '7290058108879': 'קינג סטור',
+    '7290058156016': 'סופר ספיר',
+    '7290058148776': 'שוק העיר',
+    '7290058145478': 'מעיין 2000',
+    '7290058159628': 'מרכז המזון',
+    '7290661400001': 'מחסני השוק',
+    '7290058160839': 'קואופ שופ'
+  };
 
-  /**
-   * חיפוש מוצר לפי ברקוד (חיפוש מקומי בקבצי XML)
-   */
-  searchByBarcodeLocal(barcode: string): Observable<PriceComparisonResponse> {
-    console.log(`[PriceComparisonService] מתחיל חיפוש מקומי עבור ברקוד: ${barcode}`);
-    
-    // עדכון מצב לחיפוש
-    this.searchStatusSubject.next(SearchStatus.SEARCHING);
-    
-    const requestBody = { barcode: barcode.trim() };
-    
-    return this.http.post<PriceComparisonResponse>(`${this.apiUrl}/search-local`, requestBody)
-      .pipe(
-        tap(response => {
-          console.log(`[PriceComparisonService] תגובה מהשרת:`, response);
-          
-          if (response.success && response.priceDetails && response.priceDetails.length > 0) {
-            // מיון התוצאות לפי העדפה נוכחית
-            const sortedResponse = {
-              ...response,
-              priceDetails: this.sortPriceDetails(response.priceDetails, this.currentSortOption)
-            };
-            
-            this.searchStatusSubject.next(SearchStatus.SUCCESS);
-            this.lastResultsSubject.next(sortedResponse);
-          } else {
-            this.searchStatusSubject.next(SearchStatus.NOT_FOUND);
-            this.lastResultsSubject.next(response);
-          }
-        }),
-        catchError(error => this.handleSearchError(error))
-      );
-  }
+  constructor(private http: HttpClient) { }
 
-  /**
-   * חיפוש מוצר לפי ברקוד (מסד נתונים - הפונקציונליות הקיימת)
-   */
-  searchByBarcode(barcode: string): Observable<PriceComparisonResponse> {
-    console.log(`[PriceComparisonService] מתחיל חיפוש במסד נתונים עבור ברקוד: ${barcode}`);
+  getCheapestSmart(barcode: string, isClub: boolean = false, isQuantity: boolean = false): Observable<Product[]> {
+    // URL matches the backend controller: [HttpGet("get-cheapest-smart/{barcode}")]
+    const url = `${this.apiUrl}/get-cheapest-smart/${barcode}`;
     
-    // עדכון מצב לחיפוש
-    this.searchStatusSubject.next(SearchStatus.SEARCHING);
-    
-    const requestBody = { barcode: barcode.trim() };
-    
-    return this.http.post<PriceComparisonResponse>(`${this.apiUrl}/search`, requestBody)
-      .pipe(
-        tap(response => {
-          console.log(`[PriceComparisonService] תגובה מהשרת:`, response);
-          
-          if (response.success && response.priceDetails && response.priceDetails.length > 0) {
-            // מיון התוצאות לפי העדפה נוכחית
-            const sortedResponse = {
-              ...response,
-              priceDetails: this.sortPriceDetails(response.priceDetails, this.currentSortOption)
-            };
-            
-            this.searchStatusSubject.next(SearchStatus.SUCCESS);
-            this.lastResultsSubject.next(sortedResponse);
-          } else {
-            this.searchStatusSubject.next(SearchStatus.NOT_FOUND);
-            this.lastResultsSubject.next(response);
-          }
-        }),
-        catchError(error => this.handleSearchError(error))
-      );
-  }
+    let params = new HttpParams()
+      .set('showClub', isClub.toString())
+      .set('showQuantity', isQuantity.toString());
 
-  /**
-   * קבלת מצב נתוני XML המקומיים
-   */
-  getLocalDataStatus(): Observable<LocalDataStatus> {
-    return this.http.get<LocalDataStatus>(`${this.apiUrl}/local-data-status`)
-      .pipe(
-        catchError(error => {
-          console.error('[PriceComparisonService] שגיאה בקבלת מצב נתונים מקומיים:', error);
-          return throwError(() => error);
-        })
-      );
-  }
+    console.log(`[PriceComparisonService] Calling GET ${url} with params:`, params.toString());
 
-  /**
-   * רענון נתוני XML מקומיים
-   */
-  refreshLocalData(): Observable<boolean> {
-    console.log('[PriceComparisonService] מתחיל רענון נתונים מקומיים');
-    
-    return this.http.post<boolean>(`${this.apiUrl}/refresh-local-data`, {})
-      .pipe(
-        tap(success => {
-          if (success) {
-            console.log('[PriceComparisonService] רענון נתונים מקומיים הצליח');
-          } else {
-            console.warn('[PriceComparisonService] רענון נתונים מקומיים נכשל');
-          }
-        }),
-        catchError(error => {
-          console.error('[PriceComparisonService] שגיאה ברענון נתונים מקומיים:', error);
-          return throwError(() => error);
-        })
-      );
-  }
-
-  /**
-   * מיון רשימת מחירים לפי אפשרות נתונה
-   */
-  private sortPriceDetails(priceDetails: ProductPriceInfo[], sortOption: SortOption): ProductPriceInfo[] {
-    const sortedPrices = [...priceDetails];
-    
-    switch (sortOption) {
-      case SortOption.PRICE_ASC:
-        return sortedPrices.sort((a, b) => a.currentPrice - b.currentPrice);
+    return this.http.get<any[]>(url, { params }).pipe(
+      map(response => {
+        if (!response || !Array.isArray(response)) {
+          console.warn('[PriceComparisonService] Invalid response format:', response);
+          return [];
+        }
         
-      case SortOption.PRICE_DESC:
-        return sortedPrices.sort((a, b) => b.currentPrice - a.currentPrice);
-      
-      case SortOption.CHAIN_NAME:
-        return sortedPrices.sort((a, b) => a.chainName.localeCompare(b.chainName, 'he'));
-      
-      case SortOption.STORE_NAME:
-        return sortedPrices.sort((a, b) => a.storeName.localeCompare(b.storeName, 'he'));
-      
-      default:
-        return sortedPrices;
-    }
-  }
+        return response.map(item => {
+          // IMPORTANT: Do NOT use item.storeLabel as it contains the address and causes duplication
+          let storeName = item.storeName || item.StoreName; 
+          const storeId = item.storeId || item.StoreId;
+          const address = item.storeAddress || item.StoreAddress || "";
+          let city = item.storeCity || item.StoreCity;
+          
+          // Resolve Chain Name from ID if needed
+          let chainName = item.chainId;
+          if (chainName && /^\d+$/.test(chainName.toString().trim())) {
+             if (this.CHAIN_MAPPING[chainName]) {
+               chainName = this.CHAIN_MAPPING[chainName];
+             }
+          }
 
-  /**
-   * שינוי אפשרות המיון והחלה על התוצאות הקיימות
-   */
-  changeSortOption(sortOption: SortOption): void {
-    console.log(`[PriceComparisonService] שינוי מיון ל: ${sortOption}`);
-    
-    this.currentSortOption = sortOption;
-    
-    // החלת המיון על התוצאות הקיימות
-    const currentResults = this.lastResultsSubject.value;
-    if (currentResults && currentResults.priceDetails) {
-      const sortedPrices = this.sortPriceDetails(currentResults.priceDetails, sortOption);
-      const updatedResults = {
-        ...currentResults,
-        priceDetails: sortedPrices
-      };
-      this.lastResultsSubject.next(updatedResults);
-    }
-  }
+          // 1. Try to extract city from address if missing
+          if (!city && address.includes(',')) {
+             const parts = address.split(',');
+             city = parts[parts.length - 1].trim();
+          }
 
-  /**
-   * קבלת אפשרות המיון הנוכחית
-   */
-  getCurrentSortOption(): SortOption {
-    return this.currentSortOption;
-  }
+          // 2. Fix numeric store names (e.g. "970")
+          if (!storeName || /^\d+$/.test(storeName.toString().trim())) {
+            if (city) {
+              storeName = city;
+            } else {
+              storeName = `סניף ${storeId}`;
+            }
+          }
 
-  /**
-   * איפוס מצב החיפוש
-   */
-  resetSearch(): void {
-    console.log(`[PriceComparisonService] איפוס מצב החיפוש`);
-    this.searchStatusSubject.next(SearchStatus.IDLE);
-    this.lastResultsSubject.next(null);
-  }
+          // 3. Ensure Chain Name is part of the Store Name
+          // If storeName is "Ramat Gan", we want "Victory Ramat Gan"
+          if (chainName && storeName && !storeName.includes(chainName)) {
+             // Only prepend if chainName is NOT numeric (to avoid "7290... Jerusalem")
+             if (!/^\d+$/.test(chainName.toString())) {
+                 storeName = `${chainName} ${storeName}`;
+             }
+          }
 
-  /**
-   * קבלת הסניף עם המחיר הזול ביותר
-   */
-  getCheapestStore(results: PriceComparisonResponse): ProductPriceInfo | null {
-    if (!results.success || !results.priceDetails || results.priceDetails.length === 0) {
-      return null;
-    }
-
-    return results.priceDetails.reduce((cheapest, current) => 
-      current.currentPrice < cheapest.currentPrice ? current : cheapest
+          return {
+            chainId: chainName,
+            storeId: item.storeId,
+            storeName: storeName, 
+            storeAddress: address,
+            storeCity: city,
+            itemCode: item.itemCode,
+            itemName: item.itemName,
+            regularPrice: item.regularPrice,
+            finalCalculatedPrice: item.finalCalculatedPrice,
+            priceTypeLabel: item.priceTypeLabel,
+            hasPromo: item.hasPromo,
+            promoPrice: item.promoPrice,
+            promoDescription: item.promoDescription,
+            promoEndDate: item.promoEndDate,
+            isClubMemberPromo: item.isClubMemberPromo,
+            isCreditCardPromo: item.isCreditCardPromo
+          } as Product;
+        });
+      }),
+      tap({
+        next: (data) => console.log(`[PriceComparisonService] Success: ${data.length} products found`),
+        error: (error) => console.error(`[PriceComparisonService] Error:`, error)
+      })
     );
   }
 
-  /**
-   * קבלת הסניף עם המחיר היקר ביותר
-   */
-  getMostExpensiveStore(results: PriceComparisonResponse): ProductPriceInfo | null {
-    if (!results.success || !results.priceDetails || results.priceDetails.length === 0) {
-      return null;
-    }
+  findStoresByBusStop(stopId: string, radiusKm: number): Observable<StoreNearStop[]> {
+    const url = `http://localhost:5162/api/BusStopSearch/FindStores`;
+    let params = new HttpParams()
+      .set('stopId', stopId)
+      .set('radiusKm', radiusKm.toString());
 
-    return results.priceDetails.reduce((expensive, current) => 
-      current.currentPrice > expensive.currentPrice ? current : expensive
-    );
-  }
-
-  /**
-   * חישוב חיסכון אפשרי בין המחיר הזול והיקר
-   */
-  calculatePotentialSavings(results: PriceComparisonResponse): number {
-    const cheapest = this.getCheapestStore(results);
-    const mostExpensive = this.getMostExpensiveStore(results);
-    
-    if (!cheapest || !mostExpensive) {
-      return 0;
-    }
-
-    return mostExpensive.currentPrice - cheapest.currentPrice;
-  }
-
-  /**
-   * טיפול בשגיאות חיפוש
-   */
-  private handleSearchError(error: HttpErrorResponse): Observable<PriceComparisonResponse> {
-    let errorMessage = 'שגיאה לא ידועה בחיפוש המוצר';
-
-    if (error.error instanceof ErrorEvent) {
-      // שגיאת רשת או צד לקוח
-      errorMessage = 'בעיה בחיבור לשרת. אנא בדוק את החיבור לאינטרנט';
-    } else {
-      // שגיאה מהשרת
-      switch (error.status) {
-        case 400:
-          errorMessage = error.error?.message || 'ברקוד לא תקין';
-          break;
-        case 404:
-          errorMessage = 'מוצר לא נמצא במערכת';
-          break;
-        case 500:
-          errorMessage = 'שגיאה פנימית בשרת';
-          break;
-        default:
-          errorMessage = `שגיאה בשרת (קוד ${error.status})`;
-      }
-    }
-
-    const errorResponse: PriceComparisonResponse = {
-      success: false,
-      errorMessage: errorMessage,
-      priceDetails: []
-    };
-
-    // עדכון מצב החיפוש לשגיאה
-    this.searchStatusSubject.next(SearchStatus.ERROR);
-    
-    // שמירת התגובה עם השגיאה
-    this.lastResultsSubject.next(errorResponse);
-
-    return throwError(() => errorResponse);
+    return this.http.get<StoreNearStop[]>(url, { params });
   }
 }

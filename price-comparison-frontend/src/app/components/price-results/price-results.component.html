@@ -72,51 +72,26 @@
     <!-- רשימת מחירים -->
     <div class="price-items">
       <div 
-        *ngFor="let item of filteredResults; trackBy: trackByStore"
+        *ngFor="let item of priceDetails; let i = index"
         class="price-item"
-        [class.min-price]="item['isMinPrice']"
       >
-
         <!-- פרטי הסניף -->
         <div class="store-info">
           <div class="store-header">
-            <h4 class="store-name">{{ item.storeName }}</h4>
-            <span class="chain-name">{{ item.chainName }}</span>
+            <h4 class="store-name">{{ item.itemName }}</h4>
+            <span class="chain-name">סניף: {{ item.storeId }}</span>
           </div>
-          <p class="store-address">{{ item.storeAddress }}</p>
         </div>
 
         <!-- מידע על המחיר -->
         <div class="price-info">
           <div class="price-display">
-            <span class="price-amount">₪{{ item.currentPrice | number:'1.2-2' }}</span>
+            <span class="price-amount">₪{{ item.finalPrice }}</span>
+            <span *ngIf="item.isPromoApplied" class="original-price">₪{{ item.originalPrice }}</span>
           </div>
-
-          <!-- אינדיקטור מחיר זול ביותר -->
-          <div *ngIf="item['isMinPrice']" class="min-price-badge">
-            <svg class="icon icon-star" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
-            <span>זול ביותר</span>
-          </div>
-
-          <!-- הצגת חיסכון אפשרי -->
-          <div 
-            *ngIf="!item['isMinPrice'] && calculateSavings(item.currentPrice) > 0" 
-            class="savings-info"
-          >
-            <span class="savings-amount">+₪{{ calculateSavings(item.currentPrice) | number:'1.2-2' }}</span>
-            <span class="savings-label">יותר יקר</span>
-          </div>
-        </div>
-
-        <!-- מידע נוסף -->
-        <div class="additional-info">
-          <div class="last-updated">
-            <svg class="icon icon-clock" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span>עודכן: {{ formatDate(item.lastUpdated) }}</span>
+          <div *ngIf="item.isPromoApplied" class="promo-details">
+            <span>מבצע: {{ item.promoDescription }}</span>
+            <span>תוקף: {{ item.promoStartDate }} - {{ item.promoEndDate }}</span>
           </div>
         </div>
       </div>
